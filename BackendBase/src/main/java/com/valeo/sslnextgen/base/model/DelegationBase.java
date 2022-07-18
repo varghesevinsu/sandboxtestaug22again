@@ -1,6 +1,7 @@
 package com.valeo.sslnextgen.base.model;
 import com.eva.base.model.BaseModel;
 import com.eva.base.annotations.Table;
+import com.eva.base.annotations.NotBlank;
 import com.eva.base.annotations.Searchable;
 import com.eva.base.util.ValidationErrorConstants;
 import java.util.Date;
@@ -13,6 +14,7 @@ public class DelegationBase extends BaseModel {
 	private DelegationDelegationenddate delegationEndDate;
 	@Searchable(index = true)
 	private String approverLeader;
+	@NotBlank
 	@Searchable(index = true)
 	private String delegateName;
 	@Searchable(index = true)
