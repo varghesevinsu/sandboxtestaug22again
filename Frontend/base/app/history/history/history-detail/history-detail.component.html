@@ -1,0 +1,111 @@
+ <div class="detail history-detail">
+   <div id="title-bar">
+    <div class="display">
+        <div class="col" class="page-title-bar">
+            <!-- <span class="pi pi-arrow-left back-action"></span> -->
+            <span class="page-title" [innerHTML]="pageViewTitle | translate"></span>
+        </div>
+        <app-action-bar [buttons] = "leftActionBarConfig.children"
+(onBtnClick)='actionBarAction($event)'
+[style.order]="isMobile?'1':'0'">
+</app-action-bar><app-workflow-action-bar [buttons] = "workflowActionBarConfig.children"
+(onBtnClick)='workflowActionBarAction($event)'
+[workflow]="workflowActions"
+[style.order]="isMobile?'1':'0'">
+</app-workflow-action-bar><ul class="nav  caption-bar" *ngIf="detailCaptionBarConfig" [ngStyle]="{width: detailCaptionBarConfig.width, 'justify-content':detailCaptionBarConfig.align}">
+        <li class="nav-item" *ngFor="let captionItem of detailCaptionBarConfig.children" [style.display]="((captionItem.showOn =='mobile_only' && isMobile) || (captionItem.showOn =='desktop_only' && !isMobile) || (captionItem.showOn =='both')||(!captionItem.showOn))?'block':'none'">
+            <div class="card" *ngIf="backupData && formatCaptionItems(captionItem,backupData)">
+                <div class="card-body">
+                   <h5 class="card-title" >{{captionItem.label | translate}}</h5>
+                          <div *ngIf="!captionItem.render" class="card-sub-title" [innerHTML]="backupData && formatCaptionItems(captionItem,backupData)">
+                         </div>
+                    <div *ngIf="captionItem.render" class="card-sub-title">
+                        <div [innerHtml]="captionItem.render(captionItem)"></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    </div>
+</div><div class="ev-detail-view">
+    <div class="detail-flex-box">
+        <div class="flex align-items-center justify-content-center wizard-container" style="display:none">
+
+        </div>
+        <div class="flex align-items-center justify-content-center form-container">
+            <form class="ev-form " [formGroup]="detailFormControls" #detailForm [ngClass]="{'read-only-fields':enableReadOnly}">
+                <div class="row form-body">
+                    <div class="form-row vg-col-1">
+                        <div class="form-col" [hidden]="hiddenFields.currentStatus">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.currentStatus?.isRequired, 'error':inValidFields.currentStatus}">
+        <label for="currentStatus" class="col-form-label currentStatus-label" [textContent]=" 'CURRENT_STATUS'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.currentStatus?.infoBubble"   [pTooltip]="formFieldConfig?.currentStatus?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="currentStatus " formControlName="currentStatus" [placeholder]="formFieldConfig?.currentStatus?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.currentStatus?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.nextStatus">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.nextStatus?.isRequired, 'error':inValidFields.nextStatus}">
+        <label for="nextStatus" class="col-form-label nextStatus-label" [textContent]=" 'NEXT_STATUS'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.nextStatus?.infoBubble"   [pTooltip]="formFieldConfig?.nextStatus?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="nextStatus " formControlName="nextStatus" [placeholder]="formFieldConfig?.nextStatus?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.nextStatus?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.who">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.who?.isRequired, 'error':inValidFields.who}">
+        <label for="who" class="col-form-label who-label" [textContent]=" 'WHO'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.who?.infoBubble"   [pTooltip]="formFieldConfig?.who?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="who " formControlName="who" [placeholder]="formFieldConfig?.who?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.who?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.role">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.role?.isRequired, 'error':inValidFields.role}">
+        <label for="role" class="col-form-label role-label" [textContent]=" 'ROLE'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.role?.infoBubble"   [pTooltip]="formFieldConfig?.role?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="role " formControlName="role" [placeholder]="formFieldConfig?.role?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.role?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.action">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.action?.isRequired, 'error':inValidFields.action}">
+        <label for="action" class="col-form-label action-label" [textContent]=" 'ACTION'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.action?.infoBubble"   [pTooltip]="formFieldConfig?.action?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="action " formControlName="action" [placeholder]="formFieldConfig?.action?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.action?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.when">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.when?.isRequired, 'error':inValidFields.when}">
+        <label for="when" class="col-form-label dateTime-label" [textContent]="'WHEN'|translate"></label>
+<span class="info-bubble" *ngIf="formFieldConfig?.when?.infoBubble"   [pTooltip]="formFieldConfig?.when?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-calendar 
+           appendTo="body"
+            class="form-input" 
+            formControlName="when"
+            [showIcon]="true" 
+            inputId="datePicker"
+            [showTime]="true"
+            [minDate]="formFieldConfig?.when?.calendarMinDate" 
+            [maxDate]="formFieldConfig?.when?.calendarMaxDate"
+            
+        ></p-calendar>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.comment">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.comment?.isRequired, 'error':inValidFields.comment}">
+        <label for="comment" class="col-form-label comment-label" [textContent]=" 'COMMENT'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.comment?.infoBubble"   [pTooltip]="formFieldConfig?.comment?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="comment " formControlName="comment" [placeholder]="formFieldConfig?.comment?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.comment?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.requestCode">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requestCode?.isRequired, 'error':inValidFields.requestCode}">
+        <label for="requestCode" class="col-form-label requestCode-label" [textContent]=" 'REQUEST_CODE'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.requestCode?.infoBubble"   [pTooltip]="formFieldConfig?.requestCode?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="requestCode " formControlName="requestCode" [placeholder]="formFieldConfig?.requestCode?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.requestCode?.helpText || ''}}</div>
+    </div>
+</div>
+                    </div>
+                </div>
+        </form>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,61 @@
+ <div class="detail project-type-detail">
+   <div id="title-bar">
+    <div class="display">
+        <div class="col" class="page-title-bar">
+            <!-- <span class="pi pi-arrow-left back-action"></span> -->
+            <span class="page-title" [innerHTML]="pageViewTitle | translate"></span>
+        </div>
+        <app-action-bar [buttons] = "leftActionBarConfig.children"
+(onBtnClick)='actionBarAction($event)'
+[style.order]="isMobile?'1':'0'">
+</app-action-bar><app-workflow-action-bar [buttons] = "workflowActionBarConfig.children"
+(onBtnClick)='workflowActionBarAction($event)'
+[workflow]="workflowActions"
+[style.order]="isMobile?'1':'0'">
+</app-workflow-action-bar><ul class="nav  caption-bar" *ngIf="detailCaptionBarConfig" [ngStyle]="{width: detailCaptionBarConfig.width, 'justify-content':detailCaptionBarConfig.align}">
+        <li class="nav-item" *ngFor="let captionItem of detailCaptionBarConfig.children" [style.display]="((captionItem.showOn =='mobile_only' && isMobile) || (captionItem.showOn =='desktop_only' && !isMobile) || (captionItem.showOn =='both')||(!captionItem.showOn))?'block':'none'">
+            <div class="card" *ngIf="backupData && formatCaptionItems(captionItem,backupData)">
+                <div class="card-body">
+                   <h5 class="card-title" >{{captionItem.label | translate}}</h5>
+                          <div *ngIf="!captionItem.render" class="card-sub-title" [innerHTML]="backupData && formatCaptionItems(captionItem,backupData)">
+                         </div>
+                    <div *ngIf="captionItem.render" class="card-sub-title">
+                        <div [innerHtml]="captionItem.render(captionItem)"></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    </div>
+</div><div class="ev-detail-view">
+    <div class="detail-flex-box">
+        <div class="flex align-items-center justify-content-center wizard-container" style="display:none">
+
+        </div>
+        <div class="flex align-items-center justify-content-center form-container">
+            <form class="ev-form " [formGroup]="detailFormControls" #detailForm [ngClass]="{'read-only-fields':enableReadOnly}">
+                <div class="row form-body">
+                    <div class="form-row vg-col-1">
+                        <div class="form-col" [hidden]="hiddenFields.projectType">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.projectType?.isRequired, 'error':inValidFields.projectType}">
+        <label for="projectType" class="col-form-label projectType-label" [textContent]=" 'PROJECT_TYPE'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.projectType?.infoBubble"   [pTooltip]="formFieldConfig?.projectType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="projectType " formControlName="projectType" [placeholder]="formFieldConfig?.projectType?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.projectType?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.status">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.status?.isRequired, 'error':inValidFields.status}">
+        <label for="status" class="col-form-label status-label d-none" [textContent]="'STATUS'|translate"></label>
+        <p-checkbox class="form-input" formControlName="status" label="{{'STATUS' | translate}}" binary="true"></p-checkbox>
+        <span class="info-bubble" *ngIf="formFieldConfig?.status?.infoBubble"   [pTooltip]="formFieldConfig?.status?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.status?.helpText || ''}}</div>
+    </div>
+</div>
+
+                    </div>
+                </div>
+        </form>
+        </div>
+    </div>
+</div>
+</div>

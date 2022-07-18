@@ -1,0 +1,184 @@
+ <div class="detail place-of-dev-detail">
+   <div id="title-bar">
+    <div class="display">
+        <div class="col" class="page-title-bar">
+            <!-- <span class="pi pi-arrow-left back-action"></span> -->
+            <span class="page-title" [innerHTML]="pageViewTitle | translate"></span>
+        </div>
+        <app-action-bar [buttons] = "leftActionBarConfig.children"
+(onBtnClick)='actionBarAction($event)'
+[style.order]="isMobile?'1':'0'">
+</app-action-bar><app-workflow-action-bar [buttons] = "workflowActionBarConfig.children"
+(onBtnClick)='workflowActionBarAction($event)'
+[workflow]="workflowActions"
+[style.order]="isMobile?'1':'0'">
+</app-workflow-action-bar><ul class="nav  caption-bar" *ngIf="detailCaptionBarConfig" [ngStyle]="{width: detailCaptionBarConfig.width, 'justify-content':detailCaptionBarConfig.align}">
+        <li class="nav-item" *ngFor="let captionItem of detailCaptionBarConfig.children" [style.display]="((captionItem.showOn =='mobile_only' && isMobile) || (captionItem.showOn =='desktop_only' && !isMobile) || (captionItem.showOn =='both')||(!captionItem.showOn))?'block':'none'">
+            <div class="card" *ngIf="backupData && formatCaptionItems(captionItem,backupData)">
+                <div class="card-body">
+                   <h5 class="card-title" >{{captionItem.label | translate}}</h5>
+                          <div *ngIf="!captionItem.render" class="card-sub-title" [innerHTML]="backupData && formatCaptionItems(captionItem,backupData)">
+                         </div>
+                    <div *ngIf="captionItem.render" class="card-sub-title">
+                        <div [innerHtml]="captionItem.render(captionItem)"></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    </div>
+</div><div class="ev-detail-view">
+    <div class="detail-flex-box">
+        <div class="flex align-items-center justify-content-center wizard-container" style="display:none">
+
+        </div>
+        <div class="flex align-items-center justify-content-center form-container">
+            <form class="ev-form " [formGroup]="detailFormControls" #detailForm [ngClass]="{'read-only-fields':enableReadOnly}">
+                <div class="row form-body">
+                    <div class="form-row vg-col-1">
+                        <div class="form-col" [hidden]="hiddenFields.siteCode">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.siteCode?.isRequired, 'error':inValidFields.siteCode}">
+        <label for="siteCode" class="col-form-label siteCode-label" [textContent]="'SITE_CODE'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.siteCode?.infoBubble"   [pTooltip]="formFieldConfig?.siteCode?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['siteCode']?.options" formControlName="siteCode"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.siteCode?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #siteCodeSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.siteCode.value; let selected;">
+                    <ng-template *ngTemplateOutlet="siteCodeSelectedRef;context:{conditions :formFieldConfig.siteCode?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.siteCode?.options)).value], option:(getSelectedObject(selected,formFieldConfig.siteCode?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #siteCodeListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="siteCodeListRef;context:{conditions :formFieldConfig.siteCode?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.siteCode?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.entity">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.entity?.isRequired, 'error':inValidFields.entity}">
+        <label for="entity" class="col-form-label entity-label" [textContent]="'ENTITY'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.entity?.infoBubble"   [pTooltip]="formFieldConfig?.entity?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['entity']?.options" formControlName="entity"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.entity?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #entitySelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.entity.value; let selected;">
+                    <ng-template *ngTemplateOutlet="entitySelectedRef;context:{conditions :formFieldConfig.entity?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.entity?.options)).value], option:(getSelectedObject(selected,formFieldConfig.entity?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #entityListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="entityListRef;context:{conditions :formFieldConfig.entity?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.entity?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.location">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.location?.isRequired, 'error':inValidFields.location}">
+        <label for="location" class="col-form-label location-label" [textContent]="'LOCATION'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.location?.infoBubble"   [pTooltip]="formFieldConfig?.location?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['location']?.options" formControlName="location"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.location?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #locationSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.location.value; let selected;">
+                    <ng-template *ngTemplateOutlet="locationSelectedRef;context:{conditions :formFieldConfig.location?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.location?.options)).value], option:(getSelectedObject(selected,formFieldConfig.location?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #locationListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="locationListRef;context:{conditions :formFieldConfig.location?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.location?.helpText || ''}}</div>
+    </div>
+</div>
+                    </div>
+                </div>
+        </form>
+        </div>
+    </div>
+</div>
+</div>
