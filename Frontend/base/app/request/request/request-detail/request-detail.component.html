@@ -1,0 +1,958 @@
+ <div class="detail request-detail">
+   <div id="title-bar">
+    <div class="display">
+        <div class="col" class="page-title-bar">
+            <!-- <span class="pi pi-arrow-left back-action"></span> -->
+            <span class="page-title" [innerHTML]="pageViewTitle | translate"></span>
+        </div>
+        <app-action-bar [buttons] = "leftActionBarConfig.children"
+(onBtnClick)='actionBarAction($event)'
+[style.order]="isMobile?'1':'0'">
+</app-action-bar><app-workflow-action-bar [buttons] = "workflowActionBarConfig.children"
+(onBtnClick)='workflowActionBarAction($event)'
+[workflow]="workflowActions"
+[style.order]="isMobile?'1':'0'">
+</app-workflow-action-bar><ul class="nav  caption-bar" *ngIf="detailCaptionBarConfig" [ngStyle]="{width: detailCaptionBarConfig.width, 'justify-content':detailCaptionBarConfig.align}">
+        <li class="nav-item" *ngFor="let captionItem of detailCaptionBarConfig.children" [style.display]="((captionItem.showOn =='mobile_only' && isMobile) || (captionItem.showOn =='desktop_only' && !isMobile) || (captionItem.showOn =='both')||(!captionItem.showOn))?'block':'none'">
+            <div class="card" *ngIf="backupData && formatCaptionItems(captionItem,backupData)">
+                <div class="card-body">
+                   <h5 class="card-title" >{{captionItem.label | translate}}</h5>
+                          <div *ngIf="!captionItem.render" class="card-sub-title" [innerHTML]="backupData && formatCaptionItems(captionItem,backupData)">
+                         </div>
+                    <div *ngIf="captionItem.render" class="card-sub-title">
+                        <div [innerHtml]="captionItem.render(captionItem)"></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    </div>
+</div><div class="ev-detail-view">
+    <div class="detail-flex-box">
+        <div class="flex align-items-center justify-content-center wizard-container" style="display:none">
+
+        </div>
+        <div class="flex align-items-center justify-content-center form-container">
+            <form class="ev-form " [formGroup]="detailFormControls" #detailForm [ngClass]="{'read-only-fields':enableReadOnly}">
+                <div class="row form-body">
+                    <div class="form-row vg-col-1">
+                        <p-tabView class="tab-view"><p-tabPanel header="{{'REQUEST'|translate}} ">
+    <div class="form-row vg-col-1">
+  <p-tabView class="tab-view"><div class="section-col">
+    <div class="form-section">
+        <h5 class="header" [innerHTML]="'Requester'"></h5>
+        <div class="form-row  vg-col-2">
+            <div class="form-col" [hidden]="hiddenFields.requester">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requester?.isRequired, 'error':inValidFields.requester}">
+        <label for="requester" class="col-form-label requester-label" [textContent]=" 'REQUESTER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.requester?.infoBubble"   [pTooltip]="formFieldConfig?.requester?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="requester " formControlName="requester" [placeholder]="formFieldConfig?.requester?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.requester?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.requesterOrgaloc">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requesterOrgaloc?.isRequired, 'error':inValidFields.requesterOrgaloc}">
+        <label for="requesterOrgaloc" class="col-form-label requesterOrgaloc-label" [textContent]=" 'REQUESTER_ORGALOC'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.requesterOrgaloc?.infoBubble"   [pTooltip]="formFieldConfig?.requesterOrgaloc?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="requesterOrgaloc " formControlName="requesterOrgaloc" [placeholder]="formFieldConfig?.requesterOrgaloc?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.requesterOrgaloc?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.functionalNetwork">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.functionalNetwork?.isRequired, 'error':inValidFields.functionalNetwork}">
+        <label for="functionalNetwork" class="col-form-label functionalNetwork-label" [textContent]="'FUNCTIONAL_NETWORK'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.functionalNetwork?.infoBubble"   [pTooltip]="formFieldConfig?.functionalNetwork?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['functionalNetwork']?.options" formControlName="functionalNetwork"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.functionalNetwork?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #functionalNetworkSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.functionalNetwork.value; let selected;">
+                    <ng-template *ngTemplateOutlet="functionalNetworkSelectedRef;context:{conditions :formFieldConfig.functionalNetwork?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.functionalNetwork?.options)).value], option:(getSelectedObject(selected,formFieldConfig.functionalNetwork?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #functionalNetworkListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="functionalNetworkListRef;context:{conditions :formFieldConfig.functionalNetwork?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.functionalNetwork?.helpText || ''}}</div>
+    </div>
+</div>
+        </div>
+    </div>
+</div><div class="section-col">
+    <div class="form-section">
+        <h5 class="header" [innerHTML]="'Project or Activity'"></h5>
+        <div class="form-row  vg-col-2">
+            <div class="form-col" [hidden]="hiddenFields.projectOrActivity">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.projectOrActivity?.isRequired, 'error':inValidFields.projectOrActivity}">
+        <label for="projectOrActivity" class="col-form-label projectOrActivity-label" [textContent]="'PROJECT_OR_ACTIVITY'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.projectOrActivity?.infoBubble"   [pTooltip]="formFieldConfig?.projectOrActivity?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['projectOrActivity']?.options" formControlName="projectOrActivity"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.projectOrActivity?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #projectOrActivitySelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.projectOrActivity.value; let selected;">
+                    <ng-template *ngTemplateOutlet="projectOrActivitySelectedRef;context:{conditions :formFieldConfig.projectOrActivity?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.projectOrActivity?.options)).value], option:(getSelectedObject(selected,formFieldConfig.projectOrActivity?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #projectOrActivityListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="projectOrActivityListRef;context:{conditions :formFieldConfig.projectOrActivity?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.projectOrActivity?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.prjOaCode">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.prjOaCode?.isRequired, 'error':inValidFields.prjOaCode}">
+        <label for="prjOaCode" class="col-form-label prjOaCode-label" [textContent]=" 'PRJ_OA_CODE'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.prjOaCode?.infoBubble"   [pTooltip]="formFieldConfig?.prjOaCode?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="prjOaCode " formControlName="prjOaCode" [placeholder]="formFieldConfig?.prjOaCode?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.prjOaCode?.helpText || ''}}</div>
+    </div>
+</div><span class="custom-btn {{formFieldConfig?.validate.outline?'outlined':''}} default-btn {{formFieldConfig.validate.buttonStyle}}" 
+*ngIf="!(formFieldConfig?.validate.visibility ==='hide'|| formFieldConfig?.validate.showOn =='mobile_only' && !isMobile || formFieldConfig?.validate.showOn =='desktop_only' && isMobile)"
+    [style.borderColor]="formFieldConfig?.validate.outlineColor" [style.borderColor]="formFieldConfig?.validate.outlineColor"
+    [style.backgroundColor]="formFieldConfig?.validate.backgroundColor" [style.fontFamily]="formFieldConfig?.validate.font?.fontFamily?.code"
+    [style.fontSize]="formFieldConfig?.validate.font?.fontSize" [style.fontWeight]="formFieldConfig?.validate.font?.fontWeight"
+    [style.color]="formFieldConfig?.validate.font?.fontColor">
+    <p-button [label]="(formFieldConfig?.validate.buttonType !=='icon_only') ? (formFieldConfig?.validate.label | translate):''" id="{{formFieldConfig?.validate.label}}"
+        styleClass="{{formFieldConfig?.validate.buttonStyle}}" class=""
+        [disabled]="(formFieldConfig?.validate.buttonEnabled =='no')"
+        [hidden]="formFieldConfig?.validate.visibility ==='hide' || formFieldConfig?.validate.showOn =='mobile_only' && !isMobile || formFieldConfig?.validate.showOn =='desktop_only' && isMobile"
+        [icon]="(formFieldConfig?.validate.buttonType !=='text_only') && (formFieldConfig?.validate.icon?.icon?.value)? formFieldConfig?.validate.icon?.icon?.value:''"
+        [iconPos]="(formFieldConfig?.validate.buttonType ==='icon_on_right')?'right':'left'"
+        (onClick)="onValidateAction($event, formFieldConfig?.validate)" [pTooltip]="formFieldConfig?.validate.tooltipMessage" tooltipPosition="top">
+    </p-button>
+</span><div class="form-col" [hidden]="hiddenFields.prOrActivityName">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.prOrActivityName?.isRequired, 'error':inValidFields.prOrActivityName}">
+        <label for="prOrActivityName" class="col-form-label prOrActivityName-label" [textContent]=" 'PR_OR_ACTIVITY_NAME'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.prOrActivityName?.infoBubble"   [pTooltip]="formFieldConfig?.prOrActivityName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="prOrActivityName " formControlName="prOrActivityName" [placeholder]="formFieldConfig?.prOrActivityName?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.prOrActivityName?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.subName">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.subName?.isRequired, 'error':inValidFields.subName}">
+        <label for="subName" class="col-form-label subName-label" [textContent]=" 'SUB_NAME'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.subName?.infoBubble"   [pTooltip]="formFieldConfig?.subName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="subName " formControlName="subName" [placeholder]="formFieldConfig?.subName?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.subName?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.orgalocToBeInvoiced">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.orgalocToBeInvoiced?.isRequired, 'error':inValidFields.orgalocToBeInvoiced}">
+        <label for="orgalocToBeInvoiced" class="col-form-label orgalocToBeInvoiced-label" [textContent]=" 'ORGALOC_TO_BE_INVOICED'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.orgalocToBeInvoiced?.infoBubble"   [pTooltip]="formFieldConfig?.orgalocToBeInvoiced?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="orgalocToBeInvoiced " formControlName="orgalocToBeInvoiced" [placeholder]="formFieldConfig?.orgalocToBeInvoiced?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.orgalocToBeInvoiced?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.statusOfTheRequest">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.statusOfTheRequest?.isRequired, 'error':inValidFields.statusOfTheRequest}">
+        <label for="statusOfTheRequest" class="col-form-label statusOfTheRequest-label" [textContent]="'STATUS_OF_THE_REQUEST'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.statusOfTheRequest?.infoBubble"   [pTooltip]="formFieldConfig?.statusOfTheRequest?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['statusOfTheRequest']?.options" formControlName="statusOfTheRequest"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.statusOfTheRequest?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #statusOfTheRequestSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.statusOfTheRequest.value; let selected;">
+                    <ng-template *ngTemplateOutlet="statusOfTheRequestSelectedRef;context:{conditions :formFieldConfig.statusOfTheRequest?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.statusOfTheRequest?.options)).value], option:(getSelectedObject(selected,formFieldConfig.statusOfTheRequest?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #statusOfTheRequestListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="statusOfTheRequestListRef;context:{conditions :formFieldConfig.statusOfTheRequest?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.statusOfTheRequest?.helpText || ''}}</div>
+    </div>
+</div>
+        </div>
+    </div>
+</div><div class="section-col">
+    <div class="form-section">
+        <h5 class="header" [innerHTML]="'Service Project'"></h5>
+        <div class="form-row  vg-col-2">
+            <div class="form-col" [hidden]="hiddenFields.serviceType">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.serviceType?.isRequired, 'error':inValidFields.serviceType}">
+        <label for="serviceType" class="col-form-label serviceType-label" [textContent]="'SERVICE_TYPE'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.serviceType?.infoBubble"   [pTooltip]="formFieldConfig?.serviceType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['serviceType']?.options" formControlName="serviceType"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.serviceType?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #serviceTypeSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.serviceType.value; let selected;">
+                    <ng-template *ngTemplateOutlet="serviceTypeSelectedRef;context:{conditions :formFieldConfig.serviceType?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.serviceType?.options)).value], option:(getSelectedObject(selected,formFieldConfig.serviceType?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #serviceTypeListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="serviceTypeListRef;context:{conditions :formFieldConfig.serviceType?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.serviceType?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.emcLab">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.emcLab?.isRequired, 'error':inValidFields.emcLab}">
+        <label for="emcLab" class="col-form-label emcLab-label" [textContent]="'EMC_LAB'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.emcLab?.infoBubble"   [pTooltip]="formFieldConfig?.emcLab?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['emcLab']?.options" formControlName="emcLab"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.emcLab?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #emcLabSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.emcLab.value; let selected;">
+                    <ng-template *ngTemplateOutlet="emcLabSelectedRef;context:{conditions :formFieldConfig.emcLab?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.emcLab?.options)).value], option:(getSelectedObject(selected,formFieldConfig.emcLab?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #emcLabListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="emcLabListRef;context:{conditions :formFieldConfig.emcLab?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.emcLab?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.requestName">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requestName?.isRequired, 'error':inValidFields.requestName}">
+        <label for="requestName" class="col-form-label requestName-label" [textContent]=" 'REQUEST_NAME'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.requestName?.infoBubble"   [pTooltip]="formFieldConfig?.requestName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="requestName " formControlName="requestName" [placeholder]="formFieldConfig?.requestName?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.requestName?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.requestedStartDate">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requestedStartDate?.isRequired, 'error':inValidFields.requestedStartDate}">
+        <label for="requestedStartDate" class="col-form-label dateTime-label" [textContent]="'REQUESTED_START_DATE'|translate"></label>
+<span class="info-bubble" *ngIf="formFieldConfig?.requestedStartDate?.infoBubble"   [pTooltip]="formFieldConfig?.requestedStartDate?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-calendar 
+           appendTo="body"
+            class="form-input" 
+            formControlName="requestedStartDate"
+            [showIcon]="true" 
+            inputId="datePicker"
+            [showTime]="true"
+            [minDate]="formFieldConfig?.requestedStartDate?.calendarMinDate" 
+            [maxDate]="formFieldConfig?.requestedStartDate?.calendarMaxDate"
+            
+        ></p-calendar>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.requestedEndDate">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requestedEndDate?.isRequired, 'error':inValidFields.requestedEndDate}">
+        <label for="requestedEndDate" class="col-form-label dateTime-label" [textContent]="'REQUESTED_END_DATE'|translate"></label>
+<span class="info-bubble" *ngIf="formFieldConfig?.requestedEndDate?.infoBubble"   [pTooltip]="formFieldConfig?.requestedEndDate?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-calendar 
+           appendTo="body"
+            class="form-input" 
+            formControlName="requestedEndDate"
+            [showIcon]="true" 
+            inputId="datePicker"
+            [showTime]="true"
+            [minDate]="formFieldConfig?.requestedEndDate?.calendarMinDate" 
+            [maxDate]="formFieldConfig?.requestedEndDate?.calendarMaxDate"
+            
+        ></p-calendar>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.taskType">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.taskType?.isRequired, 'error':inValidFields.taskType}">
+        <label for="taskType" class="col-form-label taskType-label" [textContent]="'TASK_TYPE'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.taskType?.infoBubble"   [pTooltip]="formFieldConfig?.taskType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['taskType']?.options" formControlName="taskType"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.taskType?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #taskTypeSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.taskType.value; let selected;">
+                    <ng-template *ngTemplateOutlet="taskTypeSelectedRef;context:{conditions :formFieldConfig.taskType?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.taskType?.options)).value], option:(getSelectedObject(selected,formFieldConfig.taskType?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #taskTypeListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="taskTypeListRef;context:{conditions :formFieldConfig.taskType?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.taskType?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.estimatedDurationInHours">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.estimatedDurationInHours?.isRequired, 'error':inValidFields.estimatedDurationInHours}">
+        <label for="estimatedDurationInHours" class="col-form-label estimatedDurationInHours-label" [textContent]="'ESTIMATED_DURATION_IN_HOURS'|translate"></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.estimatedDurationInHours?.infoBubble"   [pTooltip]="formFieldConfig?.estimatedDurationInHours?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-inputNumber class="form-input" formControlName="estimatedDurationInHours" [placeholder]="formFieldConfig?.estimatedDurationInHours?.placeHolder || ''"></p-inputNumber>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.estimatedDurationInHours?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.projectNameAsInEdrm">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.projectNameAsInEdrm?.isRequired, 'error':inValidFields.projectNameAsInEdrm}">
+        <label for="projectNameAsInEdrm" class="col-form-label projectNameAsInEdrm-label" [textContent]=" 'PROJECT_NAME_AS_IN_EDRM'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.projectNameAsInEdrm?.infoBubble"   [pTooltip]="formFieldConfig?.projectNameAsInEdrm?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="projectNameAsInEdrm " formControlName="projectNameAsInEdrm" [placeholder]="formFieldConfig?.projectNameAsInEdrm?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.projectNameAsInEdrm?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.projectType">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.projectType?.isRequired, 'error':inValidFields.projectType}">
+        <label for="projectType" class="col-form-label projectType-label" [textContent]="'PROJECT_TYPE'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.projectType?.infoBubble"   [pTooltip]="formFieldConfig?.projectType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['projectType']?.options" formControlName="projectType"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.projectType?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #projectTypeSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.projectType.value; let selected;">
+                    <ng-template *ngTemplateOutlet="projectTypeSelectedRef;context:{conditions :formFieldConfig.projectType?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.projectType?.options)).value], option:(getSelectedObject(selected,formFieldConfig.projectType?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #projectTypeListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="projectTypeListRef;context:{conditions :formFieldConfig.projectType?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.projectType?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.areLeftRightDesign">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.areLeftRightDesign?.isRequired, 'error':inValidFields.areLeftRightDesign}">
+        <label for="areLeftRightDesign" class="col-form-label areLeftRightDesign-label" [textContent]=" 'ARE_LEFT_RIGHT_DESIGN'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.areLeftRightDesign?.infoBubble"   [pTooltip]="formFieldConfig?.areLeftRightDesign?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="areLeftRightDesign " formControlName="areLeftRightDesign" [placeholder]="formFieldConfig?.areLeftRightDesign?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.areLeftRightDesign?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.boardName">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.boardName?.isRequired, 'error':inValidFields.boardName}">
+        <label for="boardName" class="col-form-label boardName-label" [textContent]=" 'BOARD_NAME'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.boardName?.infoBubble"   [pTooltip]="formFieldConfig?.boardName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="boardName " formControlName="boardName" [placeholder]="formFieldConfig?.boardName?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.boardName?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.boardNumber">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.boardNumber?.isRequired, 'error':inValidFields.boardNumber}">
+        <label for="boardNumber" class="col-form-label boardNumber-label" [textContent]="'BOARD_NUMBER'|translate"></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.boardNumber?.infoBubble"   [pTooltip]="formFieldConfig?.boardNumber?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-inputNumber class="form-input" formControlName="boardNumber" [placeholder]="formFieldConfig?.boardNumber?.placeHolder || ''"></p-inputNumber>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.boardNumber?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.panelization">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.panelization?.isRequired, 'error':inValidFields.panelization}">
+        <label for="panelization" class="col-form-label panelization-label" [textContent]="'PANELIZATION'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.panelization?.infoBubble"   [pTooltip]="formFieldConfig?.panelization?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['panelization']?.options" formControlName="panelization"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.panelization?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #panelizationSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.panelization.value; let selected;">
+                    <ng-template *ngTemplateOutlet="panelizationSelectedRef;context:{conditions :formFieldConfig.panelization?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.panelization?.options)).value], option:(getSelectedObject(selected,formFieldConfig.panelization?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #panelizationListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="panelizationListRef;context:{conditions :formFieldConfig.panelization?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.panelization?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.linkToSpecifications">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.linkToSpecifications?.isRequired, 'error':inValidFields.linkToSpecifications}">
+        <app-url-edit formControlName="linkToSpecifications" [label]="'LINK_TO_SPECIFICATIONS' |translate"></app-url-edit>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.additionalInformation">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.additionalInformation?.isRequired, 'error':inValidFields.additionalInformation}">
+        <label for="additionalInformation" class="col-form-label additionalInformation-label" [textContent]=" 'ADDITIONAL_INFORMATION'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.additionalInformation?.infoBubble"   [pTooltip]="formFieldConfig?.additionalInformation?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="additionalInformation " formControlName="additionalInformation" [placeholder]="formFieldConfig?.additionalInformation?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.additionalInformation?.helpText || ''}}</div>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+</p-tabView>
+</div>
+</p-tabPanel><p-tabPanel header="{{'SCHEDULER'|translate}} ">
+    <div class="form-row vg-col-1">
+  <div class="section-col">
+    <div class="form-section">
+        <h5 class="header" [innerHTML]="'Offer Details'"></h5>
+        <div class="form-row  vg-col-2">
+            <div class="form-col" [hidden]="hiddenFields.scheduler">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.scheduler?.isRequired, 'error':inValidFields.scheduler}">
+        <label for="scheduler" class="col-form-label scheduler-label" [textContent]=" 'SCHEDULER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.scheduler?.infoBubble"   [pTooltip]="formFieldConfig?.scheduler?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="scheduler " formControlName="scheduler" [placeholder]="formFieldConfig?.scheduler?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.scheduler?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.schedulerCurrency">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.schedulerCurrency?.isRequired, 'error':inValidFields.schedulerCurrency}">
+        <label for="schedulerCurrency" class="col-form-label schedulerCurrency-label" [textContent]="'SCHEDULER_CURRENCY'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.schedulerCurrency?.infoBubble"   [pTooltip]="formFieldConfig?.schedulerCurrency?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['schedulerCurrency']?.options" formControlName="schedulerCurrency"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.schedulerCurrency?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #schedulerCurrencySelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.schedulerCurrency.value; let selected;">
+                    <ng-template *ngTemplateOutlet="schedulerCurrencySelectedRef;context:{conditions :formFieldConfig.schedulerCurrency?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.schedulerCurrency?.options)).value], option:(getSelectedObject(selected,formFieldConfig.schedulerCurrency?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #schedulerCurrencyListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="schedulerCurrencyListRef;context:{conditions :formFieldConfig.schedulerCurrency?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.schedulerCurrency?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.schedulerProposedStartDate">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.schedulerProposedStartDate?.isRequired, 'error':inValidFields.schedulerProposedStartDate}">
+        <label for="schedulerProposedStartDate" class="col-form-label dateTime-label" [textContent]="'SCHEDULER_PROPOSED_START_DATE'|translate"></label>
+<span class="info-bubble" *ngIf="formFieldConfig?.schedulerProposedStartDate?.infoBubble"   [pTooltip]="formFieldConfig?.schedulerProposedStartDate?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-calendar 
+           appendTo="body"
+            class="form-input" 
+            formControlName="schedulerProposedStartDate"
+            [showIcon]="true" 
+            inputId="datePicker"
+            [showTime]="true"
+            [minDate]="formFieldConfig?.schedulerProposedStartDate?.calendarMinDate" 
+            [maxDate]="formFieldConfig?.schedulerProposedStartDate?.calendarMaxDate"
+            
+        ></p-calendar>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.schedulerProposedEndDate">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.schedulerProposedEndDate?.isRequired, 'error':inValidFields.schedulerProposedEndDate}">
+        <label for="schedulerProposedEndDate" class="col-form-label dateTime-label" [textContent]="'SCHEDULER_PROPOSED_END_DATE'|translate"></label>
+<span class="info-bubble" *ngIf="formFieldConfig?.schedulerProposedEndDate?.infoBubble"   [pTooltip]="formFieldConfig?.schedulerProposedEndDate?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-calendar 
+           appendTo="body"
+            class="form-input" 
+            formControlName="schedulerProposedEndDate"
+            [showIcon]="true" 
+            inputId="datePicker"
+            [showTime]="true"
+            [minDate]="formFieldConfig?.schedulerProposedEndDate?.calendarMinDate" 
+            [maxDate]="formFieldConfig?.schedulerProposedEndDate?.calendarMaxDate"
+            
+        ></p-calendar>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.quoteNo">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.quoteNo?.isRequired, 'error':inValidFields.quoteNo}">
+        <label for="quoteNo" class="col-form-label quoteNo-label" [textContent]=" 'QUOTE_NO'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.quoteNo?.infoBubble"   [pTooltip]="formFieldConfig?.quoteNo?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="quoteNo " formControlName="quoteNo" [placeholder]="formFieldConfig?.quoteNo?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.quoteNo?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.quotationDescription">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.quotationDescription?.isRequired, 'error':inValidFields.quotationDescription}">
+        <label for="quotationDescription" class="col-form-label quotationDescription-label" [textContent]=" 'QUOTATION_DESCRIPTION'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.quotationDescription?.infoBubble"   [pTooltip]="formFieldConfig?.quotationDescription?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="quotationDescription " formControlName="quotationDescription" [placeholder]="formFieldConfig?.quotationDescription?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.quotationDescription?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.schedulerAdditionalInformation">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.schedulerAdditionalInformation?.isRequired, 'error':inValidFields.schedulerAdditionalInformation}">
+        <label for="schedulerAdditionalInformation" class="col-form-label schedulerAdditionalInformation-label" [textContent]=" 'SCHEDULER_ADDITIONAL_INFORMATION'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.schedulerAdditionalInformation?.infoBubble"   [pTooltip]="formFieldConfig?.schedulerAdditionalInformation?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="schedulerAdditionalInformation " formControlName="schedulerAdditionalInformation" [placeholder]="formFieldConfig?.schedulerAdditionalInformation?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.schedulerAdditionalInformation?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.schedulerName">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.schedulerName?.isRequired, 'error':inValidFields.schedulerName}">
+        <label for="schedulerName" class="col-form-label schedulerName-label" [textContent]="'SCHEDULER_NAME'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.schedulerName?.infoBubble"   [pTooltip]="formFieldConfig?.schedulerName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['schedulerName']?.options" formControlName="schedulerName"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.schedulerName?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #schedulerNameSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.schedulerName.value; let selected;">
+                    <ng-template *ngTemplateOutlet="schedulerNameSelectedRef;context:{conditions :formFieldConfig.schedulerName?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.schedulerName?.options)).value], option:(getSelectedObject(selected,formFieldConfig.schedulerName?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #schedulerNameListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="schedulerNameListRef;context:{conditions :formFieldConfig.schedulerName?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.schedulerName?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.linkToQuotation">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.linkToQuotation?.isRequired, 'error':inValidFields.linkToQuotation}">
+        <app-url-edit formControlName="linkToQuotation" [label]="'LINK_TO_QUOTATION' |translate"></app-url-edit>
+    </div>
+</div>
+        </div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.osaNameToBeCreatedInStr">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.osaNameToBeCreatedInStr?.isRequired, 'error':inValidFields.osaNameToBeCreatedInStr}">
+        <label for="osaNameToBeCreatedInStr" class="col-form-label osaNameToBeCreatedInStr-label" [textContent]=" 'OSA_NAME_TO_BE_CREATED_IN_STR'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.osaNameToBeCreatedInStr?.infoBubble"   [pTooltip]="formFieldConfig?.osaNameToBeCreatedInStr?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="osaNameToBeCreatedInStr " formControlName="osaNameToBeCreatedInStr" [placeholder]="formFieldConfig?.osaNameToBeCreatedInStr?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.osaNameToBeCreatedInStr?.helpText || ''}}</div>
+    </div>
+</div><div class="section-col">
+    <div class="form-section">
+        <h5 class="header" [innerHTML]="'Global Budget Per Site'"></h5>
+        <div class="form-row  vg-col-2">
+            <div class="form-col" [hidden]="hiddenFields.leadPlaceOfDevelopment">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.leadPlaceOfDevelopment?.isRequired, 'error':inValidFields.leadPlaceOfDevelopment}">
+        <label for="leadPlaceOfDevelopment" class="col-form-label leadPlaceOfDevelopment-label" [textContent]="'LEAD_PLACE_OF_DEVELOPMENT'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.leadPlaceOfDevelopment?.infoBubble"   [pTooltip]="formFieldConfig?.leadPlaceOfDevelopment?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['leadPlaceOfDevelopment']?.options" formControlName="leadPlaceOfDevelopment"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.leadPlaceOfDevelopment?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #leadPlaceOfDevelopmentSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.leadPlaceOfDevelopment.value; let selected;">
+                    <ng-template *ngTemplateOutlet="leadPlaceOfDevelopmentSelectedRef;context:{conditions :formFieldConfig.leadPlaceOfDevelopment?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.leadPlaceOfDevelopment?.options)).value], option:(getSelectedObject(selected,formFieldConfig.leadPlaceOfDevelopment?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #leadPlaceOfDevelopmentListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="leadPlaceOfDevelopmentListRef;context:{conditions :formFieldConfig.leadPlaceOfDevelopment?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.leadPlaceOfDevelopment?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.secondPlaceOfDevelopment">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.secondPlaceOfDevelopment?.isRequired, 'error':inValidFields.secondPlaceOfDevelopment}">
+        <label for="secondPlaceOfDevelopment" class="col-form-label secondPlaceOfDevelopment-label" [textContent]="'SECOND_PLACE_OF_DEVELOPMENT'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.secondPlaceOfDevelopment?.infoBubble"   [pTooltip]="formFieldConfig?.secondPlaceOfDevelopment?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['secondPlaceOfDevelopment']?.options" formControlName="secondPlaceOfDevelopment"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.secondPlaceOfDevelopment?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #secondPlaceOfDevelopmentSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.secondPlaceOfDevelopment.value; let selected;">
+                    <ng-template *ngTemplateOutlet="secondPlaceOfDevelopmentSelectedRef;context:{conditions :formFieldConfig.secondPlaceOfDevelopment?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.secondPlaceOfDevelopment?.options)).value], option:(getSelectedObject(selected,formFieldConfig.secondPlaceOfDevelopment?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #secondPlaceOfDevelopmentListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="secondPlaceOfDevelopmentListRef;context:{conditions :formFieldConfig.secondPlaceOfDevelopment?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.secondPlaceOfDevelopment?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.hoursManpower">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.hoursManpower?.isRequired, 'error':inValidFields.hoursManpower}">
+        <label for="hoursManpower" class="col-form-label hoursManpower-label" [textContent]="'HOURS_MANPOWER'|translate"></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.hoursManpower?.infoBubble"   [pTooltip]="formFieldConfig?.hoursManpower?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-inputNumber class="form-input" formControlName="hoursManpower" [placeholder]="formFieldConfig?.hoursManpower?.placeHolder || ''"></p-inputNumber>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.hoursManpower?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.hoursManpower2">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.hoursManpower2?.isRequired, 'error':inValidFields.hoursManpower2}">
+        <label for="hoursManpower2" class="col-form-label hoursManpower2-label" [textContent]="'HOURS_MANPOWER2'|translate"></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.hoursManpower2?.infoBubble"   [pTooltip]="formFieldConfig?.hoursManpower2?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-inputNumber class="form-input" formControlName="hoursManpower2" [placeholder]="formFieldConfig?.hoursManpower2?.placeHolder || ''"></p-inputNumber>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.hoursManpower2?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.budget">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.budget?.isRequired, 'error':inValidFields.budget}">
+        <label for="budget" class="col-form-label budget-label" [textContent]=" 'BUDGET'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.budget?.infoBubble"   [pTooltip]="formFieldConfig?.budget?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="budget " formControlName="budget" [placeholder]="formFieldConfig?.budget?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.budget?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.budgetManpower2">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.budgetManpower2?.isRequired, 'error':inValidFields.budgetManpower2}">
+        <label for="budgetManpower2" class="col-form-label budgetManpower2-label" [textContent]="'BUDGET_MANPOWER2'|translate"></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.budgetManpower2?.infoBubble"   [pTooltip]="formFieldConfig?.budgetManpower2?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-inputNumber class="form-input" formControlName="budgetManpower2" [placeholder]="formFieldConfig?.budgetManpower2?.placeHolder || ''"></p-inputNumber>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.budgetManpower2?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.additionnalCost">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.additionnalCost?.isRequired, 'error':inValidFields.additionnalCost}">
+        <label for="additionnalCost" class="col-form-label additionnalCost-label" [textContent]=" 'ADDITIONNAL_COST'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.additionnalCost?.infoBubble"   [pTooltip]="formFieldConfig?.additionnalCost?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="additionnalCost " formControlName="additionnalCost" [placeholder]="formFieldConfig?.additionnalCost?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.additionnalCost?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.additionnalCost2">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.additionnalCost2?.isRequired, 'error':inValidFields.additionnalCost2}">
+        <label for="additionnalCost2" class="col-form-label additionnalCost2-label" [textContent]=" 'ADDITIONNAL_COST2'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.additionnalCost2?.infoBubble"   [pTooltip]="formFieldConfig?.additionnalCost2?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="additionnalCost2 " formControlName="additionnalCost2" [placeholder]="formFieldConfig?.additionnalCost2?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.additionnalCost2?.helpText || ''}}</div>
+    </div>
+</div>
+        </div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.globalBudget">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.globalBudget?.isRequired, 'error':inValidFields.globalBudget}">
+        <label for="globalBudget" class="col-form-label globalBudget-label" [textContent]=" 'GLOBAL_BUDGET'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.globalBudget?.infoBubble"   [pTooltip]="formFieldConfig?.globalBudget?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="globalBudget " formControlName="globalBudget" [placeholder]="formFieldConfig?.globalBudget?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.globalBudget?.helpText || ''}}</div>
+    </div>
+</div>
+</div>
+</p-tabPanel><p-tabPanel header="{{'VALIDATION_RFQ'|translate}} ">
+    <div class="form-row vg-col-1">
+  
+</div>
+</p-tabPanel><p-tabPanel header="{{'ACTORS'|translate}} ">
+    <div class="form-row vg-col-1">
+  <div class="section-col">
+    <div class="form-section">
+        <h5 class="header" [innerHTML]="'Actors'"></h5>
+        <div class="form-row  vg-col-1">
+            <div class="form-col" [hidden]="hiddenFields.businessController">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.businessController?.isRequired, 'error':inValidFields.businessController}">
+        <label for="businessController" class="col-form-label businessController-label" [textContent]=" 'BUSINESS_CONTROLLER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.businessController?.infoBubble"   [pTooltip]="formFieldConfig?.businessController?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="businessController " formControlName="businessController" [placeholder]="formFieldConfig?.businessController?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.businessController?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.projectManagerOrActivityLeader">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.projectManagerOrActivityLeader?.isRequired, 'error':inValidFields.projectManagerOrActivityLeader}">
+        <label for="projectManagerOrActivityLeader" class="col-form-label projectManagerOrActivityLeader-label" [textContent]=" 'PROJECT_MANAGER_OR_ACTIVITY_LEADER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.projectManagerOrActivityLeader?.infoBubble"   [pTooltip]="formFieldConfig?.projectManagerOrActivityLeader?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="projectManagerOrActivityLeader " formControlName="projectManagerOrActivityLeader" [placeholder]="formFieldConfig?.projectManagerOrActivityLeader?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.projectManagerOrActivityLeader?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.scheduler">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.scheduler?.isRequired, 'error':inValidFields.scheduler}">
+        <label for="scheduler" class="col-form-label scheduler-label" [textContent]=" 'SCHEDULER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.scheduler?.infoBubble"   [pTooltip]="formFieldConfig?.scheduler?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="scheduler " formControlName="scheduler" [placeholder]="formFieldConfig?.scheduler?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.scheduler?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.leader">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.leader?.isRequired, 'error':inValidFields.leader}">
+        <label for="leader" class="col-form-label leader-label" [textContent]=" 'LEADER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.leader?.infoBubble"   [pTooltip]="formFieldConfig?.leader?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="leader " formControlName="leader" [placeholder]="formFieldConfig?.leader?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.leader?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.watcher">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.watcher?.isRequired, 'error':inValidFields.watcher}">
+        <label for="watcher" class="col-form-label watcher-label" [textContent]=" 'WATCHER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.watcher?.infoBubble"   [pTooltip]="formFieldConfig?.watcher?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="watcher " formControlName="watcher" [placeholder]="formFieldConfig?.watcher?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.watcher?.helpText || ''}}</div>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+</div>
+</p-tabPanel><p-tabPanel header="{{'HISTORY'|translate}} ">
+    <div class="form-row vg-col-1">
+  <app-history-list  (onAction)="onInnerListAction($event)" #HistoryListComponent [parentId] = "id"style="width:100%"></app-history-list>
+</div>
+</p-tabPanel>
+</p-tabView>
+                    </div>
+                </div>
+        </form>
+        </div>
+    </div>
+</div>
+</div>
