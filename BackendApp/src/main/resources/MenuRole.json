@@ -1,0 +1,217 @@
+{
+  "left" : [ {
+    "pathsInvolved" : [ "/request/requestlist", "/request/requestdetail" ],
+    "accessControl" : [ "all", "Development Administrator" ],
+    "onClick" : "navigate_to_page",
+    "valueChange" : true,
+    "icon" : {
+      "type" : "icon",
+      "icon" : {
+        "label" : "fab fa-wpforms",
+        "value" : "fab fa-wpforms"
+      },
+      "iconColor" : "#000000",
+      "iconSize" : "13px"
+    },
+    "currentNode" : "9522a607-a962-4a47-a346-38ea1755d93b",
+    "label" : "My Requests",
+    "page" : {
+      "name" : "Request List",
+      "sid" : "1dd09d7b-e617-42c8-bd36-5885c3afef5e",
+      "url" : "/request/requestlist"
+    },
+    "element" : "menuItem"
+  } ],
+  "topBarLeft" : [ ],
+  "topBarMiddle" : [ ],
+  "topBarRight" : [ {
+    "pathsInvolved" : [ "/request/requestlist", "/request/requestdetail" ],
+    "accessControl" : [ "all", "Development Administrator" ],
+    "onClick" : "navigate_to_page",
+    "valueChange" : true,
+    "icon" : {
+      "type" : "icon",
+      "icon" : {
+        "label" : "fab fa-hire-a-helper",
+        "value" : "fab fa-hire-a-helper"
+      },
+      "iconColor" : "#000000",
+      "iconSize" : "13px"
+    },
+    "currentNode" : "bc61f41c-7450-4c85-a7fb-4023be4530b0",
+    "label" : " Help",
+    "page" : {
+      "name" : "Request List",
+      "sid" : "1dd09d7b-e617-42c8-bd36-5885c3afef5e",
+      "url" : "/request/requestlist"
+    },
+    "url" : "UserGuide Test ",
+    "element" : "menuItem"
+  }, {
+    "pathsInvolved" : [ "/request/requestlist", "/request/requestdetail" ],
+    "accessControl" : [ "all", "Development Administrator" ],
+    "onClick" : "navigate_to_page",
+    "valueChange" : true,
+    "icon" : {
+      "type" : "icon",
+      "icon" : {
+        "label" : "fas fa-user-slash",
+        "value" : "fas fa-user-slash"
+      },
+      "iconColor" : "#000000",
+      "iconSize" : "13px"
+    },
+    "currentNode" : "91532bf0-a204-4430-acaf-78bfb3c02911",
+    "label" : "Disconnect",
+    "page" : {
+      "name" : "Request List",
+      "sid" : "1dd09d7b-e617-42c8-bd36-5885c3afef5e",
+      "url" : "/request/requestlist"
+    },
+    "element" : "menuItem"
+  } ],
+  "right" : [ {
+    "pathsInvolved" : [ "/services/serviceslist", "/services/servicesdetail", "/manpower/manpowerlist", "/manpower/manpowerdetail", "/tool/tooldetail", "/tool/toollist", "/lab/labdetail", "/lab/lablist", "/placeofdev/placeofdevlist", "/placeofdev/placeofdevdetail", "/tooldesigntype/tooldesigntypedetail", "/tooldesigntype/tooldesigntypelist", "/userguide/userguidelist", "/userguide/userguidedetail", "/applicationuser/applicationuserdetail", "/applicationuser/applicationuserlist" ],
+    "accessControl" : [ "all", "Development Administrator" ],
+    "children" : [ {
+      "pathsInvolved" : [ "/services/serviceslist", "/services/servicesdetail" ],
+      "accessControl" : [ "all", "Development Administrator" ],
+      "onClick" : "navigate_to_page",
+      "valueChange" : true,
+      "currentNode" : "a657b0f7-88f9-42ea-b395-6f924e6ac219",
+      "label" : "Service",
+      "page" : {
+        "name" : "Services List",
+        "sid" : "23f2c71c-ec45-4304-9b90-533cefcfc712",
+        "url" : "/services/serviceslist"
+      },
+      "element" : "menuItem"
+    }, {
+      "pathsInvolved" : [ "/manpower/manpowerlist", "/manpower/manpowerdetail" ],
+      "accessControl" : [ "Admin", "Development Administrator" ],
+      "onClick" : "navigate_to_page",
+      "valueChange" : true,
+      "currentNode" : "a77ac35d-1d5c-4229-9244-33d2ab5af9d0",
+      "label" : "ManPower",
+      "page" : {
+        "name" : "ManPower List",
+        "sid" : "11dd8562-d67f-43e4-92d6-dde0a0f14983",
+        "url" : "/manpower/manpowerlist"
+      },
+      "element" : "menuItem"
+    }, {
+      "pathsInvolved" : [ "/tool/tooldetail", "/tool/toollist" ],
+      "accessControl" : [ "all", "Development Administrator" ],
+      "onClick" : "navigate_to_page",
+      "valueChange" : true,
+      "currentNode" : "34259eaf-cc9c-465d-b774-6cb0eeebc85b",
+      "label" : "Tool",
+      "page" : {
+        "name" : "Tool List",
+        "sid" : "cee72f24-b06c-4591-bc70-591f73d00a91",
+        "url" : "/tool/toollist"
+      },
+      "element" : "menuItem"
+    }, {
+      "pathsInvolved" : [ "/lab/labdetail", "/lab/lablist" ],
+      "accessControl" : [ "all", "Development Administrator" ],
+      "onClick" : "navigate_to_page",
+      "valueChange" : true,
+      "currentNode" : "22b6300e-31e4-458c-b4d2-631c750f494f",
+      "label" : "Lab",
+      "page" : {
+        "name" : "Lab List",
+        "sid" : "cd286f79-47a2-425a-a8e8-94494ae41d10",
+        "url" : "/lab/lablist"
+      },
+      "element" : "menuItem"
+    }, {
+      "pathsInvolved" : [ "/placeofdev/placeofdevlist", "/placeofdev/placeofdevdetail" ],
+      "accessControl" : [ "all", "Development Administrator" ],
+      "onClick" : "navigate_to_page",
+      "valueChange" : true,
+      "currentNode" : "e0205e9f-a9bc-4f86-a797-e96cc773e0ef",
+      "label" : "Place of Dev",
+      "page" : {
+        "name" : "Place of dev List",
+        "sid" : "1f674d32-527f-486f-ada6-2cd60dd98c7c",
+        "url" : "/placeofdev/placeofdevlist"
+      },
+      "element" : "menuItem"
+    }, {
+      "pathsInvolved" : [ ],
+      "onClick" : "navigate_to_page",
+      "logoFileName" : "Valeo_Logo.png",
+      "valueChange" : true,
+      "mobileLogoFileName" : "Valeo_Logo.png",
+      "currentNode" : "dc22e3a0-5b8d-4bc7-bc02-8b9a29025a0d",
+      "label" : "Project",
+      "element" : "menuItem"
+    }, {
+      "pathsInvolved" : [ "/tooldesigntype/tooldesigntypedetail", "/tooldesigntype/tooldesigntypelist" ],
+      "onClick" : "navigate_to_page",
+      "logoFileName" : "Valeo_Logo.png",
+      "valueChange" : true,
+      "mobileLogoFileName" : "logo_valeo.png",
+      "currentNode" : "44bb4704-91a8-4f17-aa49-5f30ad0d62ad",
+      "label" : "Tool Design Type",
+      "page" : {
+        "name" : "Tool design type List",
+        "sid" : "40369276-e12b-481d-b6cb-75527c310729",
+        "url" : "/tooldesigntype/tooldesigntypelist"
+      },
+      "element" : "menuItem"
+    }, {
+      "pathsInvolved" : [ "/userguide/userguidelist", "/userguide/userguidedetail" ],
+      "accessControl" : [ "all", "Development Administrator" ],
+      "onClick" : "navigate_to_page",
+      "valueChange" : true,
+      "currentNode" : "0727e133-510f-4738-8957-dc7f3e212f0e",
+      "label" : "User Guide",
+      "page" : {
+        "name" : "User Guide List",
+        "sid" : "4f3546fb-d323-4855-a3cb-9b64d4a0c7d2",
+        "url" : "/userguide/userguidelist"
+      },
+      "element" : "menuItem"
+    }, {
+      "pathsInvolved" : [ "/applicationuser/applicationuserdetail", "/applicationuser/applicationuserlist" ],
+      "accessControl" : [ "all", "Development Administrator" ],
+      "onClick" : "navigate_to_page",
+      "valueChange" : true,
+      "currentNode" : "78e5529f-e09a-443c-b193-f08c52b7fbe2",
+      "label" : "Application Users",
+      "page" : {
+        "name" : "Application User List",
+        "sid" : "5dea81b7-be34-410f-a610-6f852f24cfbf",
+        "url" : "/applicationuser/applicationuserlist"
+      },
+      "element" : "menuItem"
+    } ],
+    "valueChange" : true,
+    "currentNode" : "1eaf14d2-31da-468c-83e9-c25579817994",
+    "label" : "Administration",
+    "element" : "menuGroup"
+  }, {
+    "pathsInvolved" : [ "/delegation/delegationlist", "/delegation/delegationdetail" ],
+    "accessControl" : [ "all", "Development Administrator" ],
+    "onClick" : "navigate_to_page",
+    "valueChange" : true,
+    "currentNode" : "38ff3a3f-309b-4353-bbb0-aa92f9387fc1",
+    "label" : "Delegation",
+    "page" : {
+      "name" : "Delegation List",
+      "sid" : "30f9caea-1785-436b-99aa-8571bec29a60",
+      "url" : "/delegation/delegationlist"
+    },
+    "element" : "menuItem"
+  }, {
+    "pathsInvolved" : [ ],
+    "accessControl" : [ "all", "Development Administrator" ],
+    "onClick" : "navigate_to_page",
+    "valueChange" : true,
+    "currentNode" : "c3a09a7a-8f40-4ada-a72d-ce1ada3c2fa8",
+    "label" : "My Profile",
+    "element" : "menuItem"
+  } ]
+}

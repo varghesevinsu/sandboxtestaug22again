@@ -1,0 +1,1307 @@
+{
+  "workflowhistory": {
+    "post": {
+      "/{workflowType}/{modelid}/datatable": [
+        "PermitAll"
+      ]
+    }
+  },
+  "attachments": {
+    "post": {
+      "/link": [
+        "PermitAll"
+      ],
+      "/upload": [
+        "PermitAll"
+      ]
+    },
+    "get": {
+      "/download/attachment/{attachment_id}": [
+        "PermitAll"
+      ],
+      "/download/inline/{attachment_id}": [
+        "PermitAll"
+      ],
+      "/all/{modelKey}": [
+        "PermitAll"
+      ]
+    }
+  },
+  "placeofdevs": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/datatable/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/bypid/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "workflowconfig": {
+    "get": {
+      "/getconfig/{workflowType}": [
+        "PermitAll"
+      ]
+    }
+  },
+  "histories": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/datatable/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/bypid/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "otp": {
+    "post": {
+      "/validateotp/{otp}": [
+        "PermitAll"
+      ],
+      "/generateandsendotp": [
+        "PermitAll"
+      ],
+      "/forgotpasswordotp": [
+        "PermitAll"
+      ]
+    }
+  },
+  "usernotificationsyncinfo": {
+    "put": {
+      "/updatesynctime": [
+        "PermitAll"
+      ]
+    }
+  },
+  "services": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/datatable/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/bypid/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "projecttypes": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/datatable/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/bypid/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "requests": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/sslworkflow/submit/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/sslworkflow/cancel/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/sslworkflow/submittoapprover/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/sslworkflow/approvetoleader/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/sslworkflow/save/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/sslworkflow/demotetoleader/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/sslworkflow//{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/sslworkflow/assign/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/sslworkflow/demotetoscheduler/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/sslworkflow/validate/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/sslworkflow/demotetorequester/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/wfssl/submit/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "delegations": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "tools": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/datatable/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/bypid/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "tooldesigntypes": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/datatable/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/bypid/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "userguides": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/datatable/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/bypid/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "labs": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/datatable/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/bypid/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "environmentinfo": {
+    "get": {
+      "/": [
+        "PermitAll"
+      ]
+    }
+  },
+  "Changelogs": {
+    "post": {
+      "/datatable/{entityName}/{entityId}/{fieldName}/{fromModifiedDate}": [
+        "PermitAll"
+      ]
+    }
+  },
+  "statuses": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/datatable/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/bypid/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "applicationusers": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/authenticate": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/updateactualuser/{actualuser}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Requester ",
+        "Scheduler ",
+        "Leader",
+        "Approver",
+        "Admin",
+        "Viewer",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "options": {}
+  },
+  "manpowers": {
+    "post": {
+      "/datatable": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/datatable/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "get": {
+      "/{sid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/bypid/{pid}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "put": {
+      "/": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    },
+    "delete": {
+      "/{ids}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Leader",
+        "Viewer",
+        "Scheduler",
+        "Development Administrator"
+      ]
+    }
+  },
+  "notifications": {
+    "post": {
+      "/notifications/datatable": [
+        "PermitAll"
+      ]
+    }
+  }
+}
