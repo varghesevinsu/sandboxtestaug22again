@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
@@ -29,6 +29,10 @@ export interface ActionItem extends MenuItem{
   click?: (event?: any) => any
 }
 
+export enum ActionBar{
+  BUTTON ="button",
+  BUTTONGROUP ="buttonGroup"
+}
 
 @Component({
   selector: 'app-action-bar',
@@ -43,25 +47,47 @@ export class ActionBarComponent implements OnInit {
 
 
   @Output() onBtnClick: EventEmitter<any> = new EventEmitter();
+  conditionBasedButtons:any = {
+    disableButtons: []
+  };
+  @Input()
+  isRowSelected: boolean = false;
 
   isMobile: boolean = BaseAppConstants.isMobile;
   secondaryActions: any = []
   constructor(
-    private translateService:TranslateService
-  ) { }
+    private translateService:TranslateService) { }
 
   ngDoCheck(changes: any) {
-    // this.loadButtons();
+    this.loadButtons();
   }
 
   ngOnInit(): void {
     this.loadButtons();
   }
 
+  evaluateButtonRights(btn: any,selected:boolean) {
+    if (btn) {
+      if (btn.type === ActionBar.BUTTON && btn.enableOnlyIfRecordsAreSelected && this.conditionBasedButtons?.disableButtons?.indexOf(btn.action === -1)) {
+        this.conditionBasedButtons?.disableButtons?.push(btn.action);
+      }
+      if(btn.type === ActionBar.BUTTONGROUP){
+          btn.children?.forEach((o:any)=>{
+            if(o.enableOnlyIfRecordsAreSelected && this.conditionBasedButtons?.disableButtons?.indexOf(o.ation === -1))
+              this.conditionBasedButtons?.disableButtons?.push(o.action);
+          })
+      }
+      if(selected){
+        this.conditionBasedButtons.disableButtons = [];
+      }
+    }
+  }
+
   loadButtons() {
     let arr: any = [];
     this.buttons?.forEach((btn: any) => {
-      if (btn.type === 'buttonGroup' && btn.hasOwnProperty('children')) {
+      this.evaluateButtonRights(btn,this.isRowSelected);
+      if (btn.type === ActionBar.BUTTONGROUP && btn.hasOwnProperty('children')) {
         let tempArr = [...btn.children];
         if (btn.displayCount) {
           let displayActions = tempArr.slice(0, btn.displayCount);
@@ -78,13 +104,9 @@ export class ActionBarComponent implements OnInit {
           btn.displayActions = tempArr;
 
         }
-        
       }
-      else if (btn.type === 'splitButton') {
-        btn.dropdownActions = this.updateDropdownActions(btn.children);
-      }
-      else if (btn.type === 'button' && this.isMobile) {
-        if (btn.onMobile === 'secondary') {
+      else if (btn.type === ActionBar.BUTTON) {
+        if (btn.onMobile === 'secondary' && this.isMobile) {
           arr.push(btn);
         }
       }

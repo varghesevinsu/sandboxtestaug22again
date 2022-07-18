@@ -10,7 +10,7 @@
                 [style.color]="btn.font?.fontColor">
                 <p-button [label]="(btn.buttonType !=='icon_only') ? (btn.label | translate):''" id="{{btn.label}}"
                     styleClass="{{btn.buttonStyle}}" class=""
-                    [disabled]="(btn.buttonEnabled =='no')"
+                    [disabled]="(btn.buttonEnabled =='no'|| conditionBasedButtons.disableButtons.includes(btn.action))"
                     [hidden]="hideActions(btn)"
                     [icon]="(btn.buttonType !=='text_only') && (btn.icon?.icon?.value)? btn.icon?.icon?.value:''"
                     [iconPos]="(btn.buttonType ==='icon_on_right')?'right':'left'"
@@ -48,7 +48,7 @@
                     <button id="btngroup"
                         *ngIf="!hideActions(btngroup)"
                         pButton label="{{((btngroup.buttonType !=='icon_only') ? btngroup.label:'')|translate}}" id="{{btn.label}}"
-                        style="border-right: 1px solid;" [disabled]="(btngroup.buttonEnabled == 'no')"
+                        style="border-right: 1px solid;" [disabled]="(btngroup.buttonEnabled == 'no' || conditionBasedButtons.disableButtons.includes(btngroup?.action))"
                         [icon]="(btngroup.buttonType !=='text_only') && (btngroup.icon?.icon?.value)?btngroup.icon?.icon?.value:''"
                         [iconPos]="(btngroup.buttonType ==='icon_on_right')?'right':'left'" (click)="onButtonClick($event, btngroup)"
                         [style.borderColor]="(btn.outlineColor)?btn.outlineColor:''" [pTooltip]="btngroup.tooltipMessage"
