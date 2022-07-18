@@ -71,8 +71,8 @@
     "element" : "menuItem"
   } ],
   "right" : [ {
-    "pathsInvolved" : [ "/services/serviceslist", "/services/servicesdetail", "/manpower/manpowerlist", "/manpower/manpowerdetail", "/tool/tooldetail", "/tool/toollist", "/lab/labdetail", "/lab/lablist", "/placeofdev/placeofdevlist", "/placeofdev/placeofdevdetail", "/tooldesigntype/tooldesigntypedetail", "/tooldesigntype/tooldesigntypelist", "/userguide/userguidelist", "/userguide/userguidedetail", "/applicationuser/applicationuserdetail", "/applicationuser/applicationuserlist" ],
-    "accessControl" : [ "all", "Development Administrator" ],
+    "pathsInvolved" : [ "/services/serviceslist", "/services/servicesdetail", "/manpower/manpowerlist", "/manpower/manpowerdetail", "/tool/tooldetail", "/tool/toollist", "/lab/labdetail", "/lab/lablist", "/placeofdev/placeofdevlist", "/placeofdev/placeofdevdetail", "/projecttype/projecttypelist", "/projecttype/projecttypedetail", "/tooldesigntype/tooldesigntypedetail", "/tooldesigntype/tooldesigntypelist", "/userguide/userguidelist", "/userguide/userguidedetail", "/applicationuser/applicationuserdetail", "/applicationuser/applicationuserlist" ],
+    "accessControl" : [ "Admin", "Development Administrator" ],
     "children" : [ {
       "pathsInvolved" : [ "/services/serviceslist", "/services/servicesdetail" ],
       "accessControl" : [ "all", "Development Administrator" ],
@@ -101,7 +101,7 @@
       "element" : "menuItem"
     }, {
       "pathsInvolved" : [ "/tool/tooldetail", "/tool/toollist" ],
-      "accessControl" : [ "all", "Development Administrator" ],
+      "accessControl" : [ "Admin", "Development Administrator" ],
       "onClick" : "navigate_to_page",
       "valueChange" : true,
       "currentNode" : "34259eaf-cc9c-465d-b774-6cb0eeebc85b",
@@ -114,7 +114,7 @@
       "element" : "menuItem"
     }, {
       "pathsInvolved" : [ "/lab/labdetail", "/lab/lablist" ],
-      "accessControl" : [ "all", "Development Administrator" ],
+      "accessControl" : [ "Admin", "Development Administrator" ],
       "onClick" : "navigate_to_page",
       "valueChange" : true,
       "currentNode" : "22b6300e-31e4-458c-b4d2-631c750f494f",
@@ -127,7 +127,7 @@
       "element" : "menuItem"
     }, {
       "pathsInvolved" : [ "/placeofdev/placeofdevlist", "/placeofdev/placeofdevdetail" ],
-      "accessControl" : [ "all", "Development Administrator" ],
+      "accessControl" : [ "Admin", "Development Administrator" ],
       "onClick" : "navigate_to_page",
       "valueChange" : true,
       "currentNode" : "e0205e9f-a9bc-4f86-a797-e96cc773e0ef",
@@ -139,16 +139,23 @@
       },
       "element" : "menuItem"
     }, {
-      "pathsInvolved" : [ ],
+      "pathsInvolved" : [ "/projecttype/projecttypelist", "/projecttype/projecttypedetail" ],
+      "accessControl" : [ "Admin", "Development Administrator" ],
       "onClick" : "navigate_to_page",
       "logoFileName" : "Valeo_Logo.png",
       "valueChange" : true,
       "mobileLogoFileName" : "Valeo_Logo.png",
       "currentNode" : "dc22e3a0-5b8d-4bc7-bc02-8b9a29025a0d",
       "label" : "Project",
+      "page" : {
+        "name" : "Project type Detail",
+        "sid" : "bf6819e8-f0b6-4ea9-97cd-0229fe86d496",
+        "url" : "/projecttype/projecttypedetail"
+      },
       "element" : "menuItem"
     }, {
       "pathsInvolved" : [ "/tooldesigntype/tooldesigntypedetail", "/tooldesigntype/tooldesigntypelist" ],
+      "accessControl" : [ "Admin", "Development Administrator" ],
       "onClick" : "navigate_to_page",
       "logoFileName" : "Valeo_Logo.png",
       "valueChange" : true,
@@ -163,7 +170,7 @@
       "element" : "menuItem"
     }, {
       "pathsInvolved" : [ "/userguide/userguidelist", "/userguide/userguidedetail" ],
-      "accessControl" : [ "all", "Development Administrator" ],
+      "accessControl" : [ "Admin", "Development Administrator" ],
       "onClick" : "navigate_to_page",
       "valueChange" : true,
       "currentNode" : "0727e133-510f-4738-8957-dc7f3e212f0e",
@@ -176,7 +183,7 @@
       "element" : "menuItem"
     }, {
       "pathsInvolved" : [ "/applicationuser/applicationuserdetail", "/applicationuser/applicationuserlist" ],
-      "accessControl" : [ "all", "Development Administrator" ],
+      "accessControl" : [ "Admin", "Development Administrator" ],
       "onClick" : "navigate_to_page",
       "valueChange" : true,
       "currentNode" : "78e5529f-e09a-443c-b193-f08c52b7fbe2",
@@ -194,7 +201,7 @@
     "element" : "menuGroup"
   }, {
     "pathsInvolved" : [ "/delegation/delegationlist", "/delegation/delegationdetail" ],
-    "accessControl" : [ "all", "Development Administrator" ],
+    "accessControl" : [ "Leader", "Admin", "Development Administrator" ],
     "onClick" : "navigate_to_page",
     "valueChange" : true,
     "currentNode" : "38ff3a3f-309b-4353-bbb0-aa92f9387fc1",
