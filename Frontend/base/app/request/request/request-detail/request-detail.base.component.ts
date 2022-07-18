@@ -68,6 +68,7 @@ workflowActions:any ={
   isSaveResponseReceived:boolean = false;
   formSecurityConfig:any = {};
   enableReadOnly = BaseAppConstants.enableReadOnly;
+isRowSelected:boolean = true; 
 	@ViewChild('HistoryListComponent') HistoryListComponent: any;
 	bsModalRef?: BsModalRef;
 	isChildPage:boolean = false;
@@ -920,26 +921,6 @@ workflowActions:any ={
     "fieldType" : "string",
     "allowViewing" : "yes",
     "fieldId" : "subName"
-  }, {
-    "allowEditing" : "no",
-    "allowedValues" : { },
-    "defaultField" : false,
-    "fieldName" : " Orgaloc to be invoiced",
-    "data" : " Orgaloc to be invoiced",
-    "currentNode" : "07ab99d2-8dd8-4b1f-85ac-80316253bcbf",
-    "label" : " Orgaloc to be invoiced",
-    "type" : "formField",
-    "mandatory" : "yes",
-    "searchable" : "full_word",
-    "transientField" : false,
-    "field" : "orgalocToBeInvoiced",
-    "valueChange" : true,
-    "name" : "orgalocToBeInvoiced",
-    "sysGen" : false,
-    "uiType" : "text",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "orgalocToBeInvoiced"
   }, {
     "allowEditing" : "no",
     "multipleValues" : false,
@@ -2277,53 +2258,51 @@ workflowActions:any ={
 	
 		detailFormControls : FormGroup = new FormGroup({
 	boardNumber: new FormControl('',[Validators.required]),
+	quotationDescription: new FormControl('',[]),
 	schedulerProposedStartDate: new FormControl('',[Validators.required]),
+	requesterOrgaloc: new FormControl('',[Validators.required]),
 	serviceType: new FormControl('',[Validators.required]),
 	linkToSpecifications: new FormControl('',[]),
+	additionalInformation: new FormControl('',[]),
+	businessController: new FormControl('',[]),
 	projectManagerOrActivityLeader: new FormControl('',[]),
+	hoursManpower: new FormControl('',[]),
+	watcher: new FormControl('',[]),
+	emcLab: new FormControl('',[Validators.required]),
 	budget: new FormControl('',[]),
 	schedulerCurrency: new FormControl('',[]),
+	requestedEndDate: new FormControl('',[]),
 	schedulerName: new FormControl('',[Validators.required]),
 	prOrActivityName: new FormControl('',[]),
+	osaNameToBeCreatedInStr: new FormControl('',[]),
+	projectNameAsInEdrm: new FormControl('',[]),
+	panelization: new FormControl('',[]),
+	prjOaCode: new FormControl('',[]),
+	quoteNo: new FormControl('',[Validators.required]),
 	projectType: new FormControl('',[]),
 	schedulerProposedEndDate: new FormControl('',[]),
 	requestName: new FormControl('',[Validators.required]),
 	projectOrActivity: new FormControl('',[Validators.required]),
+	schedulerAdditionalInformation: new FormControl('',[]),
 	statusOfTheRequest: new FormControl('',[Validators.required]),
-	nameCode: new FormControl('',[]),
+	functionalNetwork: new FormControl('',[]),
 	namecode: new FormControl('',[]),
 	leader: new FormControl('',[]),
 	secondPlaceOfDevelopment: new FormControl('',[]),
 	estimatedDurationInHours: new FormControl('',[]),
+	requestedStartDate: new FormControl('',[]),
 	subName: new FormControl('',[]),
-	orgalocToBeInvoiced: new FormControl('',[Validators.required]),
+	hoursManpower2: new FormControl('',[]),
+	boardName: new FormControl('',[Validators.required]),
 	globalBudget: new FormControl('',[]),
+	additionnalCost: new FormControl('',[]),
 	leadPlaceOfDevelopment: new FormControl('',[]),
 	requester: new FormControl('',[Validators.required]),
 	linkToQuotation: new FormControl('',[]),
+	budgetManpower2: new FormControl('',[]),
 	additionnalCost2: new FormControl('',[]),
 	areLeftRightDesign: new FormControl('',[]),
 	taskType: new FormControl('',[]),
-	quotationDescription: new FormControl('',[]),
-	requesterOrgaloc: new FormControl('',[Validators.required]),
-	additionalInformation: new FormControl('',[]),
-	businessController: new FormControl('',[]),
-	hoursManpower: new FormControl('',[]),
-	watcher: new FormControl('',[]),
-	emcLab: new FormControl('',[Validators.required]),
-	requestedEndDate: new FormControl('',[]),
-	projectNameAsInEdrm: new FormControl('',[]),
-	osaNameToBeCreatedInStr: new FormControl('',[]),
-	panelization: new FormControl('',[]),
-	prjOaCode: new FormControl('',[]),
-	quoteNo: new FormControl('',[Validators.required]),
-	schedulerAdditionalInformation: new FormControl('',[]),
-	functionalNetwork: new FormControl('',[]),
-	requestedStartDate: new FormControl('',[]),
-	hoursManpower2: new FormControl('',[]),
-	boardName: new FormControl('',[Validators.required]),
-	additionnalCost: new FormControl('',[]),
-	budgetManpower2: new FormControl('',[]),
 	scheduler: new FormControl('',[]),
 });
 
@@ -2379,6 +2358,19 @@ workflowActions:any ={
       const selectedObj = (options.filter((item: { label: any}) => item.label.includes(field)));
       return selectedObj[0];
   }
+	onwfDemoteToLeader(){
+	const params = {id:this.id}
+	this.requestService.sslWorkflowDemoteToLeader(params).subscribe((res:any)=>{
+		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
+		if(Object.keys(this.mandatoryFields).length > 0){
+			this.clearValidations(this.mandatoryFields);
+		}
+		this.onInit();
+	},error=>{
+		if(Object.keys(this.mandatoryFields).length > 0)
+			this.clearValidations(this.mandatoryFields);
+	})
+}
 	onSave(isToastNotNeeded?:boolean){
          let data = this.formatFormDataBeforeSave();
         const finalArr:string[] = [];
@@ -2403,6 +2395,7 @@ workflowActions:any ={
 			});
             this.messageService.clear();
             this.requestService[method](requestedObj).subscribe((res:RequestBase) => {
+            this.backupData = {...data};
             this.isSaveResponseReceived = true;
             this.isFormValueChanged = false;
 	        this.id = res.sid;
@@ -2423,19 +2416,6 @@ workflowActions:any ={
         } 
         
     }
-	onwfDemoteToLeader(){
-	const params = {id:this.id}
-	this.requestService.sslWorkflowDemoteToLeader(params).subscribe((res:any)=>{
-		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
-		if(Object.keys(this.mandatoryFields).length > 0){
-			this.clearValidations(this.mandatoryFields);
-		}
-		this.onInit();
-	},error=>{
-		if(Object.keys(this.mandatoryFields).length > 0)
-			this.clearValidations(this.mandatoryFields);
-	})
-}
 	getWorkflowConfig() {
 	const workFlowInfo = this.data.workflowInfo;
 	const params = {
@@ -2599,8 +2579,45 @@ addValidations(mandatoryFields:[]){
       }
      })
   }
+	onBack(){
+	this.messageService.clear();
+	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
+    const fields = Object.keys(this.backupData || {});
+    const technicalFields = fields.filter(function (obj) { return UsableFields.indexOf(obj) == -1; });
+     if (this.appUtilBaseService.isEqualIgnoreCase(this.backupData, this.detailFormControls.getRawValue(), technicalFields, true) || (fields.length <= 0 && ((Object.values(this.detailFormControls.getRawValue()))?.filter(Boolean))?.length <=0)) {		
+     this.location.back();
+	}else{
+		this.confirmationService.confirm({
+			message:'Do you want to discard all unsaved changes?',
+			header:'Confirmation',
+			icon:'pipi-info-circle',
+			accept:()=>{
+				this.backupData=JSON.parse(JSON.stringify(this.detailFormControls.getRawValue()));
+				this.location.back();
+			},
+			reject:()=>{
+			},
+		});
+	}
+}
+	waitForResponse() {
+    setTimeout(() => {
+      if (this.id && !environment.prototype) {
+        if (!this.data?.workflowInfo) {
+          this.waitForResponse();
+        }
+        else {
+          this.getWorkflowConfig();
+        }
+      }
+    }, 3000);
+  }
+	showMessage(config:any){
+    this.messageService.clear();
+    this.messageService.add(config);
+}
 	getData(){
-        if(environment.prototype){
+       if(environment.prototype && this.id){
         const params = {
           sid: this.id
         };
@@ -2622,22 +2639,6 @@ addValidations(mandatoryFields:[]){
             });
         }
     }
-	waitForResponse() {
-    setTimeout(() => {
-      if (this.id && !environment.prototype) {
-        if (!this.data?.workflowInfo) {
-          this.waitForResponse();
-        }
-        else {
-          this.getWorkflowConfig();
-        }
-      }
-    }, 3000);
-  }
-	showMessage(config:any){
-    this.messageService.clear();
-    this.messageService.add(config);
-}
 	loadCaptionbarItems(){
     
 }
@@ -2685,27 +2686,6 @@ addValidations(mandatoryFields:[]){
 		if(Object.keys(this.mandatoryFields).length > 0)
 			this.clearValidations(this.mandatoryFields);
 	})
-}
-	onBack(){
-	this.messageService.clear();
-	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
-    const fields = Object.keys(this.backupData || {});
-    const technicalFields = fields.filter(function (obj) { return UsableFields.indexOf(obj) == -1; });
-    if (this.appUtilBaseService.isEqualIgnoreCase(this.backupData, this.detailFormControls.getRawValue(), technicalFields, true) || (fields.length <= 0)) {
-		this.location.back();
-	}else{
-		this.confirmationService.confirm({
-			message:'Do you want to discard all unsaved changes?',
-			header:'Confirmation',
-			icon:'pipi-info-circle',
-			accept:()=>{
-				this.backupData=JSON.parse(JSON.stringify(this.detailFormControls.getRawValue()));
-				this.location.back();
-			},
-			reject:()=>{
-			},
-		});
-	}
 }
 	restrictBasedonRoles(roles: any) {
     if (roles.includes('selected')) {
@@ -2775,6 +2755,11 @@ addValidations(mandatoryFields:[]){
         if (ele.fieldType == 'Date' && data[ele.name]) {
           const formattedDate = new Date(data[ele.name]).getTime()
           data[ele.name] = formattedDate;
+        }
+    else if(ele.fieldType ==='Boolean' ){
+          if(data[ele.name] === null || data[ele.name]=== undefined || data[ele.name]===''){
+            data[ele.name] = false;
+          }
         }
       })
     }
@@ -2849,10 +2834,12 @@ if (this.workFlowInitialState && this.workFlowEnabled && this.workFlowField) {
       this.detailFormConfig?.children?.forEach((ele: any) => {
         if (ele?.field === this.workFlowField && ele?.multipleValues) {
           this.detailFormControls.get(this.workFlowField)?.patchValue([this.workFlowInitialState]);
+          this.backupData[this.workFlowField] = [this.workFlowInitialState];
         }
         else {
           if (ele?.field === this.workFlowField && !ele?.multipleValues) {
             this.detailFormControls.get(this.workFlowField)?.patchValue(this.workFlowInitialState);
+            this.backupData[this.workFlowField] = this.workFlowInitialState;
           }
         }
       })

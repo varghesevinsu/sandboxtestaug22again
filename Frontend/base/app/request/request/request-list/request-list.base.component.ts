@@ -84,6 +84,7 @@ total:number =0;
 inValidFields:any = {};
 selectedItems:any ={};
 scrollTop:number =0;
+isRowSelected: boolean = false;
 	bsModalRef?: BsModalRef;
 	isChildPage:boolean = false;
 
@@ -1167,6 +1168,14 @@ this.messageService.add(config);
    this.onRefresh();
   }
 }
+	onRowSelect(event:any){
+    if(this.selectedValues.length > 0){
+      this.isRowSelected = true;
+    }
+    else if(this.selectedValues.length <= 0){
+      this.isRowSelected = false;
+    }
+  }
 	sort(e: any, field: string) {
 this.filter.sortField = field;
 this.filter.sortOrder = (e.currentTarget.childNodes[1].childNodes[0].classList.contains('pi-sort-amount-up-alt')) ? 'desc' : 'asc';
