@@ -78,11 +78,11 @@ deploy to pre-prod:
   only:
     - pre-prod
 
-deploy to dev:
-  environment: dev
+deploy to development:
+  environment: development
   stage: deploy
   variables:
-    MAVEN_PROFILE: "dev"
+    MAVEN_PROFILE: "development"
   image: google/cloud-sdk:alpine
   needs:
     - job: build-artifacts
@@ -103,7 +103,7 @@ deploy to dev:
   when: manual
   allow_failure: true
   only:
-    - dev
+    - development
 
 deploy to test:
   environment: test
