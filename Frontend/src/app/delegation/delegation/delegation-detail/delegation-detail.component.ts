@@ -47,4 +47,5 @@ export class DelegationDetailComponent extends DelegationDetailBaseComponent imp
   }
  
 
+
 }
