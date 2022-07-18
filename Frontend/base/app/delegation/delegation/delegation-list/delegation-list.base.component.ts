@@ -84,6 +84,7 @@ total:number =0;
 inValidFields:any = {};
 selectedItems:any ={};
 scrollTop:number =0;
+isRowSelected: boolean = false;
 	bsModalRef?: BsModalRef;
 	isChildPage:boolean = false;
 
@@ -151,7 +152,7 @@ scrollTop:number =0;
     "data" : "Approver Leader",
     "field" : "approverLeader",
     "name" : "approverLeader",
-    "uiType" : "select",
+    "uiType" : "text",
     "label" : "Approver Leader",
     "type" : "datamodelField",
     "fieldType" : "string"
@@ -162,7 +163,7 @@ scrollTop:number =0;
     "data" : " Delegate Name",
     "field" : "delegateName",
     "name" : "delegateName",
-    "uiType" : "select",
+    "uiType" : "text",
     "label" : " Delegate Name",
     "type" : "datamodelField",
     "fieldType" : "string"
@@ -280,7 +281,7 @@ scrollTop:number =0;
     "multipleValuesMin" : 0,
     "name" : "approverLeader",
     "width" : "120px",
-    "uiType" : "select",
+    "uiType" : "text",
     "fieldType" : "string",
     "allowViewing" : "yes"
   }, {
@@ -294,7 +295,7 @@ scrollTop:number =0;
     "showOnMobile" : "true",
     "label" : " Delegate Name",
     "type" : "datamodelField",
-    "mandatory" : "no",
+    "mandatory" : "yes",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "delegateName",
@@ -302,7 +303,7 @@ scrollTop:number =0;
     "name" : "delegateName",
     "sysGen" : false,
     "width" : "120px",
-    "uiType" : "select",
+    "uiType" : "text",
     "fieldType" : "string",
     "allowViewing" : "yes",
     "fieldId" : "delegateName"
@@ -536,10 +537,6 @@ scrollTop:number =0;
 		}
 	}
 }
-	getSelectedObject(field:string,options:any){
-      const selectedObj = (options.filter((item: { label: any}) => item.label.includes(field)));
-      return selectedObj[0];
-  }
 	getSubHeader() {
 this.subHeader = this.tableConfig.groupOnColumn?.name?.split('.');
 }
@@ -656,6 +653,14 @@ this.messageService.add(config);
    this.onRefresh();
   }
 }
+	onRowSelect(event:any){
+    if(this.selectedValues.length > 0){
+      this.isRowSelected = true;
+    }
+    else if(this.selectedValues.length <= 0){
+      this.isRowSelected = false;
+    }
+  }
 	sort(e: any, field: string) {
 this.filter.sortField = field;
 this.filter.sortOrder = (e.currentTarget.childNodes[1].childNodes[0].classList.contains('pi-sort-amount-up-alt')) ? 'desc' : 'asc';

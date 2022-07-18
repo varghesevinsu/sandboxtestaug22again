@@ -67,6 +67,7 @@ workflowActions:any ={
   isSaveResponseReceived:boolean = false;
   formSecurityConfig:any = {};
   enableReadOnly = BaseAppConstants.enableReadOnly;
+isRowSelected:boolean = true; 
 	bsModalRef?: BsModalRef;
 	isChildPage:boolean = false;
 
@@ -181,7 +182,7 @@ workflowActions:any ={
     "multipleValuesMin" : 0,
     "name" : "approverLeader",
     "sysGen" : false,
-    "uiType" : "select",
+    "uiType" : "text",
     "fieldType" : "string",
     "allowViewing" : "yes",
     "fieldId" : "approverLeader"
@@ -195,14 +196,14 @@ workflowActions:any ={
     "multipleValuesMax" : 10,
     "label" : " Delegate Name",
     "type" : "formField",
-    "mandatory" : "no",
+    "mandatory" : "yes",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "delegateName",
     "multipleValuesMin" : 0,
     "name" : "delegateName",
     "sysGen" : false,
-    "uiType" : "select",
+    "uiType" : "text",
     "fieldType" : "string",
     "allowViewing" : "yes",
     "fieldId" : "delegateName"
@@ -297,8 +298,8 @@ workflowActions:any ={
 		detailFormControls : FormGroup = new FormGroup({
 	delegationStartDate: new FormControl('',[]),
 	approverLeader: new FormControl('',[]),
-	delegateName: new FormControl('',[]),
 	delegationEndDate: new FormControl('',[]),
+	delegateName: new FormControl('',[Validators.required]),
 });
 
 
@@ -322,10 +323,6 @@ workflowActions:any ={
         this.updateAllowedActions();
         this.isFormValueChanged = true;
       })
-  }
-	getSelectedObject(field:string,options:any){
-      const selectedObj = (options.filter((item: { label: any}) => item.label.includes(field)));
-      return selectedObj[0];
   }
 	getWorkflowConfig() {
 	const workFlowInfo = this.data.workflowInfo;
@@ -467,6 +464,27 @@ addValidations(mandatoryFields:[]){
     return true      
     //return this.appUtilBaseService.canDeactivateCall(this.form, this.backupData);
 }
+	onBack(){
+	this.messageService.clear();
+	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
+    const fields = Object.keys(this.backupData || {});
+    const technicalFields = fields.filter(function (obj) { return UsableFields.indexOf(obj) == -1; });
+     if (this.appUtilBaseService.isEqualIgnoreCase(this.backupData, this.detailFormControls.getRawValue(), technicalFields, true) || (fields.length <= 0 && ((Object.values(this.detailFormControls.getRawValue()))?.filter(Boolean))?.length <=0)) {		
+     this.location.back();
+	}else{
+		this.confirmationService.confirm({
+			message:'Do you want to discard all unsaved changes?',
+			header:'Confirmation',
+			icon:'pipi-info-circle',
+			accept:()=>{
+				this.backupData=JSON.parse(JSON.stringify(this.detailFormControls.getRawValue()));
+				this.location.back();
+			},
+			reject:()=>{
+			},
+		});
+	}
+}
 	waitForResponse() {
     setTimeout(() => {
       if (this.id && !environment.prototype) {
@@ -483,6 +501,29 @@ addValidations(mandatoryFields:[]){
     this.messageService.clear();
     this.messageService.add(config);
 }
+	getData(){
+       if(environment.prototype && this.id){
+        const params = {
+          sid: this.id
+        };
+            this.delegationService.getProtoTypingDataById(params).subscribe((res:any) =>{
+                this.data = res;
+                this.backupData = res;
+                this.detailFormControls.patchValue(this.backupData);
+            });
+		}else if(this.id){
+			const params = {
+                sid: this.id
+              };
+            this.delegationService.getById(params).subscribe((res:DelegationBase[]) =>{
+                this.data = res||{};
+                this.backupData = res || {};
+                if(this.backupData?.recDeleted)
+                	delete this.backupData?.recDeleted;
+                	 this.formatRawData();
+            });
+        }
+    }
 	loadCaptionbarItems(){
     
 }
@@ -505,50 +546,6 @@ addValidations(mandatoryFields:[]){
         }
       }
   }
-	getData(){
-        if(environment.prototype){
-        const params = {
-          sid: this.id
-        };
-            this.delegationService.getProtoTypingDataById(params).subscribe((res:any) =>{
-                this.data = res;
-                this.backupData = res;
-                this.detailFormControls.patchValue(this.backupData);
-            });
-		}else if(this.id){
-			const params = {
-                sid: this.id
-              };
-            this.delegationService.getById(params).subscribe((res:DelegationBase[]) =>{
-                this.data = res||{};
-                this.backupData = res || {};
-                if(this.backupData?.recDeleted)
-                	delete this.backupData?.recDeleted;
-                	 this.formatRawData();
-            });
-        }
-    }
-	onBack(){
-	this.messageService.clear();
-	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
-    const fields = Object.keys(this.backupData || {});
-    const technicalFields = fields.filter(function (obj) { return UsableFields.indexOf(obj) == -1; });
-    if (this.appUtilBaseService.isEqualIgnoreCase(this.backupData, this.detailFormControls.getRawValue(), technicalFields, true) || (fields.length <= 0)) {
-		this.location.back();
-	}else{
-		this.confirmationService.confirm({
-			message:'Do you want to discard all unsaved changes?',
-			header:'Confirmation',
-			icon:'pipi-info-circle',
-			accept:()=>{
-				this.backupData=JSON.parse(JSON.stringify(this.detailFormControls.getRawValue()));
-				this.location.back();
-			},
-			reject:()=>{
-			},
-		});
-	}
-}
 	restrictBasedonRoles(roles: any) {
     if (roles.includes('selected')) {
        if(this.currentUserData){
@@ -588,6 +585,7 @@ addValidations(mandatoryFields:[]){
 			});
             this.messageService.clear();
             this.delegationService[method](requestedObj).subscribe((res:DelegationBase) => {
+            this.backupData = {...data};
             this.isSaveResponseReceived = true;
             this.isFormValueChanged = false;
 	        this.id = res.sid;
@@ -676,6 +674,11 @@ addValidations(mandatoryFields:[]){
           const formattedDate = new Date(data[ele.name]).getTime()
           data[ele.name] = formattedDate;
         }
+    else if(ele.fieldType ==='Boolean' ){
+          if(data[ele.name] === null || data[ele.name]=== undefined || data[ele.name]===''){
+            data[ele.name] = false;
+          }
+        }
       })
     }
     if (Object.keys(this.selectedItems).length > 0) {
@@ -761,10 +764,12 @@ if (this.workFlowInitialState && this.workFlowEnabled && this.workFlowField) {
       this.detailFormConfig?.children?.forEach((ele: any) => {
         if (ele?.field === this.workFlowField && ele?.multipleValues) {
           this.detailFormControls.get(this.workFlowField)?.patchValue([this.workFlowInitialState]);
+          this.backupData[this.workFlowField] = [this.workFlowInitialState];
         }
         else {
           if (ele?.field === this.workFlowField && !ele?.multipleValues) {
             this.detailFormControls.get(this.workFlowField)?.patchValue(this.workFlowInitialState);
+            this.backupData[this.workFlowField] = this.workFlowInitialState;
           }
         }
       })

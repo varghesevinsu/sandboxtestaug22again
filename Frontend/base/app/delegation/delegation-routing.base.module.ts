@@ -19,7 +19,13 @@ export const routes: Routes = [
      	label: "DELEGATION_LIST",
         breadcrumb: "DELEGATION_LIST",
         roles : [
-        			"all"
+        			"selected",
+				
+        			"Leader",
+				
+        			"Admin",
+				
+        			"Development Administrator"
 				]
      }
 },
@@ -31,7 +37,13 @@ export const routes: Routes = [
      	label: "DELEGATION_DETAIL",
         breadcrumb: "DELEGATION_DETAIL",
         roles : [
-        			"all"
+        			"selected",
+				
+        			"Leader",
+				
+        			"Admin",
+				
+        			"Development Administrator"
 				]
      }
 }
