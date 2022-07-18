@@ -1,0 +1,128 @@
+ <div class="detail services-detail">
+   <div id="title-bar">
+    <div class="display">
+        <div class="col" class="page-title-bar">
+            <!-- <span class="pi pi-arrow-left back-action"></span> -->
+            <span class="page-title" [innerHTML]="pageViewTitle | translate"></span>
+        </div>
+        <app-action-bar [buttons] = "leftActionBarConfig.children"
+(onBtnClick)='actionBarAction($event)'
+[style.order]="isMobile?'1':'0'">
+</app-action-bar><app-workflow-action-bar [buttons] = "workflowActionBarConfig.children"
+(onBtnClick)='workflowActionBarAction($event)'
+[workflow]="workflowActions"
+[style.order]="isMobile?'1':'0'">
+</app-workflow-action-bar><ul class="nav  caption-bar" *ngIf="detailCaptionBarConfig" [ngStyle]="{width: detailCaptionBarConfig.width, 'justify-content':detailCaptionBarConfig.align}">
+        <li class="nav-item" *ngFor="let captionItem of detailCaptionBarConfig.children" [style.display]="((captionItem.showOn =='mobile_only' && isMobile) || (captionItem.showOn =='desktop_only' && !isMobile) || (captionItem.showOn =='both')||(!captionItem.showOn))?'block':'none'">
+            <div class="card" *ngIf="backupData && formatCaptionItems(captionItem,backupData)">
+                <div class="card-body">
+                   <h5 class="card-title" >{{captionItem.label | translate}}</h5>
+                          <div *ngIf="!captionItem.render" class="card-sub-title" [innerHTML]="backupData && formatCaptionItems(captionItem,backupData)">
+                         </div>
+                    <div *ngIf="captionItem.render" class="card-sub-title">
+                        <div [innerHtml]="captionItem.render(captionItem)"></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    </div>
+</div><div class="ev-detail-view">
+    <div class="detail-flex-box">
+        <div class="flex align-items-center justify-content-center wizard-container" style="display:none">
+
+        </div>
+        <div class="flex align-items-center justify-content-center form-container">
+            <form class="ev-form " [formGroup]="detailFormControls" #detailForm [ngClass]="{'read-only-fields':enableReadOnly}">
+                <div class="row form-body">
+                    <div class="form-row vg-col-1">
+                        <div class="form-col" [hidden]="hiddenFields.metier">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.metier?.isRequired, 'error':inValidFields.metier}">
+        <label for="metier" class="col-form-label metier-label" [textContent]=" 'METIER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.metier?.infoBubble"   [pTooltip]="formFieldConfig?.metier?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="metier " formControlName="metier" [placeholder]="formFieldConfig?.metier?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.metier?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.service">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.service?.isRequired, 'error':inValidFields.service}">
+        <label for="service" class="col-form-label service-label" [textContent]=" 'SERVICE'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.service?.infoBubble"   [pTooltip]="formFieldConfig?.service?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="service " formControlName="service" [placeholder]="formFieldConfig?.service?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.service?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.enabledLab">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.enabledLab?.isRequired, 'error':inValidFields.enabledLab}">
+        <label for="enabledLab" class="col-form-label enabledLab-label d-none" [textContent]="'ENABLED_LAB'|translate"></label>
+        <p-checkbox class="form-input" formControlName="enabledLab" label="{{'ENABLED_LAB' | translate}}" binary="true"></p-checkbox>
+        <span class="info-bubble" *ngIf="formFieldConfig?.enabledLab?.infoBubble"   [pTooltip]="formFieldConfig?.enabledLab?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.enabledLab?.helpText || ''}}</div>
+    </div>
+</div>
+<div class="form-col" [hidden]="hiddenFields.respLeader">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.respLeader?.isRequired, 'error':inValidFields.respLeader}">
+        <label for="respLeader" class="col-form-label respLeader-label" [textContent]=" 'RESP_LEADER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.respLeader?.infoBubble"   [pTooltip]="formFieldConfig?.respLeader?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="respLeader " formControlName="respLeader" [placeholder]="formFieldConfig?.respLeader?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.respLeader?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.respScheduler">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.respScheduler?.isRequired, 'error':inValidFields.respScheduler}">
+        <label for="respScheduler" class="col-form-label respScheduler-label" [textContent]=" 'RESP_SCHEDULER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.respScheduler?.infoBubble"   [pTooltip]="formFieldConfig?.respScheduler?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="respScheduler " formControlName="respScheduler" [placeholder]="formFieldConfig?.respScheduler?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.respScheduler?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.specificFields">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.specificFields?.isRequired, 'error':inValidFields.specificFields}">
+        <label for="specificFields" class="col-form-label specificFields-label" [textContent]="'SPECIFIC_FIELDS'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.specificFields?.infoBubble"   [pTooltip]="formFieldConfig?.specificFields?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['specificFields']?.options" formControlName="specificFields"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.specificFields?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #specificFieldsSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.specificFields.value; let selected;">
+                    <ng-template *ngTemplateOutlet="specificFieldsSelectedRef;context:{conditions :formFieldConfig.specificFields?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.specificFields?.options)).value], option:(getSelectedObject(selected,formFieldConfig.specificFields?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #specificFieldsListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="specificFieldsListRef;context:{conditions :formFieldConfig.specificFields?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.specificFields?.helpText || ''}}</div>
+    </div>
+</div>
+                    </div>
+                </div>
+        </form>
+        </div>
+    </div>
+</div>
+</div>
