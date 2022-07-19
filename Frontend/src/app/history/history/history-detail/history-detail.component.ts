@@ -47,4 +47,5 @@ export class HistoryDetailComponent extends HistoryDetailBaseComponent implement
   }
  
 
+
 }
