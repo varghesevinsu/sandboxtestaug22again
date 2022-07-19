@@ -91,7 +91,7 @@ public abstract class HistoryServiceBaseImpl<BL extends IHistoryBLBase<M>, M ext
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("byrequestcode/{requestcode}")
-	public M getByRequestCode(@PathParam("requestcode") String requestCode) {
+	public M getByRequestCode(@PathParam("requestcode") Long requestCode) {
 		return logic.getByRequestCode(requestCode);
 	}
 

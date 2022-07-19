@@ -15,7 +15,7 @@ public interface IHistoryBLBase<T extends HistoryBase> extends ICRUDOperation<T>
 public PaginationResponse getDatatableDataByPId(PaginationRequest paginationrequest,String pid);
 
 
-public T getByRequestCode(String requestCode);
+public T getByRequestCode(Long requestCode);
 
 	
 }

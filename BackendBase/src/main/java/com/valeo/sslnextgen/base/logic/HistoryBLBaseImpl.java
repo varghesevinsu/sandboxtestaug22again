@@ -161,7 +161,7 @@ public class HistoryBLBaseImpl<T extends HistoryBase> extends BaseBusinessLogic<
 
 
 	@Override
-	public T getByRequestCode(String requestCode) {
+	public T getByRequestCode(Long requestCode) {
 		List<Filter> filters = new ArrayList<>();
 		filters.add(new SimpleFilter("requestCode", requestCode, Operator.EQUAL));
 		List<T> getAllList= super.getAll(filters);

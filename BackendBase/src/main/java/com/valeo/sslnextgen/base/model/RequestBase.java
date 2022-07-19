@@ -19,7 +19,6 @@ public class RequestBase extends BaseWorkflowModel {
 	private Long boardNumber;
 	@Searchable(index = true)
 	private String name;
-	@NotBlank
 	@Searchable(index = true)
 	private String orgalocToBeInvoiced;
 	@Searchable(index = false)
@@ -42,7 +41,6 @@ public class RequestBase extends BaseWorkflowModel {
 	private Long budgetManpower2;
 	@Searchable(index = true)
 	private String nameCode;
-	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
 	private RequestStatusoftherequest statusOfTheRequest=RequestStatusoftherequest.DRAFT;
 	@Searchable(index = false)
@@ -64,7 +62,6 @@ public class RequestBase extends BaseWorkflowModel {
 	private String internalPoNumber;
 	@Searchable(index = true)
 	private String otherBudget2;
-	@NotBlank
 	@Searchable(index = true)
 	private String nameOfTheRequest;
 	@Searchable(index = false)
@@ -127,7 +124,6 @@ public class RequestBase extends BaseWorkflowModel {
 	private String additionnalCost;
 	@Searchable(index = true)
 	private String areLeftRightDesign;
-	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
 	private Long requestCode;
 	@Searchable(index = true)
@@ -197,9 +193,10 @@ public class RequestBase extends BaseWorkflowModel {
 	private String sapCategory;
 	@Searchable(index = true)
 	private RequestProjecttype projectType;
-	@NotBlank
 	@Searchable(index = true)
 	private String requesterOrgaloc;
+	@Searchable(index = true)
+	private String subCode;
 	@NotBlank
 	@Searchable(index = true)
 	private String requestName;
@@ -920,6 +917,14 @@ public class RequestBase extends BaseWorkflowModel {
 
 	public String getRequesterOrgaloc() {
 		return requesterOrgaloc;
+	}
+
+	public void setSubCode(String subCode) {
+		this.subCode = subCode;
+	}
+
+	public String getSubCode() {
+		return subCode;
 	}
 
 	public void setRequestName(String requestName) {
