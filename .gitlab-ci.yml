@@ -46,6 +46,7 @@ build-artifacts:
     key: SSLNextGENNodeModules
     paths:
       - Frontend/node_modules/*
+  when: manual
   only:
     - development
     - release
