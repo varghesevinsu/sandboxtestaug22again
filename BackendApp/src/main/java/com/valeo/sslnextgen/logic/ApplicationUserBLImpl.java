@@ -52,7 +52,7 @@ implements IApplicationUserBL<ApplicationUser>
 	}
 
 	public ApplicationUser getCurrentUser() {
-		return getCurrentUser(false);
+		return getCurrentUser(true);
 	}
 
 	public ApplicationUser getCurrentUser(boolean isUserId) {
