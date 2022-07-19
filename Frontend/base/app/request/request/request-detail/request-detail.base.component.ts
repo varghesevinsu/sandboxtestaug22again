@@ -483,7 +483,7 @@ isRowSelected:boolean = true;
     "currentNode" : "e75a6658-cb28-4e0c-a96c-c6bd279b55ac",
     "label" : " Request Name",
     "type" : "captionItem",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "requestName",
@@ -504,7 +504,7 @@ isRowSelected:boolean = true;
     "allowViewing" : "yes",
     "fieldId" : "requestName"
   }, {
-    "allowEditing" : "no",
+    "allowEditing" : "yes",
     "multipleValues" : false,
     "allowedValues" : {
       "values" : [ {
@@ -624,7 +624,7 @@ isRowSelected:boolean = true;
     "currentNode" : "fb2566d3-97d8-4497-a178-0866cd3f5593",
     "label" : " Requester",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "requester",
@@ -775,6 +775,106 @@ isRowSelected:boolean = true;
     "allowEditing" : "conditional",
     "allowedValues" : {
       "values" : [ {
+        "label" : "FROM_ED1_",
+        "value" : "FROM_ED1*"
+      }, {
+        "label" : "FROM_ED2_",
+        "value" : "FROM_ED2*"
+      }, {
+        "label" : "FROM_ED3_",
+        "value" : "FROM_ED3*"
+      } ],
+      "conditions" : {
+        "conditionType" : "Auto",
+        "conditions" : [ {
+          "id" : "From ED1*",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : "JobCode",
+              "operator" : "==",
+              "value" : "From ED1*"
+            } ]
+          },
+          "style" : {
+            "background-color" : "#E544FF33",
+            "color" : "#E544FF",
+            "cell-background-color" : "#fff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333"
+          }
+        }, {
+          "id" : "From ED2*",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : "JobCode",
+              "operator" : "==",
+              "value" : "From ED2*"
+            } ]
+          },
+          "style" : {
+            "background-color" : "#8220FF33",
+            "color" : "#8220FF",
+            "cell-background-color" : "#fff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333"
+          }
+        }, {
+          "id" : "From ED3*",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : "JobCode",
+              "operator" : "==",
+              "value" : "From ED3*"
+            } ]
+          },
+          "style" : {
+            "background-color" : "#1A73E833",
+            "color" : "#1A73E8",
+            "cell-background-color" : "#fff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333"
+          }
+        } ]
+      }
+    },
+    "defaultField" : false,
+    "fieldName" : "NameCode",
+    "data" : "namecode",
+    "currentNode" : "8129982e-32f6-4c2d-9f89-1bf17f47c983",
+    "label" : "NameCode",
+    "type" : "formField",
+    "mandatory" : "no",
+    "searchable" : "full_word",
+    "transientField" : false,
+    "field" : "namecode",
+    "valueChange" : true,
+    "name" : "namecode",
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ "selected", "Requester ", "Admin" ]
+    },
+    "sysGen" : false,
+    "uiType" : "select",
+    "fieldType" : "string",
+    "allowViewing" : "yes",
+    "fieldId" : "namecode"
+  }, {
+    "allowEditing" : "conditional",
+    "allowedValues" : {
+      "values" : [ {
         "label" : "PROJECT",
         "value" : "PROJECT"
       }, {
@@ -830,7 +930,7 @@ isRowSelected:boolean = true;
     "currentNode" : "9ea4567d-9e20-4a4e-b49d-8552ebc84bbf",
     "label" : " Project or Activity",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "projectOrActivity",
@@ -944,6 +1044,24 @@ isRowSelected:boolean = true;
     "fieldId" : "subName"
   }, {
     "allowEditing" : "no",
+    "allowedValues" : { },
+    "defaultField" : false,
+    "fieldName" : " Orgaloc to be invoiced",
+    "data" : " Orgaloc to be invoiced",
+    "label" : " Orgaloc to be invoiced",
+    "type" : "formField",
+    "mandatory" : "no",
+    "searchable" : "full_word",
+    "transientField" : false,
+    "field" : "orgalocToBeInvoiced",
+    "name" : "orgalocToBeInvoiced",
+    "sysGen" : false,
+    "uiType" : "text",
+    "fieldType" : "string",
+    "allowViewing" : "yes",
+    "fieldId" : "orgalocToBeInvoiced"
+  }, {
+    "allowEditing" : "yes",
     "multipleValues" : false,
     "fieldName" : " Service type",
     "data" : " Service type",
@@ -1000,7 +1118,7 @@ isRowSelected:boolean = true;
     "currentNode" : "e75a6658-cb28-4e0c-a96c-c6bd279b55ac",
     "label" : " Request Name",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "requestName",
@@ -1189,7 +1307,7 @@ isRowSelected:boolean = true;
     "data" : "EMC Lab",
     "label" : "EMC Lab",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "emcLab",
@@ -1405,7 +1523,7 @@ isRowSelected:boolean = true;
     "currentNode" : "91d2a417-e5cd-4516-b653-41bf952f9f01",
     "label" : " Board Name ",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "boardName",
@@ -1440,7 +1558,7 @@ isRowSelected:boolean = true;
     "currentNode" : "04089a8e-ed07-4a6f-aa5a-66e4c28ac1f6",
     "label" : "Board Number",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "boardNumber",
@@ -1660,7 +1778,7 @@ isRowSelected:boolean = true;
     "data" : "Scheduler Proposed Start Date",
     "label" : "Scheduler Proposed Start Date",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "schedulerProposedStartDate",
@@ -1713,7 +1831,7 @@ isRowSelected:boolean = true;
     "currentNode" : "b8f8e904-f2be-471e-b34e-ee3e475e8ac2",
     "label" : "Quote No",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "field" : "quoteNo",
     "valueChange" : true,
     "name" : "quoteNo",
@@ -1790,14 +1908,14 @@ isRowSelected:boolean = true;
     "currentNode" : "2fb02ddd-d395-42a3-b95b-2dd9287c0583",
     "label" : "Scheduler Name",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "schedulerName",
     "valueChange" : true,
     "name" : "schedulerName",
     "sysGen" : false,
-    "uiType" : "select",
+    "uiType" : "text",
     "fieldType" : "string",
     "allowViewing" : "yes",
     "fieldId" : "schedulerName"
@@ -2169,53 +2287,54 @@ isRowSelected:boolean = true;
 	pageViewTitle: string = 'REQUEST_DETAIL';
 	
 		detailFormControls : FormGroup = new FormGroup({
-	boardNumber: new FormControl('',[Validators.required]),
-	quotationDescription: new FormControl('',[]),
-	schedulerProposedStartDate: new FormControl('',[Validators.required]),
+	quoteNo: new FormControl('',[]),
 	serviceType: new FormControl('',[Validators.required]),
 	linkToSpecifications: new FormControl('',[]),
-	additionalInformation: new FormControl('',[]),
-	businessController: new FormControl('',[]),
 	projectManagerOrActivityLeader: new FormControl('',[]),
-	hoursManpower: new FormControl('',[]),
-	watcher: new FormControl('',[]),
-	emcLab: new FormControl('',[Validators.required]),
 	budget: new FormControl('',[]),
+	schedulerName: new FormControl('',[]),
 	schedulerCurrency: new FormControl('',[]),
-	currency: new FormControl('',[]),
-	requestedEndDate: new FormControl('',[]),
-	schedulerName: new FormControl('',[Validators.required]),
 	prOrActivityName: new FormControl('',[]),
-	osaNameToBeCreatedInStr: new FormControl('',[]),
-	projectNameAsInEdrm: new FormControl('',[]),
-	panelization: new FormControl('',[]),
-	prjOaCode: new FormControl('',[]),
-	quoteNo: new FormControl('',[Validators.required]),
 	projectType: new FormControl('',[]),
+	schedulerProposedStartDate: new FormControl('',[]),
 	schedulerProposedEndDate: new FormControl('',[]),
-	requestName: new FormControl('',[Validators.required]),
-	projectOrActivity: new FormControl('',[Validators.required]),
-	schedulerAdditionalInformation: new FormControl('',[]),
-	functionalNetwork: new FormControl('',[]),
 	namecode: new FormControl('',[]),
+	projectOrActivity: new FormControl('',[]),
 	leader: new FormControl('',[]),
 	secondPlaceOfDevelopment: new FormControl('',[]),
 	estimatedDurationInHours: new FormControl('',[]),
-	requestedStartDate: new FormControl('',[]),
 	subName: new FormControl('',[]),
-	hoursManpower2: new FormControl('',[]),
-	boardName: new FormControl('',[Validators.required]),
+	boardName: new FormControl('',[]),
 	globalBudget: new FormControl('',[]),
-	additionnalCost: new FormControl('',[]),
+	orgalocToBeInvoiced: new FormControl('',[]),
 	leadPlaceOfDevelopment: new FormControl('',[]),
-	requester: new FormControl('',[Validators.required]),
 	linkToQuotation: new FormControl('',[]),
-	budgetManpower2: new FormControl('',[]),
 	requesterOrgaloc: new FormControl('',[]),
 	additionnalCost2: new FormControl('',[]),
 	areLeftRightDesign: new FormControl('',[]),
-	subCode: new FormControl('',[]),
 	taskType: new FormControl('',[]),
+	emcLab: new FormControl('',[]),
+	quotationDescription: new FormControl('',[]),
+	additionalInformation: new FormControl('',[]),
+	boardNumber: new FormControl('',[]),
+	businessController: new FormControl('',[]),
+	hoursManpower: new FormControl('',[]),
+	watcher: new FormControl('',[]),
+	currency: new FormControl('',[]),
+	requestedEndDate: new FormControl('',[]),
+	projectNameAsInEdrm: new FormControl('',[]),
+	osaNameToBeCreatedInStr: new FormControl('',[]),
+	panelization: new FormControl('',[]),
+	prjOaCode: new FormControl('',[]),
+	schedulerAdditionalInformation: new FormControl('',[]),
+	functionalNetwork: new FormControl('',[]),
+	requester: new FormControl('',[]),
+	requestedStartDate: new FormControl('',[]),
+	hoursManpower2: new FormControl('',[]),
+	additionnalCost: new FormControl('',[]),
+	budgetManpower2: new FormControl('',[]),
+	requestName: new FormControl('',[]),
+	subCode: new FormControl('',[]),
 	scheduler: new FormControl('',[]),
 });
 

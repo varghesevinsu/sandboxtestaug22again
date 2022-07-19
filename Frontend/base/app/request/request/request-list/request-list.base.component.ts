@@ -606,7 +606,7 @@ isRowSelected: boolean = false;
     "showOnMobile" : "true",
     "label" : " Request Name",
     "type" : "datamodelField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "requestName",
@@ -833,7 +833,7 @@ isRowSelected: boolean = false;
     "showOnMobile" : "true",
     "label" : " Requester",
     "type" : "datamodelField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "requester",
@@ -860,7 +860,7 @@ isRowSelected: boolean = false;
     "data" : "Quote No",
     "label" : "Quote No",
     "type" : "gridColumn",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "field" : "quoteNo",
     "name" : "quoteNo",
     "editConditionally" : {
@@ -877,7 +877,7 @@ isRowSelected: boolean = false;
     "allowViewing" : "yes",
     "fieldId" : "quoteNo"
   }, {
-    "allowEditing" : "no",
+    "allowEditing" : "yes",
     "multipleValues" : false,
     "allowedValues" : {
       "values" : [ {

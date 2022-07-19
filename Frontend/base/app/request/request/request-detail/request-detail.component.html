@@ -103,6 +103,52 @@
         </p-dropdown>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.functionalNetwork?.helpText || ''}}</div>
     </div>
+</div><div class="form-col" [hidden]="hiddenFields.namecode">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.namecode?.isRequired, 'error':inValidFields.namecode}">
+        <label for="namecode" class="col-form-label namecode-label" [textContent]="'NAMECODE'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.namecode?.infoBubble"   [pTooltip]="formFieldConfig?.namecode?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['namecode']?.options" formControlName="namecode"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.namecode?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #namecodeSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.namecode.value; let selected;">
+                    <ng-template *ngTemplateOutlet="namecodeSelectedRef;context:{conditions :formFieldConfig.namecode?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.namecode?.options)).value], option:(getSelectedObject(selected,formFieldConfig.namecode?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #namecodeListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="namecodeListRef;context:{conditions :formFieldConfig.namecode?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.namecode?.helpText || ''}}</div>
+    </div>
 </div>
         </div>
     </div>
@@ -197,6 +243,13 @@
         <span class="info-bubble" *ngIf="formFieldConfig?.subName?.infoBubble"   [pTooltip]="formFieldConfig?.subName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
         <input type="text " pInputText class="form-control " id="subName " formControlName="subName" [placeholder]="formFieldConfig?.subName?.placeHolder || ''"/>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.subName?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.orgalocToBeInvoiced">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.orgalocToBeInvoiced?.isRequired, 'error':inValidFields.orgalocToBeInvoiced}">
+        <label for="orgalocToBeInvoiced" class="col-form-label orgalocToBeInvoiced-label" [textContent]=" 'ORGALOC_TO_BE_INVOICED'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.orgalocToBeInvoiced?.infoBubble"   [pTooltip]="formFieldConfig?.orgalocToBeInvoiced?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="orgalocToBeInvoiced " formControlName="orgalocToBeInvoiced" [placeholder]="formFieldConfig?.orgalocToBeInvoiced?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.orgalocToBeInvoiced?.helpText || ''}}</div>
     </div>
 </div>
         </div>
@@ -686,48 +739,9 @@
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.schedulerName">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.schedulerName?.isRequired, 'error':inValidFields.schedulerName}">
-        <label for="schedulerName" class="col-form-label schedulerName-label" [textContent]="'SCHEDULER_NAME'|translate"></label>  
-        <span class="info-bubble" *ngIf="formFieldConfig?.schedulerName?.infoBubble"   [pTooltip]="formFieldConfig?.schedulerName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
-        <p-dropdown [options]="formFieldConfig['schedulerName']?.options" formControlName="schedulerName"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.schedulerName?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
-            <ng-template pTemplate="selectedItem">
-                <ng-template #schedulerNameSelectedRef let-conditions="conditions" let-option="option">
-                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
-                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
-                        <span  
-                            *ngIf="conditions?.iconClass" class="icon"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass"></i>
-                
-                        </span>
-                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-                <ng-container *ngIf="detailFormControls.controls.schedulerName.value; let selected;">
-                    <ng-template *ngTemplateOutlet="schedulerNameSelectedRef;context:{conditions :formFieldConfig.schedulerName?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.schedulerName?.options)).value], option:(getSelectedObject(selected,formFieldConfig.schedulerName?.options))}"></ng-template>
-                </ng-container>
-            </ng-template>
-        
-            <ng-template let-dropdownItem pTemplate="item" >
-                <ng-template #schedulerNameListRef let-conditions="conditions" let-option="option">
-                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
-                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
-                        <span
-                            *ngIf="conditions?.iconClass"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass" ></i>
-        
-                        </span>
-                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-        
-                <ng-container>
-                    <ng-template *ngTemplateOutlet="schedulerNameListRef;context:{conditions :formFieldConfig.schedulerName?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
-                </ng-container>
-            </ng-template>
-        </p-dropdown>
+        <label for="schedulerName" class="col-form-label schedulerName-label" [textContent]=" 'SCHEDULER_NAME'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.schedulerName?.infoBubble"   [pTooltip]="formFieldConfig?.schedulerName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="schedulerName " formControlName="schedulerName" [placeholder]="formFieldConfig?.schedulerName?.placeHolder || ''"/>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.schedulerName?.helpText || ''}}</div>
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.linkToQuotation">
