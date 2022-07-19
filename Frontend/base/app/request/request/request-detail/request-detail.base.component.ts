@@ -293,12 +293,15 @@ isRowSelected:boolean = true;
     "defaultField" : false,
     "fieldName" : "Request Code",
     "data" : "Request Code",
+    "currentNode" : "9a945dff-a8e3-44c0-bfeb-e0a7f3a60aff",
     "label" : "Request Code",
     "type" : "captionItem",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "requestCode",
+    "valueChange" : true,
+    "showOn" : "both",
     "name" : "requestCode",
     "sysGen" : false,
     "uiType" : "number",
@@ -457,7 +460,7 @@ isRowSelected:boolean = true;
     "currentNode" : "24d16c26-c13b-4740-968f-fdfec98b3e8f",
     "label" : "  Status of the request",
     "type" : "captionItem",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "defaultVal" : "Draft",
@@ -649,7 +652,7 @@ isRowSelected:boolean = true;
     "currentNode" : "e5ae4249-0bf1-408f-89ff-3a23ca6119af",
     "label" : "  Requester Orgaloc ",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "requesterOrgaloc",
@@ -875,6 +878,24 @@ isRowSelected:boolean = true;
     "allowViewing" : "yes",
     "fieldId" : "prjOaCode"
   }, {
+    "allowEditing" : "yes",
+    "allowedValues" : { },
+    "defaultField" : false,
+    "fieldName" : "Sub Code",
+    "data" : "Sub Code",
+    "label" : "Sub Code",
+    "type" : "formField",
+    "mandatory" : "no",
+    "searchable" : "full_word",
+    "transientField" : false,
+    "field" : "subCode",
+    "name" : "subCode",
+    "sysGen" : false,
+    "uiType" : "text",
+    "fieldType" : "string",
+    "allowViewing" : "yes",
+    "fieldId" : "subCode"
+  }, {
     "label" : "Validate",
     "buttonEnabled" : "yes",
     "visibility" : "show",
@@ -924,171 +945,6 @@ isRowSelected:boolean = true;
   }, {
     "allowEditing" : "no",
     "multipleValues" : false,
-    "allowedValues" : {
-      "values" : [ {
-        "label" : "DRAFT",
-        "value" : "DRAFT"
-      }, {
-        "label" : "SCHEDULER_ANALYSIS",
-        "value" : "SCHEDULER_ANALYSIS"
-      }, {
-        "label" : "LEADER_VERIFICATION",
-        "value" : "LEADER_VERIFICATION"
-      }, {
-        "label" : "APPROVER_VALIDATION",
-        "value" : "APPROVER_VALIDATION"
-      }, {
-        "label" : "COMPLETED",
-        "value" : "COMPLETED"
-      }, {
-        "label" : "CANCELLED",
-        "value" : "CANCELLED"
-      }, {
-        "label" : "CLOSED",
-        "value" : "CLOSED"
-      } ],
-      "conditions" : {
-        "conditionType" : "Auto",
-        "conditions" : [ {
-          "id" : "Draft",
-          "query" : {
-            "condition" : "and",
-            "rules" : [ {
-              "field" : "  Status of the request",
-              "operator" : "==",
-              "value" : "Draft"
-            } ]
-          },
-          "style" : {
-            "background-color" : "#E544FF33",
-            "color" : "#E544FF",
-            "cell-background-color" : "#fff",
-            "text-align" : "center",
-            "showText" : true,
-            "icon" : "",
-            "iconColor" : "#333"
-          }
-        }, {
-          "id" : "Scheduler Analysis",
-          "query" : {
-            "condition" : "and",
-            "rules" : [ {
-              "field" : "  Status of the request",
-              "operator" : "==",
-              "value" : "Scheduler Analysis"
-            } ]
-          },
-          "style" : {
-            "background-color" : "#8220FF33",
-            "color" : "#8220FF",
-            "cell-background-color" : "#fff",
-            "text-align" : "center",
-            "showText" : true,
-            "icon" : "",
-            "iconColor" : "#333"
-          }
-        }, {
-          "id" : "Approver Validation",
-          "query" : {
-            "condition" : "and",
-            "rules" : [ {
-              "field" : "  Status of the request",
-              "operator" : "==",
-              "value" : "Approver Validation"
-            } ]
-          },
-          "style" : {
-            "background-color" : "#1A73E833",
-            "color" : "#1A73E8",
-            "cell-background-color" : "#fff",
-            "text-align" : "center",
-            "showText" : true,
-            "icon" : "",
-            "iconColor" : "#333"
-          }
-        }, {
-          "id" : "Completed",
-          "query" : {
-            "condition" : "and",
-            "rules" : [ {
-              "field" : "  Status of the request",
-              "operator" : "==",
-              "value" : "Completed"
-            } ]
-          },
-          "style" : {
-            "background-color" : "#16D3FD33",
-            "color" : "#16D3FD",
-            "cell-background-color" : "#fff",
-            "text-align" : "center",
-            "showText" : true,
-            "icon" : "",
-            "iconColor" : "#333"
-          }
-        }, {
-          "id" : "Leader Verification",
-          "query" : {
-            "condition" : "and",
-            "rules" : [ {
-              "field" : "  Status of the request",
-              "operator" : "==",
-              "value" : "Leader Verification"
-            } ]
-          },
-          "style" : {
-            "background-color" : "#00D7A333",
-            "color" : "#00D7A3",
-            "cell-background-color" : "#fff",
-            "text-align" : "center",
-            "showText" : true,
-            "icon" : "",
-            "iconColor" : "#333"
-          }
-        }, {
-          "id" : "Closed",
-          "query" : {
-            "condition" : "and",
-            "rules" : [ {
-              "field" : "  Status of the request",
-              "operator" : "==",
-              "value" : "Closed"
-            } ]
-          },
-          "style" : {
-            "background-color" : "#9CD3AB33",
-            "color" : "#9CD3AB",
-            "cell-background-color" : "#fff",
-            "text-align" : "center",
-            "showText" : true,
-            "icon" : "",
-            "iconColor" : "#333"
-          }
-        } ]
-      }
-    },
-    "defaultField" : false,
-    "fieldName" : "  Status of the request",
-    "data" : "  Status of the request",
-    "multipleValuesMax" : 10,
-    "currentNode" : "24d16c26-c13b-4740-968f-fdfec98b3e8f",
-    "label" : "  Status of the request",
-    "type" : "formField",
-    "mandatory" : "yes",
-    "searchable" : "full_word",
-    "transientField" : false,
-    "defaultVal" : "Draft",
-    "field" : "statusOfTheRequest",
-    "multipleValuesMin" : 0,
-    "valueChange" : true,
-    "name" : "statusOfTheRequest",
-    "sysGen" : false,
-    "uiType" : "select",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "statusOfTheRequest"
-  }, {
-    "allowEditing" : "no",
-    "multipleValues" : false,
     "fieldName" : " Service type",
     "data" : " Service type",
     "currentNode" : "cfa15170-0741-43ec-957c-3c263d6cf8e2",
@@ -1135,89 +991,6 @@ isRowSelected:boolean = true;
     "uiType" : "select",
     "fieldType" : "string",
     "allowViewing" : "yes"
-  }, {
-    "allowEditing" : "conditional",
-    "allowedValues" : {
-      "values" : [ {
-        "label" : "VALUE1_FROM_LAB_TABLE",
-        "value" : "VALUE1_FROM_LAB_TABLE"
-      }, {
-        "label" : "VALUE2_FROM_LAB_TABLE",
-        "value" : "VALUE2_FROM_LAB_TABLE"
-      } ],
-      "conditions" : {
-        "conditionType" : "Auto",
-        "conditions" : [ {
-          "id" : "Value1 from Lab table",
-          "query" : {
-            "condition" : "and",
-            "rules" : [ {
-              "field" : "EMC Lab",
-              "operator" : "==",
-              "value" : "Value1 from Lab table"
-            } ]
-          },
-          "style" : {
-            "background-color" : "#E544FF33",
-            "color" : "#E544FF",
-            "cell-background-color" : "#fff",
-            "text-align" : "center",
-            "showText" : true,
-            "icon" : "",
-            "iconColor" : "#333"
-          }
-        }, {
-          "id" : "Value2 from Lab table",
-          "query" : {
-            "condition" : "and",
-            "rules" : [ {
-              "field" : "EMC Lab",
-              "operator" : "==",
-              "value" : "Value2 from Lab table"
-            } ]
-          },
-          "style" : {
-            "background-color" : "#8220FF33",
-            "color" : "#8220FF",
-            "cell-background-color" : "#fff",
-            "text-align" : "center",
-            "showText" : true,
-            "icon" : "",
-            "iconColor" : "#333"
-          }
-        } ]
-      }
-    },
-    "defaultField" : false,
-    "fieldName" : "EMC Lab",
-    "data" : "EMC Lab",
-    "label" : "EMC Lab",
-    "type" : "formField",
-    "mandatory" : "yes",
-    "searchable" : "full_word",
-    "transientField" : false,
-    "field" : "emcLab",
-    "name" : "emcLab",
-    "editConditionally" : {
-      "qbName" : "Requester_Rights_Fields",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ {
-          "lhsTableName" : "request",
-          "rhsTableName" : "",
-          "custom" : true,
-          "label" : "serviceType",
-          "value" : "ECAD",
-          "operator" : "="
-        } ]
-      },
-      "roles" : [ "selected", "Requester ", "Admin" ]
-    },
-    "sysGen" : false,
-    "uiType" : "select",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "emcLab"
   }, {
     "allowEditing" : "conditional",
     "allowedValues" : { },
@@ -1302,6 +1075,145 @@ isRowSelected:boolean = true;
     "fieldType" : "Date",
     "allowViewing" : "yes",
     "fieldId" : "requestedEndDate"
+  }, {
+    "allowEditing" : "conditional",
+    "multipleValues" : false,
+    "allowedValues" : {
+      "values" : [ {
+        "label" : "EURO",
+        "value" : "EURO"
+      }, {
+        "label" : "USD",
+        "value" : "USD"
+      }, {
+        "label" : "YUAN",
+        "value" : "YUAN"
+      }, {
+        "label" : "PLEASE_SELECT",
+        "value" : "PLEASE_SELECT"
+      } ],
+      "conditions" : {
+        "conditionType" : "Auto",
+        "conditions" : [ ]
+      }
+    },
+    "defaultField" : false,
+    "fieldName" : "Currency",
+    "data" : "Currency",
+    "multipleValuesMax" : 10,
+    "label" : "Currency",
+    "type" : "formField",
+    "mandatory" : "conditional",
+    "searchable" : "full_word",
+    "transientField" : false,
+    "defaultVal" : "Please select",
+    "conditionalMandatory" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ "selected", "Requester " ]
+    },
+    "field" : "currency",
+    "multipleValuesMin" : 0,
+    "name" : "currency",
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ "selected", "Requester ", "Admin" ]
+    },
+    "sysGen" : false,
+    "uiType" : "select",
+    "fieldType" : "string",
+    "allowViewing" : "yes",
+    "fieldId" : "currency"
+  }, {
+    "allowEditing" : "conditional",
+    "allowedValues" : {
+      "values" : [ {
+        "label" : "VALUE1_FROM_LAB_TABLE",
+        "value" : "VALUE1_FROM_LAB_TABLE"
+      }, {
+        "label" : "VALUE2_FROM_LAB_TABLE",
+        "value" : "VALUE2_FROM_LAB_TABLE"
+      } ],
+      "conditions" : {
+        "conditionType" : "Auto",
+        "conditions" : [ {
+          "id" : "Value1 from Lab table",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : "EMC Lab",
+              "operator" : "==",
+              "value" : "Value1 from Lab table"
+            } ]
+          },
+          "style" : {
+            "background-color" : "#E544FF33",
+            "color" : "#E544FF",
+            "cell-background-color" : "#fff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333"
+          }
+        }, {
+          "id" : "Value2 from Lab table",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : "EMC Lab",
+              "operator" : "==",
+              "value" : "Value2 from Lab table"
+            } ]
+          },
+          "style" : {
+            "background-color" : "#8220FF33",
+            "color" : "#8220FF",
+            "cell-background-color" : "#fff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333"
+          }
+        } ]
+      }
+    },
+    "defaultField" : false,
+    "fieldName" : "EMC Lab",
+    "data" : "EMC Lab",
+    "label" : "EMC Lab",
+    "type" : "formField",
+    "mandatory" : "yes",
+    "searchable" : "full_word",
+    "transientField" : false,
+    "field" : "emcLab",
+    "name" : "emcLab",
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ {
+          "lhsTableName" : "request",
+          "rhsTableName" : "",
+          "custom" : true,
+          "label" : "serviceType",
+          "value" : "ECAD",
+          "operator" : "="
+        } ]
+      },
+      "roles" : [ "selected", "Requester ", "Admin" ]
+    },
+    "sysGen" : false,
+    "uiType" : "select",
+    "fieldType" : "string",
+    "allowViewing" : "yes",
+    "fieldId" : "emcLab"
   }, {
     "allowEditing" : "conditional",
     "allowedValues" : {
@@ -2260,7 +2172,6 @@ isRowSelected:boolean = true;
 	boardNumber: new FormControl('',[Validators.required]),
 	quotationDescription: new FormControl('',[]),
 	schedulerProposedStartDate: new FormControl('',[Validators.required]),
-	requesterOrgaloc: new FormControl('',[Validators.required]),
 	serviceType: new FormControl('',[Validators.required]),
 	linkToSpecifications: new FormControl('',[]),
 	additionalInformation: new FormControl('',[]),
@@ -2271,6 +2182,7 @@ isRowSelected:boolean = true;
 	emcLab: new FormControl('',[Validators.required]),
 	budget: new FormControl('',[]),
 	schedulerCurrency: new FormControl('',[]),
+	currency: new FormControl('',[]),
 	requestedEndDate: new FormControl('',[]),
 	schedulerName: new FormControl('',[Validators.required]),
 	prOrActivityName: new FormControl('',[]),
@@ -2284,7 +2196,6 @@ isRowSelected:boolean = true;
 	requestName: new FormControl('',[Validators.required]),
 	projectOrActivity: new FormControl('',[Validators.required]),
 	schedulerAdditionalInformation: new FormControl('',[]),
-	statusOfTheRequest: new FormControl('',[Validators.required]),
 	functionalNetwork: new FormControl('',[]),
 	namecode: new FormControl('',[]),
 	leader: new FormControl('',[]),
@@ -2300,8 +2211,10 @@ isRowSelected:boolean = true;
 	requester: new FormControl('',[Validators.required]),
 	linkToQuotation: new FormControl('',[]),
 	budgetManpower2: new FormControl('',[]),
+	requesterOrgaloc: new FormControl('',[]),
 	additionnalCost2: new FormControl('',[]),
 	areLeftRightDesign: new FormControl('',[]),
+	subCode: new FormControl('',[]),
 	taskType: new FormControl('',[]),
 	scheduler: new FormControl('',[]),
 });

@@ -163,6 +163,13 @@
         <input type="text " pInputText class="form-control " id="prjOaCode " formControlName="prjOaCode" [placeholder]="formFieldConfig?.prjOaCode?.placeHolder || ''"/>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.prjOaCode?.helpText || ''}}</div>
     </div>
+</div><div class="form-col" [hidden]="hiddenFields.subCode">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.subCode?.isRequired, 'error':inValidFields.subCode}">
+        <label for="subCode" class="col-form-label subCode-label" [textContent]=" 'SUB_CODE'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.subCode?.infoBubble"   [pTooltip]="formFieldConfig?.subCode?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="subCode " formControlName="subCode" [placeholder]="formFieldConfig?.subCode?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.subCode?.helpText || ''}}</div>
+    </div>
 </div><span class="custom-btn {{formFieldConfig?.validate.outline?'outlined':''}} default-btn {{formFieldConfig.validate.buttonStyle}}" 
 *ngIf="!(formFieldConfig?.validate.visibility ==='hide'|| formFieldConfig?.validate.showOn =='mobile_only' && !isMobile || formFieldConfig?.validate.showOn =='desktop_only' && isMobile)"
     [style.borderColor]="formFieldConfig?.validate.outlineColor" [style.borderColor]="formFieldConfig?.validate.outlineColor"
@@ -190,52 +197,6 @@
         <span class="info-bubble" *ngIf="formFieldConfig?.subName?.infoBubble"   [pTooltip]="formFieldConfig?.subName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
         <input type="text " pInputText class="form-control " id="subName " formControlName="subName" [placeholder]="formFieldConfig?.subName?.placeHolder || ''"/>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.subName?.helpText || ''}}</div>
-    </div>
-</div><div class="form-col" [hidden]="hiddenFields.statusOfTheRequest">
-    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.statusOfTheRequest?.isRequired, 'error':inValidFields.statusOfTheRequest}">
-        <label for="statusOfTheRequest" class="col-form-label statusOfTheRequest-label" [textContent]="'STATUS_OF_THE_REQUEST'|translate"></label>  
-        <span class="info-bubble" *ngIf="formFieldConfig?.statusOfTheRequest?.infoBubble"   [pTooltip]="formFieldConfig?.statusOfTheRequest?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
-        <p-dropdown [options]="formFieldConfig['statusOfTheRequest']?.options" formControlName="statusOfTheRequest"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.statusOfTheRequest?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
-            <ng-template pTemplate="selectedItem">
-                <ng-template #statusOfTheRequestSelectedRef let-conditions="conditions" let-option="option">
-                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
-                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
-                        <span  
-                            *ngIf="conditions?.iconClass" class="icon"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass"></i>
-                
-                        </span>
-                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-                <ng-container *ngIf="detailFormControls.controls.statusOfTheRequest.value; let selected;">
-                    <ng-template *ngTemplateOutlet="statusOfTheRequestSelectedRef;context:{conditions :formFieldConfig.statusOfTheRequest?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.statusOfTheRequest?.options)).value], option:(getSelectedObject(selected,formFieldConfig.statusOfTheRequest?.options))}"></ng-template>
-                </ng-container>
-            </ng-template>
-        
-            <ng-template let-dropdownItem pTemplate="item" >
-                <ng-template #statusOfTheRequestListRef let-conditions="conditions" let-option="option">
-                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
-                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
-                        <span
-                            *ngIf="conditions?.iconClass"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass" ></i>
-        
-                        </span>
-                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-        
-                <ng-container>
-                    <ng-template *ngTemplateOutlet="statusOfTheRequestListRef;context:{conditions :formFieldConfig.statusOfTheRequest?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
-                </ng-container>
-            </ng-template>
-        </p-dropdown>
-        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.statusOfTheRequest?.helpText || ''}}</div>
     </div>
 </div>
         </div>
@@ -290,6 +251,91 @@
         </p-dropdown>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.serviceType?.helpText || ''}}</div>
     </div>
+</div><div class="form-col" [hidden]="hiddenFields.requestName">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requestName?.isRequired, 'error':inValidFields.requestName}">
+        <label for="requestName" class="col-form-label requestName-label" [textContent]=" 'REQUEST_NAME'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.requestName?.infoBubble"   [pTooltip]="formFieldConfig?.requestName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="requestName " formControlName="requestName" [placeholder]="formFieldConfig?.requestName?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.requestName?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.requestedStartDate">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requestedStartDate?.isRequired, 'error':inValidFields.requestedStartDate}">
+        <label for="requestedStartDate" class="col-form-label dateTime-label" [textContent]="'REQUESTED_START_DATE'|translate"></label>
+<span class="info-bubble" *ngIf="formFieldConfig?.requestedStartDate?.infoBubble"   [pTooltip]="formFieldConfig?.requestedStartDate?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-calendar 
+           appendTo="body"
+            class="form-input" 
+            formControlName="requestedStartDate"
+            [showIcon]="true" 
+            inputId="datePicker"
+            [showTime]="true"
+            [minDate]="formFieldConfig?.requestedStartDate?.calendarMinDate" 
+            [maxDate]="formFieldConfig?.requestedStartDate?.calendarMaxDate"
+            
+        ></p-calendar>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.requestedEndDate">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requestedEndDate?.isRequired, 'error':inValidFields.requestedEndDate}">
+        <label for="requestedEndDate" class="col-form-label dateTime-label" [textContent]="'REQUESTED_END_DATE'|translate"></label>
+<span class="info-bubble" *ngIf="formFieldConfig?.requestedEndDate?.infoBubble"   [pTooltip]="formFieldConfig?.requestedEndDate?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-calendar 
+           appendTo="body"
+            class="form-input" 
+            formControlName="requestedEndDate"
+            [showIcon]="true" 
+            inputId="datePicker"
+            [showTime]="true"
+            [minDate]="formFieldConfig?.requestedEndDate?.calendarMinDate" 
+            [maxDate]="formFieldConfig?.requestedEndDate?.calendarMaxDate"
+            
+        ></p-calendar>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.currency">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.currency?.isRequired, 'error':inValidFields.currency}">
+        <label for="currency" class="col-form-label currency-label" [textContent]="'CURRENCY'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.currency?.infoBubble"   [pTooltip]="formFieldConfig?.currency?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['currency']?.options" formControlName="currency"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.currency?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #currencySelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.currency.value; let selected;">
+                    <ng-template *ngTemplateOutlet="currencySelectedRef;context:{conditions :formFieldConfig.currency?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.currency?.options)).value], option:(getSelectedObject(selected,formFieldConfig.currency?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #currencyListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="currencyListRef;context:{conditions :formFieldConfig.currency?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.currency?.helpText || ''}}</div>
+    </div>
 </div><div class="form-col" [hidden]="hiddenFields.emcLab">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.emcLab?.isRequired, 'error':inValidFields.emcLab}">
         <label for="emcLab" class="col-form-label emcLab-label" [textContent]="'EMC_LAB'|translate"></label>  
@@ -335,45 +381,6 @@
             </ng-template>
         </p-dropdown>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.emcLab?.helpText || ''}}</div>
-    </div>
-</div><div class="form-col" [hidden]="hiddenFields.requestName">
-    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requestName?.isRequired, 'error':inValidFields.requestName}">
-        <label for="requestName" class="col-form-label requestName-label" [textContent]=" 'REQUEST_NAME'|translate "></label>
-        <span class="info-bubble" *ngIf="formFieldConfig?.requestName?.infoBubble"   [pTooltip]="formFieldConfig?.requestName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
-        <input type="text " pInputText class="form-control " id="requestName " formControlName="requestName" [placeholder]="formFieldConfig?.requestName?.placeHolder || ''"/>
-        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.requestName?.helpText || ''}}</div>
-    </div>
-</div><div class="form-col" [hidden]="hiddenFields.requestedStartDate">
-    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requestedStartDate?.isRequired, 'error':inValidFields.requestedStartDate}">
-        <label for="requestedStartDate" class="col-form-label dateTime-label" [textContent]="'REQUESTED_START_DATE'|translate"></label>
-<span class="info-bubble" *ngIf="formFieldConfig?.requestedStartDate?.infoBubble"   [pTooltip]="formFieldConfig?.requestedStartDate?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
-        <p-calendar 
-           appendTo="body"
-            class="form-input" 
-            formControlName="requestedStartDate"
-            [showIcon]="true" 
-            inputId="datePicker"
-            [showTime]="true"
-            [minDate]="formFieldConfig?.requestedStartDate?.calendarMinDate" 
-            [maxDate]="formFieldConfig?.requestedStartDate?.calendarMaxDate"
-            
-        ></p-calendar>
-    </div>
-</div><div class="form-col" [hidden]="hiddenFields.requestedEndDate">
-    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requestedEndDate?.isRequired, 'error':inValidFields.requestedEndDate}">
-        <label for="requestedEndDate" class="col-form-label dateTime-label" [textContent]="'REQUESTED_END_DATE'|translate"></label>
-<span class="info-bubble" *ngIf="formFieldConfig?.requestedEndDate?.infoBubble"   [pTooltip]="formFieldConfig?.requestedEndDate?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
-        <p-calendar 
-           appendTo="body"
-            class="form-input" 
-            formControlName="requestedEndDate"
-            [showIcon]="true" 
-            inputId="datePicker"
-            [showTime]="true"
-            [minDate]="formFieldConfig?.requestedEndDate?.calendarMinDate" 
-            [maxDate]="formFieldConfig?.requestedEndDate?.calendarMaxDate"
-            
-        ></p-calendar>
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.taskType">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.taskType?.isRequired, 'error':inValidFields.taskType}">

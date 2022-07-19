@@ -102,4 +102,5 @@ export interface RequestBase {
 	dummyTest: string;
 	prOrActivityName: string;
 	dummy2: string;
+	subCode: string;
 }
