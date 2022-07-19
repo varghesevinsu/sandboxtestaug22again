@@ -82,10 +82,8 @@ public abstract class ApplicationUserBLBaseImpl<T extends ApplicationUserBase> e
 	}
 
 	public void onAfterSaveDB(T modelObj) {
-	  changelogBL.createChangeLog("ApplicationUser", modelObj.getSid().toString(), Constants.SAVED, modelObj);
-	  AppUserPrivilegeCache<T> userCache = CacheManager.getInstance()
-			.getCache(IAppUserPrivilegeCache.NAME);
-	  userCache.invalidate(modelObj.getEmail());
+		changelogBL.createChangeLog("ApplicationUser", modelObj.getSid().toString(), Constants.SAVED, modelObj);
+		invalidateCache(modelObj);
 	}
 
 	public final void onBeforeUpdate(PersistenceType type, T modelObj) {
@@ -123,9 +121,8 @@ public abstract class ApplicationUserBLBaseImpl<T extends ApplicationUserBase> e
 	}
 
 	public void onAfterUpdateDB(T modelObj) {
-	  changelogBL.createChangeLog("ApplicationUser", modelObj.getSid().toString(), Constants.UPDATED, modelObj);
-	  AppUserPrivilegeCache<T> userCache = CacheManager.getInstance()
-			.getCache(IAppUserPrivilegeCache.NAME);
+		changelogBL.createChangeLog("ApplicationUser", modelObj.getSid().toString(), Constants.UPDATED, modelObj);
+		invalidateCache(modelObj);
 	}
 	
 	@Override
@@ -141,11 +138,15 @@ public abstract class ApplicationUserBLBaseImpl<T extends ApplicationUserBase> e
 	}
 
 	public void onAfterDeleteDB(T modelObj) {
-	  changelogBL.createChangeLog("ApplicationUser", modelObj.getSid().toString(), Constants.DELETED, modelObj);
-	  AppUserPrivilegeCache<T> userCache = CacheManager.getInstance()
-			.getCache(IAppUserPrivilegeCache.NAME);
-	  userCache.invalidate(modelObj.getEmail());
-	}	
+		changelogBL.createChangeLog("ApplicationUser", modelObj.getSid().toString(), Constants.DELETED, modelObj);
+		invalidateCache(modelObj);
+	}
+
+	private void invalidateCache(T modelObj) {
+		AppUserPrivilegeCache<T> userCache = CacheManager.getInstance()
+				.getCache(IAppUserPrivilegeCache.NAME);
+		userCache.invalidate(modelObj.getEmail());
+	}
 	
 	protected void setRoles(T modelObj) {
 		List<String> userRoles = new ArrayList<>();
