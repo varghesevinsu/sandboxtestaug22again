@@ -126,6 +126,7 @@ public abstract class ApplicationUserBLBaseImpl<T extends ApplicationUserBase> e
 	  changelogBL.createChangeLog("ApplicationUser", modelObj.getSid().toString(), Constants.UPDATED, modelObj);
 	  AppUserPrivilegeCache<T> userCache = CacheManager.getInstance()
 			.getCache(IAppUserPrivilegeCache.NAME);
+		userCache.invalidate(modelObj.getEmail());
 	}
 	
 	@Override
