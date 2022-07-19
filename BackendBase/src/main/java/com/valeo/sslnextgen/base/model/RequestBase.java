@@ -38,8 +38,6 @@ public class RequestBase extends BaseWorkflowModel {
 	@Searchable(index = true)
 	private Long budgetManpower2;
 	@Searchable(index = true)
-	private String nameCode;
-	@Searchable(index = true)
 	private RequestStatusoftherequest statusOfTheRequest=RequestStatusoftherequest.DRAFT;
 	@Searchable(index = false)
 	private String osaNameToBeCreatedInStr;
@@ -307,14 +305,6 @@ public class RequestBase extends BaseWorkflowModel {
 
 	public Long getBudgetManpower2() {
 		return budgetManpower2;
-	}
-
-	public void setNameCode(String nameCode) {
-		this.nameCode = nameCode;
-	}
-
-	public String getNameCode() {
-		return nameCode;
 	}
 
 	public void setStatusOfTheRequest(RequestStatusoftherequest statusOfTheRequest) {
