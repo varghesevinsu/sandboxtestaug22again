@@ -84,6 +84,7 @@ total:number =0;
 inValidFields:any = {};
 selectedItems:any ={};
 scrollTop:number =0;
+isRowSelected: boolean = false;
 	bsModalRef?: BsModalRef;
 	isChildPage:boolean = false;
 
@@ -425,11 +426,6 @@ scrollTop:number =0;
  	 }
 
 	
-	sort(e: any, field: string) {
-this.filter.sortField = field;
-this.filter.sortOrder = (e.currentTarget.childNodes[1].childNodes[0].classList.contains('pi-sort-amount-up-alt')) ? 'desc' : 'asc';
-this.onRefresh();
-}
 	clearFilterValues() {
   this.tableSearchControls.reset();
   this.filter.advancedSearch = {};
@@ -498,36 +494,6 @@ this.onRefresh();
 		}
 	}
 }
-	onNew() {
-	const value: any = "parentId";
-	let property: Exclude<keyof ApplicationUserListBaseComponent, ''> = value;
-	if (this.isChildPage && this[property]) {
-		const methodName: any = "onNewChild";
-		let action: Exclude<keyof ApplicationUserListBaseComponent, ''> = methodName;
-		if (typeof this[action] == "function") {
-			this[action]();
-		}
-	}
-	else {
-		this.router.navigate(['../applicationuserdetail'], { relativeTo: this.activatedRoute});
-	}
-}
-	onUpdate(id: any) {
-	if (this.tableConfig.detailPage?.url) {
-      const value: any = "parentId";
-       let property: Exclude<keyof ApplicationUserListBaseComponent, ''> = value;
-       const methodName: any = "onUpdateChild";
-       let action: Exclude<keyof ApplicationUserListBaseComponent, ''> = methodName;
-       if (this.isChildPage && this[property]) {
-	       if (typeof this[action] === "function") {
-	        	this[action](id);
-	         }
-       }
-       else {
-       	this.router.navigateByUrl(this.tableConfig.detailPage.url + '?id=' + id)
-       }
-    }
-}
 	conditionalFormatting(config: any, data: any) {
    if(config?.hasOwnProperty([data])){
     const query = config[data].query
@@ -544,14 +510,6 @@ this.onRefresh();
    else{
      return false;
    }
-}
-	onRefresh(){
-this.gridData = [];
-this.params.start =0;
-this.loadGridData();
-}
-	toggleAdvancedSearch() {
-  this.showAdvancedSearch = !this.showAdvancedSearch;
 }
 	clearAllFilters() {
   this.filter.globalSearch = '';
@@ -573,46 +531,9 @@ this.loadGridData();
   //     }
   //   );
   // }
-	initFilterForm(){
-    this.quickFilterFieldConfig= this.appUtilBaseService.getControlsFromFormConfig(this.quickFilterConfig);
-    this.filterSearch();
-}
 	getSubHeader() {
 this.subHeader = this.tableConfig.groupOnColumn?.name?.split('.');
 }
-	onFormatColumns(col: any, datum: any) {
-    const type = col.uiType;
-    let data = datum[col.name];
-    let formattedValue: any;
-    switch (type) {
-      case 'date':
-        formattedValue = this.appUtilBaseService.formatDate(data, col.format ? col.format : null);
-        break;
-
-      case 'datetime':
-        formattedValue = this.appUtilBaseService.formatDateTime(data, col.format ? col.format : null)
-        break;
-
-      case 'currency':
-        const ccode = col.currencyCode ? col.currencyCode : null;
-        const cDigits = col.currencyDigits ? col.currencyDigits : null;
-        formattedValue = this.appUtilBaseService.formatCurrency(data, ccode, cDigits);
-
-        break;
-
-      case 'number':
-        formattedValue = this.appUtilBaseService.formatNumber(data, col.format ? col.format : null);
-        break;
-        
-      case 'autosuggest':
-        formattedValue = (environment.prototype)? data : (data?.value)? (data?.value[col.displayField]):data;
-        break;
-
-      default:
-        formattedValue = data;
-    }
-    return (formattedValue);
-  }
 	onFormatMultipleValues(col: any, data: any): any {
     const arr: any = []
     const displayField = col.displayField ? col.displayField : '';
@@ -683,11 +604,6 @@ this.subscriptions.push(scrollSubscription);
       }
     });
   }
-	advancedSearch() {
-  this.filter.advancedSearch = this.tableSearchControls.value;
- this.onRefresh();
-  this.toggleAdvancedSearch();
-}
 	initSearchForm(){
   this.tableSearchFieldConfig= this.appUtilBaseService.getControlsFromFormConfig(this.tableSearchConfig)
 }
@@ -724,6 +640,99 @@ this.messageService.add(config);
     // this.filter.globalSearch = this.globalSearch
    this.onRefresh();
   }
+}
+	onRowSelect(event:any){
+    if(this.selectedValues.length > 0){
+      this.isRowSelected = true;
+    }
+    else if(this.selectedValues.length <= 0){
+      this.isRowSelected = false;
+    }
+  }
+	sort(e: any, field: string) {
+this.filter.sortField = field;
+this.filter.sortOrder = (e.currentTarget.childNodes[1].childNodes[0].classList.contains('pi-sort-amount-up-alt')) ? 'desc' : 'asc';
+this.onRefresh();
+}
+	onNew() {
+	const value: any = "parentId";
+	let property: Exclude<keyof ApplicationUserListBaseComponent, ''> = value;
+	if (this.isChildPage && this[property]) {
+		const methodName: any = "onNewChild";
+		let action: Exclude<keyof ApplicationUserListBaseComponent, ''> = methodName;
+		if (typeof this[action] == "function") {
+			this[action]();
+		}
+	}
+	else {
+		this.router.navigate(['../applicationuserdetail'], { relativeTo: this.activatedRoute});
+	}
+}
+	onUpdate(id: any) {
+	if (this.tableConfig.detailPage?.url) {
+      const value: any = "parentId";
+       let property: Exclude<keyof ApplicationUserListBaseComponent, ''> = value;
+       const methodName: any = "onUpdateChild";
+       let action: Exclude<keyof ApplicationUserListBaseComponent, ''> = methodName;
+       if (this.isChildPage && this[property]) {
+	       if (typeof this[action] === "function") {
+	        	this[action](id);
+	         }
+       }
+       else {
+       	this.router.navigateByUrl(this.tableConfig.detailPage.url + '?id=' + id)
+       }
+    }
+}
+	onRefresh(){
+this.gridData = [];
+this.params.start =0;
+this.loadGridData();
+}
+	toggleAdvancedSearch() {
+  this.showAdvancedSearch = !this.showAdvancedSearch;
+}
+	initFilterForm(){
+    this.quickFilterFieldConfig= this.appUtilBaseService.getControlsFromFormConfig(this.quickFilterConfig);
+    this.filterSearch();
+}
+	onFormatColumns(col: any, datum: any) {
+    const type = col.uiType;
+    let data = datum[col.name];
+    let formattedValue: any;
+    switch (type) {
+      case 'date':
+        formattedValue = this.appUtilBaseService.formatDate(data, col.format ? col.format : null);
+        break;
+
+      case 'datetime':
+        formattedValue = this.appUtilBaseService.formatDateTime(data, col.format ? col.format : null)
+        break;
+
+      case 'currency':
+        const ccode = col.currencyCode ? col.currencyCode : null;
+        const cDigits = col.currencyDigits ? col.currencyDigits : null;
+        formattedValue = this.appUtilBaseService.formatCurrency(data, ccode, cDigits);
+
+        break;
+
+      case 'number':
+        formattedValue = this.appUtilBaseService.formatNumber(data, col.format ? col.format : null);
+        break;
+        
+      case 'autosuggest':
+        formattedValue = (environment.prototype)? data : (data?.value)? (data?.value[col.displayField]):data;
+        break;
+
+      default:
+        formattedValue = data;
+    }
+    return (formattedValue);
+  }
+	advancedSearch() {
+  this.filter.advancedSearch = this.tableSearchControls.value;
+ this.onRefresh();
+  this.toggleAdvancedSearch();
 }
 
     onInit() {
