@@ -67,6 +67,7 @@ workflowActions:any ={
   isSaveResponseReceived:boolean = false;
   formSecurityConfig:any = {};
   enableReadOnly = BaseAppConstants.enableReadOnly;
+isRowSelected:boolean = true; 
 	bsModalRef?: BsModalRef;
 	isChildPage:boolean = true;
 	@Input('parentId') parentId:any;
@@ -246,17 +247,22 @@ workflowActions:any ={
     "fieldType" : "string",
     "fieldId" : "comment"
   }, {
+    "allowEditing" : "yes",
     "allowedValues" : { },
     "defaultField" : false,
     "fieldName" : "Request Code",
     "data" : "Request Code",
     "label" : "Request Code",
     "type" : "formField",
+    "mandatory" : "no",
+    "searchable" : "full_word",
+    "transientField" : false,
     "field" : "requestCode",
     "name" : "requestCode",
     "sysGen" : false,
-    "uiType" : "text",
-    "fieldType" : "string",
+    "uiType" : "number",
+    "fieldType" : "number",
+    "allowViewing" : "yes",
     "fieldId" : "requestCode"
   } ],
   "columns" : "1",
@@ -339,29 +345,6 @@ workflowActions:any ={
         this.isFormValueChanged = true;
       })
   }
-	getData(){
-        if(environment.prototype){
-        const params = {
-          sid: this.id
-        };
-            this.historyService.getProtoTypingDataById(params).subscribe((res:any) =>{
-                this.data = res;
-                this.backupData = res;
-                this.detailFormControls.patchValue(this.backupData);
-            });
-		}else if(this.id){
-			const params = {
-                sid: this.id
-              };
-            this.historyService.getById(params).subscribe((res:HistoryBase[]) =>{
-                this.data = res||{};
-                this.backupData = res || {};
-                if(this.backupData?.recDeleted)
-                	delete this.backupData?.recDeleted;
-                	 this.formatRawData();
-            });
-        }
-    }
 	getWorkflowConfig() {
 	const workFlowInfo = this.data.workflowInfo;
 	const params = {
@@ -433,50 +416,6 @@ workflowActions:any ={
       return '';
     }
   }
-	onSave(isToastNotNeeded?:boolean){
-         let data = this.formatFormDataBeforeSave();
-        const finalArr:string[] = [];
-        this.formErrors = {};
-        this.inValidFields = {};
-        if(this.appUtilBaseService.isEqualIgnoreCase(data, this.backupData,[], true)){
-            this.showMessage({severity:'info', summary:'', detail:'No changes available to save'});
-            return;
-        }
-        if(!this.appUtilBaseService.isValidForm(this.detailFormControls, this.formErrors, finalArr, this.inValidFields)){
-            if(finalArr.length){
-                this.showMessage({severity:'error', summary:'Error', detail: this.appUtilBaseService.createNotificationList(finalArr), sticky : true});
-            }
-        }else{
-            const method = this.id ? 'update' : 'create';
-            data = {...this.backupData,...data}; //data.sid = this.id;
-            if(this.pid){
-              data.pid = this.pid;
-            }
-			const requestedObj = new Proxy(data, {
-			get: (obj, prop) => obj[prop] === ""|| (Array.isArray(obj[prop]) && obj[prop].length == 0) ? null : obj[prop],
-			});
-            this.messageService.clear();
-            this.historyService[method](requestedObj).subscribe((res:HistoryBase) => {
-            this.isSaveResponseReceived = true;
-            this.isFormValueChanged = false;
-	        this.id = res.sid;
-	        if (method === 'create') {
-	          this.router.navigate(
-	            [],
-	            {
-	              queryParams: {id:this.id},
-	              relativeTo: this.activatedRoute,
-	              queryParamsHandling: 'merge',
-	            }).then(()=>{this.onInit()});
-	          this.getId();
-	        }       
-             if(!isToastNotNeeded){
-            this.showMessage({severity:'success', summary:'', detail:'Record Saved Successfully'});
-          }
-          }, (err: any) => { this.isSaveResponseReceived = true; });
-        } 
-        
-    }
 	actionBarAction(btn: any) {
     const methodName: any = (`on` + btn.action.charAt(0).toUpperCase() + btn.action.slice(1));
     let action: Exclude<keyof HistoryDetailBaseComponent, ' '> = methodName;
@@ -490,6 +429,27 @@ workflowActions:any ={
 	canDeactivate(): Observable<boolean> | boolean {  
     return true      
     //return this.appUtilBaseService.canDeactivateCall(this.form, this.backupData);
+}
+	onBack(){
+	this.messageService.clear();
+	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
+    const fields = Object.keys(this.backupData || {});
+    const technicalFields = fields.filter(function (obj) { return UsableFields.indexOf(obj) == -1; });
+     if (this.appUtilBaseService.isEqualIgnoreCase(this.backupData, this.detailFormControls.getRawValue(), technicalFields, true) || (fields.length <= 0 && ((Object.values(this.detailFormControls.getRawValue()))?.filter(Boolean))?.length <=0)) {		
+     this.location.back();
+	}else{
+		this.confirmationService.confirm({
+			message:'Do you want to discard all unsaved changes?',
+			header:'Confirmation',
+			icon:'pipi-info-circle',
+			accept:()=>{
+				this.backupData=JSON.parse(JSON.stringify(this.detailFormControls.getRawValue()));
+				this.location.back();
+			},
+			reject:()=>{
+			},
+		});
+	}
 }
 	waitForResponse() {
     setTimeout(() => {
@@ -529,27 +489,74 @@ workflowActions:any ={
         }
       }
   }
-	onBack(){
-	this.messageService.clear();
-	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
-    const fields = Object.keys(this.backupData || {});
-    const technicalFields = fields.filter(function (obj) { return UsableFields.indexOf(obj) == -1; });
-    if (this.appUtilBaseService.isEqualIgnoreCase(this.backupData, this.detailFormControls.getRawValue(), technicalFields, true) || (fields.length <= 0)) {
-		this.location.back();
-	}else{
-		this.confirmationService.confirm({
-			message:'Do you want to discard all unsaved changes?',
-			header:'Confirmation',
-			icon:'pipi-info-circle',
-			accept:()=>{
-				this.backupData=JSON.parse(JSON.stringify(this.detailFormControls.getRawValue()));
-				this.location.back();
-			},
-			reject:()=>{
-			},
-		});
-	}
-}
+	getData(){
+       if(environment.prototype && this.id){
+        const params = {
+          sid: this.id
+        };
+            this.historyService.getProtoTypingDataById(params).subscribe((res:any) =>{
+                this.data = res;
+                this.backupData = res;
+                this.detailFormControls.patchValue(this.backupData);
+            });
+		}else if(this.id){
+			const params = {
+                sid: this.id
+              };
+            this.historyService.getById(params).subscribe((res:HistoryBase[]) =>{
+                this.data = res||{};
+                this.backupData = res || {};
+                if(this.backupData?.recDeleted)
+                	delete this.backupData?.recDeleted;
+                	 this.formatRawData();
+            });
+        }
+    }
+	onSave(isToastNotNeeded?:boolean){
+         let data = this.formatFormDataBeforeSave();
+        const finalArr:string[] = [];
+        this.formErrors = {};
+        this.inValidFields = {};
+        if(this.appUtilBaseService.isEqualIgnoreCase(data, this.backupData,[], true)){
+            this.showMessage({severity:'info', summary:'', detail:'No changes available to save'});
+            return;
+        }
+        if(!this.appUtilBaseService.isValidForm(this.detailFormControls, this.formErrors, finalArr, this.inValidFields)){
+            if(finalArr.length){
+                this.showMessage({severity:'error', summary:'Error', detail: this.appUtilBaseService.createNotificationList(finalArr), sticky : true});
+            }
+        }else{
+            const method = this.id ? 'update' : 'create';
+            data = {...this.backupData,...data}; //data.sid = this.id;
+            if(this.pid){
+              data.pid = this.pid;
+            }
+			const requestedObj = new Proxy(data, {
+			get: (obj, prop) => obj[prop] === ""|| (Array.isArray(obj[prop]) && obj[prop].length == 0) ? null : obj[prop],
+			});
+            this.messageService.clear();
+            this.historyService[method](requestedObj).subscribe((res:HistoryBase) => {
+            this.backupData = {...data};
+            this.isSaveResponseReceived = true;
+            this.isFormValueChanged = false;
+	        this.id = res.sid;
+	        if (method === 'create') {
+	          this.router.navigate(
+	            [],
+	            {
+	              queryParams: {id:this.id},
+	              relativeTo: this.activatedRoute,
+	              queryParamsHandling: 'merge',
+	            }).then(()=>{this.onInit()});
+	          this.getId();
+	        }       
+             if(!isToastNotNeeded){
+            this.showMessage({severity:'success', summary:'', detail:'Record Saved Successfully'});
+          }
+          }, (err: any) => { this.isSaveResponseReceived = true; });
+        } 
+        
+    }
 	restrictBasedonRoles(roles: any) {
     if (roles.includes('selected')) {
        if(this.currentUserData){
@@ -592,6 +599,11 @@ workflowActions:any ={
         if (ele.fieldType == 'Date' && data[ele.name]) {
           const formattedDate = new Date(data[ele.name]).getTime()
           data[ele.name] = formattedDate;
+        }
+    else if(ele.fieldType ==='Boolean' ){
+          if(data[ele.name] === null || data[ele.name]=== undefined || data[ele.name]===''){
+            data[ele.name] = false;
+          }
         }
       })
     }
@@ -733,10 +745,12 @@ if (this.workFlowInitialState && this.workFlowEnabled && this.workFlowField) {
       this.detailFormConfig?.children?.forEach((ele: any) => {
         if (ele?.field === this.workFlowField && ele?.multipleValues) {
           this.detailFormControls.get(this.workFlowField)?.patchValue([this.workFlowInitialState]);
+          this.backupData[this.workFlowField] = [this.workFlowInitialState];
         }
         else {
           if (ele?.field === this.workFlowField && !ele?.multipleValues) {
             this.detailFormControls.get(this.workFlowField)?.patchValue(this.workFlowInitialState);
+            this.backupData[this.workFlowField] = this.workFlowInitialState;
           }
         }
       })

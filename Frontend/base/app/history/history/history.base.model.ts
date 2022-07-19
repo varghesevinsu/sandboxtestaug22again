@@ -3,7 +3,7 @@ export interface HistoryBase {
 	modifiedDate: Date;
 	who: string;
 	comment: string;
-	requestCode: string;
+	requestCode: number;
 	createdBy: string;
 	modifiedBy: string;
 	nextStatus: string;
