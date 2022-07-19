@@ -16,8 +16,8 @@ public class HistoryBase extends BaseModel {
 	private String comment;
 	@Searchable(index = true)
 	private String dummyTest;
-	@Searchable(index = false)
-	private String requestCode;
+	@Searchable(index = true)
+	private Long requestCode;
 	@Searchable(index = false)
 	private String nextStatus;
 	@Searchable(index = false)
@@ -53,11 +53,11 @@ public class HistoryBase extends BaseModel {
 		return dummyTest;
 	}
 
-	public void setRequestCode(String requestCode) {
+	public void setRequestCode(Long requestCode) {
 		this.requestCode = requestCode;
 	}
 
-	public String getRequestCode() {
+	public Long getRequestCode() {
 		return requestCode;
 	}
 
