@@ -1,7 +1,6 @@
 package com.valeo.sslnextgen.base.model;
 import com.eva.base.workflow.model.BaseWorkflowModel;
 import com.eva.base.annotations.Table;
-import com.eva.base.annotations.NotBlank;
 import java.util.Map;
 import com.eva.base.annotations.Searchable;
 import javax.validation.constraints.NotNull;
@@ -14,7 +13,6 @@ import com.eva.base.workflow.util.WorkflowBasicInfo;
 @Table(name="Request", keys={"sid"})
 public class RequestBase extends BaseWorkflowModel {
 
-	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
 	private Long boardNumber;
 	@Searchable(index = true)
@@ -55,7 +53,6 @@ public class RequestBase extends BaseWorkflowModel {
 	private String dummyTest;
 	@Searchable(index = false)
 	private String projectManagerOrActivityLeader;
-	@NotBlank
 	@Searchable(index = true)
 	private String schedulerName;
 	@Searchable(index = true)
@@ -98,7 +95,6 @@ public class RequestBase extends BaseWorkflowModel {
 	private String leader;
 	@Searchable(index = true)
 	private Long rate;
-	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
 	private Date schedulerProposedStartDate;
 	@Searchable(index = true)
@@ -115,7 +111,6 @@ public class RequestBase extends BaseWorkflowModel {
 	private String sapTypeOfCostForInternal;
 	@Searchable(index = true)
 	private String leadPlaceOfDevelopment;
-	@NotBlank
 	@Searchable(index = true)
 	private String boardName;
 	@Searchable(index = true)
@@ -134,7 +129,6 @@ public class RequestBase extends BaseWorkflowModel {
 	private Long rateManpower2;
 	@Searchable(index = false)
 	private String osaStatus;
-	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
 	private RequestProjectorActivity projectOrActivity;
 	@Searchable(index = true)
@@ -165,7 +159,6 @@ public class RequestBase extends BaseWorkflowModel {
 	private String budget;
 	@Searchable(index = true)
 	private Date requestedStartDate;
-	@NotBlank
 	@Searchable(index = false)
 	private String quoteNo;
 	@Searchable(index = true)
@@ -197,12 +190,10 @@ public class RequestBase extends BaseWorkflowModel {
 	private String requesterOrgaloc;
 	@Searchable(index = true)
 	private String subCode;
-	@NotBlank
 	@Searchable(index = true)
 	private String requestName;
 	@Searchable(index = true)
 	private String linkToQuotation;
-	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
 	private RequestEMCLab emcLab;
 	@Searchable(index = true)
@@ -215,7 +206,6 @@ public class RequestBase extends BaseWorkflowModel {
 	private String tasks2;
 	@Searchable(index = true)
 	private Requestdummy dummy;
-	@NotBlank
 	@Searchable(index = true)
 	private String requester;
 	@Searchable(index = true)
