@@ -7,10 +7,12 @@
         </div>
         <app-action-bar [buttons] = "leftActionBarConfig.children"
 (onBtnClick)='actionBarAction($event)'
-[style.order]="isMobile?'1':'0'">
+[style.order]="isMobile?'1':'0'"
+[isRowSelected]="isRowSelected">
 </app-action-bar><app-action-bar [buttons] = "rightActionBarConfig.children"
 (onBtnClick)='actionBarAction($event)'
-[style.order]="isMobile?'1':'0'">
+[style.order]="isMobile?'1':'0'"
+[isRowSelected]="isRowSelected">
 </app-action-bar><div class="p-0" id="search-container">
     <div class="col global-search p-3">
         <div class="input-group">
@@ -131,6 +133,7 @@
         [sortMode]="tableConfig.sorting ==='multiple_column'?'multiple':(tableConfig.sorting ==='single_column')?'single':'none'"
         [selectionMode]="(tableConfig.recordSelection ==='multiple_records')?'multiple':'single'"
         [(selection)]="selectedValues" [resizableColumns]="tableConfig.columnResize"
+(onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowSelect($event)" 
         styleClass="table-container-{{tableConfig.tableStyle? tableConfig.tableStyle :'style_1'}}" [columnResizeMode]="tableConfig.resizeMode ==='expand_mode'?'expand':'fit'" >
 
         <ng-template pTemplate="caption" *ngIf="tableConfig.toggleColumns">
@@ -145,7 +148,7 @@
                     [style.borderRight]="tableConfig.showGridlines ? '1px solid #e3e5e7':''"
                     [style.borderBottom]="tableConfig.striped && tableConfig.tableStyle === 'style_2'? '1px solid #e3e5e7':''"
                     pFrozenColumn [frozen]="tableConfig.leftFreezeUptoColumn>0">
-                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    <p-tableHeaderCheckbox (click)="onRowSelect($event)"></p-tableHeaderCheckbox>
                 </th>
 
                 <th [style.maxWidth]="'4rem'" *ngIf="tableConfig.recordSelection ==='single_record_only'"

@@ -7,5 +7,6 @@ export interface ToolBase {
 	createdDate: Date;
 	currency: string;
 	sid: string;
-	dummyTest: string;
+	dummyTest3: string;
+	test2: string;
 }

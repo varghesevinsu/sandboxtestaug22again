@@ -99,8 +99,9 @@ export interface RequestBase {
 	additionnalCost: string;
 	additionnalCost2: string;
 	globalBudget: string;
-	dummyTest: string;
+	dummyTest3: string;
 	prOrActivityName: string;
 	dummy2: string;
 	subCode: string;
+	test2: string;
 }

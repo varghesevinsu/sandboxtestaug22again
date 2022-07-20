@@ -216,7 +216,8 @@
         <input type="text " pInputText class="form-control " id="subCode " formControlName="subCode" [placeholder]="formFieldConfig?.subCode?.placeHolder || ''"/>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.subCode?.helpText || ''}}</div>
     </div>
-</div><span class="custom-btn {{formFieldConfig?.validate.outline?'outlined':''}} default-btn {{formFieldConfig.validate.buttonStyle}}" 
+</div><span class="form-col">
+<span  style="display:inline-block" class="custom-btn {{formFieldConfig?.validate.outline?'outlined':''}} default-btn {{formFieldConfig.validate.buttonStyle}}" 
 *ngIf="!(formFieldConfig?.validate.visibility ==='hide'|| formFieldConfig?.validate.showOn =='mobile_only' && !isMobile || formFieldConfig?.validate.showOn =='desktop_only' && isMobile)"
     [style.borderColor]="formFieldConfig?.validate.outlineColor" [style.borderColor]="formFieldConfig?.validate.outlineColor"
     [style.backgroundColor]="formFieldConfig?.validate.backgroundColor" [style.fontFamily]="formFieldConfig?.validate.font?.fontFamily?.code"
@@ -230,7 +231,7 @@
         [iconPos]="(formFieldConfig?.validate.buttonType ==='icon_on_right')?'right':'left'"
         (onClick)="onValidateAction($event, formFieldConfig?.validate)" [pTooltip]="formFieldConfig?.validate.tooltipMessage" tooltipPosition="top">
     </p-button>
-</span><div class="form-col" [hidden]="hiddenFields.prOrActivityName">
+</span></span><div class="form-col" [hidden]="hiddenFields.prOrActivityName">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.prOrActivityName?.isRequired, 'error':inValidFields.prOrActivityName}">
         <label for="prOrActivityName" class="col-form-label prOrActivityName-label" [textContent]=" 'PR_OR_ACTIVITY_NAME'|translate "></label>
         <span class="info-bubble" *ngIf="formFieldConfig?.prOrActivityName?.infoBubble"   [pTooltip]="formFieldConfig?.prOrActivityName?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>

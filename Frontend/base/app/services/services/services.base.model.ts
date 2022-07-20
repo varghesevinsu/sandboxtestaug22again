@@ -11,4 +11,5 @@ export interface ServicesBase {
 	createdDate: Date;
 	respScheduler: string;
 	dummyTest: string;
+	test3: string;
 }

@@ -2,6 +2,7 @@ import { RequestService } from '../request.service';
 import { RequestBase} from '../request.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 
 import { Validators } from '@angular/forms';
 import {ViewChild } from '@angular/core';
@@ -16,6 +17,7 @@ import { ChangeLogsComponent } from '@baseapp/widgets/change-logs/change-logs.co
 import { fromEvent } from 'rxjs';
 import { AppUtilBaseService } from '@baseapp/app-util.base.service';
 import { map } from 'rxjs';
+import { ConfirmationPopupComponent } from '@baseapp/widgets/confirmation/confirmation-popup.component';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
@@ -31,12 +33,14 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 
 @Directive(
 {
-	providers:[MessageService, ConfirmationService]
+	providers:[MessageService, ConfirmationService, DialogService]
 }
 )
 export class RequestDetailBaseComponent{
 	
 	
+	comments: string ='';
+confirmationReference:any;
 	id: any;
 pid:any;
 isMobile: boolean = BaseAppConstants.isMobile;
@@ -2339,14 +2343,15 @@ isRowSelected:boolean = true;
 });
 
 
-	constructor(public requestService : RequestService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public appBaseService: AppBaseService, public router: Router, public appGlobalService: AppGlobalService, public location: Location, ...args: any) {
+	constructor(public requestService : RequestService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public dialogService: DialogService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public appBaseService: AppBaseService, public router: Router, public appGlobalService: AppGlobalService, public location: Location, ...args: any) {
     
  	 }
 
 	
-	onwfValidate(){
-	const params = {id:this.id}
-	this.requestService.sslWorkflowValidate(params).subscribe((res:any)=>{
+	onwfDemoteToLeader(){
+	const params = {id:this.id,
+      comments:this.comments}
+	this.requestService.sslWorkflowDemoteToLeader(params).subscribe((res:any)=>{
 		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
 		if(Object.keys(this.mandatoryFields).length > 0){
 			this.clearValidations(this.mandatoryFields);
@@ -2363,19 +2368,6 @@ isRowSelected:boolean = true;
         this.pid = params['pid']
       }); 
     }
-	onwfDemoteToRequester(){
-	const params = {id:this.id}
-	this.requestService.sslWorkflowDemoteToRequester(params).subscribe((res:any)=>{
-		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
-		if(Object.keys(this.mandatoryFields).length > 0){
-			this.clearValidations(this.mandatoryFields);
-		}
-		this.onInit();
-	},error=>{
-		if(Object.keys(this.mandatoryFields).length > 0)
-			this.clearValidations(this.mandatoryFields);
-	})
-}
 	formValueChanges() {
     this.detailFormControls.valueChanges.pipe(
       debounceTime(600),
@@ -2390,19 +2382,6 @@ isRowSelected:boolean = true;
       const selectedObj = (options.filter((item: { label: any}) => item.label.includes(field)));
       return selectedObj[0];
   }
-	onwfDemoteToLeader(){
-	const params = {id:this.id}
-	this.requestService.sslWorkflowDemoteToLeader(params).subscribe((res:any)=>{
-		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
-		if(Object.keys(this.mandatoryFields).length > 0){
-			this.clearValidations(this.mandatoryFields);
-		}
-		this.onInit();
-	},error=>{
-		if(Object.keys(this.mandatoryFields).length > 0)
-			this.clearValidations(this.mandatoryFields);
-	})
-}
 	onSave(isToastNotNeeded?:boolean){
          let data = this.formatFormDataBeforeSave();
         const finalArr:string[] = [];
@@ -2511,9 +2490,10 @@ isRowSelected:boolean = true;
     }
 
   }
-	onwfSubmit(){
-	const params = {id:this.id}
-	this.requestService.sslWorkflowSubmit(params).subscribe((res:any)=>{
+	onwfAssign(){
+	const params = {id:this.id,
+      comments:this.comments}
+	this.requestService.sslWorkflowAssign(params).subscribe((res:any)=>{
 		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
 		if(Object.keys(this.mandatoryFields).length > 0){
 			this.clearValidations(this.mandatoryFields);
@@ -2546,71 +2526,6 @@ isRowSelected:boolean = true;
     return true      
     //return this.appUtilBaseService.canDeactivateCall(this.form, this.backupData);
 }
-	workflowActionBarAction(btn: any) {
-    const methodName: any = (`onwf` + btn.wfAction.charAt(0).toUpperCase() + btn.wfAction.slice(1));
-    let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
-    const finalArr: string[] = [];
-    this.formErrors = {};
-    this.inValidFields = {};
-    this.mandatoryFields = this.formSecurityConfig?.mandatoryfields?.hasOwnProperty(btn.wfAction) ? this.formSecurityConfig.mandatoryfields[btn.wfAction] : {}
-    if (Object.keys(this.mandatoryFields).length > 0)
-      this.addValidations(this.mandatoryFields);
-
-    if (!this.appUtilBaseService.isValidForm(this.detailFormControls, this.formErrors, finalArr, this.inValidFields)) {
-      if (finalArr.length) {
-        this.showMessage({ severity: 'error', summary: 'Error', detail: this.appUtilBaseService.createNotificationList(finalArr), sticky: true });
-        if (Object.keys(this.mandatoryFields).length > 0)
-          this.clearValidations(this.mandatoryFields);
-      }
-    }
-    else {
-      if (this.formSecurityConfig.confirm?.hasOwnProperty(btn.wfAction)) {
-        this.confirmationService.confirm({
-          message: this.formSecurityConfig.confirm?.hasOwnProperty(btn.wfAction).message,
-          header: 'Confirmation',
-          icon: 'pi pi-info-circle',
-          accept: () => {
-            if (typeof this[action] === "function") {
-              this[action]();
-            }
-          },
-          reject: () => {
-            if (Object.keys(this.mandatoryFields).length > 0)
-              this.clearValidations(this.mandatoryFields);
-          },
-        });
-      }
-   else if (typeof this[action] === "function") {
-        if (this.isFormValueChanged) {
-           const isToastNotNeeded = true;
-          this.onSave(isToastNotNeeded);
-          let checkResponse = setInterval(() => {
-            if (this.isSaveResponseReceived) {
-              this[action]();
-              clearInterval(checkResponse);
-            }
-          }, 1000);
-        }
-        else {
-          this[action]();
-        }
-      }
-    }
-  }
-addValidations(mandatoryFields:[]){
-    mandatoryFields.forEach((controlName:string)=>{
-      if(this.detailFormControls.controls[controlName].hasValidator(Validators.required)){
-        if(!(this.validatorsRetained.hasOwnProperty(controlName))){
-          this.validatorsRetained[controlName]= {}
-        }
-        this.validatorsRetained[controlName]['requiredValidator'] = true;
-      }
-      else{
-        this.detailFormControls.controls[controlName].addValidators([Validators.required]);
-        this.detailFormControls.controls[controlName].updateValueAndValidity();
-      }
-     })
-  }
 	onBack(){
 	this.messageService.clear();
 	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
@@ -2632,6 +2547,75 @@ addValidations(mandatoryFields:[]){
 		});
 	}
 }
+	workflowActionBarAction(btn: any) {
+    const methodName: any = (`onwf` + btn.wfAction.charAt(0).toUpperCase() + btn.wfAction.slice(1));
+    let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+    const finalArr: string[] = [];
+    this.formErrors = {};
+    this.inValidFields = {};
+    this.mandatoryFields = this.formSecurityConfig?.mandatoryfields?.hasOwnProperty(btn.wfAction) ? this.formSecurityConfig.mandatoryfields[btn.wfAction] : {}
+    if (Object.keys(this.mandatoryFields).length > 0)
+      this.addValidations(this.mandatoryFields);
+
+    if (!this.appUtilBaseService.isValidForm(this.detailFormControls, this.formErrors, finalArr, this.inValidFields)) {
+      if (finalArr.length) {
+        this.showMessage({ severity: 'error', summary: 'Error', detail: this.appUtilBaseService.createNotificationList(finalArr), sticky: true });
+        if (Object.keys(this.mandatoryFields).length > 0)
+          this.clearValidations(this.mandatoryFields);
+      }
+    }
+  else {
+      if (typeof this[action] === "function") {
+        this.confirmationReference= this.dialogService.open(ConfirmationPopupComponent, {
+          header: 'Confirmation',
+          width: '30%',
+          contentStyle: { "max-height": "500px", "overflow": "auto" },
+          styleClass: "confirm-popup-container",
+          data: {
+            confirmationMsg: `Do you want to ${btn.wfAction} the record ?`,
+            isRequired: this.formSecurityConfig.comments?.hasOwnProperty(btn.wfAction) && this.formSecurityConfig.comments[btn.wfAction],
+            action:btn.label
+          }
+        });
+
+        this.confirmationReference.onClose.subscribe((result: any) => {
+          if (Object.keys(this.mandatoryFields).length > 0)
+            this.clearValidations(this.mandatoryFields);
+          if (result?.accepted) {
+            this.comments = result.comments;
+            if (this.isFormValueChanged) {
+              this.isSaveResponseReceived = false;
+              const isToastNotNeeded = true;
+              this.onSave(isToastNotNeeded);
+              let checkResponse = setInterval(() => {
+                if (this.isSaveResponseReceived) {
+                  this[action]();
+                  clearInterval(checkResponse);
+                }
+              }, 1000);
+            }
+            else {
+              this[action]();
+            }
+          }
+        });
+      }
+    }
+  }
+addValidations(mandatoryFields:[]){
+    mandatoryFields.forEach((controlName:string)=>{
+      if(this.detailFormControls.controls[controlName].hasValidator(Validators.required)){
+        if(!(this.validatorsRetained.hasOwnProperty(controlName))){
+          this.validatorsRetained[controlName]= {}
+        }
+        this.validatorsRetained[controlName]['requiredValidator'] = true;
+      }
+      else{
+        this.detailFormControls.controls[controlName].addValidators([Validators.required]);
+        this.detailFormControls.controls[controlName].updateValueAndValidity();
+      }
+     })
+  }
 	waitForResponse() {
     setTimeout(() => {
       if (this.id && !environment.prototype) {
@@ -2693,9 +2677,10 @@ addValidations(mandatoryFields:[]){
         }
       }
   }
-	onwfAssign(){
-	const params = {id:this.id}
-	this.requestService.sslWorkflowAssign(params).subscribe((res:any)=>{
+	onwfValidate(){
+	const params = {id:this.id,
+      comments:this.comments}
+	this.requestService.sslWorkflowValidate(params).subscribe((res:any)=>{
 		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
 		if(Object.keys(this.mandatoryFields).length > 0){
 			this.clearValidations(this.mandatoryFields);
@@ -2706,9 +2691,38 @@ addValidations(mandatoryFields:[]){
 			this.clearValidations(this.mandatoryFields);
 	})
 }
-	onwfApproveToLeader(){
-	const params = {id:this.id}
-	this.requestService.sslWorkflowApproveToLeader(params).subscribe((res:any)=>{
+	onwfSubmit(){
+	const params = {id:this.id,
+      comments:this.comments}
+	this.requestService.sslWorkflowSubmit(params).subscribe((res:any)=>{
+		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
+		if(Object.keys(this.mandatoryFields).length > 0){
+			this.clearValidations(this.mandatoryFields);
+		}
+		this.onInit();
+	},error=>{
+		if(Object.keys(this.mandatoryFields).length > 0)
+			this.clearValidations(this.mandatoryFields);
+	})
+}
+	onwfDemoteToScheduler(){
+	const params = {id:this.id,
+      comments:this.comments}
+	this.requestService.sslWorkflowDemoteToScheduler(params).subscribe((res:any)=>{
+		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
+		if(Object.keys(this.mandatoryFields).length > 0){
+			this.clearValidations(this.mandatoryFields);
+		}
+		this.onInit();
+	},error=>{
+		if(Object.keys(this.mandatoryFields).length > 0)
+			this.clearValidations(this.mandatoryFields);
+	})
+}
+	onwfCancel(){
+	const params = {id:this.id,
+      comments:this.comments}
+	this.requestService.sslWorkflowCancel(params).subscribe((res:any)=>{
 		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
 		if(Object.keys(this.mandatoryFields).length > 0){
 			this.clearValidations(this.mandatoryFields);
@@ -2734,22 +2748,10 @@ addValidations(mandatoryFields:[]){
     else
       return true;
   }
-	onwfCancel(){
-	const params = {id:this.id}
-	this.requestService.sslWorkflowCancel(params).subscribe((res:any)=>{
-		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
-		if(Object.keys(this.mandatoryFields).length > 0){
-			this.clearValidations(this.mandatoryFields);
-		}
-		this.onInit();
-	},error=>{
-		if(Object.keys(this.mandatoryFields).length > 0)
-			this.clearValidations(this.mandatoryFields);
-	})
-}
-	onwfDemoteToScheduler(){
-	const params = {id:this.id}
-	this.requestService.sslWorkflowDemoteToScheduler(params).subscribe((res:any)=>{
+	onwfDemoteToRequester(){
+	const params = {id:this.id,
+      comments:this.comments}
+	this.requestService.sslWorkflowDemoteToRequester(params).subscribe((res:any)=>{
 		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
 		if(Object.keys(this.mandatoryFields).length > 0){
 			this.clearValidations(this.mandatoryFields);
@@ -2810,8 +2812,12 @@ addValidations(mandatoryFields:[]){
     }
     return data;
   }
+	onInnerListAction(btn:any){
+        
+    }
 	onwfSubmitToApprover(){
-	const params = {id:this.id}
+	const params = {id:this.id,
+      comments:this.comments}
 	this.requestService.sslWorkflowSubmitToApprover(params).subscribe((res:any)=>{
 		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
 		if(Object.keys(this.mandatoryFields).length > 0){
@@ -2823,9 +2829,20 @@ addValidations(mandatoryFields:[]){
 			this.clearValidations(this.mandatoryFields);
 	})
 }
-	onInnerListAction(btn:any){
-        
-    }
+	onwfApproveToLeader(){
+	const params = {id:this.id,
+      comments:this.comments}
+	this.requestService.sslWorkflowApproveToLeader(params).subscribe((res:any)=>{
+		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
+		if(Object.keys(this.mandatoryFields).length > 0){
+			this.clearValidations(this.mandatoryFields);
+		}
+		this.onInit();
+	},error=>{
+		if(Object.keys(this.mandatoryFields).length > 0)
+			this.clearValidations(this.mandatoryFields);
+	})
+}
 	initForm(){
     this.formFieldConfig= this.appUtilBaseService.getControlsFromFormConfig(this.detailFormConfig)
     this.appUtilBaseService.configureValidators(this.detailFormControls, this.formFieldConfig);

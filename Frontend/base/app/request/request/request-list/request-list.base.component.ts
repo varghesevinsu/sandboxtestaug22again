@@ -2,6 +2,7 @@ import { RequestService } from '../request.service';
 import { RequestBase} from '../request.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
@@ -26,7 +27,7 @@ import { BaseAppConstants } from '@baseapp/app-constants.base';
 
 @Directive(
 {
-	providers:[MessageService, ConfirmationService]
+	providers:[MessageService, ConfirmationService, DialogService]
 }
 )
 export class RequestListBaseComponent{
@@ -965,7 +966,7 @@ isRowSelected: boolean = false;
 });
 
 
-	constructor(public requestService : RequestService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public renderer2: Renderer2, public router: Router, ...args: any) {
+	constructor(public requestService : RequestService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public dialogService: DialogService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public renderer2: Renderer2, public router: Router, ...args: any) {
     
  	 }
 
