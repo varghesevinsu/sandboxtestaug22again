@@ -11,4 +11,15 @@
 	<artifactId>BackendApp</artifactId>
 	<packaging>war</packaging>
 	<name>BackendApp</name>
+	<profiles>
+		<profile>
+			<id>development</id>
+			<properties>
+				<app-name>valeo-cp2028-dev</app-name>
+				<app-version>1-0-0</app-version>
+				<local-env>true</local-env>
+				<env-suffix>DEV</env-suffix>
+			</properties>
+		</profile>
+     </profiles>
 </project>
