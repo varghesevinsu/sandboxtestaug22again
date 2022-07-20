@@ -8,4 +8,5 @@ export interface PlaceOfDevBase {
 	createdDate: Date;
 	location: string;
 	dummyTest: string;
+	test2: string;
 }

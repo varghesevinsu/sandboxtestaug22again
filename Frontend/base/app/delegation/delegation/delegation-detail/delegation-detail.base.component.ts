@@ -2,6 +2,7 @@ import { DelegationService } from '../delegation.service';
 import { DelegationBase} from '../delegation.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
@@ -15,6 +16,7 @@ import { ChangeLogsComponent } from '@baseapp/widgets/change-logs/change-logs.co
 import { fromEvent } from 'rxjs';
 import { AppUtilBaseService } from '@baseapp/app-util.base.service';
 import { map } from 'rxjs';
+import { ConfirmationPopupComponent } from '@baseapp/widgets/confirmation/confirmation-popup.component';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
@@ -30,12 +32,14 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 
 @Directive(
 {
-	providers:[MessageService, ConfirmationService]
+	providers:[MessageService, ConfirmationService, DialogService]
 }
 )
 export class DelegationDetailBaseComponent{
 	
 	
+	comments: string ='';
+confirmationReference:any;
 	id: any;
 pid:any;
 isMobile: boolean = BaseAppConstants.isMobile;
@@ -303,7 +307,7 @@ isRowSelected:boolean = true;
 });
 
 
-	constructor(public delegationService : DelegationService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public appBaseService: AppBaseService, public router: Router, public appGlobalService: AppGlobalService, public location: Location, ...args: any) {
+	constructor(public delegationService : DelegationService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public dialogService: DialogService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public appBaseService: AppBaseService, public router: Router, public appGlobalService: AppGlobalService, public location: Location, ...args: any) {
     
  	 }
 
@@ -387,6 +391,14 @@ isRowSelected:boolean = true;
     }
 
   }
+	formatCaptionItems(config: any, data: any) {
+    if (Object.keys(data).length > 0) {
+      return (this.appUtilBaseService.formatRawDatatoRedableFormat(config, data[config.field]));
+    }
+    else {
+      return '';
+    }
+  }
 	workflowActionBarAction(btn: any) {
     const methodName: any = (`onwf` + btn.wfAction.charAt(0).toUpperCase() + btn.wfAction.slice(1));
     let action: Exclude<keyof DelegationDetailBaseComponent, ' '> = methodName;
@@ -404,37 +416,41 @@ isRowSelected:boolean = true;
           this.clearValidations(this.mandatoryFields);
       }
     }
-    else {
-      if (this.formSecurityConfig.confirm?.hasOwnProperty(btn.wfAction)) {
-        this.confirmationService.confirm({
-          message: this.formSecurityConfig.confirm?.hasOwnProperty(btn.wfAction).message,
+  else {
+      if (typeof this[action] === "function") {
+        this.confirmationReference= this.dialogService.open(ConfirmationPopupComponent, {
           header: 'Confirmation',
-          icon: 'pi pi-info-circle',
-          accept: () => {
-            if (typeof this[action] === "function") {
-              this[action]();
-            }
-          },
-          reject: () => {
-            if (Object.keys(this.mandatoryFields).length > 0)
-              this.clearValidations(this.mandatoryFields);
-          },
+          width: '30%',
+          contentStyle: { "max-height": "500px", "overflow": "auto" },
+          styleClass: "confirm-popup-container",
+          data: {
+            confirmationMsg: `Do you want to ${btn.wfAction} the record ?`,
+            isRequired: this.formSecurityConfig.comments?.hasOwnProperty(btn.wfAction) && this.formSecurityConfig.comments[btn.wfAction],
+            action:btn.label
+          }
         });
-      }
-   else if (typeof this[action] === "function") {
-        if (this.isFormValueChanged) {
-           const isToastNotNeeded = true;
-          this.onSave(isToastNotNeeded);
-          let checkResponse = setInterval(() => {
-            if (this.isSaveResponseReceived) {
-              this[action]();
-              clearInterval(checkResponse);
+
+        this.confirmationReference.onClose.subscribe((result: any) => {
+          if (Object.keys(this.mandatoryFields).length > 0)
+            this.clearValidations(this.mandatoryFields);
+          if (result?.accepted) {
+            this.comments = result.comments;
+            if (this.isFormValueChanged) {
+              this.isSaveResponseReceived = false;
+              const isToastNotNeeded = true;
+              this.onSave(isToastNotNeeded);
+              let checkResponse = setInterval(() => {
+                if (this.isSaveResponseReceived) {
+                  this[action]();
+                  clearInterval(checkResponse);
+                }
+              }, 1000);
             }
-          }, 1000);
-        }
-        else {
-          this[action]();
-        }
+            else {
+              this[action]();
+            }
+          }
+        });
       }
     }
   }
@@ -451,14 +467,6 @@ addValidations(mandatoryFields:[]){
         this.detailFormControls.controls[controlName].updateValueAndValidity();
       }
      })
-  }
-	formatCaptionItems(config: any, data: any) {
-    if (Object.keys(data).length > 0) {
-      return (this.appUtilBaseService.formatRawDatatoRedableFormat(config, data[config.field]));
-    }
-    else {
-      return '';
-    }
   }
 	canDeactivate(): Observable<boolean> | boolean {  
     return true      

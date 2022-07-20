@@ -597,7 +597,9 @@ body {
               .form-input {
                 .p-calendar,
                 .p-radiobutton-box,
-                .p-checkbox-box {
+                .p-checkbox-box,
+                .p-autocomplete,
+                .p-dropdown{
                   border-color: $detail-form-control-error-border-color;
                 }
               }
@@ -922,11 +924,10 @@ body {
   .advanced-search {
     position: absolute;
     background: $secondary-color;
-    right: 16px;
+    right: 15px;
     z-index: 99;
     border-radius: 5px;
-    box-shadow: 0 0.46875rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%),
-      0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
+    box-shadow: 0px -3rem 2.1875rem rgb(4 9 20 / 3%), 0 0.9375rem 1.40625rem rgb(4 9 20 / 3%), 0 0.25rem 0.53125rem rgb(4 9 20 / 5%), 0 0.125rem 0.1875rem rgb(4 9 20 / 3%);
     padding: 10px 20px;
     min-width: 50%;
     max-width: 70%;
@@ -2664,12 +2665,17 @@ p-multiselect {
   font-style: normal !important;
   width: 100%;
 }
+
+.p-datepicker.p-component{
+  min-width: 0px !important;
+}
 .custom-btn{
   &.default-btn {
     box-shadow: none;
     background-color: $detail-button-background-color;
     border-color: $detail-button-text-color;
     color: $detail-button-text-color;
+    // margin-left: 1.5rem;
   }
   .p-button {
     background-color: inherit;
@@ -2694,5 +2700,44 @@ p-multiselect {
   }
   &.outlined {
     border: 1px solid;
+  }
+}
+.confirm-popup-container{
+  .p-dialog-title {
+    font-size: 1.70rem !important;
+  }
+  .confirmation-msg{
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .field-label{
+    font-size: 14px;
+    margin: 5px 0px 5px 0px;
+  }
+  .required {
+    .field-label:after {
+      content: "*";
+      color:  $detail-form-control-error-border-color;
+    }
+  }
+  .error {
+    .field-label {
+      border-color: $detail-form-control-error-border-color;
+    }
+  }
+  .action-ele {
+    text-align: right;
+  
+    .action-btn {
+      margin: 10px 5px 0px 5px;
+    }
+  }
+}
+
+.wrokflow-simulate{
+  text-align: right;
+  &-btn{
+    margin-bottom: 10px;
+
   }
 }

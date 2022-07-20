@@ -19,6 +19,10 @@ export const routes: Routes = [
      	label: "PROJECT_TYPE_LIST",
         breadcrumb: "PROJECT_TYPE_LIST",
         roles : [
+        			"selected",
+				
+        			"Admin",
+				
         			"Development Administrator"
 				]
      }
@@ -31,6 +35,10 @@ export const routes: Routes = [
      	label: "PROJECT_TYPE_DETAIL",
         breadcrumb: "PROJECT_TYPE_DETAIL",
         roles : [
+        			"selected",
+				
+        			"Admin",
+				
         			"Development Administrator"
 				]
      }

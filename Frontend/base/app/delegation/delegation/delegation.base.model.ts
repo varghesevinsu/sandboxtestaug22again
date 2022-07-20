@@ -8,4 +8,5 @@ export interface DelegationBase {
 	approverLeader: string;
 	delegateName: string;
 	delegationStartDate: Date;
+	test2: string;
 }

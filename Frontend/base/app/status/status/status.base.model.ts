@@ -6,4 +6,5 @@ export interface StatusBase {
 	createdDate: Date;
 	statusOfTheRequest: string;
 	dummyTest: string;
+	test3: string;
 }

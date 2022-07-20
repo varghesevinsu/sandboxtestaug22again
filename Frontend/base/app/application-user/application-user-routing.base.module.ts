@@ -19,11 +19,7 @@ export const routes: Routes = [
      	label: "APPLICATION_USER_DETAIL",
         breadcrumb: "APPLICATION_USER_DETAIL",
         roles : [
-        			"selected",
-				
-        			"Admin",
-				
-        			"Development Administrator"
+        			"all"
 				]
      }
 },
@@ -35,11 +31,7 @@ export const routes: Routes = [
      	label: "APPLICATION_USER_LIST",
         breadcrumb: "APPLICATION_USER_LIST",
         roles : [
-        			"selected",
-				
-        			"Admin",
-				
-        			"Development Administrator"
+        			"all"
 				]
      }
 }

@@ -13,4 +13,5 @@ export interface ApplicationUserBase {
 	admin: Boolean;
 	firstName: string;
 	dummyTest: string;
+	test2: string;
 }

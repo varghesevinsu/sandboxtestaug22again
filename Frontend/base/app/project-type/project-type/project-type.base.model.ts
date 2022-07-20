@@ -7,4 +7,5 @@ export interface ProjectTypeBase {
 	modifiedBy: string;
 	createdBy: string;
 	dummyTest: string;
+	test2: string;
 }

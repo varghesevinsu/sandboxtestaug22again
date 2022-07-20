@@ -2,6 +2,7 @@ import { ProjectTypeService } from '../project-type.service';
 import { ProjectTypeBase} from '../project-type.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
@@ -26,7 +27,7 @@ import { BaseAppConstants } from '@baseapp/app-constants.base';
 
 @Directive(
 {
-	providers:[MessageService, ConfirmationService]
+	providers:[MessageService, ConfirmationService, DialogService]
 }
 )
 export class ProjectTypeListBaseComponent{
@@ -84,6 +85,7 @@ total:number =0;
 inValidFields:any = {};
 selectedItems:any ={};
 scrollTop:number =0;
+isRowSelected: boolean = false;
 	bsModalRef?: BsModalRef;
 	isChildPage:boolean = true;
 	@Input('parentId') parentId:any;
@@ -256,7 +258,7 @@ scrollTop:number =0;
 });
 
 
-	constructor(public projectTypeService : ProjectTypeService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public renderer2: Renderer2, public router: Router, ...args: any) {
+	constructor(public projectTypeService : ProjectTypeService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public dialogService: DialogService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public renderer2: Renderer2, public router: Router, ...args: any) {
     
  	 }
 
@@ -457,6 +459,14 @@ this.messageService.add(config);
    this.onRefresh();
   }
 }
+	onRowSelect(event:any){
+    if(this.selectedValues.length > 0){
+      this.isRowSelected = true;
+    }
+    else if(this.selectedValues.length <= 0){
+      this.isRowSelected = false;
+    }
+  }
 	onDelete() {
   if (this.selectedValues.length > 0) {
     let values: any = [];

@@ -13,4 +13,5 @@ export interface HistoryBase {
 	action: string;
 	when: Date;
 	dummyTest: string;
+	test2: string;
 }

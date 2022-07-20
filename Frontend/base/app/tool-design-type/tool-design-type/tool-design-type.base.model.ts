@@ -7,4 +7,5 @@ export interface ToolDesignTypeBase {
 	modifiedBy: string;
 	createdDate: Date;
 	dummyTest: string;
+	test3: string;
 }

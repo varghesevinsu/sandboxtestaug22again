@@ -32,7 +32,7 @@ import { DialogModule } from 'primeng/dialog';
 import { AvatarModule } from 'primeng/avatar';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
-
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [],
@@ -68,7 +68,8 @@ import { TooltipModule } from 'primeng/tooltip';
     AvatarModule,
     MessagesModule,
     ToastModule,
-    TooltipModule
+    TooltipModule,
+    DynamicDialogModule
   ],
   exports: [
     CommonModule,
@@ -102,7 +103,8 @@ import { TooltipModule } from 'primeng/tooltip';
     AvatarModule,
     MessagesModule,
     ToastModule,
-    TooltipModule
+    TooltipModule,
+    DynamicDialogModule
   ]
 })
 export class SharedBaseModule { }
