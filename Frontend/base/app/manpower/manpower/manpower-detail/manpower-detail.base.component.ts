@@ -2,6 +2,7 @@ import { ManpowerService } from '../manpower.service';
 import { ManpowerBase} from '../manpower.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
@@ -15,6 +16,7 @@ import { ChangeLogsComponent } from '@baseapp/widgets/change-logs/change-logs.co
 import { fromEvent } from 'rxjs';
 import { AppUtilBaseService } from '@baseapp/app-util.base.service';
 import { map } from 'rxjs';
+import { ConfirmationPopupComponent } from '@baseapp/widgets/confirmation/confirmation-popup.component';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
@@ -30,12 +32,14 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 
 @Directive(
 {
-	providers:[MessageService, ConfirmationService]
+	providers:[MessageService, ConfirmationService, DialogService]
 }
 )
 export class ManpowerDetailBaseComponent{
 	
 	
+	comments: string ='';
+confirmationReference:any;
 	id: any;
 pid:any;
 isMobile: boolean = BaseAppConstants.isMobile;
@@ -67,6 +71,7 @@ workflowActions:any ={
   isSaveResponseReceived:boolean = false;
   formSecurityConfig:any = {};
   enableReadOnly = BaseAppConstants.enableReadOnly;
+isRowSelected:boolean = true; 
 	bsModalRef?: BsModalRef;
 	isChildPage:boolean = true;
 	@Input('parentId') parentId:any;
@@ -312,99 +317,56 @@ workflowActions:any ={
 });
 
 
-	constructor(public manpowerService : ManpowerService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public appBaseService: AppBaseService, public router: Router, public appGlobalService: AppGlobalService, public location: Location, ...args: any) {
+	constructor(public manpowerService : ManpowerService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public dialogService: DialogService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public appBaseService: AppBaseService, public router: Router, public appGlobalService: AppGlobalService, public location: Location, ...args: any) {
     
  	 }
 
 	
-	getData(){
-        if(environment.prototype){
-        const params = {
-          sid: this.id
-        };
-            this.manpowerService.getProtoTypingDataById(params).subscribe((res:any) =>{
-                this.data = res;
-                this.backupData = res;
-                this.detailFormControls.patchValue(this.backupData);
-            });
-		}else if(this.id){
-			const params = {
-                sid: this.id
-              };
-            this.manpowerService.getById(params).subscribe((res:ManpowerBase[]) =>{
-                this.data = res||{};
-                this.backupData = res || {};
-                if(this.backupData?.recDeleted)
-                	delete this.backupData?.recDeleted;
-                	 this.formatRawData();
-            });
+	onSave(isToastNotNeeded?:boolean){
+         let data = this.formatFormDataBeforeSave();
+        const finalArr:string[] = [];
+        this.formErrors = {};
+        this.inValidFields = {};
+        if(this.appUtilBaseService.isEqualIgnoreCase(data, this.backupData,[], true)){
+            this.showMessage({severity:'info', summary:'', detail:'No changes available to save'});
+            return;
         }
-    }
-	workflowActionBarAction(btn: any) {
-    const methodName: any = (`onwf` + btn.wfAction.charAt(0).toUpperCase() + btn.wfAction.slice(1));
-    let action: Exclude<keyof ManpowerDetailBaseComponent, ' '> = methodName;
-    const finalArr: string[] = [];
-    this.formErrors = {};
-    this.inValidFields = {};
-    this.mandatoryFields = this.formSecurityConfig?.mandatoryfields?.hasOwnProperty(btn.wfAction) ? this.formSecurityConfig.mandatoryfields[btn.wfAction] : {}
-    if (Object.keys(this.mandatoryFields).length > 0)
-      this.addValidations(this.mandatoryFields);
-
-    if (!this.appUtilBaseService.isValidForm(this.detailFormControls, this.formErrors, finalArr, this.inValidFields)) {
-      if (finalArr.length) {
-        this.showMessage({ severity: 'error', summary: 'Error', detail: this.appUtilBaseService.createNotificationList(finalArr), sticky: true });
-        if (Object.keys(this.mandatoryFields).length > 0)
-          this.clearValidations(this.mandatoryFields);
-      }
-    }
-    else {
-      if (this.formSecurityConfig.confirm?.hasOwnProperty(btn.wfAction)) {
-        this.confirmationService.confirm({
-          message: this.formSecurityConfig.confirm?.hasOwnProperty(btn.wfAction).message,
-          header: 'Confirmation',
-          icon: 'pi pi-info-circle',
-          accept: () => {
-            if (typeof this[action] === "function") {
-              this[action]();
+        if(!this.appUtilBaseService.isValidForm(this.detailFormControls, this.formErrors, finalArr, this.inValidFields)){
+            if(finalArr.length){
+                this.showMessage({severity:'error', summary:'Error', detail: this.appUtilBaseService.createNotificationList(finalArr), sticky : true});
             }
-          },
-          reject: () => {
-            if (Object.keys(this.mandatoryFields).length > 0)
-              this.clearValidations(this.mandatoryFields);
-          },
-        });
-      }
-   else if (typeof this[action] === "function") {
-        if (this.isFormValueChanged) {
-           const isToastNotNeeded = true;
-          this.onSave(isToastNotNeeded);
-          let checkResponse = setInterval(() => {
-            if (this.isSaveResponseReceived) {
-              this[action]();
-              clearInterval(checkResponse);
+        }else{
+            const method = this.id ? 'update' : 'create';
+            data = {...this.backupData,...data}; //data.sid = this.id;
+            if(this.pid){
+              data.pid = this.pid;
             }
-          }, 1000);
-        }
-        else {
-          this[action]();
-        }
-      }
+			const requestedObj = new Proxy(data, {
+			get: (obj, prop) => obj[prop] === ""|| (Array.isArray(obj[prop]) && obj[prop].length == 0) ? null : obj[prop],
+			});
+            this.messageService.clear();
+            this.manpowerService[method](requestedObj).subscribe((res:ManpowerBase) => {
+            this.backupData = {...data};
+            this.isSaveResponseReceived = true;
+            this.isFormValueChanged = false;
+	        this.id = res.sid;
+	        if (method === 'create') {
+	          this.router.navigate(
+	            [],
+	            {
+	              queryParams: {id:this.id},
+	              relativeTo: this.activatedRoute,
+	              queryParamsHandling: 'merge',
+	            }).then(()=>{this.onInit()});
+	          this.getId();
+	        }       
+             if(!isToastNotNeeded){
+            this.showMessage({severity:'success', summary:'', detail:'Record Saved Successfully'});
+          }
+          }, (err: any) => { this.isSaveResponseReceived = true; });
+        } 
+        
     }
-  }
-addValidations(mandatoryFields:[]){
-    mandatoryFields.forEach((controlName:string)=>{
-      if(this.detailFormControls.controls[controlName].hasValidator(Validators.required)){
-        if(!(this.validatorsRetained.hasOwnProperty(controlName))){
-          this.validatorsRetained[controlName]= {}
-        }
-        this.validatorsRetained[controlName]['requiredValidator'] = true;
-      }
-      else{
-        this.detailFormControls.controls[controlName].addValidators([Validators.required]);
-        this.detailFormControls.controls[controlName].updateValueAndValidity();
-      }
-     })
-  }
 	getId(){
       this.activatedRoute.queryParams.subscribe((params: any) => { 
         this.id = params['id'];
@@ -477,6 +439,29 @@ addValidations(mandatoryFields:[]){
 		})
 	}
 }
+	getData(){
+       if(environment.prototype && this.id){
+        const params = {
+          sid: this.id
+        };
+            this.manpowerService.getProtoTypingDataById(params).subscribe((res:any) =>{
+                this.data = res;
+                this.backupData = res;
+                this.detailFormControls.patchValue(this.backupData);
+            });
+		}else if(this.id){
+			const params = {
+                sid: this.id
+              };
+            this.manpowerService.getById(params).subscribe((res:ManpowerBase[]) =>{
+                this.data = res||{};
+                this.backupData = res || {};
+                if(this.backupData?.recDeleted)
+                	delete this.backupData?.recDeleted;
+                	 this.formatRawData();
+            });
+        }
+    }
 	clearValidations(mandatoryFields: []) {
     mandatoryFields.forEach((controlName: string) => {
       if (!(this.validatorsRetained[controlName] && this.validatorsRetained[controlName]['requiredValidator'])) {
@@ -540,6 +525,27 @@ addValidations(mandatoryFields:[]){
     return true      
     //return this.appUtilBaseService.canDeactivateCall(this.form, this.backupData);
 }
+	onBack(){
+	this.messageService.clear();
+	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
+    const fields = Object.keys(this.backupData || {});
+    const technicalFields = fields.filter(function (obj) { return UsableFields.indexOf(obj) == -1; });
+     if (this.appUtilBaseService.isEqualIgnoreCase(this.backupData, this.detailFormControls.getRawValue(), technicalFields, true) || (fields.length <= 0 && ((Object.values(this.detailFormControls.getRawValue()))?.filter(Boolean))?.length <=0)) {		
+     this.location.back();
+	}else{
+		this.confirmationService.confirm({
+			message:'Do you want to discard all unsaved changes?',
+			header:'Confirmation',
+			icon:'pipi-info-circle',
+			accept:()=>{
+				this.backupData=JSON.parse(JSON.stringify(this.detailFormControls.getRawValue()));
+				this.location.back();
+			},
+			reject:()=>{
+			},
+		});
+	}
+}
 	waitForResponse() {
     setTimeout(() => {
       if (this.id && !environment.prototype) {
@@ -578,27 +584,6 @@ addValidations(mandatoryFields:[]){
         }
       }
   }
-	onBack(){
-	this.messageService.clear();
-	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
-    const fields = Object.keys(this.backupData || {});
-    const technicalFields = fields.filter(function (obj) { return UsableFields.indexOf(obj) == -1; });
-    if (this.appUtilBaseService.isEqualIgnoreCase(this.backupData, this.detailFormControls.getRawValue(), technicalFields, true) || (fields.length <= 0)) {
-		this.location.back();
-	}else{
-		this.confirmationService.confirm({
-			message:'Do you want to discard all unsaved changes?',
-			header:'Confirmation',
-			icon:'pipi-info-circle',
-			accept:()=>{
-				this.backupData=JSON.parse(JSON.stringify(this.detailFormControls.getRawValue()));
-				this.location.back();
-			},
-			reject:()=>{
-			},
-		});
-	}
-}
 	restrictBasedonRoles(roles: any) {
     if (roles.includes('selected')) {
        if(this.currentUserData){
@@ -642,6 +627,11 @@ addValidations(mandatoryFields:[]){
           const formattedDate = new Date(data[ele.name]).getTime()
           data[ele.name] = formattedDate;
         }
+    else if(ele.fieldType ==='Boolean' ){
+          if(data[ele.name] === null || data[ele.name]=== undefined || data[ele.name]===''){
+            data[ele.name] = false;
+          }
+        }
       })
     }
     if (Object.keys(this.selectedItems).length > 0) {
@@ -659,50 +649,6 @@ addValidations(mandatoryFields:[]){
     }
     return data;
   }
-	onSave(isToastNotNeeded?:boolean){
-         let data = this.formatFormDataBeforeSave();
-        const finalArr:string[] = [];
-        this.formErrors = {};
-        this.inValidFields = {};
-        if(this.appUtilBaseService.isEqualIgnoreCase(data, this.backupData,[], true)){
-            this.showMessage({severity:'info', summary:'', detail:'No changes available to save'});
-            return;
-        }
-        if(!this.appUtilBaseService.isValidForm(this.detailFormControls, this.formErrors, finalArr, this.inValidFields)){
-            if(finalArr.length){
-                this.showMessage({severity:'error', summary:'Error', detail: this.appUtilBaseService.createNotificationList(finalArr), sticky : true});
-            }
-        }else{
-            const method = this.id ? 'update' : 'create';
-            data = {...this.backupData,...data}; //data.sid = this.id;
-            if(this.pid){
-              data.pid = this.pid;
-            }
-			const requestedObj = new Proxy(data, {
-			get: (obj, prop) => obj[prop] === ""|| (Array.isArray(obj[prop]) && obj[prop].length == 0) ? null : obj[prop],
-			});
-            this.messageService.clear();
-            this.manpowerService[method](requestedObj).subscribe((res:ManpowerBase) => {
-            this.isSaveResponseReceived = true;
-            this.isFormValueChanged = false;
-	        this.id = res.sid;
-	        if (method === 'create') {
-	          this.router.navigate(
-	            [],
-	            {
-	              queryParams: {id:this.id},
-	              relativeTo: this.activatedRoute,
-	              queryParamsHandling: 'merge',
-	            }).then(()=>{this.onInit()});
-	          this.getId();
-	        }       
-             if(!isToastNotNeeded){
-            this.showMessage({severity:'success', summary:'', detail:'Record Saved Successfully'});
-          }
-          }, (err: any) => { this.isSaveResponseReceived = true; });
-        } 
-        
-    }
 	onCancel(){
        this.messageService.clear();
        if (this.appUtilBaseService.isEqualIgnoreCase(this.backupData, this.detailFormControls.getRawValue(), [], true)) {
@@ -735,6 +681,75 @@ this.wizardItems = this.appUtilBaseService.getWizardItemFromFormConfig(this.deta
     else if (typeof this[action] === "function") {
       this[action]();
     }
+  }
+	workflowActionBarAction(btn: any) {
+    const methodName: any = (`onwf` + btn.wfAction.charAt(0).toUpperCase() + btn.wfAction.slice(1));
+    let action: Exclude<keyof ManpowerDetailBaseComponent, ' '> = methodName;
+    const finalArr: string[] = [];
+    this.formErrors = {};
+    this.inValidFields = {};
+    this.mandatoryFields = this.formSecurityConfig?.mandatoryfields?.hasOwnProperty(btn.wfAction) ? this.formSecurityConfig.mandatoryfields[btn.wfAction] : {}
+    if (Object.keys(this.mandatoryFields).length > 0)
+      this.addValidations(this.mandatoryFields);
+
+    if (!this.appUtilBaseService.isValidForm(this.detailFormControls, this.formErrors, finalArr, this.inValidFields)) {
+      if (finalArr.length) {
+        this.showMessage({ severity: 'error', summary: 'Error', detail: this.appUtilBaseService.createNotificationList(finalArr), sticky: true });
+        if (Object.keys(this.mandatoryFields).length > 0)
+          this.clearValidations(this.mandatoryFields);
+      }
+    }
+  else {
+      if (typeof this[action] === "function") {
+        this.confirmationReference= this.dialogService.open(ConfirmationPopupComponent, {
+          header: 'Confirmation',
+          width: '30%',
+          contentStyle: { "max-height": "500px", "overflow": "auto" },
+          styleClass: "confirm-popup-container",
+          data: {
+            confirmationMsg: `Do you want to ${btn.wfAction} the record ?`,
+            isRequired: this.formSecurityConfig.comments?.hasOwnProperty(btn.wfAction) && this.formSecurityConfig.comments[btn.wfAction],
+            action:btn.label
+          }
+        });
+
+        this.confirmationReference.onClose.subscribe((result: any) => {
+          if (Object.keys(this.mandatoryFields).length > 0)
+            this.clearValidations(this.mandatoryFields);
+          if (result?.accepted) {
+            this.comments = result.comments;
+            if (this.isFormValueChanged) {
+              this.isSaveResponseReceived = false;
+              const isToastNotNeeded = true;
+              this.onSave(isToastNotNeeded);
+              let checkResponse = setInterval(() => {
+                if (this.isSaveResponseReceived) {
+                  this[action]();
+                  clearInterval(checkResponse);
+                }
+              }, 1000);
+            }
+            else {
+              this[action]();
+            }
+          }
+        });
+      }
+    }
+  }
+addValidations(mandatoryFields:[]){
+    mandatoryFields.forEach((controlName:string)=>{
+      if(this.detailFormControls.controls[controlName].hasValidator(Validators.required)){
+        if(!(this.validatorsRetained.hasOwnProperty(controlName))){
+          this.validatorsRetained[controlName]= {}
+        }
+        this.validatorsRetained[controlName]['requiredValidator'] = true;
+      }
+      else{
+        this.detailFormControls.controls[controlName].addValidators([Validators.required]);
+        this.detailFormControls.controls[controlName].updateValueAndValidity();
+      }
+     })
   }
 	configureFormOnWorkflow() {
     const actions: any = this.workflowActionBarConfig?.children;
@@ -771,10 +786,12 @@ if (this.workFlowInitialState && this.workFlowEnabled && this.workFlowField) {
       this.detailFormConfig?.children?.forEach((ele: any) => {
         if (ele?.field === this.workFlowField && ele?.multipleValues) {
           this.detailFormControls.get(this.workFlowField)?.patchValue([this.workFlowInitialState]);
+          this.backupData[this.workFlowField] = [this.workFlowInitialState];
         }
         else {
           if (ele?.field === this.workFlowField && !ele?.multipleValues) {
             this.detailFormControls.get(this.workFlowField)?.patchValue(this.workFlowInitialState);
+            this.backupData[this.workFlowField] = this.workFlowInitialState;
           }
         }
       })

@@ -10,4 +10,5 @@ export interface ManpowerBase {
 	rate: number;
 	site: string;
 	dummyTest: string;
+	test2: string;
 }

@@ -428,6 +428,7 @@ export class AppUtilBaseService {
       disableonlyactions : [],
       hideactions : [],
       mandatoryfields : {},
+      comments:{}
     };
 
     actionConfig.forEach((item:any)=>{
@@ -470,6 +471,7 @@ export class AppUtilBaseService {
         
       }
     })
+    formSecurityConfig.comments = roleSecurityConf?.comments;
     return formSecurityConfig;
   }
 
@@ -698,6 +700,15 @@ export class AppUtilBaseService {
           (data && data?.map((o:any)=>this.translateService.instant((o.replace(/ /g,"_")).toUpperCase())) || []).toString() :
           data && this.translateService.instant((data?.replace(/ /g,"_")).toUpperCase());
         break;
+
+        case 'checkbox':
+          if(typeof data != 'undefined'){
+          if(config.fieldType == 'Boolean'){          
+            formattedValue = data ? 'True' : 'False';
+          }
+        }
+        break;
+
 
       default:
         formattedValue = data;

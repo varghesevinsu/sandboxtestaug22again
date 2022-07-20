@@ -6,4 +6,5 @@ export interface LabBase {
 	modifiedBy: string;
 	labName: string;
 	dummyTest: string;
+	test3: string;
 }

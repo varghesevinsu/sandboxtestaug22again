@@ -21,6 +21,7 @@ import { SharedBaseModule } from './shared/shared.base.module';
 import { AppLoaderComponent } from './app-loader.component';
 import { DatePipe } from '@angular/common';
 import { AppBaseService } from './app.base.service';
+import { DialogService } from 'primeng/dynamicdialog';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new MultiTranslateHttpLoader(http, [
@@ -67,7 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthModule,
     SharedBaseModule
   ],
-  providers: [ConfirmationService, AuthenticationResolver, MessageService, DatePipe, AppBaseService],
+  providers: [ConfirmationService, AuthenticationResolver, MessageService, DatePipe, AppBaseService,DialogService],
   bootstrap: []
 })
 export class AppBaseModule {

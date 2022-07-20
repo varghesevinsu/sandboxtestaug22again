@@ -7,4 +7,5 @@ export interface UserGuideBase {
 	createdDate: Date;
 	createdBy: string;
 	dummyTest: string;
+	test3: string;
 }

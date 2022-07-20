@@ -22,6 +22,8 @@ import { ChangeLogsComponent } from './change-logs/change-logs.component';
 import { ChangeLogsGridComponent } from './change-logs-grid/change-logs-grid.component';
 import { SharedBaseModule } from '@baseapp/shared/shared.base.module';
 import { DatePipe } from '@angular/common';
+import { ConfirmationPopupComponent } from './confirmation/confirmation-popup.component';
+import { WorkflowSimulatorComponent } from './workflow-simulator/workflow-simulator.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { DatePipe } from '@angular/common';
     UrlEditComponent,
     WorkflowActionBarComponent,
     ChangeLogsComponent,
-    ChangeLogsGridComponent
+    ChangeLogsGridComponent,
+    ConfirmationPopupComponent,
+    WorkflowSimulatorComponent
   ],
   imports: [
     CommonModule,

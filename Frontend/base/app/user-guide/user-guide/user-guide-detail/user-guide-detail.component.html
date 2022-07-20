@@ -7,7 +7,8 @@
         </div>
         <app-action-bar [buttons] = "leftActionBarConfig.children"
 (onBtnClick)='actionBarAction($event)'
-[style.order]="isMobile?'1':'0'">
+[style.order]="isMobile?'1':'0'"
+[isRowSelected]="isRowSelected">
 </app-action-bar><app-workflow-action-bar [buttons] = "workflowActionBarConfig.children"
 (onBtnClick)='workflowActionBarAction($event)'
 [workflow]="workflowActions"
