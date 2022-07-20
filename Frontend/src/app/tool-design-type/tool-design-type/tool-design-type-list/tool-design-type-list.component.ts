@@ -20,6 +20,7 @@ import {  ViewChild} from '@angular/core';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
 import { ToolDesignTypeService } from '@baseapp/tool-design-type/tool-design-type/tool-design-type.service';
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToolDesignTypeListBaseComponent } from '@baseapp/tool-design-type/tool-design-type/tool-design-type-list/tool-design-type-list.base.component';
 
@@ -30,8 +31,8 @@ import { ToolDesignTypeListBaseComponent } from '@baseapp/tool-design-type/tool-
 })
 export class ToolDesignTypeListComponent extends ToolDesignTypeListBaseComponent implements OnInit {
  
-  constructor(public override toolDesignTypeService: ToolDesignTypeService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
-    super(toolDesignTypeService, appUtilBaseService, translateService, messageService, confirmationService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
+  constructor(public override toolDesignTypeService: ToolDesignTypeService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
+    super(toolDesignTypeService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
   }
 	
   ngAfterViewInit(): void {
@@ -42,8 +43,5 @@ export class ToolDesignTypeListComponent extends ToolDesignTypeListBaseComponent
     super.onInit();
   }
  
-
-
-
 
 }

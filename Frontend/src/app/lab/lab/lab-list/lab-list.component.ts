@@ -21,6 +21,7 @@ import { BaseAppConstants } from '@baseapp/app-constants.base';
 import { LabListBaseComponent } from '@baseapp/lab/lab/lab-list/lab-list.base.component';
 import { Component, OnInit } from '@angular/core';
 import { LabService } from '@baseapp/lab/lab/lab.service';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
@@ -30,8 +31,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class LabListComponent extends LabListBaseComponent implements OnInit {
  
-  constructor(public override labService: LabService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
-    super(labService, appUtilBaseService, translateService, messageService, confirmationService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
+  constructor(public override labService: LabService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
+    super(labService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
   }
 	
   ngAfterViewInit(): void {
@@ -42,7 +43,5 @@ export class LabListComponent extends LabListBaseComponent implements OnInit {
     super.onInit();
   }
  
-
-
 
 }

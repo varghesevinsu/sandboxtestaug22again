@@ -20,6 +20,7 @@ import {  ViewChild} from '@angular/core';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
 import { DelegationListBaseComponent } from '@baseapp/delegation/delegation/delegation-list/delegation-list.base.component';
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DelegationService } from '@baseapp/delegation/delegation/delegation.service';
 
@@ -30,8 +31,8 @@ import { DelegationService } from '@baseapp/delegation/delegation/delegation.ser
 })
 export class DelegationListComponent extends DelegationListBaseComponent implements OnInit {
  
-  constructor(public override delegationService: DelegationService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
-    super(delegationService, appUtilBaseService, translateService, messageService, confirmationService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
+  constructor(public override delegationService: DelegationService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
+    super(delegationService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
   }
 	
   ngAfterViewInit(): void {
@@ -42,6 +43,5 @@ export class DelegationListComponent extends DelegationListBaseComponent impleme
     super.onInit();
   }
  
-
 
 }

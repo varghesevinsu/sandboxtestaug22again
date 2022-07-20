@@ -18,10 +18,10 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import {  ElementRef } from '@angular/core';
 import {  ViewChild} from '@angular/core';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
-import { BaseService } from '@baseapp/base.service';
 import { RequestListBaseComponent } from '@baseapp/request/request/request-list/request-list.base.component';
 import { RequestService } from '@baseapp/request/request/request.service';
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
@@ -31,8 +31,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class RequestListComponent extends RequestListBaseComponent implements OnInit {
  
-  constructor(public override requestService: RequestService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router, public baseService: BaseService) {
-    super(requestService, appUtilBaseService, translateService, messageService, confirmationService, domSanitizer, bsModalService, activatedRoute, renderer2, router, baseService);
+  constructor(public override requestService: RequestService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
+    super(requestService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
   }
 	
   ngAfterViewInit(): void {
@@ -43,17 +43,6 @@ export class RequestListComponent extends RequestListBaseComponent implements On
     super.onInit();
   }
  
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -10,6 +10,7 @@ import { ChangeLogsComponent } from '@baseapp/widgets/change-logs/change-logs.co
 import { fromEvent } from 'rxjs';
 import { AppUtilBaseService } from '@baseapp/app-util.base.service';
 import { map } from 'rxjs';
+import { ConfirmationPopupComponent } from '@baseapp/widgets/confirmation/confirmation-popup.component';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
@@ -25,6 +26,7 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { LabDetailBaseComponent } from '@baseapp/lab/lab/lab-detail/lab-detail.base.component';
 import { Component, OnInit } from '@angular/core';
 import { LabService } from '@baseapp/lab/lab/lab.service';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
@@ -34,8 +36,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class LabDetailComponent extends LabDetailBaseComponent implements OnInit {
  
-  constructor(public override labService: LabService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override location: Location) {
-    super(labService, appUtilBaseService, translateService, messageService, confirmationService, domSanitizer, bsModalService, activatedRoute, appBaseService, router, appGlobalService, location);
+  constructor(public override labService: LabService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override location: Location) {
+    super(labService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, appBaseService, router, appGlobalService, location);
   }
 	
   ngAfterViewInit(): void {
@@ -46,7 +48,5 @@ export class LabDetailComponent extends LabDetailBaseComponent implements OnInit
     super.onInit();
   }
  
-
-
 
 }

@@ -18,8 +18,9 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import {  ElementRef } from '@angular/core';
 import {  ViewChild} from '@angular/core';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
-import { Component, OnInit } from '@angular/core';
 import { UserGuideListBaseComponent } from '@baseapp/user-guide/user-guide/user-guide-list/user-guide-list.base.component';
+import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { UserGuideService } from '@baseapp/user-guide/user-guide/user-guide.service';
 
@@ -30,8 +31,8 @@ import { UserGuideService } from '@baseapp/user-guide/user-guide/user-guide.serv
 })
 export class UserGuideListComponent extends UserGuideListBaseComponent implements OnInit {
  
-  constructor(public override userGuideService: UserGuideService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
-    super(userGuideService, appUtilBaseService, translateService, messageService, confirmationService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
+  constructor(public override userGuideService: UserGuideService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
+    super(userGuideService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
   }
 	
   ngAfterViewInit(): void {
@@ -42,6 +43,5 @@ export class UserGuideListComponent extends UserGuideListBaseComponent implement
     super.onInit();
   }
  
-
 
 }

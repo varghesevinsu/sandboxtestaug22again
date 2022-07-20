@@ -183,7 +183,7 @@
       "element" : "menuItem"
     }, {
       "pathsInvolved" : [ "/applicationuser/applicationuserdetail", "/applicationuser/applicationuserlist" ],
-      "accessControl" : [ "Admin", "Development Administrator" ],
+      "accessControl" : [ "all", "Development Administrator" ],
       "onClick" : "navigate_to_page",
       "valueChange" : true,
       "currentNode" : "78e5529f-e09a-443c-b193-f08c52b7fbe2",
@@ -213,12 +213,17 @@
     },
     "element" : "menuItem"
   }, {
-    "pathsInvolved" : [ ],
+    "pathsInvolved" : [ "/applicationuser/applicationuserdetail", "/applicationuser/applicationuserlist" ],
     "accessControl" : [ "all", "Development Administrator" ],
     "onClick" : "navigate_to_page",
     "valueChange" : true,
     "currentNode" : "c3a09a7a-8f40-4ada-a72d-ce1ada3c2fa8",
     "label" : "My Profile",
+    "page" : {
+      "name" : "Application User List",
+      "sid" : "5dea81b7-be34-410f-a610-6f852f24cfbf",
+      "url" : "/applicationuser/applicationuserlist"
+    },
     "element" : "menuItem"
   } ]
 }
