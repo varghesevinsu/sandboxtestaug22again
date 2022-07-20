@@ -72,32 +72,32 @@ public abstract class ToolPerimeterBaseImpl<T extends ToolBase> implements IPeri
 			return;
 		}
 					if (userBase.isLeader()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isApprover()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isAdmin()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isRequester()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
@@ -112,32 +112,32 @@ public abstract class ToolPerimeterBaseImpl<T extends ToolBase> implements IPeri
 			return;
 		}
 					if (userBase.isLeader()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isApprover()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isAdmin()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isRequester()) {
-			String[] readFields = new String[] {"createdBy","dummyTest","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid"};
+			String[] readFields = new String[] {"createdBy","dummyTest3","tool","modifiedBy","modifiedDate","rate","createdDate","currency","sid","test2"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 

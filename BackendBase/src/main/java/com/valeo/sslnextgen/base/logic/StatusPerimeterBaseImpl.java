@@ -72,32 +72,32 @@ public abstract class StatusPerimeterBaseImpl<T extends StatusBase> implements I
 			return;
 		}
 					if (userBase.isLeader()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isApprover()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isAdmin()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isRequester()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
@@ -112,32 +112,32 @@ public abstract class StatusPerimeterBaseImpl<T extends StatusBase> implements I
 			return;
 		}
 					if (userBase.isLeader()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isApprover()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isAdmin()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isRequester()) {
-			String[] readFields = new String[] {"dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
+			String[] readFields = new String[] {"test3","dummyTest","modifiedDate","createdBy","modifiedBy","statusOfTheRequest","sid","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 

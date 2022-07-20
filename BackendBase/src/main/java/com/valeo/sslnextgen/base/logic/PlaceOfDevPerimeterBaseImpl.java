@@ -72,32 +72,32 @@ public abstract class PlaceOfDevPerimeterBaseImpl<T extends PlaceOfDevBase> impl
 			return;
 		}
 					if (userBase.isLeader()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isApprover()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isAdmin()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isRequester()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
@@ -112,32 +112,32 @@ public abstract class PlaceOfDevPerimeterBaseImpl<T extends PlaceOfDevBase> impl
 			return;
 		}
 					if (userBase.isLeader()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isApprover()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isAdmin()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isRequester()) {
-			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","createdDate","dummyTest","location"};
+			String[] readFields = new String[] {"sid","createdBy","entity","modifiedDate","modifiedBy","siteCode","test2","createdDate","dummyTest","location"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 

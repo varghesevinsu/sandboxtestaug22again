@@ -48,7 +48,7 @@ public class RequestBase extends BaseWorkflowModel {
 	@Searchable(index = true)
 	private String prjOaEntity;
 	@Searchable(index = true)
-	private String dummyTest;
+	private String dummyTest3;
 	@Searchable(index = false)
 	private String projectManagerOrActivityLeader;
 	@Searchable(index = true)
@@ -83,6 +83,8 @@ public class RequestBase extends BaseWorkflowModel {
 	private String purchasingEntityCode;
 	@Searchable(index = true)
 	private String sapTypeOfCostForExternal;
+	@Searchable(index = true)
+	private String test2;
 	@Searchable(index = true)
 	private String sapRdCost;
 	@Searchable(index = true)
@@ -347,12 +349,12 @@ public class RequestBase extends BaseWorkflowModel {
 		return prjOaEntity;
 	}
 
-	public void setDummyTest(String dummyTest) {
-		this.dummyTest = dummyTest;
+	public void setDummyTest3(String dummyTest3) {
+		this.dummyTest3 = dummyTest3;
 	}
 
-	public String getDummyTest() {
-		return dummyTest;
+	public String getDummyTest3() {
+		return dummyTest3;
 	}
 
 	public void setProjectManagerOrActivityLeader(String projectManagerOrActivityLeader) {
@@ -489,6 +491,14 @@ public class RequestBase extends BaseWorkflowModel {
 
 	public String getSapTypeOfCostForExternal() {
 		return sapTypeOfCostForExternal;
+	}
+
+	public void setTest2(String test2) {
+		this.test2 = test2;
+	}
+
+	public String getTest2() {
+		return test2;
 	}
 
 	public void setSapRdCost(String sapRdCost) {

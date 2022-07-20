@@ -72,32 +72,32 @@ public abstract class UserGuidePerimeterBaseImpl<T extends UserGuideBase> implem
 			return;
 		}
 					if (userBase.isLeader()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isApprover()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isAdmin()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isRequester()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
@@ -112,32 +112,32 @@ public abstract class UserGuidePerimeterBaseImpl<T extends UserGuideBase> implem
 			return;
 		}
 					if (userBase.isLeader()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isApprover()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isAdmin()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isRequester()) {
-			String[] readFields = new String[] {"sid","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
