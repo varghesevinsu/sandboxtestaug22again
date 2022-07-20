@@ -21,6 +21,7 @@ import { BaseAppConstants } from '@baseapp/app-constants.base';
 import { HistoryListBaseComponent } from '@baseapp/history/history/history-list/history-list.base.component';
 import { HistoryService } from '@baseapp/history/history/history.service';
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
@@ -30,8 +31,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class HistoryListComponent extends HistoryListBaseComponent implements OnInit {
  
-  constructor(public override historyService: HistoryService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
-    super(historyService, appUtilBaseService, translateService, messageService, confirmationService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
+  constructor(public override historyService: HistoryService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
+    super(historyService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
   }
 	
   ngAfterViewInit(): void {
@@ -42,6 +43,5 @@ export class HistoryListComponent extends HistoryListBaseComponent implements On
     super.onInit();
   }
  
-
 
 }

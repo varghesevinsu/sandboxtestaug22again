@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.valeo.sslnextgen</groupId>
-		<artifactId>SSLNextGEN</artifactId>
+		<groupId>com.vs.eva</groupId>
+		<artifactId>baseproj</artifactId>
 		<version>1.0.0-${env-suffix}</version>
 	</parent>
 	<artifactId>BackInstanceParent</artifactId>
-	<packaging>pom</packaging>
-    <properties>              
-  		<appengine.cloud.tools.version>2.2.0</appengine.cloud.tools.version>
-  	</properties>
+	<packaging>war</packaging>
 	<build>
 		<resources>
 			<resource>
@@ -31,12 +28,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
 	</build>
 	<dependencies>
 		<dependency>
@@ -45,12 +36,7 @@
 			<version>2.16.0</version>
 		</dependency>
 		<dependency>
-		   <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-jdk14</artifactId>
-		    <version>1.7.28</version>
-		</dependency>
-		<dependency>
-			<groupId>com.valeo.sslnextgen</groupId>
+			<groupId>com.vs.eva</groupId>
 			<artifactId>BackendBase</artifactId>
 			<version>1.0.0-${env-suffix}</version>
 		</dependency>

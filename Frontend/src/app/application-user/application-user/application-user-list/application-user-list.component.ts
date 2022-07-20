@@ -20,6 +20,7 @@ import {  ViewChild} from '@angular/core';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
 import { ApplicationUserService } from '@baseapp/application-user/application-user/application-user.service';
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ApplicationUserListBaseComponent } from '@baseapp/application-user/application-user/application-user-list/application-user-list.base.component';
 
@@ -30,8 +31,8 @@ import { ApplicationUserListBaseComponent } from '@baseapp/application-user/appl
 })
 export class ApplicationUserListComponent extends ApplicationUserListBaseComponent implements OnInit {
  
-  constructor(public override applicationUserService: ApplicationUserService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
-    super(applicationUserService, appUtilBaseService, translateService, messageService, confirmationService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
+  constructor(public override applicationUserService: ApplicationUserService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
+    super(applicationUserService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
   }
 	
   ngAfterViewInit(): void {
@@ -42,8 +43,5 @@ export class ApplicationUserListComponent extends ApplicationUserListBaseCompone
     super.onInit();
   }
  
-
-
-
 
 }

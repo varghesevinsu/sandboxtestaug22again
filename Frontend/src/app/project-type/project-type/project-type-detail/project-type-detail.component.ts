@@ -10,6 +10,7 @@ import { ChangeLogsComponent } from '@baseapp/widgets/change-logs/change-logs.co
 import { fromEvent } from 'rxjs';
 import { AppUtilBaseService } from '@baseapp/app-util.base.service';
 import { map } from 'rxjs';
+import { ConfirmationPopupComponent } from '@baseapp/widgets/confirmation/confirmation-popup.component';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
@@ -23,6 +24,7 @@ import { Location } from '@angular/common';
 import { AppBaseService } from '@baseapp/app.base.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProjectTypeDetailBaseComponent } from '@baseapp/project-type/project-type/project-type-detail/project-type-detail.base.component';
 import { ProjectTypeService } from '@baseapp/project-type/project-type/project-type.service';
@@ -34,8 +36,8 @@ import { ProjectTypeService } from '@baseapp/project-type/project-type/project-t
 })
 export class ProjectTypeDetailComponent extends ProjectTypeDetailBaseComponent implements OnInit {
  
-  constructor(public override projectTypeService: ProjectTypeService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override location: Location) {
-    super(projectTypeService, appUtilBaseService, translateService, messageService, confirmationService, domSanitizer, bsModalService, activatedRoute, appBaseService, router, appGlobalService, location);
+  constructor(public override projectTypeService: ProjectTypeService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override location: Location) {
+    super(projectTypeService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, appBaseService, router, appGlobalService, location);
   }
 	
   ngAfterViewInit(): void {
@@ -46,7 +48,5 @@ export class ProjectTypeDetailComponent extends ProjectTypeDetailBaseComponent i
     super.onInit();
   }
  
-
-
 
 }
