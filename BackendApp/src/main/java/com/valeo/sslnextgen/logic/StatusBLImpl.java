@@ -4,7 +4,6 @@ import com.eva.base.acl.IPerimeterManager;
 import com.valeo.sslnextgen.base.logic.StatusBLBaseImpl;
 import com.valeo.sslnextgen.model.Status;
 import com.valeo.sslnextgen.logic.StatusPerimeterImpl;
-import com.valeo.sslnextgen.logic.WorkflowHistoryBLImpl;
 
 
 public class StatusBLImpl extends StatusBLBaseImpl<Status> implements IStatusBL<Status>{

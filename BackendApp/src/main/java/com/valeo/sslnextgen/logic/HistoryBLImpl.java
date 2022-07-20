@@ -4,7 +4,6 @@ import com.eva.base.acl.IPerimeterManager;
 import com.valeo.sslnextgen.base.logic.HistoryBLBaseImpl;
 import com.valeo.sslnextgen.model.History;
 import com.valeo.sslnextgen.logic.HistoryPerimeterImpl;
-import com.valeo.sslnextgen.logic.WorkflowHistoryBLImpl;
 
 
 public class HistoryBLImpl extends HistoryBLBaseImpl<History> implements IHistoryBL<History>{
