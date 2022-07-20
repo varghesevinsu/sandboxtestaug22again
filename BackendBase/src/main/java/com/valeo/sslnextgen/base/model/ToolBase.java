@@ -13,8 +13,8 @@ public class ToolBase extends BaseModel {
 	@Searchable(index = true)
 	private String pid;
 	@Searchable(index = true)
-	private String dummyTest;
-	@NotBlank
+	private String dummyTest3;
+	@NotBlank(message = ValidationErrorConstants.BLANK_VALUE)
 	@Searchable(index = true)
 	private String tool;
 	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
@@ -23,13 +23,15 @@ public class ToolBase extends BaseModel {
 	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
 	private ToolCURRENCY currency=ToolCURRENCY.PLEASE_SELECT;
+	@Searchable(index = true)
+	private String test2;
 
-	public void setDummyTest(String dummyTest) {
-		this.dummyTest = dummyTest;
+	public void setDummyTest3(String dummyTest3) {
+		this.dummyTest3 = dummyTest3;
 	}
 
-	public String getDummyTest() {
-		return dummyTest;
+	public String getDummyTest3() {
+		return dummyTest3;
 	}
 
 	public void setTool(String tool) {
@@ -54,6 +56,14 @@ public class ToolBase extends BaseModel {
 
 	public ToolCURRENCY getCurrency() {
 		return currency;
+	}
+
+	public void setTest2(String test2) {
+		this.test2 = test2;
+	}
+
+	public String getTest2() {
+		return test2;
 	}
 
 

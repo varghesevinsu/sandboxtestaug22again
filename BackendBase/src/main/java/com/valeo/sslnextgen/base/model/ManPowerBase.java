@@ -16,6 +16,8 @@ public class ManPowerBase extends BaseModel {
 	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
 	private ManPowerSERVICE service;
+	@Searchable(index = true)
+	private String test2;
 	@Searchable(index = false)
 	private String metier;
 	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
@@ -42,6 +44,14 @@ public class ManPowerBase extends BaseModel {
 
 	public ManPowerSERVICE getService() {
 		return service;
+	}
+
+	public void setTest2(String test2) {
+		this.test2 = test2;
+	}
+
+	public String getTest2() {
+		return test2;
 	}
 
 	public void setMetier(String metier) {

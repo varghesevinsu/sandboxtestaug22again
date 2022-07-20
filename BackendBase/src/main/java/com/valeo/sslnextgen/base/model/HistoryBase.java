@@ -18,6 +18,8 @@ public class HistoryBase extends BaseModel {
 	private String dummyTest;
 	@Searchable(index = true)
 	private Long requestCode;
+	@Searchable(index = true)
+	private String test2;
 	@Searchable(index = false)
 	private String nextStatus;
 	@Searchable(index = false)
@@ -59,6 +61,14 @@ public class HistoryBase extends BaseModel {
 
 	public Long getRequestCode() {
 		return requestCode;
+	}
+
+	public void setTest2(String test2) {
+		this.test2 = test2;
+	}
+
+	public String getTest2() {
+		return test2;
 	}
 
 	public void setNextStatus(String nextStatus) {

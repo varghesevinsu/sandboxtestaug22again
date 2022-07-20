@@ -12,12 +12,22 @@ public class ToolDesignTypeBase extends BaseModel {
 	@Searchable(index = true)
 	private String pid;
 	@Searchable(index = true)
+	private String test3;
+	@Searchable(index = true)
 	private Boolean enabled;
-	@NotBlank
+	@NotBlank(message = ValidationErrorConstants.BLANK_VALUE)
 	@Searchable(index = false)
 	private String toolDesignType;
 	@Searchable(index = true)
 	private String dummyTest;
+
+	public void setTest3(String test3) {
+		this.test3 = test3;
+	}
+
+	public String getTest3() {
+		return test3;
+	}
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;

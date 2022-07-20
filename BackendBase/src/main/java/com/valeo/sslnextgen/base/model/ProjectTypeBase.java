@@ -11,13 +11,15 @@ public class ProjectTypeBase extends BaseModel {
 
 	@Searchable(index = true)
 	private String pid;
-	@NotBlank
+	@NotBlank(message = ValidationErrorConstants.BLANK_VALUE)
 	@Searchable(index = true)
 	private String projectType;
 	@Searchable(index = true)
 	private Boolean status;
 	@Searchable(index = true)
 	private String dummyTest;
+	@Searchable(index = true)
+	private String test2;
 
 	public void setProjectType(String projectType) {
 		this.projectType = projectType;
@@ -41,6 +43,14 @@ public class ProjectTypeBase extends BaseModel {
 
 	public String getDummyTest() {
 		return dummyTest;
+	}
+
+	public void setTest2(String test2) {
+		this.test2 = test2;
+	}
+
+	public String getTest2() {
+		return test2;
 	}
 
 

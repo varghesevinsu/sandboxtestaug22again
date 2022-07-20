@@ -14,9 +14,11 @@ public class DelegationBase extends BaseModel {
 	private DelegationDelegationenddate delegationEndDate;
 	@Searchable(index = true)
 	private String approverLeader;
-	@NotBlank
+	@NotBlank(message = ValidationErrorConstants.BLANK_VALUE)
 	@Searchable(index = true)
 	private String delegateName;
+	@Searchable(index = true)
+	private String test2;
 	@Searchable(index = true)
 	private DelegationDelegationstartdate delegationStartDate;
 
@@ -42,6 +44,14 @@ public class DelegationBase extends BaseModel {
 
 	public String getDelegateName() {
 		return delegateName;
+	}
+
+	public void setTest2(String test2) {
+		this.test2 = test2;
+	}
+
+	public String getTest2() {
+		return test2;
 	}
 
 	public void setDelegationStartDate(DelegationDelegationstartdate delegationStartDate) {
