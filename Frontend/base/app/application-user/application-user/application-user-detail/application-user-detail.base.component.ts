@@ -262,7 +262,7 @@ isRowSelected:boolean = true;
     "label" : "Requester ",
     "infoBubble" : "",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "no",
     "searchable" : "",
     "defaultVal" : "",
     "field" : "requester",
@@ -299,8 +299,8 @@ isRowSelected:boolean = true;
 	pageViewTitle: string = 'APPLICATION_USER_DETAIL';
 	
 		detailFormControls : FormGroup = new FormGroup({
+	requester: new FormControl('',[]),
 	lastName: new FormControl('',[]),
-	requester: new FormControl('',[Validators.required]),
 	leader: new FormControl('',[]),
 	approver: new FormControl('',[]),
 	firstName: new FormControl('',[]),
