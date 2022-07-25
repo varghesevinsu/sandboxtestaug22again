@@ -96,6 +96,21 @@
             "serialworkflow": true,
             "actors": [
               {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
                 "resolutiontype": "FIELD",
                 "source": "leader",
                 "staticvalue": false
@@ -106,7 +121,31 @@
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ]
           },
           "completed": {
             "serialworkflow": true,
@@ -117,7 +156,26 @@
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ]
           }
         }
       },
@@ -140,12 +198,88 @@
         "disableonlyfields": [],
         "hide": [],
         "enableonlyactions": [],
-        "hideactions": [],
+        "hideactions": [
+          "*",
+          "*"
+        ],
         "disableonlyactions": [],
-        "actiontarget": {},
-        "mandatoryfields": {},
-        "comments": {},
-        "nextactors": {}
+        "actiontarget": {
+          "submitToApprover": [
+            {
+              "then": "leader_verification"
+            }
+          ],
+          "demoteToScheduler": [
+            {
+              "then": "leader_verification"
+            }
+          ]
+        },
+        "mandatoryfields": {
+          "submitToApprover": [],
+          "demoteToScheduler": []
+        },
+        "comments": {
+          "submitToApprover": false,
+          "demoteToScheduler": false
+        },
+        "nextactors": {
+          "leader_verification": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          }
+        }
       },
       "scheduler_analysis": {
         "enableonlyfields": [],
@@ -205,6 +339,21 @@
             "serialworkflow": true,
             "actors": [
               {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
                 "resolutiontype": "FIELD",
                 "source": "leader",
                 "staticvalue": false
@@ -215,9 +364,150 @@
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
           },
           "draft": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          },
+          "scheduler_analysis": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          }
+        }
+      },
+      "draft": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [],
+        "hideactions": [],
+        "disableonlyactions": [],
+        "actiontarget": {},
+        "mandatoryfields": {},
+        "comments": {},
+        "nextactors": {}
+      },
+      "cancelled": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [],
+        "hideactions": [],
+        "disableonlyactions": [],
+        "actiontarget": {},
+        "mandatoryfields": {},
+        "comments": {},
+        "nextactors": {}
+      },
+      "approver_validation": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [],
+        "hideactions": [
+          "*",
+          "*"
+        ],
+        "disableonlyactions": [],
+        "actiontarget": {
+          "demoteToLeader": [
+            {
+              "then": "leader_verification"
+            }
+          ],
+          "validate": [
+            {
+              "then": "approver_validation"
+            }
+          ]
+        },
+        "mandatoryfields": {
+          "demoteToLeader": [],
+          "validate": []
+        },
+        "comments": {
+          "demoteToLeader": false,
+          "validate": false
+        },
+        "nextactors": {
+          "leader_verification": {
             "serialworkflow": true,
             "actors": [
               {
@@ -227,22 +517,222 @@
               },
               {
                 "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "APPROLE",
                 "source": "admin",
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
           },
+          "approver_validation": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          }
+        }
+      },
+      "completed": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [],
+        "hideactions": [],
+        "disableonlyactions": [],
+        "actiontarget": {},
+        "mandatoryfields": {},
+        "comments": {},
+        "nextactors": {}
+      }
+    },
+    "requester": {
+      "leader_verification": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [],
+        "hideactions": [],
+        "disableonlyactions": [],
+        "actiontarget": {},
+        "mandatoryfields": {},
+        "comments": {},
+        "nextactors": {}
+      },
+      "scheduler_analysis": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [],
+        "hideactions": [
+          "*",
+          "*",
+          "*"
+        ],
+        "disableonlyactions": [],
+        "actiontarget": {
+          "approveToLeader": [
+            {
+              "then": "scheduler_analysis"
+            }
+          ],
+          "demoteToRequester": [
+            {
+              "then": "scheduler_analysis"
+            }
+          ],
+          "assign": [
+            {
+              "then": "scheduler_analysis"
+            }
+          ]
+        },
+        "mandatoryfields": {
+          "approveToLeader": [],
+          "demoteToRequester": [],
+          "assign": []
+        },
+        "comments": {
+          "approveToLeader": false,
+          "demoteToRequester": false,
+          "assign": false
+        },
+        "nextactors": {
           "scheduler_analysis": {
             "serialworkflow": true,
             "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "FIELD",
                 "source": "scheduler",
                 "staticvalue": false
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "FIELD",
+                "source": "requester",
+                "staticvalue": false
+              }
+            ]
           }
         }
       },
@@ -312,6 +802,7 @@
           "assign",
           "validate",
           "demoteToLeader",
+          "*",
           "submit",
           "cancel",
           "demoteToRequester",
@@ -325,9 +816,15 @@
           "submitToApprover": [
             {
               "then": "approver_validation"
+            },
+            {
+              "then": "leader_verification"
             }
           ],
           "demoteToScheduler": [
+            {
+              "then": "leader_verification"
+            },
             {
               "then": "scheduler_analysis"
             }
@@ -342,20 +839,103 @@
           "demoteToScheduler": false
         },
         "nextactors": {
+          "leader_verification": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ]
+          },
           "scheduler_analysis": {
             "serialworkflow": true,
             "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "FIELD",
                 "source": "scheduler",
                 "staticvalue": false
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ]
           },
           "approver_validation": {
             "serialworkflow": true,
             "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "APPROLE",
                 "source": "approver",
@@ -367,7 +947,31 @@
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ]
           }
         }
       },
@@ -412,12 +1016,163 @@
         "disableonlyfields": [],
         "hide": [],
         "enableonlyactions": [],
-        "hideactions": [],
+        "hideactions": [
+          "*",
+          "*"
+        ],
         "disableonlyactions": [],
-        "actiontarget": {},
-        "mandatoryfields": {},
-        "comments": {},
-        "nextactors": {}
+        "actiontarget": {
+          "demoteToLeader": [
+            {
+              "then": "leader_verification"
+            }
+          ],
+          "validate": [
+            {
+              "then": "approver_validation"
+            }
+          ]
+        },
+        "mandatoryfields": {
+          "demoteToLeader": [],
+          "validate": []
+        },
+        "comments": {
+          "demoteToLeader": false,
+          "validate": false
+        },
+        "nextactors": {
+          "leader_verification": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          },
+          "approver_validation": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          }
+        }
       },
       "completed": {
         "enableonlyfields": [],
@@ -438,24 +1193,143 @@
         "disableonlyfields": [],
         "hide": [],
         "enableonlyactions": [],
-        "hideactions": [],
+        "hideactions": [
+          "*",
+          "*"
+        ],
         "disableonlyactions": [],
-        "actiontarget": {},
-        "mandatoryfields": {},
-        "comments": {},
-        "nextactors": {}
+        "actiontarget": {
+          "submitToApprover": [
+            {
+              "then": "leader_verification"
+            }
+          ],
+          "demoteToScheduler": [
+            {
+              "then": "leader_verification"
+            }
+          ]
+        },
+        "mandatoryfields": {
+          "submitToApprover": [],
+          "demoteToScheduler": []
+        },
+        "comments": {
+          "submitToApprover": false,
+          "demoteToScheduler": false
+        },
+        "nextactors": {
+          "leader_verification": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          }
+        }
       },
       "scheduler_analysis": {
         "enableonlyfields": [],
         "disableonlyfields": [],
         "hide": [],
         "enableonlyactions": [],
-        "hideactions": [],
+        "hideactions": [
+          "*"
+        ],
         "disableonlyactions": [],
-        "actiontarget": {},
-        "mandatoryfields": {},
-        "comments": {},
-        "nextactors": {}
+        "actiontarget": {
+          "cancel": [
+            {
+              "then": "scheduler_analysis"
+            }
+          ]
+        },
+        "mandatoryfields": {
+          "cancel": []
+        },
+        "comments": {
+          "cancel": false
+        },
+        "nextactors": {
+          "scheduler_analysis": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              }
+            ]
+          }
+        }
       },
       "draft": {
         "enableonlyfields": [],
@@ -509,12 +1383,36 @@
             "serialworkflow": true,
             "actors": [
               {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
                 "resolutiontype": "FIELD",
                 "source": "scheduler",
                 "staticvalue": false
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ]
           },
           "cancelled": {
             "serialworkflow": true,
@@ -525,7 +1423,26 @@
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ]
           }
         }
       },
@@ -546,12 +1463,163 @@
         "disableonlyfields": [],
         "hide": [],
         "enableonlyactions": [],
-        "hideactions": [],
+        "hideactions": [
+          "*",
+          "*"
+        ],
         "disableonlyactions": [],
-        "actiontarget": {},
-        "mandatoryfields": {},
-        "comments": {},
-        "nextactors": {}
+        "actiontarget": {
+          "demoteToLeader": [
+            {
+              "then": "leader_verification"
+            }
+          ],
+          "validate": [
+            {
+              "then": "approver_validation"
+            }
+          ]
+        },
+        "mandatoryfields": {
+          "demoteToLeader": [],
+          "validate": []
+        },
+        "comments": {
+          "demoteToLeader": false,
+          "validate": false
+        },
+        "nextactors": {
+          "leader_verification": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          },
+          "approver_validation": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          }
+        }
       },
       "completed": {
         "enableonlyfields": [],
@@ -583,6 +1651,9 @@
           "assign",
           "validate",
           "demoteToLeader",
+          "*",
+          "*",
+          "*",
           "submit",
           "cancel",
           "demoteToRequester",
@@ -596,9 +1667,21 @@
           "submitToApprover": [
             {
               "then": "approver_validation"
+            },
+            {
+              "then": "leader_verification"
+            },
+            {
+              "then": "leader_verification"
             }
           ],
           "demoteToScheduler": [
+            {
+              "then": "leader_verification"
+            },
+            {
+              "then": "leader_verification"
+            },
             {
               "then": "scheduler_analysis"
             }
@@ -613,20 +1696,114 @@
           "demoteToScheduler": false
         },
         "nextactors": {
+          "leader_verification": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          },
           "scheduler_analysis": {
             "serialworkflow": true,
             "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "FIELD",
                 "source": "scheduler",
                 "staticvalue": false
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ]
           },
           "approver_validation": {
             "serialworkflow": true,
             "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "APPROLE",
                 "source": "approver",
@@ -638,7 +1815,793 @@
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ]
+          }
+        }
+      },
+      "scheduler_analysis": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [],
+        "hideactions": [
+          "*",
+          "submit",
+          "cancel",
+          "demoteToScheduler",
+          "submitToApprover",
+          "validate",
+          "demoteToLeader",
+          "submit",
+          "cancel",
+          "demoteToScheduler",
+          "submitToApprover",
+          "validate",
+          "demoteToLeader",
+          "submit",
+          "cancel",
+          "demoteToScheduler",
+          "submitToApprover",
+          "validate",
+          "demoteToLeader",
+          "*",
+          "*",
+          "*"
+        ],
+        "disableonlyactions": [],
+        "actiontarget": {
+          "cancel": [
+            {
+              "then": "scheduler_analysis"
+            },
+            {
+              "then": "cancelled"
+            }
+          ],
+          "approveToLeader": [
+            {
+              "then": "leader_verification"
+            },
+            {
+              "then": "scheduler_analysis"
+            }
+          ],
+          "demoteToRequester": [
+            {
+              "then": "draft"
+            },
+            {
+              "then": "scheduler_analysis"
+            }
+          ],
+          "assign": [
+            {
+              "then": "scheduler_analysis"
+            },
+            {
+              "then": "scheduler_analysis"
+            }
+          ]
+        },
+        "mandatoryfields": {
+          "cancel": [],
+          "approveToLeader": [],
+          "demoteToRequester": [],
+          "assign": []
+        },
+        "comments": {
+          "cancel": false,
+          "approveToLeader": false,
+          "demoteToRequester": false,
+          "assign": false
+        },
+        "nextactors": {
+          "leader_verification": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          },
+          "scheduler_analysis": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              }
+            ]
+          },
+          "draft": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          },
+          "cancelled": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              }
+            ]
+          }
+        }
+      },
+      "draft": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [
+          "name",
+          "orgalocToBeInvoiced",
+          "commentsTravelExtraCosts",
+          "tasks"
+        ],
+        "enableonlyactions": [],
+        "hideactions": [
+          "demoteToRequester",
+          "approveToLeader",
+          "assign",
+          "demoteToScheduler",
+          "submitToApprover",
+          "validate",
+          "demoteToLeader",
+          "demoteToRequester",
+          "approveToLeader",
+          "assign",
+          "demoteToScheduler",
+          "submitToApprover",
+          "validate",
+          "demoteToLeader"
+        ],
+        "disableonlyactions": [],
+        "actiontarget": {
+          "cancel": [
+            {
+              "then": "cancelled"
+            }
+          ],
+          "submit": [
+            {
+              "then": "scheduler_analysis"
+            }
+          ]
+        },
+        "mandatoryfields": {
+          "cancel": [],
+          "submit": []
+        },
+        "comments": {
+          "cancel": false,
+          "submit": false
+        },
+        "nextactors": {
+          "scheduler_analysis": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ]
+          },
+          "cancelled": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ]
+          }
+        }
+      },
+      "cancelled": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [],
+        "hideactions": [],
+        "disableonlyactions": [],
+        "actiontarget": {},
+        "mandatoryfields": {},
+        "comments": {},
+        "nextactors": {}
+      },
+      "approver_validation": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [],
+        "hideactions": [
+          "submit",
+          "cancel",
+          "demoteToRequester",
+          "approveToLeader",
+          "assign",
+          "demoteToScheduler",
+          "submitToApprover",
+          "*",
+          "*",
+          "submit",
+          "cancel",
+          "demoteToRequester",
+          "approveToLeader",
+          "assign",
+          "demoteToScheduler",
+          "submitToApprover"
+        ],
+        "disableonlyactions": [],
+        "actiontarget": {
+          "demoteToLeader": [
+            {
+              "then": "leader_verification"
+            },
+            {
+              "then": "leader_verification"
+            }
+          ],
+          "validate": [
+            {
+              "then": "completed"
+            },
+            {
+              "then": "approver_validation"
+            }
+          ]
+        },
+        "mandatoryfields": {
+          "demoteToLeader": [],
+          "validate": []
+        },
+        "comments": {
+          "demoteToLeader": false,
+          "validate": false
+        },
+        "nextactors": {
+          "leader_verification": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          },
+          "completed": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ]
+          },
+          "approver_validation": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          }
+        }
+      },
+      "completed": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [],
+        "hideactions": [],
+        "disableonlyactions": [],
+        "actiontarget": {},
+        "mandatoryfields": {},
+        "comments": {},
+        "nextactors": {}
+      }
+    },
+    "admin": {
+      "leader_verification": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [
+          "demoteToScheduler",
+          "submitToApprover"
+        ],
+        "hideactions": [
+          "submit",
+          "cancel",
+          "demoteToRequester",
+          "approveToLeader",
+          "assign",
+          "validate",
+          "demoteToLeader",
+          "*",
+          "submit",
+          "cancel",
+          "demoteToRequester",
+          "approveToLeader",
+          "assign",
+          "validate",
+          "demoteToLeader"
+        ],
+        "disableonlyactions": [],
+        "actiontarget": {
+          "submitToApprover": [
+            {
+              "then": "approver_validation"
+            },
+            {
+              "then": "leader_verification"
+            }
+          ],
+          "demoteToScheduler": [
+            {
+              "then": "leader_verification"
+            },
+            {
+              "then": "scheduler_analysis"
+            }
+          ]
+        },
+        "mandatoryfields": {
+          "submitToApprover": [],
+          "demoteToScheduler": []
+        },
+        "comments": {
+          "submitToApprover": false,
+          "demoteToScheduler": false
+        },
+        "nextactors": {
+          "leader_verification": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ]
+          },
+          "scheduler_analysis": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ]
+          },
+          "approver_validation": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ]
           }
         }
       },
@@ -674,6 +2637,11 @@
               "then": "leader_verification"
             }
           ],
+          "cancel": [
+            {
+              "then": "cancelled"
+            }
+          ],
           "demoteToRequester": [
             {
               "then": "draft"
@@ -687,11 +2655,13 @@
         },
         "mandatoryfields": {
           "approveToLeader": [],
+          "cancel": [],
           "demoteToRequester": [],
           "assign": []
         },
         "comments": {
           "approveToLeader": false,
+          "cancel": false,
           "demoteToRequester": false,
           "assign": false
         },
@@ -699,6 +2669,21 @@
           "leader_verification": {
             "serialworkflow": true,
             "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "FIELD",
                 "source": "leader",
@@ -710,9 +2695,58 @@
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
           },
           "draft": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          },
+          "scheduler_analysis": {
             "serialworkflow": true,
             "actors": [
               {
@@ -721,23 +2755,61 @@
                 "staticvalue": true
               },
               {
-                "resolutiontype": "APPROLE",
-                "source": "admin",
-                "staticvalue": true
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
               }
             ],
-            "sendemail": false
-          },
-          "scheduler_analysis": {
-            "serialworkflow": true,
-            "actors": [
+            "sendemail": false,
+            "mailtos": [
               {
                 "resolutiontype": "FIELD",
                 "source": "scheduler",
                 "staticvalue": false
               }
             ],
-            "sendemail": false
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ]
+          },
+          "cancelled": {
+            "serialworkflow": true,
+            "actors": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              }
+            ]
           }
         }
       },
@@ -793,12 +2865,36 @@
             "serialworkflow": true,
             "actors": [
               {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
                 "resolutiontype": "FIELD",
                 "source": "scheduler",
                 "staticvalue": false
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "FIELD",
+                "source": "scheduler",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ]
           },
           "cancelled": {
             "serialworkflow": true,
@@ -809,7 +2905,26 @@
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ]
           }
         }
       },
@@ -872,6 +2987,21 @@
             "serialworkflow": true,
             "actors": [
               {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "leader",
+                "staticvalue": true
+              },
+              {
                 "resolutiontype": "FIELD",
                 "source": "leader",
                 "staticvalue": false
@@ -882,7 +3012,31 @@
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "FIELD",
+                "source": "leader",
+                "staticvalue": false
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ]
           },
           "completed": {
             "serialworkflow": true,
@@ -893,7 +3047,26 @@
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ]
           }
         }
       },
@@ -910,7 +3083,7 @@
         "nextactors": {}
       }
     },
-    "admin": {
+    "scheduler ": {
       "leader_verification": {
         "enableonlyfields": [],
         "disableonlyfields": [],
@@ -930,70 +3103,20 @@
         "enableonlyactions": [],
         "hideactions": [],
         "disableonlyactions": [],
-        "actiontarget": {},
-        "mandatoryfields": {},
-        "comments": {},
-        "nextactors": {}
-      },
-      "draft": {
-        "enableonlyfields": [],
-        "disableonlyfields": [],
-        "hide": [
-          "name",
-          "orgalocToBeInvoiced",
-          "commentsTravelExtraCosts",
-          "tasks"
-        ],
-        "enableonlyactions": [],
-        "hideactions": [
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader"
-        ],
-        "disableonlyactions": [],
         "actiontarget": {
           "cancel": [
             {
               "then": "cancelled"
             }
-          ],
-          "submit": [
-            {
-              "then": "scheduler_analysis"
-            }
           ]
         },
         "mandatoryfields": {
-          "cancel": [],
-          "submit": []
+          "cancel": []
         },
         "comments": {
-          "cancel": false,
-          "submit": false
+          "cancel": false
         },
         "nextactors": {
-          "scheduler_analysis": {
-            "serialworkflow": true,
-            "actors": [
-              {
-                "resolutiontype": "FIELD",
-                "source": "scheduler",
-                "staticvalue": false
-              }
-            ],
-            "sendemail": false
-          },
           "cancelled": {
             "serialworkflow": true,
             "actors": [
@@ -1003,9 +3126,40 @@
                 "staticvalue": true
               }
             ],
-            "sendemail": false
+            "sendemail": false,
+            "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              }
+            ],
+            "mailccs": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "admin",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "scheduler ",
+                "staticvalue": true
+              }
+            ]
           }
         }
+      },
+      "draft": {
+        "enableonlyfields": [],
+        "disableonlyfields": [],
+        "hide": [],
+        "enableonlyactions": [],
+        "hideactions": [],
+        "disableonlyactions": [],
+        "actiontarget": {},
+        "mandatoryfields": {},
+        "comments": {},
+        "nextactors": {}
       },
       "cancelled": {
         "enableonlyfields": [],
@@ -1024,72 +3178,12 @@
         "disableonlyfields": [],
         "hide": [],
         "enableonlyactions": [],
-        "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover"
-        ],
+        "hideactions": [],
         "disableonlyactions": [],
-        "actiontarget": {
-          "demoteToLeader": [
-            {
-              "then": "leader_verification"
-            }
-          ],
-          "validate": [
-            {
-              "then": "completed"
-            }
-          ]
-        },
-        "mandatoryfields": {
-          "demoteToLeader": [],
-          "validate": []
-        },
-        "comments": {
-          "demoteToLeader": false,
-          "validate": false
-        },
-        "nextactors": {
-          "leader_verification": {
-            "serialworkflow": true,
-            "actors": [
-              {
-                "resolutiontype": "FIELD",
-                "source": "leader",
-                "staticvalue": false
-              },
-              {
-                "resolutiontype": "APPROLE",
-                "source": "admin",
-                "staticvalue": true
-              }
-            ],
-            "sendemail": false
-          },
-          "completed": {
-            "serialworkflow": true,
-            "actors": [
-              {
-                "resolutiontype": "APPROLE",
-                "source": "admin",
-                "staticvalue": true
-              }
-            ],
-            "sendemail": false
-          }
-        }
+        "actiontarget": {},
+        "mandatoryfields": {},
+        "comments": {},
+        "nextactors": {}
       },
       "completed": {
         "enableonlyfields": [],

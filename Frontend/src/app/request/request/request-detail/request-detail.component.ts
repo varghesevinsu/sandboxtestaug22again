@@ -1,3 +1,4 @@
+import { BaseService } from '@baseapp/base.service';
 import { Validators } from '@angular/forms';
 import {ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -37,8 +38,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class RequestDetailComponent extends RequestDetailBaseComponent implements OnInit {
  
-  constructor(public override requestService: RequestService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override location: Location) {
-    super(requestService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, appBaseService, router, appGlobalService, location);
+  constructor(public override requestService: RequestService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override baseService: BaseService, public override location: Location) {
+    super(requestService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, appBaseService, router, appGlobalService, baseService, location);
   }
 	
   ngAfterViewInit(): void {
@@ -50,6 +51,7 @@ export class RequestDetailComponent extends RequestDetailBaseComponent implement
   }
  
 onValidateAction($event:any,$button:any){}
+
 
 
 
