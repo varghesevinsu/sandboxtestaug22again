@@ -94,8 +94,6 @@ export interface RequestBase {
 	schedulerAdditionalInformation: string;
 	otherBudget2: string;
 	schedulerCurrency: string;
-	scheduler: string;
-	leader: string;
 	additionnalCost: string;
 	additionnalCost2: string;
 	globalBudget: string;
@@ -104,4 +102,7 @@ export interface RequestBase {
 	dummy2: string;
 	subCode: string;
 	test2: string;
+	dummy2: string;
+	leader: string;
+	scheduler: string;
 }

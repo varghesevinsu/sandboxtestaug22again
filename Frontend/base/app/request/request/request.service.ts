@@ -272,21 +272,6 @@ export class RequestService {
     
         return subject;
     }
-    sslWorkflowDemoteToRequester(...args: any):Observable<any>{
-        const serviceOpts = RequestApiConstants.sslWorkflowDemoteToRequester;
-        const params= args[0];
-        
-        const subject = new Observable(observer => {
-          this.baseService.put(serviceOpts,params).subscribe((response: any) => {
-            observer.next(response);
-          },
-          (err:any) => {
-            observer.error(err);
-          });
-        });
-    
-        return subject;
-    }
     sslWorkflowSubmitToApprover(...args: any):Observable<any>{
         const serviceOpts = RequestApiConstants.sslWorkflowSubmitToApprover;
         const params= args[0];

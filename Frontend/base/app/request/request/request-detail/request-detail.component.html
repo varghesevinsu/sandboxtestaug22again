@@ -933,20 +933,6 @@
         <input type="text " pInputText class="form-control " id="projectManagerOrActivityLeader " formControlName="projectManagerOrActivityLeader" [placeholder]="formFieldConfig?.projectManagerOrActivityLeader?.placeHolder || ''"/>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.projectManagerOrActivityLeader?.helpText || ''}}</div>
     </div>
-</div><div class="form-col" [hidden]="hiddenFields.scheduler">
-    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.scheduler?.isRequired, 'error':inValidFields.scheduler}">
-        <label for="scheduler" class="col-form-label scheduler-label" [textContent]=" 'SCHEDULER'|translate "></label>
-        <span class="info-bubble" *ngIf="formFieldConfig?.scheduler?.infoBubble"   [pTooltip]="formFieldConfig?.scheduler?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
-        <input type="text " pInputText class="form-control " id="scheduler " formControlName="scheduler" [placeholder]="formFieldConfig?.scheduler?.placeHolder || ''"/>
-        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.scheduler?.helpText || ''}}</div>
-    </div>
-</div><div class="form-col" [hidden]="hiddenFields.leader">
-    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.leader?.isRequired, 'error':inValidFields.leader}">
-        <label for="leader" class="col-form-label leader-label" [textContent]=" 'LEADER'|translate "></label>
-        <span class="info-bubble" *ngIf="formFieldConfig?.leader?.infoBubble"   [pTooltip]="formFieldConfig?.leader?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
-        <input type="text " pInputText class="form-control " id="leader " formControlName="leader" [placeholder]="formFieldConfig?.leader?.placeHolder || ''"/>
-        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.leader?.helpText || ''}}</div>
-    </div>
 </div><div class="form-col" [hidden]="hiddenFields.watcher">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.watcher?.isRequired, 'error':inValidFields.watcher}">
         <label for="watcher" class="col-form-label watcher-label" [textContent]=" 'WATCHER'|translate "></label>

@@ -81,11 +81,6 @@ export class RequestApiConstants {
         method: 'DELETE',
         showloading: true
     };
-    public static readonly sslWorkflowDemoteToRequester: any = {
-        url: '/rest/requests/sslworkflow/demotetorequester/{id}',
-        method: 'PUT',
-        showloading: true
-    };
     public static readonly sslWorkflowSubmitToApprover: any = {
         url: '/rest/requests/sslworkflow/submittoapprover/{id}',
         method: 'PUT',

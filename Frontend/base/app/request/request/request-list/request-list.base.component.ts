@@ -868,7 +868,14 @@ isRowSelected: boolean = false;
       "qbName" : "Scheduler_Rights_Fields",
       "query" : {
         "condition" : "and",
-        "rules" : [ ]
+        "rules" : [ {
+          "lhsTableName" : "request",
+          "rhsTableName" : "applicationuser",
+          "custom" : false,
+          "label" : "scheduler",
+          "value" : "email",
+          "operator" : "="
+        } ]
       },
       "roles" : [ "selected", "Scheduler ", "Admin" ]
     },

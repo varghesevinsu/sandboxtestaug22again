@@ -148,40 +148,6 @@ isRowSelected:boolean = true;
       "buttonType" : "icon_on_left",
       "visibility" : "show",
       "service" : {
-        "name" : "sslWorkflowCancel",
-        "tableId" : "c31ac3f2-1ff3-4533-9aba-53f71383ab00",
-        "sid" : "ebd893b9-f99c-4e47-91f5-a4e1c74f4ee6",
-        "tableName" : "Request"
-      },
-      "showOn" : "both",
-      "buttonStyle" : "curved",
-      "buttonEnabled" : "yes",
-      "action" : "call_a_backend_webservice",
-      "label" : "CANCEL",
-      "type" : "button",
-      "wfAction" : "cancel"
-    }, {
-      "outline" : true,
-      "buttonType" : "icon_on_left",
-      "visibility" : "show",
-      "service" : {
-        "name" : "sslWorkflowDemoteToRequester",
-        "tableId" : "c31ac3f2-1ff3-4533-9aba-53f71383ab00",
-        "sid" : "b8faadaa-d332-40a2-877e-f0342094c449",
-        "tableName" : "Request"
-      },
-      "showOn" : "both",
-      "buttonStyle" : "curved",
-      "buttonEnabled" : "yes",
-      "action" : "call_a_backend_webservice",
-      "label" : "DEMOTE_TO_REQUESTER",
-      "type" : "button",
-      "wfAction" : "demoteToRequester"
-    }, {
-      "outline" : true,
-      "buttonType" : "icon_on_left",
-      "visibility" : "show",
-      "service" : {
         "name" : "sslWorkflowApproveToLeader",
         "tableId" : "c31ac3f2-1ff3-4533-9aba-53f71383ab00",
         "sid" : "e1849ce3-0166-47b6-a736-65f450594f14",
@@ -279,6 +245,23 @@ isRowSelected:boolean = true;
       "label" : "DEMOTE_TO_LEADER",
       "type" : "button",
       "wfAction" : "demoteToLeader"
+    }, {
+      "outline" : true,
+      "buttonType" : "icon_on_left",
+      "visibility" : "show",
+      "service" : {
+        "name" : "sslWorkflowCancel",
+        "tableId" : "c31ac3f2-1ff3-4533-9aba-53f71383ab00",
+        "sid" : "ad519d5d-decc-414f-b626-bc960655bff3",
+        "tableName" : "Request"
+      },
+      "showOn" : "both",
+      "buttonStyle" : "curved",
+      "buttonEnabled" : "yes",
+      "action" : "call_a_backend_webservice",
+      "label" : "CANCEL",
+      "type" : "button",
+      "wfAction" : "cancel"
     } ],
     "valueChange" : true,
     "buttonStyle" : "curved",
@@ -1067,22 +1050,6 @@ isRowSelected:boolean = true;
   }, {
     "allowEditing" : "yes",
     "multipleValues" : false,
-    "fieldName" : " Service type",
-    "data" : " Service type",
-    "currentNode" : "cfa15170-0741-43ec-957c-3c263d6cf8e2",
-    "type" : "formField",
-    "mandatory" : "yes",
-    "valueChange" : true,
-    "editConditionally" : {
-      "qbName" : "Requester_Rights_Fields",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ ]
-      },
-      "roles" : [ ]
-    },
-    "sysGen" : false,
-    "fieldId" : "serviceType",
     "allowedValues" : {
       "values" : [ {
         "label" : "EMC",
@@ -1103,16 +1070,32 @@ isRowSelected:boolean = true;
       }
     },
     "defaultField" : false,
+    "fieldName" : " Service type",
+    "data" : " Service type",
     "multipleValuesMax" : 10,
+    "currentNode" : "cfa15170-0741-43ec-957c-3c263d6cf8e2",
     "label" : " Service type",
+    "type" : "formField",
+    "mandatory" : "yes",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "serviceType",
     "multipleValuesMin" : 0,
+    "valueChange" : true,
     "name" : "serviceType",
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ ]
+    },
+    "sysGen" : false,
     "uiType" : "select",
     "fieldType" : "string",
-    "allowViewing" : "yes"
+    "allowViewing" : "yes",
+    "fieldId" : "serviceType"
   }, {
     "allowEditing" : "conditional",
     "allowedValues" : { },
@@ -1309,12 +1292,16 @@ isRowSelected:boolean = true;
     "defaultField" : false,
     "fieldName" : "EMC Lab",
     "data" : "EMC Lab",
+    "multipleValuesMax" : 10,
+    "currentNode" : "f059b3b1-37dc-4add-b876-04ee5c4cb964",
     "label" : "EMC Lab",
     "type" : "formField",
     "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "emcLab",
+    "multipleValuesMin" : 0,
+    "valueChange" : true,
     "name" : "emcLab",
     "editConditionally" : {
       "qbName" : "Requester_Rights_Fields",
@@ -1325,7 +1312,7 @@ isRowSelected:boolean = true;
           "rhsTableName" : "",
           "custom" : true,
           "label" : "serviceType",
-          "value" : "ECAD",
+          "value" : "EMC",
           "operator" : "="
         } ]
       },
@@ -1351,6 +1338,7 @@ isRowSelected:boolean = true;
     "defaultField" : false,
     "fieldName" : " Task Type",
     "data" : " Task Type",
+    "multipleValuesMax" : 10,
     "currentNode" : "be8e0685-73a0-4783-85e1-ec9134fbc7ab",
     "label" : " Task Type",
     "type" : "formField",
@@ -1358,6 +1346,7 @@ isRowSelected:boolean = true;
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "taskType",
+    "multipleValuesMin" : 0,
     "valueChange" : true,
     "name" : "taskType",
     "editConditionally" : {
@@ -1461,6 +1450,7 @@ isRowSelected:boolean = true;
     "defaultField" : false,
     "fieldName" : " Project type",
     "data" : " Project type",
+    "multipleValuesMax" : 10,
     "currentNode" : "e2a955b1-17cc-45f0-b2cb-ecc4d016f7ee",
     "label" : " Project type",
     "type" : "formField",
@@ -1468,6 +1458,7 @@ isRowSelected:boolean = true;
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "projectType",
+    "multipleValuesMin" : 0,
     "valueChange" : true,
     "name" : "projectType",
     "editConditionally" : {
@@ -1591,12 +1582,33 @@ isRowSelected:boolean = true;
   }, {
     "allowEditing" : "conditional",
     "multipleValues" : false,
+    "allowedValues" : {
+      "values" : [ {
+        "label" : "YES",
+        "value" : "YES"
+      }, {
+        "label" : "NO",
+        "value" : "NO"
+      } ],
+      "conditions" : {
+        "conditionType" : "Auto",
+        "conditions" : [ ]
+      }
+    },
+    "defaultField" : false,
     "fieldName" : " Panelization",
     "data" : " Panelization",
+    "multipleValuesMax" : 10,
     "currentNode" : "3e63ce12-4ced-4914-a345-0ef8b27626ca",
+    "label" : " Panelization",
     "type" : "formField",
     "mandatory" : "no",
+    "searchable" : "full_word",
+    "transientField" : false,
+    "field" : "panelization",
+    "multipleValuesMin" : 0,
     "valueChange" : true,
+    "name" : "panelization",
     "editConditionally" : {
       "qbName" : "Requester_Rights_Fields",
       "query" : {
@@ -1613,31 +1625,10 @@ isRowSelected:boolean = true;
       "roles" : [ "selected", "Requester ", "Admin" ]
     },
     "sysGen" : false,
-    "fieldId" : "panelization",
-    "allowedValues" : {
-      "values" : [ {
-        "label" : "YES",
-        "value" : "YES"
-      }, {
-        "label" : "NO",
-        "value" : "NO"
-      } ],
-      "conditions" : {
-        "conditionType" : "Auto",
-        "conditions" : [ ]
-      }
-    },
-    "defaultField" : false,
-    "multipleValuesMax" : 10,
-    "label" : " Panelization",
-    "searchable" : "full_word",
-    "transientField" : false,
-    "field" : "panelization",
-    "multipleValuesMin" : 0,
-    "name" : "panelization",
     "uiType" : "select",
     "fieldType" : "string",
-    "allowViewing" : "yes"
+    "allowViewing" : "yes",
+    "fieldId" : "panelization"
   }, {
     "allowEditing" : "conditional",
     "allowedValues" : { },
@@ -1843,7 +1834,14 @@ isRowSelected:boolean = true;
       "qbName" : "Scheduler_Rights_Fields",
       "query" : {
         "condition" : "and",
-        "rules" : [ ]
+        "rules" : [ {
+          "lhsTableName" : "request",
+          "rhsTableName" : "applicationuser",
+          "custom" : false,
+          "label" : "scheduler",
+          "value" : "email",
+          "operator" : "="
+        } ]
       },
       "roles" : [ "selected", "Scheduler ", "Admin" ]
     },
@@ -1969,10 +1967,32 @@ isRowSelected:boolean = true;
     "fieldId" : "osaNameToBeCreatedInStr"
   }, {
     "allowEditing" : "conditional",
-    "allowedValues" : { },
+    "allowedValues" : {
+      "values" : [ {
+        "label" : "CRE1",
+        "value" : "CRE1"
+      }, {
+        "label" : "CRE2",
+        "value" : "CRE2"
+      }, {
+        "label" : "WUH1",
+        "value" : "WUH1"
+      }, {
+        "label" : "WUH2",
+        "value" : "WUH2"
+      }, {
+        "label" : "SHE1",
+        "value" : "SHE1"
+      } ],
+      "conditions" : {
+        "conditionType" : "Auto",
+        "conditions" : [ ]
+      }
+    },
     "defaultField" : false,
     "fieldName" : "Lead Place of Development",
     "data" : "Lead Place of Development",
+    "multipleValuesMax" : 10,
     "currentNode" : "8daeb8b5-a138-41d7-b19f-09ee5420119a",
     "label" : "Lead Place of Development",
     "type" : "formField",
@@ -1980,6 +2000,7 @@ isRowSelected:boolean = true;
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "leadPlaceOfDevelopment",
+    "multipleValuesMin" : 0,
     "valueChange" : true,
     "name" : "leadPlaceOfDevelopment",
     "editConditionally" : {
@@ -1997,10 +2018,32 @@ isRowSelected:boolean = true;
     "fieldId" : "leadPlaceOfDevelopment"
   }, {
     "allowEditing" : "conditional",
-    "allowedValues" : { },
+    "allowedValues" : {
+      "values" : [ {
+        "label" : "CRE1",
+        "value" : "CRE1"
+      }, {
+        "label" : "CRE2",
+        "value" : "CRE2"
+      }, {
+        "label" : "WUH1",
+        "value" : "WUH1"
+      }, {
+        "label" : "WHU2",
+        "value" : "WHU2"
+      }, {
+        "label" : "SHE1",
+        "value" : "SHE1"
+      } ],
+      "conditions" : {
+        "conditionType" : "Auto",
+        "conditions" : [ ]
+      }
+    },
     "defaultField" : false,
     "fieldName" : "second Place of Development",
     "data" : "second Place of Development",
+    "multipleValuesMax" : 10,
     "currentNode" : "bc6eac5a-2fc0-48f8-b898-67548ff26396",
     "label" : "second Place of Development",
     "type" : "formField",
@@ -2008,6 +2051,7 @@ isRowSelected:boolean = true;
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "secondPlaceOfDevelopment",
+    "multipleValuesMin" : 0,
     "valueChange" : true,
     "name" : "secondPlaceOfDevelopment",
     "editConditionally" : {
@@ -2016,7 +2060,7 @@ isRowSelected:boolean = true;
         "condition" : "and",
         "rules" : [ ]
       },
-      "roles" : [ "selected", "Admin", "Scheduler" ]
+      "roles" : [ "selected", "Admin", "Scheduler", "Scheduler " ]
     },
     "sysGen" : false,
     "uiType" : "select",
@@ -2044,7 +2088,7 @@ isRowSelected:boolean = true;
         "condition" : "and",
         "rules" : [ ]
       },
-      "roles" : [ "selected", "Admin", "Scheduler" ]
+      "roles" : [ "selected", "Admin", "Scheduler", "Scheduler " ]
     },
     "sysGen" : false,
     "uiType" : "number",
@@ -2072,7 +2116,7 @@ isRowSelected:boolean = true;
         "condition" : "and",
         "rules" : [ ]
       },
-      "roles" : [ ]
+      "roles" : [ "selected", "Admin" ]
     },
     "sysGen" : false,
     "uiType" : "number",
@@ -2227,46 +2271,6 @@ isRowSelected:boolean = true;
     "fieldType" : "string",
     "fieldId" : "projectManagerOrActivityLeader"
   }, {
-    "allowEditing" : "no",
-    "allowedValues" : { },
-    "defaultField" : false,
-    "fieldName" : "Scheduler",
-    "data" : "Scheduler",
-    "currentNode" : "ff4d800e-dfca-4a4f-b784-8a5bb045566c",
-    "label" : "Scheduler",
-    "type" : "formField",
-    "mandatory" : "no",
-    "searchable" : "full_word",
-    "transientField" : false,
-    "field" : "scheduler",
-    "valueChange" : true,
-    "name" : "scheduler",
-    "sysGen" : false,
-    "uiType" : "text",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "scheduler"
-  }, {
-    "allowEditing" : "no",
-    "allowedValues" : { },
-    "defaultField" : false,
-    "fieldName" : "Leader",
-    "data" : "Leader",
-    "currentNode" : "6b0f901e-945a-49f4-83f3-b6a846ab3e2d",
-    "label" : "Leader",
-    "type" : "formField",
-    "mandatory" : "no",
-    "searchable" : "full_word",
-    "transientField" : false,
-    "field" : "leader",
-    "valueChange" : true,
-    "name" : "leader",
-    "sysGen" : false,
-    "uiType" : "text",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "leader"
-  }, {
     "allowEditing" : "yes",
     "allowedValues" : { },
     "defaultField" : false,
@@ -2291,54 +2295,52 @@ isRowSelected:boolean = true;
 	pageViewTitle: string = 'REQUEST_DETAIL';
 	
 		detailFormControls : FormGroup = new FormGroup({
+	emcLab: new FormControl('',[]),
 	quoteNo: new FormControl('',[]),
+	quotationDescription: new FormControl('',[]),
 	serviceType: new FormControl('',[Validators.required]),
 	linkToSpecifications: new FormControl('',[]),
-	projectManagerOrActivityLeader: new FormControl('',[]),
-	budget: new FormControl('',[]),
-	schedulerName: new FormControl('',[]),
-	schedulerCurrency: new FormControl('',[]),
-	prOrActivityName: new FormControl('',[]),
-	projectType: new FormControl('',[]),
-	schedulerProposedStartDate: new FormControl('',[]),
-	schedulerProposedEndDate: new FormControl('',[]),
-	namecode: new FormControl('',[]),
-	projectOrActivity: new FormControl('',[]),
-	leader: new FormControl('',[]),
-	secondPlaceOfDevelopment: new FormControl('',[]),
-	estimatedDurationInHours: new FormControl('',[]),
-	subName: new FormControl('',[]),
-	boardName: new FormControl('',[]),
-	globalBudget: new FormControl('',[]),
-	orgalocToBeInvoiced: new FormControl('',[]),
-	leadPlaceOfDevelopment: new FormControl('',[]),
-	linkToQuotation: new FormControl('',[]),
-	requesterOrgaloc: new FormControl('',[]),
-	additionnalCost2: new FormControl('',[]),
-	areLeftRightDesign: new FormControl('',[]),
-	taskType: new FormControl('',[]),
-	emcLab: new FormControl('',[]),
-	quotationDescription: new FormControl('',[]),
 	additionalInformation: new FormControl('',[]),
 	boardNumber: new FormControl('',[]),
 	businessController: new FormControl('',[]),
 	hoursManpower: new FormControl('',[]),
 	watcher: new FormControl('',[]),
+	budget: new FormControl('',[]),
+	schedulerName: new FormControl('',[]),
+	schedulerCurrency: new FormControl('',[]),
 	currency: new FormControl('',[]),
 	requestedEndDate: new FormControl('',[]),
-	projectNameAsInEdrm: new FormControl('',[]),
+	prOrActivityName: new FormControl('',[]),
 	osaNameToBeCreatedInStr: new FormControl('',[]),
+	projectNameAsInEdrm: new FormControl('',[]),
 	panelization: new FormControl('',[]),
 	prjOaCode: new FormControl('',[]),
+	projectType: new FormControl('',[]),
+	schedulerProposedStartDate: new FormControl('',[]),
+	schedulerProposedEndDate: new FormControl('',[]),
 	schedulerAdditionalInformation: new FormControl('',[]),
 	functionalNetwork: new FormControl('',[]),
 	requester: new FormControl('',[]),
+	namecode: new FormControl('',[]),
+	projectOrActivity: new FormControl('',[]),
+	secondPlaceOfDevelopment: new FormControl('',[]),
+	estimatedDurationInHours: new FormControl('',[]),
 	requestedStartDate: new FormControl('',[]),
+	subName: new FormControl('',[]),
 	hoursManpower2: new FormControl('',[]),
+	boardName: new FormControl('',[]),
+	globalBudget: new FormControl('',[]),
+	orgalocToBeInvoiced: new FormControl('',[]),
 	additionnalCost: new FormControl('',[]),
+	leadPlaceOfDevelopment: new FormControl('',[]),
+	linkToQuotation: new FormControl('',[]),
 	budgetManpower2: new FormControl('',[]),
+	requesterOrgaloc: new FormControl('',[]),
+	additionnalCost2: new FormControl('',[]),
 	requestName: new FormControl('',[]),
+	areLeftRightDesign: new FormControl('',[]),
 	subCode: new FormControl('',[]),
+	taskType: new FormControl('',[]),
 	scheduler: new FormControl('',[]),
 });
 
@@ -2748,20 +2750,6 @@ addValidations(mandatoryFields:[]){
     else
       return true;
   }
-	onwfDemoteToRequester(){
-	const params = {id:this.id,
-      comments:this.comments}
-	this.requestService.sslWorkflowDemoteToRequester(params).subscribe((res:any)=>{
-		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
-		if(Object.keys(this.mandatoryFields).length > 0){
-			this.clearValidations(this.mandatoryFields);
-		}
-		this.onInit();
-	},error=>{
-		if(Object.keys(this.mandatoryFields).length > 0)
-			this.clearValidations(this.mandatoryFields);
-	})
-}
 	restrictEditandView(ele:any,action:string,fieldName:string){
     const conResult = this.appUtilBaseService.evaluvateCondition(ele.query.rules, ele.query.condition,this.detailFormControls.getRawValue());
      if(action =='view'){
