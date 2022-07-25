@@ -1,10 +1,12 @@
 package com.valeo.sslnextgen.base.model;
 import com.eva.base.workflow.model.BaseWorkflowModel;
 import com.eva.base.annotations.Table;
+import java.util.List;
 import java.util.Map;
 import com.eva.base.annotations.Searchable;
 import javax.validation.constraints.NotNull;
 import com.eva.base.util.ValidationErrorConstants;
+import com.eva.base.model.Lookup;
 import com.google.cloud.firestore.annotation.Exclude;
 import java.util.Date;
 import com.eva.base.workflow.util.WorkflowBasicInfo;
@@ -87,8 +89,8 @@ public class RequestBase extends BaseWorkflowModel {
 	private String sapRdCost;
 	@Searchable(index = true)
 	private String selletEntityCode;
-	@Searchable(index = false)
-	private String watcher;
+	@Searchable(index = true)
+	private List<Lookup> watcher;
 	@Searchable(index = true)
 	private String leader;
 	@Searchable(index = true)
@@ -194,8 +196,6 @@ public class RequestBase extends BaseWorkflowModel {
 	private String linkToQuotation;
 	@Searchable(index = true)
 	private RequestEMCLab emcLab;
-	@Searchable(index = true)
-	private String dummy2;
 	@Searchable(index = true)
 	private Long totalBudget2;
 	@Searchable(index = true)
@@ -509,11 +509,11 @@ public class RequestBase extends BaseWorkflowModel {
 		return selletEntityCode;
 	}
 
-	public void setWatcher(String watcher) {
+	public void setWatcher(List<Lookup> watcher) {
 		this.watcher = watcher;
 	}
 
-	public String getWatcher() {
+	public List<Lookup> getWatcher() {
 		return watcher;
 	}
 
@@ -931,14 +931,6 @@ public class RequestBase extends BaseWorkflowModel {
 
 	public RequestEMCLab getEmcLab() {
 		return emcLab;
-	}
-
-	public void setDummy2(String dummy2) {
-		this.dummy2 = dummy2;
-	}
-
-	public String getDummy2() {
-		return dummy2;
 	}
 
 	public void setTotalBudget2(Long totalBudget2) {
