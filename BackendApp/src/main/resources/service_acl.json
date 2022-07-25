@@ -563,9 +563,9 @@
         "Admin",
         "Approver",
         "Requester ",
+        "Scheduler ",
         "Leader",
         "Viewer",
-        "Scheduler",
         "Development Administrator"
       ],
       "/wfssl/submit/{id}": [
