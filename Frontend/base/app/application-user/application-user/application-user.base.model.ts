@@ -12,4 +12,6 @@ export interface ApplicationUserBase {
 	firstName: string;
 	leader: Boolean;
 	scheduler: Boolean;
+	requester: Boolean;
+	approver: Boolean;
 }
