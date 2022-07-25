@@ -1,27 +1,5 @@
 {
-  "left" : [ {
-    "pathsInvolved" : [ "/request/requestlist", "/request/requestdetail" ],
-    "accessControl" : [ "all", "Development Administrator" ],
-    "onClick" : "navigate_to_page",
-    "valueChange" : true,
-    "icon" : {
-      "type" : "icon",
-      "icon" : {
-        "label" : "fab fa-wpforms",
-        "value" : "fab fa-wpforms"
-      },
-      "iconColor" : "#000000",
-      "iconSize" : "13px"
-    },
-    "currentNode" : "9522a607-a962-4a47-a346-38ea1755d93b",
-    "label" : "My Requests",
-    "page" : {
-      "name" : "Request List",
-      "sid" : "1dd09d7b-e617-42c8-bd36-5885c3afef5e",
-      "url" : "/request/requestlist"
-    },
-    "element" : "menuItem"
-  } ],
+  "left" : [ ],
   "topBarLeft" : [ ],
   "topBarMiddle" : [ ],
   "topBarRight" : [ {
@@ -71,7 +49,20 @@
     "element" : "menuItem"
   } ],
   "right" : [ {
-    "pathsInvolved" : [ "/services/serviceslist", "/services/servicesdetail", "/manpower/manpowerlist", "/manpower/manpowerdetail", "/tool/tooldetail", "/tool/toollist", "/lab/labdetail", "/lab/lablist", "/placeofdev/placeofdevlist", "/placeofdev/placeofdevdetail", "/projecttype/projecttypelist", "/projecttype/projecttypedetail", "/tooldesigntype/tooldesigntypedetail", "/tooldesigntype/tooldesigntypelist", "/userguide/userguidelist", "/userguide/userguidedetail", "/applicationuser/applicationuserdetail", "/applicationuser/applicationuserlist" ],
+    "pathsInvolved" : [ "/request/requestlist", "/request/requestdetail" ],
+    "accessControl" : [ "all", "Development Administrator" ],
+    "onClick" : "navigate_to_page",
+    "valueChange" : true,
+    "currentNode" : "ee6c7e1a-3ab5-456a-a266-e369fb8cc07c",
+    "label" : "My Requests",
+    "page" : {
+      "name" : "Request List",
+      "sid" : "1dd09d7b-e617-42c8-bd36-5885c3afef5e",
+      "url" : "/request/requestlist"
+    },
+    "element" : "menuItem"
+  }, {
+    "pathsInvolved" : [ "/services/serviceslist", "/services/servicesdetail", "/manpower/manpowerlist", "/manpower/manpowerdetail", "/tool/tooldetail", "/tool/toollist", "/lab/labdetail", "/lab/lablist", "/placeofdev/placeofdevlist", "/placeofdev/placeofdevdetail", "/projecttype/projecttypelist", "/projecttype/projecttypedetail", "/tooldesigntype/tooldesigntypedetail", "/tooldesigntype/tooldesigntypelist", "/userguide/userguidelist", "/userguide/userguidedetail" ],
     "accessControl" : [ "Admin", "Development Administrator" ],
     "children" : [ {
       "pathsInvolved" : [ "/services/serviceslist", "/services/servicesdetail" ],
@@ -179,19 +170,6 @@
         "name" : "User Guide List",
         "sid" : "4f3546fb-d323-4855-a3cb-9b64d4a0c7d2",
         "url" : "/userguide/userguidelist"
-      },
-      "element" : "menuItem"
-    }, {
-      "pathsInvolved" : [ "/applicationuser/applicationuserdetail", "/applicationuser/applicationuserlist" ],
-      "accessControl" : [ "all", "Development Administrator" ],
-      "onClick" : "navigate_to_page",
-      "valueChange" : true,
-      "currentNode" : "78e5529f-e09a-443c-b193-f08c52b7fbe2",
-      "label" : "Application Users",
-      "page" : {
-        "name" : "Application User List",
-        "sid" : "5dea81b7-be34-410f-a610-6f852f24cfbf",
-        "url" : "/applicationuser/applicationuserlist"
       },
       "element" : "menuItem"
     } ],
