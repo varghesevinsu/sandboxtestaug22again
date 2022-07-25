@@ -72,8 +72,6 @@ public class RequestBase extends BaseWorkflowModel {
 	@Searchable(index = true)
 	private Long budgetManpower;
 	@Searchable(index = true)
-	private String dummy2;
-	@Searchable(index = true)
 	private RequestCurrency currency=RequestCurrency.PLEASE_SELECT;
 	@Searchable(index = true)
 	private String additionnalCost2;
@@ -110,7 +108,7 @@ public class RequestBase extends BaseWorkflowModel {
 	@Searchable(index = true)
 	private String sapTypeOfCostForInternal;
 	@Searchable(index = true)
-	private String leadPlaceOfDevelopment;
+	private RequestLeadPlaceofDevelopment leadPlaceOfDevelopment;
 	@Searchable(index = true)
 	private String boardName;
 	@Searchable(index = true)
@@ -162,7 +160,7 @@ public class RequestBase extends BaseWorkflowModel {
 	@Searchable(index = false)
 	private String quoteNo;
 	@Searchable(index = true)
-	private String secondPlaceOfDevelopment;
+	private RequestsecondPlaceofDevelopment secondPlaceOfDevelopment;
 	@Searchable(index = true)
 	private RequestTaskType taskType;
 	@Searchable(index = false)
@@ -196,6 +194,8 @@ public class RequestBase extends BaseWorkflowModel {
 	private String linkToQuotation;
 	@Searchable(index = true)
 	private RequestEMCLab emcLab;
+	@Searchable(index = true)
+	private String dummy2;
 	@Searchable(index = true)
 	private Long totalBudget2;
 	@Searchable(index = true)
@@ -589,11 +589,11 @@ public class RequestBase extends BaseWorkflowModel {
 		return sapTypeOfCostForInternal;
 	}
 
-	public void setLeadPlaceOfDevelopment(String leadPlaceOfDevelopment) {
+	public void setLeadPlaceOfDevelopment(RequestLeadPlaceofDevelopment leadPlaceOfDevelopment) {
 		this.leadPlaceOfDevelopment = leadPlaceOfDevelopment;
 	}
 
-	public String getLeadPlaceOfDevelopment() {
+	public RequestLeadPlaceofDevelopment getLeadPlaceOfDevelopment() {
 		return leadPlaceOfDevelopment;
 	}
 
@@ -797,11 +797,11 @@ public class RequestBase extends BaseWorkflowModel {
 		return quoteNo;
 	}
 
-	public void setSecondPlaceOfDevelopment(String secondPlaceOfDevelopment) {
+	public void setSecondPlaceOfDevelopment(RequestsecondPlaceofDevelopment secondPlaceOfDevelopment) {
 		this.secondPlaceOfDevelopment = secondPlaceOfDevelopment;
 	}
 
-	public String getSecondPlaceOfDevelopment() {
+	public RequestsecondPlaceofDevelopment getSecondPlaceOfDevelopment() {
 		return secondPlaceOfDevelopment;
 	}
 
