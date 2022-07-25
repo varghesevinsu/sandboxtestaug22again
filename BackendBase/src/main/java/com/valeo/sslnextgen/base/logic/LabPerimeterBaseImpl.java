@@ -76,17 +76,17 @@ public abstract class LabPerimeterBaseImpl<T extends LabBase> implements IPerime
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"modifiedDate","sid","createdBy","createdDate","modifiedBy","test3","dummyTest","labName"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"modifiedDate","sid","createdBy","createdDate","modifiedBy","test3","dummyTest","labName"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"modifiedDate","sid","createdBy","createdDate","modifiedBy","test3","dummyTest","labName"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"modifiedDate","sid","createdBy","createdDate","modifiedBy","test3","dummyTest","labName"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
@@ -116,17 +116,17 @@ public abstract class LabPerimeterBaseImpl<T extends LabBase> implements IPerime
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"modifiedDate","sid","createdBy","createdDate","modifiedBy","test3","dummyTest","labName"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"modifiedDate","sid","createdBy","createdDate","modifiedBy","test3","dummyTest","labName"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"modifiedDate","sid","createdBy","createdDate","modifiedBy","test3","dummyTest","labName"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"modifiedDate","sid","createdBy","createdDate","modifiedBy","test3","dummyTest","labName"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}

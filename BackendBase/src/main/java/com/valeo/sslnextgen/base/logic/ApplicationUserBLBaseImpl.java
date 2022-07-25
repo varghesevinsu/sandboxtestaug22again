@@ -159,14 +159,14 @@ public abstract class ApplicationUserBLBaseImpl<T extends ApplicationUserBase> e
 		if(modelObj.isRequester()) {
 			userRoles.add(Roles.REQUESTER.getRoleName());
 		}
+		if(modelObj.isScheduler()) {
+			userRoles.add(Roles.SCHEDULER.getRoleName());
+		}
 		if(modelObj.isLeader()) {
 			userRoles.add(Roles.LEADER.getRoleName());
 		}
 		if(modelObj.isViewer()) {
 			userRoles.add(Roles.VIEWER.getRoleName());
-		}
-		if(modelObj.isScheduler()) {
-			userRoles.add(Roles.SCHEDULER.getRoleName());
 		}
 		if(modelObj.isDevAdmin()){
 			userRoles.add(Roles.DEVADMIN.getRoleName());

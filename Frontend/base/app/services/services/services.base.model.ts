@@ -1,7 +1,7 @@
 export interface ServicesBase {
 	service: string;
 	specificFields: string;
-	respLeader: string;
+	respLeader: any;
 	modifiedBy: string;
 	enabledLab: Boolean;
 	createdBy: string;
@@ -9,7 +9,6 @@ export interface ServicesBase {
 	metier: string;
 	modifiedDate: Date;
 	createdDate: Date;
-	respScheduler: string;
+	respScheduler: any;
 	dummyTest: string;
-	test3: string;
 }

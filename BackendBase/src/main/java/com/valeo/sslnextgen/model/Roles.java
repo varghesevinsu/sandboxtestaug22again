@@ -5,12 +5,12 @@ import java.util.Map;
 
 public enum Roles {
 	DEVADMIN(7,"Development Administrator"),
-VIEWER(5,"Viewer"),
-LEADER(4,"Leader"),
+LEADER(5,"Leader"),
 APPROVER(2,"Approver"),
-SCHEDULER(6,"Scheduler"),
+SCHEDULER(4,"Scheduler "),
 ADMIN(1,"Admin"),
-REQUESTER(3,"Requester ");
+REQUESTER(3,"Requester "),
+VIEWER(6,"Viewer");
 
 	private static final Map<String, Roles> roleNameMap = new HashMap<String, Roles>();
 	static {

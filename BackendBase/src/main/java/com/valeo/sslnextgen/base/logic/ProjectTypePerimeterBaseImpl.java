@@ -76,17 +76,17 @@ public abstract class ProjectTypePerimeterBaseImpl<T extends ProjectTypeBase> im
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"projectType","createdDate","modifiedDate","sid","status","modifiedBy","dummyTest","test2","createdBy"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"projectType","createdDate","modifiedDate","sid","status","modifiedBy","dummyTest","test2","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"projectType","createdDate","modifiedDate","sid","status","modifiedBy","dummyTest","test2","createdBy"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"projectType","createdDate","modifiedDate","sid","status","modifiedBy","dummyTest","test2","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
@@ -116,17 +116,17 @@ public abstract class ProjectTypePerimeterBaseImpl<T extends ProjectTypeBase> im
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"projectType","createdDate","modifiedDate","sid","status","modifiedBy","dummyTest","test2","createdBy"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"projectType","createdDate","modifiedDate","sid","status","modifiedBy","dummyTest","test2","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"projectType","createdDate","modifiedDate","sid","status","modifiedBy","dummyTest","test2","createdBy"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"projectType","createdDate","modifiedDate","sid","status","modifiedBy","dummyTest","test2","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}

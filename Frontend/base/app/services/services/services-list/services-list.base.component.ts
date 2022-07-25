@@ -3,7 +3,9 @@ import { ServicesBase} from '../services.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { ApplicationUserApiConstants } from '@baseapp/application-user/application-user/application-user.api-constants';
 
+import { BaseService } from '@baseapp/base.service';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { allowedValuesValidator } from "@baseapp/widgets/validators/allowedValuesValidator";
@@ -41,6 +43,9 @@ tableSearchFieldConfig:any = {};
   @ViewChild('menu')
   menu!: ElementRef;
 
+	autoSuggestPageNo:number = 0;
+filteredItems:any = [];
+isAutoSuggestCallFired: boolean = false;
 	quickFilter: any;
 hiddenFields:any = {};
 quickFilterFieldConfig:any={}
@@ -226,25 +231,31 @@ isRowSelected: boolean = false;
     "type" : "datamodelField",
     "fieldType" : "string"
   }, {
+    "multipleValues" : false,
     "allowedValues" : { },
     "fieldName" : "respScheduler",
     "data" : "Resp Scheduler",
-    "field" : "respScheduler",
-    "name" : "respScheduler",
-    "uiType" : "text",
+    "lookupUrl" : "applicationusers/autosuggest",
     "label" : "Resp Scheduler",
     "type" : "datamodelField",
-    "fieldType" : "string"
+    "field" : "respScheduler",
+    "name" : "respScheduler",
+    "uiType" : "autosuggest",
+    "displayField" : "email",
+    "fieldType" : "any"
   }, {
+    "multipleValues" : false,
     "allowedValues" : { },
     "fieldName" : "respLeader",
     "data" : "Resp Leader",
-    "field" : "respLeader",
-    "name" : "respLeader",
-    "uiType" : "text",
+    "lookupUrl" : "applicationusers/autosuggest",
     "label" : "Resp Leader",
     "type" : "datamodelField",
-    "fieldType" : "string"
+    "field" : "respLeader",
+    "name" : "respLeader",
+    "uiType" : "autosuggest",
+    "displayField" : "email",
+    "fieldType" : "any"
   } ],
   "columns" : "2",
   "valueChange" : true,
@@ -321,14 +332,6 @@ isRowSelected: boolean = false;
     "mandatory" : "yes",
     "searchable" : "full_word",
     "transientField" : false,
-    "conditionalMandatory" : {
-      "qbName" : "Create&Update Service",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ ]
-      },
-      "roles" : [ "selected", "Admin" ]
-    },
     "field" : "service",
     "multipleValuesMin" : 0,
     "name" : "service",
@@ -407,46 +410,60 @@ isRowSelected: boolean = false;
     "fieldId" : "specificFields"
   }, {
     "allowEditing" : "yes",
-    "allowedValues" : { },
-    "defaultField" : false,
+    "multipleValues" : false,
+    "lookupTo" : "0725d0fa-e979-4bdf-88d6-f2648d42a48d",
     "fieldName" : "Resp Scheduler",
     "data" : "Resp Scheduler",
+    "lookupUrl" : "applicationusers/autosuggest",
     "currentNode" : "Resp Scheduler",
     "showOnMobile" : "true",
-    "label" : "Resp Scheduler",
     "type" : "datamodelField",
     "mandatory" : "no",
+    "valueChange" : true,
+    "sysGen" : false,
+    "fieldId" : "respScheduler",
+    "allowedValues" : { },
+    "defaultField" : false,
+    "multipleValuesMax" : 10,
+    "lookupType" : "table",
+    "label" : "Resp Scheduler",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "respScheduler",
-    "valueChange" : true,
+    "multipleValuesMin" : 0,
     "name" : "respScheduler",
-    "sysGen" : false,
     "width" : "120px",
-    "uiType" : "text",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "respScheduler"
+    "uiType" : "autosuggest",
+    "displayField" : "email",
+    "fieldType" : "any",
+    "allowViewing" : "yes"
   }, {
     "allowEditing" : "yes",
-    "allowedValues" : { },
-    "defaultField" : false,
+    "multipleValues" : false,
+    "lookupTo" : "0725d0fa-e979-4bdf-88d6-f2648d42a48d",
     "fieldName" : "Resp Leader",
     "data" : "Resp Leader",
+    "lookupUrl" : "applicationusers/autosuggest",
     "showOnMobile" : "true",
-    "label" : "Resp Leader",
     "type" : "datamodelField",
     "mandatory" : "no",
+    "sysGen" : false,
+    "fieldId" : "respLeader",
+    "allowedValues" : { },
+    "defaultField" : false,
+    "multipleValuesMax" : 10,
+    "lookupType" : "table",
+    "label" : "Resp Leader",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "respLeader",
+    "multipleValuesMin" : 0,
     "name" : "respLeader",
-    "sysGen" : false,
     "width" : "120px",
-    "uiType" : "text",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "respLeader"
+    "uiType" : "autosuggest",
+    "displayField" : "email",
+    "fieldType" : "any",
+    "allowViewing" : "yes"
   } ],
   "toggleColumns" : false,
   "valueChange" : true,
@@ -488,7 +505,7 @@ isRowSelected: boolean = false;
 });
 
 
-	constructor(public servicesService : ServicesService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public dialogService: DialogService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public renderer2: Renderer2, public router: Router, ...args: any) {
+	constructor(public servicesService : ServicesService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public dialogService: DialogService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public renderer2: Renderer2, public router: Router, public baseService: BaseService, ...args: any) {
     
  	 }
 
@@ -665,18 +682,55 @@ this.subscriptions.push(scrollSubscription);
       }
     });
   }
+	deattachScroll() {
+    this.filteredItems = [];
+    this.autoSuggestPageNo = 0;
+    this.isAutoSuggestCallFired = false;
+  }
 	initSearchForm(){
   this.tableSearchFieldConfig= this.appUtilBaseService.getControlsFromFormConfig(this.tableSearchConfig)
 }
 	showToastMessage(config: object) {
 this.messageService.add(config);
 }
+	autoSuggestSearchrespScheduler(event?: any, col?: any,url?:any) {
+if(!this.isAutoSuggestCallFired){
+      this.isAutoSuggestCallFired = true;
+    let apiObj = Object.assign({}, ApplicationUserApiConstants.autoSuggestService)
+    apiObj.url = `${url ||apiObj.url}?query=${event.query}&pgNo=${this.autoSuggestPageNo}&pgLen=${BaseAppConstants.defaultPageSize}`;
+     this.baseService.get(apiObj).subscribe((res: any) => {
+      this.isAutoSuggestCallFired = false;
+      let updateRecords =  [...this.filteredItems, ...res];
+      const ids = updateRecords.map(o => o.sid)
+      this.filteredItems = updateRecords.filter(({ sid }, index) => !ids.includes(sid, index + 1));
+    })
+}
+ }
 	onKeydown(event: any) {
   if (event.which === 13 || event.keyCode === 13) {
     // this.filter.globalSearch = this.globalSearch
    this.onRefresh();
   }
 }
+	attachInfiniteScrollForAutoCompleterespScheduler(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchrespScheduler`
+        let action: Exclude<keyof ServicesListBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
 	onRowSelect(event:any){
     if(this.selectedValues.length > 0){
       this.isRowSelected = true;
@@ -709,6 +763,14 @@ this.messageService.add(config);
       });
     }
 
+  }
+	unSelect(event:any,field:string){
+    this.selectedItems[field]?.forEach((item:any,index:number)=>{
+        if(item.id === event.sid){
+            this.selectedItems[field].splice(index,1);
+        }
+    })
+    
   }
 	sort(e: any, field: string) {
 this.filter.sortField = field;
@@ -753,6 +815,25 @@ this.loadGridData();
 	toggleAdvancedSearch() {
   this.showAdvancedSearch = !this.showAdvancedSearch;
 }
+	attachInfiniteScrollForAutoCompleterespLeader(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchrespLeader`
+        let action: Exclude<keyof ServicesListBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
 	actionBarAction(btn: any) {
     const methodName: any = (`on` + btn.action.charAt(0).toUpperCase() + btn.action.slice(1));
     let action: Exclude<keyof ServicesListBaseComponent, ' '> = methodName;
@@ -814,11 +895,46 @@ this.loadGridData();
     }
     return (formattedValue);
   }
+	onSelect(event: any, field: string, config: any) {
+    let lookupFields: any[] = config?.lookupFields || [];
+    let model = {
+      id: event.sid,
+      value: {}
+    }
+    if (lookupFields.length > 0) {
+      model.value = lookupFields?.reduce((o: any, key: any) => ({ ...o, [key]: event[key] }), {});
+    }
+    else {
+      model.value = event;
+    }
+    if (!this.selectedItems?.hasOwnProperty(field)) {
+      this.selectedItems[field] = [];
+    }
+    if (config?.multiple === true) {
+      this.selectedItems[field]?.push(model);
+    }
+    else {
+      this.selectedItems[field][0] = model;
+    }
+  }
 	advancedSearch() {
   this.filter.advancedSearch = this.tableSearchControls.value;
  this.onRefresh();
   this.toggleAdvancedSearch();
 }
+	autoSuggestSearchrespLeader(event?: any, col?: any,url?:any) {
+if(!this.isAutoSuggestCallFired){
+      this.isAutoSuggestCallFired = true;
+    let apiObj = Object.assign({}, ApplicationUserApiConstants.autoSuggestService)
+    apiObj.url = `${url ||apiObj.url}?query=${event.query}&pgNo=${this.autoSuggestPageNo}&pgLen=${BaseAppConstants.defaultPageSize}`;
+     this.baseService.get(apiObj).subscribe((res: any) => {
+      this.isAutoSuggestCallFired = false;
+      let updateRecords =  [...this.filteredItems, ...res];
+      const ids = updateRecords.map(o => o.sid)
+      this.filteredItems = updateRecords.filter(({ sid }, index) => !ids.includes(sid, index + 1));
+    })
+}
+ }
 
     onInit() {
 		

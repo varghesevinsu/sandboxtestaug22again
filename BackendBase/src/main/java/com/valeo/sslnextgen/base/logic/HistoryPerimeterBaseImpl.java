@@ -76,17 +76,17 @@ public abstract class HistoryPerimeterBaseImpl<T extends HistoryBase> implements
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"createdDate","modifiedDate","who","comment","dummyTest","requestCode","test2","createdBy","modifiedBy","nextStatus","currentStatus","role","sid","action","when"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"createdDate","modifiedDate","who","comment","dummyTest","requestCode","test2","createdBy","modifiedBy","nextStatus","currentStatus","role","sid","action","when"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"createdDate","modifiedDate","who","comment","dummyTest","requestCode","test2","createdBy","modifiedBy","nextStatus","currentStatus","role","sid","action","when"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"createdDate","modifiedDate","who","comment","dummyTest","requestCode","test2","createdBy","modifiedBy","nextStatus","currentStatus","role","sid","action","when"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
@@ -116,17 +116,17 @@ public abstract class HistoryPerimeterBaseImpl<T extends HistoryBase> implements
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"createdDate","modifiedDate","who","comment","dummyTest","requestCode","test2","createdBy","modifiedBy","nextStatus","currentStatus","role","sid","action","when"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"createdDate","modifiedDate","who","comment","dummyTest","requestCode","test2","createdBy","modifiedBy","nextStatus","currentStatus","role","sid","action","when"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"createdDate","modifiedDate","who","comment","dummyTest","requestCode","test2","createdBy","modifiedBy","nextStatus","currentStatus","role","sid","action","when"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"createdDate","modifiedDate","who","comment","dummyTest","requestCode","test2","createdBy","modifiedBy","nextStatus","currentStatus","role","sid","action","when"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}

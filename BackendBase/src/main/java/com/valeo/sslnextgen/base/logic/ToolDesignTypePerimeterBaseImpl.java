@@ -76,17 +76,17 @@ public abstract class ToolDesignTypePerimeterBaseImpl<T extends ToolDesignTypeBa
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
@@ -116,17 +116,17 @@ public abstract class ToolDesignTypePerimeterBaseImpl<T extends ToolDesignTypeBa
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}

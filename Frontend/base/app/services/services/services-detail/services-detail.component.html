@@ -61,16 +61,34 @@
 </div>
 <div class="form-col" [hidden]="hiddenFields.respLeader">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.respLeader?.isRequired, 'error':inValidFields.respLeader}">
-        <label for="respLeader" class="col-form-label respLeader-label" [textContent]=" 'RESP_LEADER'|translate "></label>
+        <label for="respLeader" class="col-form-label respLeader-label" [textContent]="'RESP_LEADER'|translate"></label>
         <span class="info-bubble" *ngIf="formFieldConfig?.respLeader?.infoBubble"   [pTooltip]="formFieldConfig?.respLeader?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
-        <input type="text " pInputText class="form-control " id="respLeader " formControlName="respLeader" [placeholder]="formFieldConfig?.respLeader?.placeHolder || ''"/>
+        <p-autoComplete 
+            [placeholder]="formFieldConfig?.respLeader?.placeHolder || 'Select'"
+            class="form-input" 
+            formControlName="respLeader" 
+            [suggestions]="filteredItems" 
+            completeOnFocus="true" [dropdown]="true"
+           (onShow)="attachInfiniteScrollForAutoCompleterespLeader('respLeader')"             (completeMethod)="autoSuggestSearchrespLeader($event,formFieldConfig?.respLeader)"
+            [multiple]="formFieldConfig?.respLeader?.multiple" (onHide)="deattachScroll()" [field]="(formFieldConfig?.respLeader?.displayField)"
+             (onSelect)="onSelect($event,'respLeader',formFieldConfig?.respLeader)" (onUnselect)="unSelect($event,'respLeader')" appendTo="body">
+        </p-autoComplete>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.respLeader?.helpText || ''}}</div>
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.respScheduler">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.respScheduler?.isRequired, 'error':inValidFields.respScheduler}">
-        <label for="respScheduler" class="col-form-label respScheduler-label" [textContent]=" 'RESP_SCHEDULER'|translate "></label>
+        <label for="respScheduler" class="col-form-label respScheduler-label" [textContent]="'RESP_SCHEDULER'|translate"></label>
         <span class="info-bubble" *ngIf="formFieldConfig?.respScheduler?.infoBubble"   [pTooltip]="formFieldConfig?.respScheduler?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
-        <input type="text " pInputText class="form-control " id="respScheduler " formControlName="respScheduler" [placeholder]="formFieldConfig?.respScheduler?.placeHolder || ''"/>
+        <p-autoComplete 
+            [placeholder]="formFieldConfig?.respScheduler?.placeHolder || 'Select'"
+            class="form-input" 
+            formControlName="respScheduler" 
+            [suggestions]="filteredItems" 
+            completeOnFocus="true" [dropdown]="true"
+           (onShow)="attachInfiniteScrollForAutoCompleterespScheduler('respScheduler')"             (completeMethod)="autoSuggestSearchrespScheduler($event,formFieldConfig?.respScheduler)"
+            [multiple]="formFieldConfig?.respScheduler?.multiple" (onHide)="deattachScroll()" [field]="(formFieldConfig?.respScheduler?.displayField)"
+             (onSelect)="onSelect($event,'respScheduler',formFieldConfig?.respScheduler)" (onUnselect)="unSelect($event,'respScheduler')" appendTo="body">
+        </p-autoComplete>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.respScheduler?.helpText || ''}}</div>
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.specificFields">

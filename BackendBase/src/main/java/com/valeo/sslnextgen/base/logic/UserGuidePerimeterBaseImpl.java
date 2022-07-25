@@ -76,17 +76,17 @@ public abstract class UserGuidePerimeterBaseImpl<T extends UserGuideBase> implem
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
@@ -116,17 +116,17 @@ public abstract class UserGuidePerimeterBaseImpl<T extends UserGuideBase> implem
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"sid","test3","modifiedDate","link","description","modifiedBy","dummyTest","createdDate","createdBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}

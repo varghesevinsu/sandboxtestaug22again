@@ -8,8 +8,8 @@ public interface ISSLWorkflowWorkflowActions<T extends RequestBase>{
 	String SSL_WORKFLOW = "sslworkflow";
 	
     String CANCEL = "cancel";
-        String APPROVE_TO_LEADER = "approveToLeader";
         String DEMOTE_TO_LEADER = "demoteToLeader";
+        String APPROVE_TO_LEADER = "approveToLeader";
         String SUBMIT = "submit";
         String SUBMIT_TO_APPROVER = "submitToApprover";
         String DEMOTE_TO_REQUESTER = "demoteToRequester";
@@ -22,14 +22,14 @@ public interface ISSLWorkflowWorkflowActions<T extends RequestBase>{
 	void onbeforeCancel(T model, WorkflowMetaInfo metaInfo);
 	void onCancel(T model, WorkflowMetaInfo metaInfo);
 	void onAfterCancel(T model, WorkflowMetaInfo metaInfo);
-        T approveToLeader(Object id, Map<String, Object> additionalInfo);
-	void onbeforeApproveToLeader(T model, WorkflowMetaInfo metaInfo);
-	void onApproveToLeader(T model, WorkflowMetaInfo metaInfo);
-	void onAfterApproveToLeader(T model, WorkflowMetaInfo metaInfo);
         T demoteToLeader(Object id, Map<String, Object> additionalInfo);
 	void onbeforeDemoteToLeader(T model, WorkflowMetaInfo metaInfo);
 	void onDemoteToLeader(T model, WorkflowMetaInfo metaInfo);
 	void onAfterDemoteToLeader(T model, WorkflowMetaInfo metaInfo);
+        T approveToLeader(Object id, Map<String, Object> additionalInfo);
+	void onbeforeApproveToLeader(T model, WorkflowMetaInfo metaInfo);
+	void onApproveToLeader(T model, WorkflowMetaInfo metaInfo);
+	void onAfterApproveToLeader(T model, WorkflowMetaInfo metaInfo);
         T submit(Object id, Map<String, Object> additionalInfo);
 	void onbeforeSubmit(T model, WorkflowMetaInfo metaInfo);
 	void onSubmit(T model, WorkflowMetaInfo metaInfo);

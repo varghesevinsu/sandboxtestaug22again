@@ -4,6 +4,7 @@ import com.eva.base.annotations.Table;
 import com.eva.base.annotations.Searchable;
 import javax.validation.constraints.NotNull;
 import com.eva.base.util.ValidationErrorConstants;
+import com.eva.base.model.Lookup;
 
 
 @Table(name="Services", keys={"sid"})
@@ -17,7 +18,7 @@ public class ServicesBase extends BaseModel {
 	@Searchable(index = true)
 	private ServicesSpecificFields specificFields=ServicesSpecificFields.N_A;
 	@Searchable(index = true)
-	private String respLeader;
+	private Lookup respLeader;
 	@Searchable(index = true)
 	private Boolean enabledLab=true;
 	@Searchable(index = true)
@@ -25,7 +26,7 @@ public class ServicesBase extends BaseModel {
 	@Searchable(index = true)
 	private String metier;
 	@Searchable(index = true)
-	private String respScheduler;
+	private Lookup respScheduler;
 
 	public void setService(ServicesService service) {
 		this.service = service;
@@ -43,11 +44,11 @@ public class ServicesBase extends BaseModel {
 		return specificFields;
 	}
 
-	public void setRespLeader(String respLeader) {
+	public void setRespLeader(Lookup respLeader) {
 		this.respLeader = respLeader;
 	}
 
-	public String getRespLeader() {
+	public Lookup getRespLeader() {
 		return respLeader;
 	}
 
@@ -75,11 +76,11 @@ public class ServicesBase extends BaseModel {
 		return metier;
 	}
 
-	public void setRespScheduler(String respScheduler) {
+	public void setRespScheduler(Lookup respScheduler) {
 		this.respScheduler = respScheduler;
 	}
 
-	public String getRespScheduler() {
+	public Lookup getRespScheduler() {
 		return respScheduler;
 	}
 

@@ -76,17 +76,17 @@ public abstract class ManPowerPerimeterBaseImpl<T extends ManPowerBase> implemen
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"sid","dummyTest","service","modifiedDate","modifiedBy","test2","createdDate","createdBy","metier","currency","rate","site"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"sid","dummyTest","service","modifiedDate","modifiedBy","test2","createdDate","createdBy","metier","currency","rate","site"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"sid","dummyTest","service","modifiedDate","modifiedBy","test2","createdDate","createdBy","metier","currency","rate","site"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"sid","dummyTest","service","modifiedDate","modifiedBy","test2","createdDate","createdBy","metier","currency","rate","site"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
@@ -116,17 +116,17 @@ public abstract class ManPowerPerimeterBaseImpl<T extends ManPowerBase> implemen
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"sid","dummyTest","service","modifiedDate","modifiedBy","test2","createdDate","createdBy","metier","currency","rate","site"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"sid","dummyTest","service","modifiedDate","modifiedBy","test2","createdDate","createdBy","metier","currency","rate","site"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"sid","dummyTest","service","modifiedDate","modifiedBy","test2","createdDate","createdBy","metier","currency","rate","site"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"sid","dummyTest","service","modifiedDate","modifiedBy","test2","createdDate","createdBy","metier","currency","rate","site"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}

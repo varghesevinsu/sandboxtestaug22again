@@ -76,17 +76,17 @@ public abstract class DelegationPerimeterBaseImpl<T extends DelegationBase> impl
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"delegationEndDate","modifiedBy","createdBy","approverLeader","modifiedDate","delegateName","test2","sid","createdDate","delegationStartDate"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"delegationEndDate","modifiedBy","createdBy","approverLeader","modifiedDate","delegateName","test2","sid","createdDate","delegationStartDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"delegationEndDate","modifiedBy","createdBy","approverLeader","modifiedDate","delegateName","test2","sid","createdDate","delegationStartDate"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"delegationEndDate","modifiedBy","createdBy","approverLeader","modifiedDate","delegateName","test2","sid","createdDate","delegationStartDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
@@ -116,17 +116,17 @@ public abstract class DelegationPerimeterBaseImpl<T extends DelegationBase> impl
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
-			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"delegationEndDate","modifiedBy","createdBy","approverLeader","modifiedDate","delegateName","test2","sid","createdDate","delegationStartDate"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"delegationEndDate","modifiedBy","createdBy","approverLeader","modifiedDate","delegateName","test2","sid","createdDate","delegationStartDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
+			String[] readFields = new String[] {"delegationEndDate","modifiedBy","createdBy","approverLeader","modifiedDate","delegateName","test2","sid","createdDate","delegationStartDate"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
+			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"delegationEndDate","modifiedBy","createdBy","approverLeader","modifiedDate","delegateName","test2","sid","createdDate","delegationStartDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
