@@ -190,25 +190,7 @@ isAutoSuggestCallFired: boolean = false;
   }, {
     "allowEditing" : "yes",
     "multipleValues" : false,
-    "allowedValues" : {
-      "values" : [ {
-        "label" : "EMC",
-        "value" : "EMC"
-      }, {
-        "label" : "ECAD",
-        "value" : "ECAD"
-      }, {
-        "label" : "SERVICE_3",
-        "value" : "SERVICE_3"
-      }, {
-        "label" : "SERVICE_4",
-        "value" : "SERVICE_4"
-      } ],
-      "conditions" : {
-        "conditionType" : "Auto",
-        "conditions" : [ ]
-      }
-    },
+    "allowedValues" : { },
     "defaultField" : false,
     "fieldName" : " Service",
     "data" : " Service",

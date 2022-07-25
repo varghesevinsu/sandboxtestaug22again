@@ -1,8 +1,8 @@
 package com.valeo.sslnextgen.base.model;
 import com.eva.base.model.BaseModel;
 import com.eva.base.annotations.Table;
+import com.eva.base.annotations.NotBlank;
 import com.eva.base.annotations.Searchable;
-import javax.validation.constraints.NotNull;
 import com.eva.base.util.ValidationErrorConstants;
 import com.eva.base.model.Lookup;
 
@@ -12,9 +12,9 @@ public class ServicesBase extends BaseModel {
 
 	@Searchable(index = true)
 	private String pid;
-	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
+	@NotBlank(message = ValidationErrorConstants.BLANK_VALUE)
 	@Searchable(index = true)
-	private ServicesService service;
+	private String service;
 	@Searchable(index = true)
 	private ServicesSpecificFields specificFields=ServicesSpecificFields.N_A;
 	@Searchable(index = true)
@@ -28,11 +28,11 @@ public class ServicesBase extends BaseModel {
 	@Searchable(index = true)
 	private Lookup respScheduler;
 
-	public void setService(ServicesService service) {
+	public void setService(String service) {
 		this.service = service;
 	}
 
-	public ServicesService getService() {
+	public String getService() {
 		return service;
 	}
 
