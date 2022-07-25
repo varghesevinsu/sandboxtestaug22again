@@ -34,14 +34,14 @@ export interface RequestBase {
 	sapTypeOfCostForExternal: string;
 	sapRdCost: string;
 	selletEntityCode: string;
-	watcher: string;
+	watcher: any;
 	rate: number;
 	metier: string;
 	namecode: string;
 	otherActivityCode: string;
 	subName: string;
 	sapTypeOfCostForInternal: string;
-	leadPlaceOfDevelopment: string;
+	leadPlaceOfDevelopment: any;
 	sid: string;
 	boardName: string;
 	areLeftRightDesign: string;
@@ -65,7 +65,7 @@ export interface RequestBase {
 	budget: string;
 	requestedStartDate: Date;
 	quoteNo: string;
-	secondPlaceOfDevelopment: string;
+	secondPlaceOfDevelopment: any;
 	taskType: string;
 	closingDate: string;
 	quotationDescription: string;
@@ -80,7 +80,7 @@ export interface RequestBase {
 	requesterOrgaloc: string;
 	requestName: string;
 	linkToQuotation: string;
-	emcLab: string;
+	emcLab: any;
 	totalBudget2: number;
 	linkToSpecifications: string;
 	tasks2: string;
@@ -102,7 +102,6 @@ export interface RequestBase {
 	dummy2: string;
 	subCode: string;
 	test2: string;
-	dummy2: string;
 	leader: string;
 	scheduler: string;
 }

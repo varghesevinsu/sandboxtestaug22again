@@ -30,7 +30,7 @@ export class AppLayoutBaseService {
   }, {
     "element" : "appTitle",
     "title" : "Smart Service Line",
-    "color" : "#21c055",
+    "color" : "#3c403d",
     "currentNode" : "appTitle",
     "valueChange" : "true"
   } ],

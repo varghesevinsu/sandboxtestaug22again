@@ -392,48 +392,18 @@
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.emcLab">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.emcLab?.isRequired, 'error':inValidFields.emcLab}">
-        <label for="emcLab" class="col-form-label emcLab-label" [textContent]="'EMC_LAB'|translate"></label>  
-        <span class="info-bubble" *ngIf="formFieldConfig?.emcLab?.infoBubble"   [pTooltip]="formFieldConfig?.emcLab?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
-        <p-dropdown [options]="formFieldConfig['emcLab']?.options" formControlName="emcLab"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.emcLab?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
-            <ng-template pTemplate="selectedItem">
-                <ng-template #emcLabSelectedRef let-conditions="conditions" let-option="option">
-                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
-                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
-                        <span  
-                            *ngIf="conditions?.iconClass" class="icon"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass"></i>
-                
-                        </span>
-                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-                <ng-container *ngIf="detailFormControls.controls.emcLab.value; let selected;">
-                    <ng-template *ngTemplateOutlet="emcLabSelectedRef;context:{conditions :formFieldConfig.emcLab?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.emcLab?.options)).value], option:(getSelectedObject(selected,formFieldConfig.emcLab?.options))}"></ng-template>
-                </ng-container>
-            </ng-template>
-        
-            <ng-template let-dropdownItem pTemplate="item" >
-                <ng-template #emcLabListRef let-conditions="conditions" let-option="option">
-                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
-                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
-                        <span
-                            *ngIf="conditions?.iconClass"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass" ></i>
-        
-                        </span>
-                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-        
-                <ng-container>
-                    <ng-template *ngTemplateOutlet="emcLabListRef;context:{conditions :formFieldConfig.emcLab?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
-                </ng-container>
-            </ng-template>
-        </p-dropdown>
+        <label for="emcLab" class="col-form-label emcLab-label" [textContent]="'EMC_LAB'|translate"></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.emcLab?.infoBubble"   [pTooltip]="formFieldConfig?.emcLab?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-autoComplete 
+            [placeholder]="formFieldConfig?.emcLab?.placeHolder || 'Select'"
+            class="form-input" 
+            formControlName="emcLab" 
+            [suggestions]="filteredItems" 
+            completeOnFocus="true" [dropdown]="true"
+           (onShow)="attachInfiniteScrollForAutoCompleteemcLab('emcLab')"             (completeMethod)="autoSuggestSearchemcLab($event,formFieldConfig?.emcLab)"
+            [multiple]="formFieldConfig?.emcLab?.multiple" (onHide)="deattachScroll()" [field]="(formFieldConfig?.emcLab?.displayField)"
+             (onSelect)="onSelect($event,'emcLab',formFieldConfig?.emcLab)" (onUnselect)="unSelect($event,'emcLab')" appendTo="body">
+        </p-autoComplete>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.emcLab?.helpText || ''}}</div>
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.taskType">
@@ -632,14 +602,7 @@
     <div class="form-section">
         <h5 class="header" [innerHTML]="'Offer Details'"></h5>
         <div class="form-row  vg-col-2">
-            <div class="form-col" [hidden]="hiddenFields.scheduler">
-    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.scheduler?.isRequired, 'error':inValidFields.scheduler}">
-        <label for="scheduler" class="col-form-label scheduler-label" [textContent]=" 'SCHEDULER'|translate "></label>
-        <span class="info-bubble" *ngIf="formFieldConfig?.scheduler?.infoBubble"   [pTooltip]="formFieldConfig?.scheduler?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
-        <input type="text " pInputText class="form-control " id="scheduler " formControlName="scheduler" [placeholder]="formFieldConfig?.scheduler?.placeHolder || ''"/>
-        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.scheduler?.helpText || ''}}</div>
-    </div>
-</div><div class="form-col" [hidden]="hiddenFields.schedulerCurrency">
+            <div class="form-col" [hidden]="hiddenFields.schedulerCurrency">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.schedulerCurrency?.isRequired, 'error':inValidFields.schedulerCurrency}">
         <label for="schedulerCurrency" class="col-form-label schedulerCurrency-label" [textContent]="'SCHEDULER_CURRENCY'|translate"></label>  
         <span class="info-bubble" *ngIf="formFieldConfig?.schedulerCurrency?.infoBubble"   [pTooltip]="formFieldConfig?.schedulerCurrency?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
@@ -765,94 +728,34 @@
         <div class="form-row  vg-col-2">
             <div class="form-col" [hidden]="hiddenFields.leadPlaceOfDevelopment">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.leadPlaceOfDevelopment?.isRequired, 'error':inValidFields.leadPlaceOfDevelopment}">
-        <label for="leadPlaceOfDevelopment" class="col-form-label leadPlaceOfDevelopment-label" [textContent]="'LEAD_PLACE_OF_DEVELOPMENT'|translate"></label>  
-        <span class="info-bubble" *ngIf="formFieldConfig?.leadPlaceOfDevelopment?.infoBubble"   [pTooltip]="formFieldConfig?.leadPlaceOfDevelopment?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
-        <p-dropdown [options]="formFieldConfig['leadPlaceOfDevelopment']?.options" formControlName="leadPlaceOfDevelopment"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.leadPlaceOfDevelopment?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
-            <ng-template pTemplate="selectedItem">
-                <ng-template #leadPlaceOfDevelopmentSelectedRef let-conditions="conditions" let-option="option">
-                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
-                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
-                        <span  
-                            *ngIf="conditions?.iconClass" class="icon"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass"></i>
-                
-                        </span>
-                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-                <ng-container *ngIf="detailFormControls.controls.leadPlaceOfDevelopment.value; let selected;">
-                    <ng-template *ngTemplateOutlet="leadPlaceOfDevelopmentSelectedRef;context:{conditions :formFieldConfig.leadPlaceOfDevelopment?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.leadPlaceOfDevelopment?.options)).value], option:(getSelectedObject(selected,formFieldConfig.leadPlaceOfDevelopment?.options))}"></ng-template>
-                </ng-container>
-            </ng-template>
-        
-            <ng-template let-dropdownItem pTemplate="item" >
-                <ng-template #leadPlaceOfDevelopmentListRef let-conditions="conditions" let-option="option">
-                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
-                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
-                        <span
-                            *ngIf="conditions?.iconClass"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass" ></i>
-        
-                        </span>
-                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-        
-                <ng-container>
-                    <ng-template *ngTemplateOutlet="leadPlaceOfDevelopmentListRef;context:{conditions :formFieldConfig.leadPlaceOfDevelopment?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
-                </ng-container>
-            </ng-template>
-        </p-dropdown>
+        <label for="leadPlaceOfDevelopment" class="col-form-label leadPlaceOfDevelopment-label" [textContent]="'LEAD_PLACE_OF_DEVELOPMENT'|translate"></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.leadPlaceOfDevelopment?.infoBubble"   [pTooltip]="formFieldConfig?.leadPlaceOfDevelopment?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-autoComplete 
+            [placeholder]="formFieldConfig?.leadPlaceOfDevelopment?.placeHolder || 'Select'"
+            class="form-input" 
+            formControlName="leadPlaceOfDevelopment" 
+            [suggestions]="filteredItems" 
+            completeOnFocus="true" [dropdown]="true"
+           (onShow)="attachInfiniteScrollForAutoCompleteleadPlaceOfDevelopment('leadPlaceOfDevelopment')"             (completeMethod)="autoSuggestSearchleadPlaceOfDevelopment($event,formFieldConfig?.leadPlaceOfDevelopment)"
+            [multiple]="formFieldConfig?.leadPlaceOfDevelopment?.multiple" (onHide)="deattachScroll()" [field]="(formFieldConfig?.leadPlaceOfDevelopment?.displayField)"
+             (onSelect)="onSelect($event,'leadPlaceOfDevelopment',formFieldConfig?.leadPlaceOfDevelopment)" (onUnselect)="unSelect($event,'leadPlaceOfDevelopment')" appendTo="body">
+        </p-autoComplete>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.leadPlaceOfDevelopment?.helpText || ''}}</div>
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.secondPlaceOfDevelopment">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.secondPlaceOfDevelopment?.isRequired, 'error':inValidFields.secondPlaceOfDevelopment}">
-        <label for="secondPlaceOfDevelopment" class="col-form-label secondPlaceOfDevelopment-label" [textContent]="'SECOND_PLACE_OF_DEVELOPMENT'|translate"></label>  
-        <span class="info-bubble" *ngIf="formFieldConfig?.secondPlaceOfDevelopment?.infoBubble"   [pTooltip]="formFieldConfig?.secondPlaceOfDevelopment?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
-        <p-dropdown [options]="formFieldConfig['secondPlaceOfDevelopment']?.options" formControlName="secondPlaceOfDevelopment"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.secondPlaceOfDevelopment?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
-            <ng-template pTemplate="selectedItem">
-                <ng-template #secondPlaceOfDevelopmentSelectedRef let-conditions="conditions" let-option="option">
-                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
-                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
-                        <span  
-                            *ngIf="conditions?.iconClass" class="icon"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass"></i>
-                
-                        </span>
-                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-                <ng-container *ngIf="detailFormControls.controls.secondPlaceOfDevelopment.value; let selected;">
-                    <ng-template *ngTemplateOutlet="secondPlaceOfDevelopmentSelectedRef;context:{conditions :formFieldConfig.secondPlaceOfDevelopment?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.secondPlaceOfDevelopment?.options)).value], option:(getSelectedObject(selected,formFieldConfig.secondPlaceOfDevelopment?.options))}"></ng-template>
-                </ng-container>
-            </ng-template>
-        
-            <ng-template let-dropdownItem pTemplate="item" >
-                <ng-template #secondPlaceOfDevelopmentListRef let-conditions="conditions" let-option="option">
-                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
-                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
-                        <span
-                            *ngIf="conditions?.iconClass"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass" ></i>
-        
-                        </span>
-                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-        
-                <ng-container>
-                    <ng-template *ngTemplateOutlet="secondPlaceOfDevelopmentListRef;context:{conditions :formFieldConfig.secondPlaceOfDevelopment?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
-                </ng-container>
-            </ng-template>
-        </p-dropdown>
+        <label for="secondPlaceOfDevelopment" class="col-form-label secondPlaceOfDevelopment-label" [textContent]="'SECOND_PLACE_OF_DEVELOPMENT'|translate"></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.secondPlaceOfDevelopment?.infoBubble"   [pTooltip]="formFieldConfig?.secondPlaceOfDevelopment?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-autoComplete 
+            [placeholder]="formFieldConfig?.secondPlaceOfDevelopment?.placeHolder || 'Select'"
+            class="form-input" 
+            formControlName="secondPlaceOfDevelopment" 
+            [suggestions]="filteredItems" 
+            completeOnFocus="true" [dropdown]="true"
+           (onShow)="attachInfiniteScrollForAutoCompletesecondPlaceOfDevelopment('secondPlaceOfDevelopment')"             (completeMethod)="autoSuggestSearchsecondPlaceOfDevelopment($event,formFieldConfig?.secondPlaceOfDevelopment)"
+            [multiple]="formFieldConfig?.secondPlaceOfDevelopment?.multiple" (onHide)="deattachScroll()" [field]="(formFieldConfig?.secondPlaceOfDevelopment?.displayField)"
+             (onSelect)="onSelect($event,'secondPlaceOfDevelopment',formFieldConfig?.secondPlaceOfDevelopment)" (onUnselect)="unSelect($event,'secondPlaceOfDevelopment')" appendTo="body">
+        </p-autoComplete>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.secondPlaceOfDevelopment?.helpText || ''}}</div>
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.hoursManpower">
@@ -935,10 +838,33 @@
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.watcher">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.watcher?.isRequired, 'error':inValidFields.watcher}">
-        <label for="watcher" class="col-form-label watcher-label" [textContent]=" 'WATCHER'|translate "></label>
+        <label for="watcher" class="col-form-label watcher-label" [textContent]="'WATCHER'|translate"></label>
         <span class="info-bubble" *ngIf="formFieldConfig?.watcher?.infoBubble"   [pTooltip]="formFieldConfig?.watcher?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
-        <input type="text " pInputText class="form-control " id="watcher " formControlName="watcher" [placeholder]="formFieldConfig?.watcher?.placeHolder || ''"/>
+        <p-autoComplete 
+            [placeholder]="formFieldConfig?.watcher?.placeHolder || 'Select'"
+            class="form-input" 
+            formControlName="watcher" 
+            [suggestions]="filteredItems" 
+            completeOnFocus="true" [dropdown]="true"
+           (onShow)="attachInfiniteScrollForAutoCompletewatcher('watcher')"             (completeMethod)="autoSuggestSearchwatcher($event,formFieldConfig?.watcher)"
+            [multiple]="formFieldConfig?.watcher?.multiple" (onHide)="deattachScroll()" [field]="(formFieldConfig?.watcher?.displayField)"
+             (onSelect)="onSelect($event,'watcher',formFieldConfig?.watcher)" (onUnselect)="unSelect($event,'watcher')" appendTo="body">
+        </p-autoComplete>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.watcher?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.leader">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.leader?.isRequired, 'error':inValidFields.leader}">
+        <label for="leader" class="col-form-label leader-label" [textContent]=" 'LEADER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.leader?.infoBubble"   [pTooltip]="formFieldConfig?.leader?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="leader " formControlName="leader" [placeholder]="formFieldConfig?.leader?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.leader?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.scheduler">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.scheduler?.isRequired, 'error':inValidFields.scheduler}">
+        <label for="scheduler" class="col-form-label scheduler-label" [textContent]=" 'SCHEDULER'|translate "></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.scheduler?.infoBubble"   [pTooltip]="formFieldConfig?.scheduler?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <input type="text " pInputText class="form-control " id="scheduler " formControlName="scheduler" [placeholder]="formFieldConfig?.scheduler?.placeHolder || ''"/>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.scheduler?.helpText || ''}}</div>
     </div>
 </div>
         </div>

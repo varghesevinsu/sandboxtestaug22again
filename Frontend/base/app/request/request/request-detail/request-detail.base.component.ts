@@ -3,7 +3,11 @@ import { RequestBase} from '../request.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { LabApiConstants } from '@baseapp/lab/lab/lab.api-constants';
+import { PlaceOfDevApiConstants } from '@baseapp/place-of-dev/place-of-dev/place-of-dev.api-constants';
+import { ApplicationUserApiConstants } from '@baseapp/application-user/application-user/application-user.api-constants';
 
+import { BaseService } from '@baseapp/base.service';
 import { Validators } from '@angular/forms';
 import {ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -73,6 +77,9 @@ workflowActions:any ={
   formSecurityConfig:any = {};
   enableReadOnly = BaseAppConstants.enableReadOnly;
 isRowSelected:boolean = true; 
+	autoSuggestPageNo:number = 0;
+filteredItems:any = [];
+isAutoSuggestCallFired: boolean = false;
 	@ViewChild('HistoryListComponent') HistoryListComponent: any;
 	bsModalRef?: BsModalRef;
 	isChildPage:boolean = false;
@@ -262,6 +269,23 @@ isRowSelected:boolean = true;
       "label" : "CANCEL",
       "type" : "button",
       "wfAction" : "cancel"
+    }, {
+      "outline" : true,
+      "buttonType" : "icon_on_left",
+      "visibility" : "show",
+      "service" : {
+        "name" : "sslWorkflowDemoteToRequester",
+        "tableId" : "c31ac3f2-1ff3-4533-9aba-53f71383ab00",
+        "sid" : "60d19603-5c77-4c43-819e-18549db932ca",
+        "tableName" : "Request"
+      },
+      "showOn" : "both",
+      "buttonStyle" : "curved",
+      "buttonEnabled" : "yes",
+      "action" : "call_a_backend_webservice",
+      "label" : "DEMOTE_TO_REQUESTER",
+      "type" : "button",
+      "wfAction" : "demoteToRequester"
     } ],
     "valueChange" : true,
     "buttonStyle" : "curved",
@@ -1238,6 +1262,47 @@ isRowSelected:boolean = true;
     "fieldId" : "currency"
   }, {
     "allowEditing" : "conditional",
+    "multipleValues" : false,
+    "lookupTo" : "0d365be1-d06a-4418-8175-9a07397b2eca",
+    "fieldName" : "EMC Lab",
+    "data" : "EMC Lab",
+    "lookupUrl" : "labs/autosuggest",
+    "currentNode" : "f059b3b1-37dc-4add-b876-04ee5c4cb964",
+    "type" : "formField",
+    "mandatory" : "conditional",
+    "viewConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ {
+          "lhsTableName" : "request",
+          "rhsTableName" : "",
+          "custom" : true,
+          "label" : "serviceType",
+          "value" : "EMC",
+          "operator" : "="
+        } ]
+      },
+      "roles" : [ "all" ]
+    },
+    "valueChange" : true,
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ {
+          "lhsTableName" : "request",
+          "rhsTableName" : "",
+          "custom" : true,
+          "label" : "serviceType",
+          "value" : "EMC",
+          "operator" : "="
+        } ]
+      },
+      "roles" : [ "all" ]
+    },
+    "sysGen" : false,
+    "fieldId" : "emcLab",
     "allowedValues" : {
       "values" : [ {
         "label" : "VALUE1_FROM_LAB_TABLE",
@@ -1290,20 +1355,12 @@ isRowSelected:boolean = true;
       }
     },
     "defaultField" : false,
-    "fieldName" : "EMC Lab",
-    "data" : "EMC Lab",
     "multipleValuesMax" : 10,
-    "currentNode" : "f059b3b1-37dc-4add-b876-04ee5c4cb964",
+    "lookupType" : "table",
     "label" : "EMC Lab",
-    "type" : "formField",
-    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
-    "field" : "emcLab",
-    "multipleValuesMin" : 0,
-    "valueChange" : true,
-    "name" : "emcLab",
-    "editConditionally" : {
+    "conditionalMandatory" : {
       "qbName" : "Requester_Rights_Fields",
       "query" : {
         "condition" : "and",
@@ -1316,13 +1373,15 @@ isRowSelected:boolean = true;
           "operator" : "="
         } ]
       },
-      "roles" : [ "selected", "Requester ", "Admin" ]
+      "roles" : [ "selected", "Requester ", "Approver", "Admin" ]
     },
-    "sysGen" : false,
-    "uiType" : "select",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "emcLab"
+    "field" : "emcLab",
+    "multipleValuesMin" : 0,
+    "name" : "emcLab",
+    "uiType" : "autosuggest",
+    "displayField" : "labName",
+    "fieldType" : "any",
+    "allowViewing" : "conditional"
   }, {
     "allowEditing" : "conditional",
     "allowedValues" : {
@@ -1688,26 +1747,6 @@ isRowSelected:boolean = true;
     "type" : "htmlcontainer",
     "name" : "test"
   }, {
-    "allowEditing" : "no",
-    "allowedValues" : { },
-    "defaultField" : false,
-    "fieldName" : "Scheduler",
-    "data" : "Scheduler",
-    "currentNode" : "32b7e9b1-82aa-468f-8b2b-c44658b43af3",
-    "label" : "Scheduler",
-    "type" : "formField",
-    "mandatory" : "no",
-    "searchable" : "full_word",
-    "transientField" : false,
-    "field" : "scheduler",
-    "valueChange" : true,
-    "name" : "scheduler",
-    "sysGen" : false,
-    "uiType" : "text",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "scheduler"
-  }, {
     "allowEditing" : "conditional",
     "multipleValues" : false,
     "fieldName" : "Scheduler currency",
@@ -1967,6 +2006,25 @@ isRowSelected:boolean = true;
     "fieldId" : "osaNameToBeCreatedInStr"
   }, {
     "allowEditing" : "conditional",
+    "multipleValues" : false,
+    "lookupTo" : "89f10c22-d7c3-45e1-9904-61e3ba1c54f6",
+    "fieldName" : "Lead Place of Development",
+    "data" : "Lead Place of Development",
+    "lookupUrl" : "placeofdevs/autosuggest",
+    "currentNode" : "8daeb8b5-a138-41d7-b19f-09ee5420119a",
+    "type" : "formField",
+    "mandatory" : "no",
+    "valueChange" : true,
+    "editConditionally" : {
+      "qbName" : "Scheduler_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ "selected", "Scheduler " ]
+    },
+    "sysGen" : false,
+    "fieldId" : "leadPlaceOfDevelopment",
     "allowedValues" : {
       "values" : [ {
         "label" : "CRE1",
@@ -1990,34 +2048,38 @@ isRowSelected:boolean = true;
       }
     },
     "defaultField" : false,
-    "fieldName" : "Lead Place of Development",
-    "data" : "Lead Place of Development",
     "multipleValuesMax" : 10,
-    "currentNode" : "8daeb8b5-a138-41d7-b19f-09ee5420119a",
+    "lookupType" : "table",
     "label" : "Lead Place of Development",
-    "type" : "formField",
-    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "leadPlaceOfDevelopment",
     "multipleValuesMin" : 0,
-    "valueChange" : true,
     "name" : "leadPlaceOfDevelopment",
+    "uiType" : "autosuggest",
+    "displayField" : "siteCode",
+    "fieldType" : "any",
+    "allowViewing" : "yes"
+  }, {
+    "allowEditing" : "conditional",
+    "lookupTo" : "89f10c22-d7c3-45e1-9904-61e3ba1c54f6",
+    "fieldName" : "second Place of Development",
+    "data" : "second Place of Development",
+    "lookupUrl" : "placeofdevs/autosuggest",
+    "currentNode" : "bc6eac5a-2fc0-48f8-b898-67548ff26396",
+    "type" : "formField",
+    "mandatory" : "no",
+    "valueChange" : true,
     "editConditionally" : {
       "qbName" : "Scheduler_Rights_Fields",
       "query" : {
         "condition" : "and",
         "rules" : [ ]
       },
-      "roles" : [ ]
+      "roles" : [ "selected", "Admin", "Scheduler", "Scheduler " ]
     },
     "sysGen" : false,
-    "uiType" : "select",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "leadPlaceOfDevelopment"
-  }, {
-    "allowEditing" : "conditional",
+    "fieldId" : "secondPlaceOfDevelopment",
     "allowedValues" : {
       "values" : [ {
         "label" : "CRE1",
@@ -2037,36 +2099,117 @@ isRowSelected:boolean = true;
       } ],
       "conditions" : {
         "conditionType" : "Auto",
-        "conditions" : [ ]
+        "conditions" : [ {
+          "id" : "CRE1",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : "second Place of Development",
+              "operator" : "==",
+              "value" : "CRE1"
+            } ]
+          },
+          "style" : {
+            "background-color" : "#E544FF33",
+            "color" : "#E544FF",
+            "cell-background-color" : "#ffffff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333333"
+          }
+        }, {
+          "id" : "CRE2",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : "second Place of Development",
+              "operator" : "==",
+              "value" : "CRE2"
+            } ]
+          },
+          "style" : {
+            "background-color" : "#8220FF33",
+            "color" : "#8220FF",
+            "cell-background-color" : "#ffffff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333333"
+          }
+        }, {
+          "id" : "WUH1",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : "second Place of Development",
+              "operator" : "==",
+              "value" : "WUH1"
+            } ]
+          },
+          "style" : {
+            "background-color" : "#1A73E833",
+            "color" : "#1A73E8",
+            "cell-background-color" : "#ffffff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333333"
+          }
+        }, {
+          "id" : "WHU2",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : "second Place of Development",
+              "operator" : "==",
+              "value" : "WHU2"
+            } ]
+          },
+          "style" : {
+            "background-color" : "#16D3FD33",
+            "color" : "#16D3FD",
+            "cell-background-color" : "#ffffff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333333"
+          }
+        }, {
+          "id" : "SHE1",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : "second Place of Development",
+              "operator" : "==",
+              "value" : "SHE1"
+            } ]
+          },
+          "style" : {
+            "background-color" : "#00D7A333",
+            "color" : "#00D7A3",
+            "cell-background-color" : "#ffffff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333333"
+          }
+        } ]
       }
     },
     "defaultField" : false,
-    "fieldName" : "second Place of Development",
-    "data" : "second Place of Development",
     "multipleValuesMax" : 10,
-    "currentNode" : "bc6eac5a-2fc0-48f8-b898-67548ff26396",
+    "lookupType" : "table",
     "label" : "second Place of Development",
-    "type" : "formField",
-    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "secondPlaceOfDevelopment",
     "multipleValuesMin" : 0,
-    "valueChange" : true,
     "name" : "secondPlaceOfDevelopment",
-    "editConditionally" : {
-      "qbName" : "Scheduler_Rights_Fields",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ ]
-      },
-      "roles" : [ "selected", "Admin", "Scheduler", "Scheduler " ]
-    },
-    "sysGen" : false,
-    "uiType" : "select",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "secondPlaceOfDevelopment"
+    "uiType" : "autosuggest",
+    "displayField" : "siteCode",
+    "fieldType" : "any",
+    "allowViewing" : "yes"
   }, {
     "allowEditing" : "conditional",
     "allowedValues" : { },
@@ -2272,20 +2415,74 @@ isRowSelected:boolean = true;
     "fieldId" : "projectManagerOrActivityLeader"
   }, {
     "allowEditing" : "yes",
-    "allowedValues" : { },
-    "defaultField" : false,
+    "multipleValues" : true,
+    "lookupTo" : "0725d0fa-e979-4bdf-88d6-f2648d42a48d",
     "fieldName" : "  Watcher",
     "data" : "  Watcher",
+    "lookupUrl" : "applicationusers/autosuggest",
     "currentNode" : "67e7e78f-ee3c-476e-bd09-9420d311f20d",
-    "label" : "  Watcher",
+    "infoBubble" : "",
     "type" : "formField",
-    "field" : "watcher",
+    "mandatory" : "no",
     "valueChange" : true,
+    "sysGen" : false,
+    "placeHolder" : "",
+    "fieldId" : "watcher",
+    "allowedValues" : { },
+    "defaultField" : false,
+    "helpText" : "",
+    "multipleValuesMax" : 10,
+    "lookupType" : "table",
+    "label" : "  Watcher",
+    "searchable" : "full_word",
+    "transientField" : false,
+    "field" : "watcher",
+    "multipleValuesMin" : 0,
     "name" : "watcher",
+    "uiType" : "autosuggest",
+    "displayField" : "email",
+    "fieldType" : "any",
+    "allowViewing" : "yes"
+  }, {
+    "allowEditing" : "no",
+    "allowedValues" : { },
+    "defaultField" : false,
+    "fieldName" : "Leader",
+    "data" : "Leader",
+    "currentNode" : "6b0f901e-945a-49f4-83f3-b6a846ab3e2d",
+    "label" : "Leader",
+    "type" : "formField",
+    "mandatory" : "no",
+    "searchable" : "full_word",
+    "transientField" : false,
+    "field" : "leader",
+    "valueChange" : true,
+    "name" : "leader",
     "sysGen" : false,
     "uiType" : "text",
     "fieldType" : "string",
-    "fieldId" : "watcher"
+    "allowViewing" : "yes",
+    "fieldId" : "leader"
+  }, {
+    "allowEditing" : "no",
+    "allowedValues" : { },
+    "defaultField" : false,
+    "fieldName" : "Scheduler",
+    "data" : "Scheduler",
+    "currentNode" : "ff4d800e-dfca-4a4f-b784-8a5bb045566c",
+    "label" : "Scheduler",
+    "type" : "formField",
+    "mandatory" : "no",
+    "searchable" : "full_word",
+    "transientField" : false,
+    "field" : "scheduler",
+    "valueChange" : true,
+    "name" : "scheduler",
+    "sysGen" : false,
+    "uiType" : "text",
+    "fieldType" : "string",
+    "allowViewing" : "yes",
+    "fieldId" : "scheduler"
   } ],
   "columns" : "1",
   "valueChange" : true,
@@ -2323,6 +2520,7 @@ isRowSelected:boolean = true;
 	requester: new FormControl('',[]),
 	namecode: new FormControl('',[]),
 	projectOrActivity: new FormControl('',[]),
+	leader: new FormControl('',[]),
 	secondPlaceOfDevelopment: new FormControl('',[]),
 	estimatedDurationInHours: new FormControl('',[]),
 	requestedStartDate: new FormControl('',[]),
@@ -2345,11 +2543,24 @@ isRowSelected:boolean = true;
 });
 
 
-	constructor(public requestService : RequestService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public dialogService: DialogService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public appBaseService: AppBaseService, public router: Router, public appGlobalService: AppGlobalService, public location: Location, ...args: any) {
+	constructor(public requestService : RequestService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public dialogService: DialogService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public appBaseService: AppBaseService, public router: Router, public appGlobalService: AppGlobalService, public baseService: BaseService, public location: Location, ...args: any) {
     
  	 }
 
 	
+	autoSuggestSearchemcLab(event?: any, col?: any,url?:any) {
+if(!this.isAutoSuggestCallFired){
+      this.isAutoSuggestCallFired = true;
+    let apiObj = Object.assign({}, LabApiConstants.autoSuggestService)
+    apiObj.url = `${url ||apiObj.url}?query=${event.query}&pgNo=${this.autoSuggestPageNo}&pgLen=${BaseAppConstants.defaultPageSize}`;
+     this.baseService.get(apiObj).subscribe((res: any) => {
+      this.isAutoSuggestCallFired = false;
+      let updateRecords =  [...this.filteredItems, ...res];
+      const ids = updateRecords.map(o => o.sid)
+      this.filteredItems = updateRecords.filter(({ sid }, index) => !ids.includes(sid, index + 1));
+    })
+}
+ }
 	onwfDemoteToLeader(){
 	const params = {id:this.id,
       comments:this.comments}
@@ -2364,6 +2575,44 @@ isRowSelected:boolean = true;
 			this.clearValidations(this.mandatoryFields);
 	})
 }
+	attachInfiniteScrollForAutoCompletewatcher(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchwatcher`
+        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
+	attachInfiniteScrollForAutoCompletesecondPlaceOfDevelopment(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchsecondPlaceOfDevelopment`
+        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
 	getId(){
       this.activatedRoute.queryParams.subscribe((params: any) => { 
         this.id = params['id'];
@@ -2506,6 +2755,11 @@ isRowSelected:boolean = true;
 			this.clearValidations(this.mandatoryFields);
 	})
 }
+	deattachScroll() {
+    this.filteredItems = [];
+    this.autoSuggestPageNo = 0;
+    this.isAutoSuggestCallFired = false;
+  }
 	formatCaptionItems(config: any, data: any) {
     if (Object.keys(data).length > 0) {
       return (this.appUtilBaseService.formatRawDatatoRedableFormat(config, data[config.field]));
@@ -2513,6 +2767,25 @@ isRowSelected:boolean = true;
     else {
       return '';
     }
+  }
+	attachInfiniteScrollForAutoCompleteemcLab(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchemcLab`
+        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
   }
 	actionBarAction(btn: any) {
     const methodName: any = (`on` + btn.action.charAt(0).toUpperCase() + btn.action.slice(1));
@@ -2528,6 +2801,19 @@ isRowSelected:boolean = true;
     return true      
     //return this.appUtilBaseService.canDeactivateCall(this.form, this.backupData);
 }
+	autoSuggestSearchleadPlaceOfDevelopment(event?: any, col?: any,url?:any) {
+if(!this.isAutoSuggestCallFired){
+      this.isAutoSuggestCallFired = true;
+    let apiObj = Object.assign({}, PlaceOfDevApiConstants.autoSuggestService)
+    apiObj.url = `${url ||apiObj.url}?query=${event.query}&pgNo=${this.autoSuggestPageNo}&pgLen=${BaseAppConstants.defaultPageSize}`;
+     this.baseService.get(apiObj).subscribe((res: any) => {
+      this.isAutoSuggestCallFired = false;
+      let updateRecords =  [...this.filteredItems, ...res];
+      const ids = updateRecords.map(o => o.sid)
+      this.filteredItems = updateRecords.filter(({ sid }, index) => !ids.includes(sid, index + 1));
+    })
+}
+ }
 	onBack(){
 	this.messageService.clear();
 	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
@@ -2660,6 +2946,14 @@ addValidations(mandatoryFields:[]){
 	loadCaptionbarItems(){
     
 }
+	unSelect(event:any,field:string){
+    this.selectedItems[field]?.forEach((item:any,index:number)=>{
+        if(item.id === event.sid){
+            this.selectedItems[field].splice(index,1);
+        }
+    })
+    
+  }
 	loadActionbar(){
     
 }
@@ -2679,6 +2973,19 @@ addValidations(mandatoryFields:[]){
         }
       }
   }
+	autoSuggestSearchwatcher(event?: any, col?: any,url?:any) {
+if(!this.isAutoSuggestCallFired){
+      this.isAutoSuggestCallFired = true;
+    let apiObj = Object.assign({}, ApplicationUserApiConstants.autoSuggestService)
+    apiObj.url = `${url ||apiObj.url}?query=${event.query}&pgNo=${this.autoSuggestPageNo}&pgLen=${BaseAppConstants.defaultPageSize}`;
+     this.baseService.get(apiObj).subscribe((res: any) => {
+      this.isAutoSuggestCallFired = false;
+      let updateRecords =  [...this.filteredItems, ...res];
+      const ids = updateRecords.map(o => o.sid)
+      this.filteredItems = updateRecords.filter(({ sid }, index) => !ids.includes(sid, index + 1));
+    })
+}
+ }
 	onwfValidate(){
 	const params = {id:this.id,
       comments:this.comments}
@@ -2750,6 +3057,42 @@ addValidations(mandatoryFields:[]){
     else
       return true;
   }
+	onSelect(event: any, field: string, config: any) {
+    let lookupFields: any[] = config?.lookupFields || [];
+    let model = {
+      id: event.sid,
+      value: {}
+    }
+    if (lookupFields.length > 0) {
+      model.value = lookupFields?.reduce((o: any, key: any) => ({ ...o, [key]: event[key] }), {});
+    }
+    else {
+      model.value = event;
+    }
+    if (!this.selectedItems?.hasOwnProperty(field)) {
+      this.selectedItems[field] = [];
+    }
+    if (config?.multiple === true) {
+      this.selectedItems[field]?.push(model);
+    }
+    else {
+      this.selectedItems[field][0] = model;
+    }
+  }
+	onwfDemoteToRequester(){
+	const params = {id:this.id,
+      comments:this.comments}
+	this.requestService.sslWorkflowDemoteToRequester(params).subscribe((res:any)=>{
+		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
+		if(Object.keys(this.mandatoryFields).length > 0){
+			this.clearValidations(this.mandatoryFields);
+		}
+		this.onInit();
+	},error=>{
+		if(Object.keys(this.mandatoryFields).length > 0)
+			this.clearValidations(this.mandatoryFields);
+	})
+}
 	restrictEditandView(ele:any,action:string,fieldName:string){
     const conResult = this.appUtilBaseService.evaluvateCondition(ele.query.rules, ele.query.condition,this.detailFormControls.getRawValue());
      if(action =='view'){
@@ -2800,6 +3143,19 @@ addValidations(mandatoryFields:[]){
     }
     return data;
   }
+	autoSuggestSearchsecondPlaceOfDevelopment(event?: any, col?: any,url?:any) {
+if(!this.isAutoSuggestCallFired){
+      this.isAutoSuggestCallFired = true;
+    let apiObj = Object.assign({}, PlaceOfDevApiConstants.autoSuggestService)
+    apiObj.url = `${url ||apiObj.url}?query=${event.query}&pgNo=${this.autoSuggestPageNo}&pgLen=${BaseAppConstants.defaultPageSize}`;
+     this.baseService.get(apiObj).subscribe((res: any) => {
+      this.isAutoSuggestCallFired = false;
+      let updateRecords =  [...this.filteredItems, ...res];
+      const ids = updateRecords.map(o => o.sid)
+      this.filteredItems = updateRecords.filter(({ sid }, index) => !ids.includes(sid, index + 1));
+    })
+}
+ }
 	onInnerListAction(btn:any){
         
     }
@@ -2817,6 +3173,25 @@ addValidations(mandatoryFields:[]){
 			this.clearValidations(this.mandatoryFields);
 	})
 }
+	attachInfiniteScrollForAutoCompleteleadPlaceOfDevelopment(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchleadPlaceOfDevelopment`
+        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
 	onwfApproveToLeader(){
 	const params = {id:this.id,
       comments:this.comments}
