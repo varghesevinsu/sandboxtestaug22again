@@ -193,34 +193,6 @@ isRowSelected:boolean = true;
     "fieldType" : "string",
     "fieldId" : "lastName"
   }, {
-    "allowEditing" : "yes",
-    "allowedValues" : { },
-    "defaultField" : false,
-    "fieldName" : "Requester ",
-    "data" : "Requester ",
-    "label" : "Requester ",
-    "type" : "formField",
-    "mandatory" : "yes",
-    "field" : "requester",
-    "name" : "requester",
-    "sysGen" : true,
-    "uiType" : "checkbox",
-    "fieldType" : "Boolean",
-    "fieldId" : "requester"
-  }, {
-    "allowedValues" : { },
-    "defaultField" : false,
-    "fieldName" : "Approver",
-    "data" : "Approver",
-    "label" : "Approver",
-    "type" : "formField",
-    "field" : "approver",
-    "name" : "approver",
-    "sysGen" : true,
-    "uiType" : "checkbox",
-    "fieldType" : "Boolean",
-    "fieldId" : "approver"
-  }, {
     "allowedValues" : { },
     "defaultField" : false,
     "fieldName" : "Admin",
@@ -246,6 +218,21 @@ isRowSelected:boolean = true;
     "uiType" : "checkbox",
     "fieldType" : "Boolean",
     "fieldId" : "viewer"
+  }, {
+    "allowedValues" : { },
+    "defaultField" : false,
+    "fieldName" : "Scheduler ",
+    "data" : "Scheduler",
+    "currentNode" : "5b97e515-53ce-4aea-96ba-5e07ecf444e8",
+    "label" : "Scheduler",
+    "type" : "formField",
+    "field" : "scheduler",
+    "valueChange" : true,
+    "name" : "scheduler",
+    "sysGen" : true,
+    "uiType" : "checkbox",
+    "fieldType" : "Boolean",
+    "fieldId" : "scheduler"
   } ],
   "columns" : "1",
   "valueChange" : true,
@@ -256,8 +243,6 @@ isRowSelected:boolean = true;
 	
 		detailFormControls : FormGroup = new FormGroup({
 	lastName: new FormControl('',[]),
-	requester: new FormControl('',[Validators.required]),
-	approver: new FormControl('',[]),
 	firstName: new FormControl('',[]),
 	viewer: new FormControl('',[]),
 	admin: new FormControl('',[]),

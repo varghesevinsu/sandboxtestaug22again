@@ -6,12 +6,10 @@ export interface ApplicationUserBase {
 	email: string;
 	modifiedDate: Date;
 	createdBy: string;
-	requester: Boolean;
-	approver: Boolean;
 	lastName: string;
 	modifiedBy: string;
 	admin: Boolean;
 	firstName: string;
-	dummyTest: string;
-	test2: string;
+	leader: Boolean;
+	scheduler: Boolean;
 }

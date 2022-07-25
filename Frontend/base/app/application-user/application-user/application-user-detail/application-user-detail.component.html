@@ -58,23 +58,7 @@
         <input type="text " pInputText class="form-control " id="lastName " formControlName="lastName" [placeholder]="formFieldConfig?.lastName?.placeHolder || ''"/>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.lastName?.helpText || ''}}</div>
     </div>
-</div><div class="form-col" [hidden]="hiddenFields.requester">
-    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.requester?.isRequired, 'error':inValidFields.requester}">
-        <label for="requester" class="col-form-label requester-label d-none" [textContent]="'REQUESTER'|translate"></label>
-        <p-checkbox class="form-input" formControlName="requester" label="{{'REQUESTER' | translate}}" binary="true"></p-checkbox>
-        <span class="info-bubble" *ngIf="formFieldConfig?.requester?.infoBubble"   [pTooltip]="formFieldConfig?.requester?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
-        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.requester?.helpText || ''}}</div>
-    </div>
-</div>
-<div class="form-col" [hidden]="hiddenFields.approver">
-    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.approver?.isRequired, 'error':inValidFields.approver}">
-        <label for="approver" class="col-form-label approver-label d-none" [textContent]="'APPROVER'|translate"></label>
-        <p-checkbox class="form-input" formControlName="approver" label="{{'APPROVER' | translate}}" binary="true"></p-checkbox>
-        <span class="info-bubble" *ngIf="formFieldConfig?.approver?.infoBubble"   [pTooltip]="formFieldConfig?.approver?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
-        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.approver?.helpText || ''}}</div>
-    </div>
-</div>
-<div class="form-col" [hidden]="hiddenFields.admin">
+</div><div class="form-col" [hidden]="hiddenFields.admin">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.admin?.isRequired, 'error':inValidFields.admin}">
         <label for="admin" class="col-form-label admin-label d-none" [textContent]="'ADMIN'|translate"></label>
         <p-checkbox class="form-input" formControlName="admin" label="{{'ADMIN' | translate}}" binary="true"></p-checkbox>
@@ -88,6 +72,14 @@
         <p-checkbox class="form-input" formControlName="viewer" label="{{'VIEWER' | translate}}" binary="true"></p-checkbox>
         <span class="info-bubble" *ngIf="formFieldConfig?.viewer?.infoBubble"   [pTooltip]="formFieldConfig?.viewer?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.viewer?.helpText || ''}}</div>
+    </div>
+</div>
+<div class="form-col" [hidden]="hiddenFields.scheduler">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.scheduler?.isRequired, 'error':inValidFields.scheduler}">
+        <label for="scheduler" class="col-form-label scheduler-label d-none" [textContent]="'SCHEDULER'|translate"></label>
+        <p-checkbox class="form-input" formControlName="scheduler" label="{{'SCHEDULER' | translate}}" binary="true"></p-checkbox>
+        <span class="info-bubble" *ngIf="formFieldConfig?.scheduler?.infoBubble"   [pTooltip]="formFieldConfig?.scheduler?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.scheduler?.helpText || ''}}</div>
     </div>
 </div>
 
