@@ -18,6 +18,6 @@ public class RequestBLImpl extends RequestBLBaseImpl<Request> implements IReques
 
 	
 	protected IPerimeterManager<Request> getPerimeterManager() {
-		return new RequestPerimeterImpl();
+		return null;
 	}
 }

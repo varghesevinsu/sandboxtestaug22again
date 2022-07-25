@@ -16,6 +16,6 @@ public class ProjectTypeBLImpl extends ProjectTypeBLBaseImpl<ProjectType> implem
 
 	
 	protected IPerimeterManager<ProjectType> getPerimeterManager() {
-		return new ProjectTypePerimeterImpl();
+		return null;
 	}
 }

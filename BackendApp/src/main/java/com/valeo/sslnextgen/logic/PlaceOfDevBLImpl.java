@@ -16,6 +16,6 @@ public class PlaceOfDevBLImpl extends PlaceOfDevBLBaseImpl<PlaceOfDev> implement
 
 	
 	protected IPerimeterManager<PlaceOfDev> getPerimeterManager() {
-		return new PlaceOfDevPerimeterImpl();
+		return null;
 	}
 }

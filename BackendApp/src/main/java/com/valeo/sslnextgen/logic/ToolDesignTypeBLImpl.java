@@ -16,6 +16,6 @@ public class ToolDesignTypeBLImpl extends ToolDesignTypeBLBaseImpl<ToolDesignTyp
 
 	
 	protected IPerimeterManager<ToolDesignType> getPerimeterManager() {
-		return new ToolDesignTypePerimeterImpl();
+		return null;
 	}
 }

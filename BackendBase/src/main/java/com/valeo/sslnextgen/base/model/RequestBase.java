@@ -197,8 +197,6 @@ public class RequestBase extends BaseWorkflowModel {
 	@Searchable(index = true)
 	private RequestEMCLab emcLab;
 	@Searchable(index = true)
-	private String dummy2;
-	@Searchable(index = true)
 	private Long totalBudget2;
 	@Searchable(index = true)
 	private RequestSchedulercurrency schedulerCurrency=RequestSchedulercurrency.PLEASE_SELECT;
@@ -445,14 +443,6 @@ public class RequestBase extends BaseWorkflowModel {
 
 	public Long getBudgetManpower() {
 		return budgetManpower;
-	}
-
-	public void setDummy2(String dummy2) {
-		this.dummy2 = dummy2;
-	}
-
-	public String getDummy2() {
-		return dummy2;
 	}
 
 	public void setCurrency(RequestCurrency currency) {
