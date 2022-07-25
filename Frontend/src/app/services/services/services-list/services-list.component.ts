@@ -1,3 +1,4 @@
+import { BaseService } from '@baseapp/base.service';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { allowedValuesValidator } from "@baseapp/widgets/validators/allowedValuesValidator";
@@ -31,8 +32,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class ServicesListComponent extends ServicesListBaseComponent implements OnInit {
  
-  constructor(public override servicesService: ServicesService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router) {
-    super(servicesService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, renderer2, router);
+  constructor(public override servicesService: ServicesService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router, public override baseService: BaseService) {
+    super(servicesService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, renderer2, router, baseService);
   }
 	
   ngAfterViewInit(): void {
@@ -43,5 +44,6 @@ export class ServicesListComponent extends ServicesListBaseComponent implements 
     super.onInit();
   }
  
+
 
 }

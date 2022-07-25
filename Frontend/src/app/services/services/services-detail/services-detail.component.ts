@@ -1,3 +1,4 @@
+import { BaseService } from '@baseapp/base.service';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { ActionItem } from '@baseapp/widgets/action-bar/action-bar.component';
@@ -36,8 +37,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class ServicesDetailComponent extends ServicesDetailBaseComponent implements OnInit {
  
-  constructor(public override servicesService: ServicesService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override location: Location) {
-    super(servicesService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, appBaseService, router, appGlobalService, location);
+  constructor(public override servicesService: ServicesService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override baseService: BaseService, public override location: Location) {
+    super(servicesService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, appBaseService, router, appGlobalService, baseService, location);
   }
 	
   ngAfterViewInit(): void {
@@ -48,5 +49,6 @@ export class ServicesDetailComponent extends ServicesDetailBaseComponent impleme
     super.onInit();
   }
  
+
 
 }
