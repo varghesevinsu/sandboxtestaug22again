@@ -16,6 +16,6 @@ public class DelegationBLImpl extends DelegationBLBaseImpl<Delegation> implement
 
 	
 	protected IPerimeterManager<Delegation> getPerimeterManager() {
-		return new DelegationPerimeterImpl();
+		return null;
 	}
 }

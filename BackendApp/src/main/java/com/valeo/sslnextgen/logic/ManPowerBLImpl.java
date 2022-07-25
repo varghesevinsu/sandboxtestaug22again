@@ -22,7 +22,7 @@ public class ManPowerBLImpl extends ManPowerBLBaseImpl<ManPower> implements IMan
 
 	
 	protected IPerimeterManager<ManPower> getPerimeterManager() {
-		return new ManPowerPerimeterImpl();
+		return null;
 	}
 
     @Override
