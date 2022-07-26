@@ -1272,6 +1272,15 @@
         "Leader",
         "Viewer",
         "Development Administrator"
+      ],
+      "/byAll/{service}/{site}/{currency}": [
+      	"Admin",
+        "Approver",
+        "Requester ",
+        "Scheduler ",
+        "Leader",
+        "Viewer",
+        "Development Administrator"
       ]
     },
     "put": {
