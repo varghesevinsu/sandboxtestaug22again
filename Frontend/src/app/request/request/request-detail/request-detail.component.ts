@@ -61,25 +61,27 @@ export class RequestDetailComponent extends RequestDetailBaseComponent implement
 
     let rate: number = 0;
 
-    formControls.controls['leadPlaceOfDevelopment'].enable()
+    formControls.controls['leadPlaceOfDevelopment'].enable({emitEvent:false})
 
-    formControls.controls['budget'].disable()
+    formControls.controls['budget'].disable({emitEvent:false})
 
-    formControls.controls['leadPlaceOfDevelopment'].valueChanges.subscribe((placeOfDev)=>{
+    formControls.controls['budgetManpower2'].disable({emitEvent:false})
+
+    formControls.controls['secondPlaceOfDevelopment'].valueChanges.subscribe((placeOfDev)=>{
        service.getManPowerByAll(formControls.controls['serviceType'].value,placeOfDev.siteCode, formControls.controls['currency'].value).subscribe(
         (manPower)=>{
             rate = manPower.rate
         }
        )
-      formControls.controls['budget'].setValue(rate * formControls.controls['hoursManpower'].value + formControls.controls['additionalInformation'].value)
+      formControls.controls['budgetManpower2'].setValue(rate * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
     })
 
-    formControls.controls['hoursManpower'].valueChanges.subscribe(
-      (event) => formControls.controls['budget'].setValue(rate * formControls.controls['hoursManpower'].value + formControls.controls['additionalInformation'].value)
+    formControls.controls['hoursManpower2'].valueChanges.subscribe(
+      (event) => formControls.controls['budgetManpower2'].setValue(rate * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
     )
 
-    formControls.controls['additionalInformation'].valueChanges.subscribe(
-      (event) => formControls.controls['budget'].setValue(rate * formControls.controls['hoursManpower'].value + formControls.controls['additionalInformation'].value)
+    formControls.controls['additionnalCost2'].valueChanges.subscribe(
+      (event) => formControls.controls['budgetManpower2'].setValue(rate * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
     )
   }
 

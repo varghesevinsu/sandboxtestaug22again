@@ -4,7 +4,7 @@ import { routes } from '@baseapp/app-routing.base.module';
 
 routes.unshift({
   path: '',
-  redirectTo: 'requests/requestlist',
+  redirectTo: 'request/requestlist',
   pathMatch: 'full'
 })
 
