@@ -16,6 +16,6 @@ public class StatusBLImpl extends StatusBLBaseImpl<Status> implements IStatusBL<
 
 	
 	protected IPerimeterManager<Status> getPerimeterManager() {
-		return null;
+		return new StatusPerimeterImpl();
 	}
 }

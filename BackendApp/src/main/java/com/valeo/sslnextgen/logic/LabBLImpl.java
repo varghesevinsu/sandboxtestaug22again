@@ -16,6 +16,6 @@ public class LabBLImpl extends LabBLBaseImpl<Lab> implements ILabBL<Lab>{
 
 	
 	protected IPerimeterManager<Lab> getPerimeterManager() {
-		return null;
+		return new LabPerimeterImpl();
 	}
 }

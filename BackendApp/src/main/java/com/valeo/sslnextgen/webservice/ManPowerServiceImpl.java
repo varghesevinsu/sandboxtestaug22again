@@ -26,11 +26,4 @@ public class ManPowerServiceImpl extends ManPowerServiceBaseImpl<IManPowerBL<Man
 	public ManPowerServiceImpl() {
 		super(InstanceFactory.getProxy(new ManPowerBLImpl()));
 	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("byAll/{service}/{site}/{currency}")
-	public ManPower getByAll(@PathParam("service") String service,@PathParam("site") String site,@PathParam("currency") String currency) {
-		return logic.getByAll(service,site,currency);
-	}
 }

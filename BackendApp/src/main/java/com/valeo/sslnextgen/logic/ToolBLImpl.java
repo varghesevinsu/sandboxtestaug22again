@@ -16,6 +16,6 @@ public class ToolBLImpl extends ToolBLBaseImpl<Tool> implements IToolBL<Tool>{
 
 	
 	protected IPerimeterManager<Tool> getPerimeterManager() {
-		return null;
+		return new ToolPerimeterImpl();
 	}
 }

@@ -16,6 +16,6 @@ public class HistoryBLImpl extends HistoryBLBaseImpl<History> implements IHistor
 
 	
 	protected IPerimeterManager<History> getPerimeterManager() {
-		return null;
+		return new HistoryPerimeterImpl();
 	}
 }

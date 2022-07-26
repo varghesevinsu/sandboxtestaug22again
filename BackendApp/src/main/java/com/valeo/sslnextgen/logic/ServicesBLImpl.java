@@ -16,6 +16,6 @@ public class ServicesBLImpl extends ServicesBLBaseImpl<Services> implements ISer
 
 	
 	protected IPerimeterManager<Services> getPerimeterManager() {
-		return null;
+		return new ServicesPerimeterImpl();
 	}
 }

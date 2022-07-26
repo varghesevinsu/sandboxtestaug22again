@@ -16,6 +16,6 @@ public class UserGuideBLImpl extends UserGuideBLBaseImpl<UserGuide> implements I
 
 	
 	protected IPerimeterManager<UserGuide> getPerimeterManager() {
-		return null;
+		return new UserGuidePerimeterImpl();
 	}
 }

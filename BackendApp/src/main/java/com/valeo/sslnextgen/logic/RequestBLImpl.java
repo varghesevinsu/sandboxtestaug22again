@@ -13,6 +13,7 @@ public class RequestBLImpl extends RequestBLBaseImpl<Request> implements IReques
 		super(Request.class);	
 		setChangelogBL(new ChangelogBLImpl()); 
 		setWorkflowHistoryBL(new WorkflowHistoryBLImpl());
+		setUserPrivilegeBL(new ApplicationUserBLImpl());
 	}
 	
 
