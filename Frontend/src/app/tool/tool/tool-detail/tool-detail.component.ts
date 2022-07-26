@@ -51,4 +51,5 @@ export class ToolDetailComponent extends ToolDetailBaseComponent implements OnIn
 
 
 
+
 }
