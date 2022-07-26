@@ -66,7 +66,7 @@ export interface RequestBase {
 	requestedStartDate: Date;
 	quoteNo: string;
 	secondPlaceOfDevelopment: any;
-	taskType: string;
+	taskType: any;
 	closingDate: string;
 	quotationDescription: string;
 	hours: number;
@@ -76,7 +76,7 @@ export interface RequestBase {
 	intercoPartnerCode: string;
 	estimatedDurationInHours: number;
 	sapCategory: string;
-	projectType: string;
+	projectType: any;
 	requesterOrgaloc: string;
 	requestName: string;
 	linkToQuotation: string;

@@ -4,6 +4,8 @@ import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LabApiConstants } from '@baseapp/lab/lab/lab.api-constants';
+import { ToolDesignTypeApiConstants } from '@baseapp/tool-design-type/tool-design-type/tool-design-type.api-constants';
+import { ProjectTypeApiConstants } from '@baseapp/project-type/project-type/project-type.api-constants';
 import { PlaceOfDevApiConstants } from '@baseapp/place-of-dev/place-of-dev/place-of-dev.api-constants';
 import { ApplicationUserApiConstants } from '@baseapp/application-user/application-user/application-user.api-constants';
 
@@ -548,14 +550,6 @@ isAutoSuggestCallFired: boolean = false;
     "field" : "serviceType",
     "multipleValuesMin" : 0,
     "name" : "serviceType",
-    "editConditionally" : {
-      "qbName" : "Requester_Rights_Fields",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ ]
-      },
-      "roles" : [ ]
-    },
     "sysGen" : false,
     "uiType" : "select",
     "fieldType" : "string",
@@ -610,14 +604,6 @@ isAutoSuggestCallFired: boolean = false;
     "transientField" : false,
     "field" : "prjOaCode",
     "name" : "prjOaCode",
-    "editConditionally" : {
-      "qbName" : "Requester_Rights_Fields",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ ]
-      },
-      "roles" : [ "selected", "Requester ", "Admin" ]
-    },
     "sysGen" : false,
     "uiType" : "text",
     "fieldType" : "string",
@@ -683,7 +669,6 @@ isAutoSuggestCallFired: boolean = false;
     "infoBubble" : "",
     "type" : "formField",
     "mandatory" : "no",
-    "viewConditionally" : "",
     "valueChange" : true,
     "editConditionally" : {
       "qbName" : "Requester_Rights_Fields",
@@ -775,7 +760,6 @@ isAutoSuggestCallFired: boolean = false;
     "label" : " Functional Network ",
     "searchable" : "full_word",
     "transientField" : false,
-    "conditionalMandatory" : "",
     "field" : "functionalNetwork",
     "multipleValuesMin" : 0,
     "name" : "functionalNetwork",
@@ -860,6 +844,7 @@ isAutoSuggestCallFired: boolean = false;
     "defaultField" : false,
     "fieldName" : "NameCode",
     "data" : "namecode",
+    "multipleValuesMax" : 10,
     "currentNode" : "8129982e-32f6-4c2d-9f89-1bf17f47c983",
     "label" : "NameCode",
     "type" : "formField",
@@ -867,6 +852,7 @@ isAutoSuggestCallFired: boolean = false;
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "namecode",
+    "multipleValuesMin" : 0,
     "valueChange" : true,
     "name" : "namecode",
     "editConditionally" : {
@@ -938,6 +924,7 @@ isAutoSuggestCallFired: boolean = false;
     "defaultField" : false,
     "fieldName" : " Project or Activity",
     "data" : " Project or Activity",
+    "multipleValuesMax" : 10,
     "currentNode" : "9ea4567d-9e20-4a4e-b49d-8552ebc84bbf",
     "label" : " Project or Activity",
     "type" : "formField",
@@ -945,6 +932,7 @@ isAutoSuggestCallFired: boolean = false;
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "projectOrActivity",
+    "multipleValuesMin" : 0,
     "valueChange" : true,
     "name" : "projectOrActivity",
     "editConditionally" : {
@@ -975,14 +963,6 @@ isAutoSuggestCallFired: boolean = false;
     "field" : "prjOaCode",
     "valueChange" : true,
     "name" : "prjOaCode",
-    "editConditionally" : {
-      "qbName" : "Requester_Rights_Fields",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ ]
-      },
-      "roles" : [ "selected", "Requester ", "Admin" ]
-    },
     "sysGen" : false,
     "uiType" : "text",
     "fieldType" : "string",
@@ -1107,14 +1087,6 @@ isAutoSuggestCallFired: boolean = false;
     "multipleValuesMin" : 0,
     "valueChange" : true,
     "name" : "serviceType",
-    "editConditionally" : {
-      "qbName" : "Requester_Rights_Fields",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ ]
-      },
-      "roles" : [ ]
-    },
     "sysGen" : false,
     "uiType" : "select",
     "fieldType" : "string",
@@ -1269,7 +1241,7 @@ isAutoSuggestCallFired: boolean = false;
     "lookupUrl" : "labs/autosuggest",
     "currentNode" : "f059b3b1-37dc-4add-b876-04ee5c4cb964",
     "type" : "formField",
-    "mandatory" : "conditional",
+    "mandatory" : "no",
     "viewConditionally" : {
       "qbName" : "Requester_Rights_Fields",
       "query" : {
@@ -1290,16 +1262,9 @@ isAutoSuggestCallFired: boolean = false;
       "qbName" : "Requester_Rights_Fields",
       "query" : {
         "condition" : "and",
-        "rules" : [ {
-          "lhsTableName" : "request",
-          "rhsTableName" : "",
-          "custom" : true,
-          "label" : "serviceType",
-          "value" : "EMC",
-          "operator" : "="
-        } ]
+        "rules" : [ ]
       },
-      "roles" : [ "all" ]
+      "roles" : [ "selected", "Requester " ]
     },
     "sysGen" : false,
     "fieldId" : "emcLab",
@@ -1360,21 +1325,6 @@ isAutoSuggestCallFired: boolean = false;
     "label" : "EMC Lab",
     "searchable" : "full_word",
     "transientField" : false,
-    "conditionalMandatory" : {
-      "qbName" : "Requester_Rights_Fields",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ {
-          "lhsTableName" : "request",
-          "rhsTableName" : "",
-          "custom" : true,
-          "label" : "serviceType",
-          "value" : "EMC",
-          "operator" : "="
-        } ]
-      },
-      "roles" : [ "selected", "Requester ", "Approver", "Admin" ]
-    },
     "field" : "emcLab",
     "multipleValuesMin" : 0,
     "name" : "emcLab",
@@ -1384,31 +1334,15 @@ isAutoSuggestCallFired: boolean = false;
     "allowViewing" : "conditional"
   }, {
     "allowEditing" : "conditional",
-    "allowedValues" : {
-      "values" : [ {
-        "label" : "VALUE1_FROM_DESIGNTOOL_TABLE",
-        "value" : "VALUE1_FROM_DESIGNTOOL_TABLE"
-      } ],
-      "conditions" : {
-        "conditionType" : "Auto",
-        "conditions" : [ ]
-      }
-    },
-    "defaultField" : false,
+    "multipleValues" : false,
+    "lookupTo" : "c9c62a29-bd0b-49dd-a5d9-6a6f44cb4ec4",
     "fieldName" : " Task Type",
     "data" : " Task Type",
-    "multipleValuesMax" : 10,
+    "lookupUrl" : "tooldesigntypes/autosuggest",
     "currentNode" : "be8e0685-73a0-4783-85e1-ec9134fbc7ab",
-    "label" : " Task Type",
     "type" : "formField",
     "mandatory" : "conditional",
-    "searchable" : "full_word",
-    "transientField" : false,
-    "field" : "taskType",
-    "multipleValuesMin" : 0,
-    "valueChange" : true,
-    "name" : "taskType",
-    "editConditionally" : {
+    "viewConditionally" : {
       "qbName" : "Requester_Rights_Fields",
       "query" : {
         "condition" : "and",
@@ -1421,13 +1355,42 @@ isAutoSuggestCallFired: boolean = false;
           "operator" : "="
         } ]
       },
-      "roles" : [ "selected", "Requester ", "Admin" ]
+      "roles" : [ "all" ]
+    },
+    "valueChange" : true,
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ ]
     },
     "sysGen" : false,
-    "uiType" : "select",
-    "fieldType" : "string",
-    "allowViewing" : "conditional",
-    "fieldId" : "taskType"
+    "fieldId" : "taskType",
+    "allowedValues" : {
+      "values" : [ {
+        "label" : "VALUE1_FROM_DESIGNTOOL_TABLE",
+        "value" : "VALUE1_FROM_DESIGNTOOL_TABLE"
+      } ],
+      "conditions" : {
+        "conditionType" : "Auto",
+        "conditions" : [ ]
+      }
+    },
+    "defaultField" : false,
+    "multipleValuesMax" : 10,
+    "lookupType" : "table",
+    "label" : " Task Type",
+    "searchable" : "full_word",
+    "transientField" : false,
+    "field" : "taskType",
+    "multipleValuesMin" : 0,
+    "name" : "taskType",
+    "uiType" : "autosuggest",
+    "displayField" : "toolDesignType",
+    "fieldType" : "any",
+    "allowViewing" : "conditional"
   }, {
     "allowEditing" : "conditional",
     "allowedValues" : { },
@@ -1468,10 +1431,7 @@ isAutoSuggestCallFired: boolean = false;
     "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
-    "field" : "projectNameAsInEdrm",
-    "valueChange" : true,
-    "name" : "projectNameAsInEdrm",
-    "editConditionally" : {
+    "viewConditionally" : {
       "qbName" : "Requester_Rights_Fields",
       "query" : {
         "condition" : "and",
@@ -1484,15 +1444,59 @@ isAutoSuggestCallFired: boolean = false;
           "operator" : "="
         } ]
       },
-      "roles" : [ "selected", "Requester ", "Admin" ]
+      "roles" : [ ]
+    },
+    "field" : "projectNameAsInEdrm",
+    "valueChange" : true,
+    "name" : "projectNameAsInEdrm",
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ "selected", "Requester " ]
     },
     "sysGen" : false,
     "uiType" : "text",
     "fieldType" : "string",
-    "allowViewing" : "yes",
+    "allowViewing" : "conditional",
     "fieldId" : "projectNameAsInEdrm"
   }, {
     "allowEditing" : "conditional",
+    "lookupTo" : "642e438e-dd81-49a6-9393-aecb24a31c8f",
+    "fieldName" : " Project type",
+    "data" : " Project type",
+    "lookupUrl" : "projecttypes/autosuggest",
+    "currentNode" : "e2a955b1-17cc-45f0-b2cb-ecc4d016f7ee",
+    "type" : "formField",
+    "mandatory" : "yes",
+    "viewConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ {
+          "lhsTableName" : "request",
+          "rhsTableName" : "",
+          "custom" : true,
+          "label" : "serviceType",
+          "value" : "ECAD",
+          "operator" : "="
+        } ]
+      },
+      "roles" : [ "all" ]
+    },
+    "valueChange" : true,
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ ]
+    },
+    "sysGen" : false,
+    "fieldId" : "projectType",
     "allowedValues" : {
       "values" : [ {
         "label" : "VALUE1_FROM_PR_TABLE",
@@ -1503,36 +1507,60 @@ isAutoSuggestCallFired: boolean = false;
       } ],
       "conditions" : {
         "conditionType" : "Auto",
-        "conditions" : [ ]
+        "conditions" : [ {
+          "id" : "Value1 from PR table",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : " Project type",
+              "operator" : "==",
+              "value" : "Value1 from PR table"
+            } ]
+          },
+          "style" : {
+            "background-color" : "#E544FF33",
+            "color" : "#E544FF",
+            "cell-background-color" : "#ffffff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333333"
+          }
+        }, {
+          "id" : "Value2 from PR table ",
+          "query" : {
+            "condition" : "and",
+            "rules" : [ {
+              "field" : " Project type",
+              "operator" : "==",
+              "value" : "Value2 from PR table "
+            } ]
+          },
+          "style" : {
+            "background-color" : "#8220FF33",
+            "color" : "#8220FF",
+            "cell-background-color" : "#ffffff",
+            "text-align" : "center",
+            "showText" : true,
+            "icon" : "",
+            "iconColor" : "#333333"
+          }
+        } ]
       }
     },
     "defaultField" : false,
-    "fieldName" : " Project type",
-    "data" : " Project type",
     "multipleValuesMax" : 10,
-    "currentNode" : "e2a955b1-17cc-45f0-b2cb-ecc4d016f7ee",
+    "lookupType" : "table",
     "label" : " Project type",
-    "type" : "formField",
-    "mandatory" : "conditional",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "projectType",
     "multipleValuesMin" : 0,
-    "valueChange" : true,
     "name" : "projectType",
-    "editConditionally" : {
-      "qbName" : "Requester_Rights_Fields",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ ]
-      },
-      "roles" : [ "selected", "Admin", "Scheduler" ]
-    },
-    "sysGen" : false,
-    "uiType" : "select",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "projectType"
+    "uiType" : "autosuggest",
+    "displayField" : "projectType",
+    "fieldType" : "any",
+    "allowViewing" : "conditional"
   }, {
     "allowEditing" : "conditional",
     "allowedValues" : { },
@@ -1545,10 +1573,7 @@ isAutoSuggestCallFired: boolean = false;
     "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
-    "field" : "areLeftRightDesign",
-    "valueChange" : true,
-    "name" : "areLeftRightDesign",
-    "editConditionally" : {
+    "viewConditionally" : {
       "qbName" : "Requester_Rights_Fields",
       "query" : {
         "condition" : "and",
@@ -1561,12 +1586,23 @@ isAutoSuggestCallFired: boolean = false;
           "operator" : "="
         } ]
       },
-      "roles" : [ "selected", "Requester ", "Admin" ]
+      "roles" : [ "all" ]
+    },
+    "field" : "areLeftRightDesign",
+    "valueChange" : true,
+    "name" : "areLeftRightDesign",
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ ]
     },
     "sysGen" : false,
     "uiType" : "text",
     "fieldType" : "string",
-    "allowViewing" : "yes",
+    "allowViewing" : "conditional",
     "fieldId" : "areLeftRightDesign"
   }, {
     "allowEditing" : "conditional",
@@ -1577,13 +1613,10 @@ isAutoSuggestCallFired: boolean = false;
     "currentNode" : "91d2a417-e5cd-4516-b653-41bf952f9f01",
     "label" : " Board Name ",
     "type" : "formField",
-    "mandatory" : "no",
+    "mandatory" : "conditional",
     "searchable" : "full_word",
     "transientField" : false,
-    "field" : "boardName",
-    "valueChange" : true,
-    "name" : "boardName",
-    "editConditionally" : {
+    "viewConditionally" : {
       "qbName" : "Requester_Rights_Fields",
       "query" : {
         "condition" : "and",
@@ -1596,12 +1629,23 @@ isAutoSuggestCallFired: boolean = false;
           "operator" : "="
         } ]
       },
-      "roles" : [ "selected", "Requester ", "Admin" ]
+      "roles" : [ "all" ]
+    },
+    "field" : "boardName",
+    "valueChange" : true,
+    "name" : "boardName",
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ ]
     },
     "sysGen" : false,
     "uiType" : "text",
     "fieldType" : "string",
-    "allowViewing" : "yes",
+    "allowViewing" : "conditional",
     "fieldId" : "boardName"
   }, {
     "allowEditing" : "conditional",
@@ -1612,13 +1656,10 @@ isAutoSuggestCallFired: boolean = false;
     "currentNode" : "04089a8e-ed07-4a6f-aa5a-66e4c28ac1f6",
     "label" : "Board Number",
     "type" : "formField",
-    "mandatory" : "no",
+    "mandatory" : "conditional",
     "searchable" : "full_word",
     "transientField" : false,
-    "field" : "boardNumber",
-    "valueChange" : true,
-    "name" : "boardNumber",
-    "editConditionally" : {
+    "viewConditionally" : {
       "qbName" : "Requester_Rights_Fields",
       "query" : {
         "condition" : "and",
@@ -1631,16 +1672,58 @@ isAutoSuggestCallFired: boolean = false;
           "operator" : "="
         } ]
       },
+      "roles" : [ "all" ]
+    },
+    "field" : "boardNumber",
+    "valueChange" : true,
+    "name" : "boardNumber",
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
       "roles" : [ "selected", "Requester ", "Admin" ]
     },
     "sysGen" : false,
     "uiType" : "number",
     "fieldType" : "number",
-    "allowViewing" : "yes",
+    "allowViewing" : "conditional",
     "fieldId" : "boardNumber"
   }, {
     "allowEditing" : "conditional",
     "multipleValues" : false,
+    "fieldName" : " Panelization",
+    "data" : " Panelization",
+    "currentNode" : "3e63ce12-4ced-4914-a345-0ef8b27626ca",
+    "type" : "formField",
+    "mandatory" : "no",
+    "viewConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ {
+          "lhsTableName" : "request",
+          "rhsTableName" : "",
+          "custom" : true,
+          "label" : "serviceType",
+          "value" : "ECAD",
+          "operator" : "="
+        } ]
+      },
+      "roles" : [ ]
+    },
+    "valueChange" : true,
+    "editConditionally" : {
+      "qbName" : "Requester_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ ]
+    },
+    "sysGen" : false,
+    "fieldId" : "panelization",
     "allowedValues" : {
       "values" : [ {
         "label" : "YES",
@@ -1655,39 +1738,16 @@ isAutoSuggestCallFired: boolean = false;
       }
     },
     "defaultField" : false,
-    "fieldName" : " Panelization",
-    "data" : " Panelization",
     "multipleValuesMax" : 10,
-    "currentNode" : "3e63ce12-4ced-4914-a345-0ef8b27626ca",
     "label" : " Panelization",
-    "type" : "formField",
-    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "panelization",
     "multipleValuesMin" : 0,
-    "valueChange" : true,
     "name" : "panelization",
-    "editConditionally" : {
-      "qbName" : "Requester_Rights_Fields",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ {
-          "lhsTableName" : "request",
-          "rhsTableName" : "",
-          "custom" : true,
-          "label" : "serviceType",
-          "value" : "ECAD",
-          "operator" : "="
-        } ]
-      },
-      "roles" : [ "selected", "Requester ", "Admin" ]
-    },
-    "sysGen" : false,
     "uiType" : "select",
     "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "panelization"
+    "allowViewing" : "conditional"
   }, {
     "allowEditing" : "conditional",
     "allowedValues" : { },
@@ -2512,7 +2572,6 @@ isAutoSuggestCallFired: boolean = false;
 	projectNameAsInEdrm: new FormControl('',[]),
 	panelization: new FormControl('',[]),
 	prjOaCode: new FormControl('',[]),
-	projectType: new FormControl('',[]),
 	schedulerProposedStartDate: new FormControl('',[]),
 	schedulerProposedEndDate: new FormControl('',[]),
 	schedulerAdditionalInformation: new FormControl('',[]),
@@ -2531,6 +2590,7 @@ isAutoSuggestCallFired: boolean = false;
 	orgalocToBeInvoiced: new FormControl('',[]),
 	additionnalCost: new FormControl('',[]),
 	leadPlaceOfDevelopment: new FormControl('',[]),
+	projectType: new FormControl('',[Validators.required]),
 	linkToQuotation: new FormControl('',[]),
 	budgetManpower2: new FormControl('',[]),
 	requesterOrgaloc: new FormControl('',[]),
@@ -2575,129 +2635,9 @@ if(!this.isAutoSuggestCallFired){
 			this.clearValidations(this.mandatoryFields);
 	})
 }
-	attachInfiniteScrollForAutoCompletewatcher(fieldName:string) {
-    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
-    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
-      return Math.round(tracker.scrollTop);
-    }));
-
-    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
-      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
-        this.isAutoSuggestCallFired = false;
-          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
-            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
-          }
-         const methodName: any = `autoSuggestSearchwatcher`
-        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
-        this[action]();
-      }
-    });
-    // this.subscriptions.push(autoSuggestScrollSubscription);
-  }
-	attachInfiniteScrollForAutoCompletesecondPlaceOfDevelopment(fieldName:string) {
-    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
-    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
-      return Math.round(tracker.scrollTop);
-    }));
-
-    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
-      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
-        this.isAutoSuggestCallFired = false;
-          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
-            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
-          }
-         const methodName: any = `autoSuggestSearchsecondPlaceOfDevelopment`
-        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
-        this[action]();
-      }
-    });
-    // this.subscriptions.push(autoSuggestScrollSubscription);
-  }
-	getId(){
-      this.activatedRoute.queryParams.subscribe((params: any) => { 
-        this.id = params['id'];
-        this.pid = params['pid']
-      }); 
-    }
-	formValueChanges() {
-    this.detailFormControls.valueChanges.pipe(
-      debounceTime(600),
-      distinctUntilChanged(),
-    )
-      .subscribe(() => {
-        this.updateAllowedActions();
-        this.isFormValueChanged = true;
-      })
-  }
 	getSelectedObject(field:string,options:any){
       const selectedObj = (options.filter((item: { label: any}) => item.label.includes(field)));
       return selectedObj[0];
-  }
-	onSave(isToastNotNeeded?:boolean){
-         let data = this.formatFormDataBeforeSave();
-        const finalArr:string[] = [];
-        this.formErrors = {};
-        this.inValidFields = {};
-        if(this.appUtilBaseService.isEqualIgnoreCase(data, this.backupData,[], true)){
-            this.showMessage({severity:'info', summary:'', detail:'No changes available to save'});
-            return;
-        }
-        if(!this.appUtilBaseService.isValidForm(this.detailFormControls, this.formErrors, finalArr, this.inValidFields)){
-            if(finalArr.length){
-                this.showMessage({severity:'error', summary:'Error', detail: this.appUtilBaseService.createNotificationList(finalArr), sticky : true});
-            }
-        }else{
-            const method = this.id ? 'update' : 'create';
-            data = {...this.backupData,...data}; //data.sid = this.id;
-            if(this.pid){
-              data.pid = this.pid;
-            }
-			const requestedObj = new Proxy(data, {
-			get: (obj, prop) => obj[prop] === ""|| (Array.isArray(obj[prop]) && obj[prop].length == 0) ? null : obj[prop],
-			});
-            this.messageService.clear();
-            this.requestService[method](requestedObj).subscribe((res:RequestBase) => {
-            this.backupData = {...data};
-            this.isSaveResponseReceived = true;
-            this.isFormValueChanged = false;
-	        this.id = res.sid;
-	        if (method === 'create') {
-	          this.router.navigate(
-	            [],
-	            {
-	              queryParams: {id:this.id},
-	              relativeTo: this.activatedRoute,
-	              queryParamsHandling: 'merge',
-	            }).then(()=>{this.onInit()});
-	          this.getId();
-	        }       
-             if(!isToastNotNeeded){
-            this.showMessage({severity:'success', summary:'', detail:'Record Saved Successfully'});
-          }
-          }, (err: any) => { this.isSaveResponseReceived = true; });
-        } 
-        
-    }
-	getWorkflowConfig() {
-	const workFlowInfo = this.data.workflowInfo;
-	const params = {
-		workflowType: this.workflowType
-	}
-	if(workFlowInfo && this.workFlowEnabled){
-		this.appBaseService.getWorkFlowConfig(params).subscribe((res: any) => {
-			this.securityJson = res.config;
-			this.configureFormOnWorkflow();
-		})
-	}
-}
-	clearValidations(mandatoryFields: []) {
-    mandatoryFields.forEach((controlName: string) => {
-      if (!(this.validatorsRetained[controlName] && this.validatorsRetained[controlName]['requiredValidator'])) {
-        this.detailFormControls.controls[controlName].removeValidators(Validators.required);
-        this.detailFormControls.controls[controlName].updateValueAndValidity();
-      }
-
-    })
   }
 	formatRawData() {
     this.detailFormConfig.children.map((ele: any) => {
@@ -2760,33 +2700,6 @@ if(!this.isAutoSuggestCallFired){
     this.autoSuggestPageNo = 0;
     this.isAutoSuggestCallFired = false;
   }
-	formatCaptionItems(config: any, data: any) {
-    if (Object.keys(data).length > 0) {
-      return (this.appUtilBaseService.formatRawDatatoRedableFormat(config, data[config.field]));
-    }
-    else {
-      return '';
-    }
-  }
-	attachInfiniteScrollForAutoCompleteemcLab(fieldName:string) {
-    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
-    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
-      return Math.round(tracker.scrollTop);
-    }));
-
-    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
-      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
-        this.isAutoSuggestCallFired = false;
-          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
-            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
-          }
-         const methodName: any = `autoSuggestSearchemcLab`
-        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
-        this[action]();
-      }
-    });
-    // this.subscriptions.push(autoSuggestScrollSubscription);
-  }
 	actionBarAction(btn: any) {
     const methodName: any = (`on` + btn.action.charAt(0).toUpperCase() + btn.action.slice(1));
     let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
@@ -2814,27 +2727,6 @@ if(!this.isAutoSuggestCallFired){
     })
 }
  }
-	onBack(){
-	this.messageService.clear();
-	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
-    const fields = Object.keys(this.backupData || {});
-    const technicalFields = fields.filter(function (obj) { return UsableFields.indexOf(obj) == -1; });
-     if (this.appUtilBaseService.isEqualIgnoreCase(this.backupData, this.detailFormControls.getRawValue(), technicalFields, true) || (fields.length <= 0 && ((Object.values(this.detailFormControls.getRawValue()))?.filter(Boolean))?.length <=0)) {		
-     this.location.back();
-	}else{
-		this.confirmationService.confirm({
-			message:'Do you want to discard all unsaved changes?',
-			header:'Confirmation',
-			icon:'pipi-info-circle',
-			accept:()=>{
-				this.backupData=JSON.parse(JSON.stringify(this.detailFormControls.getRawValue()));
-				this.location.back();
-			},
-			reject:()=>{
-			},
-		});
-	}
-}
 	workflowActionBarAction(btn: any) {
     const methodName: any = (`onwf` + btn.wfAction.charAt(0).toUpperCase() + btn.wfAction.slice(1));
     let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
@@ -2916,10 +2808,6 @@ addValidations(mandatoryFields:[]){
       }
     }, 3000);
   }
-	showMessage(config:any){
-    this.messageService.clear();
-    this.messageService.add(config);
-}
 	getData(){
        if(environment.prototype && this.id){
         const params = {
@@ -2943,9 +2831,19 @@ addValidations(mandatoryFields:[]){
             });
         }
     }
-	loadCaptionbarItems(){
-    
+	autoSuggestSearchprojectType(event?: any, col?: any,url?:any) {
+if(!this.isAutoSuggestCallFired){
+      this.isAutoSuggestCallFired = true;
+    let apiObj = Object.assign({}, ProjectTypeApiConstants.autoSuggestService)
+    apiObj.url = `${url ||apiObj.url}?query=${event.query}&pgNo=${this.autoSuggestPageNo}&pgLen=${BaseAppConstants.defaultPageSize}`;
+     this.baseService.get(apiObj).subscribe((res: any) => {
+      this.isAutoSuggestCallFired = false;
+      let updateRecords =  [...this.filteredItems, ...res];
+      const ids = updateRecords.map(o => o.sid)
+      this.filteredItems = updateRecords.filter(({ sid }, index) => !ids.includes(sid, index + 1));
+    })
 }
+ }
 	unSelect(event:any,field:string){
     this.selectedItems[field]?.forEach((item:any,index:number)=>{
         if(item.id === event.sid){
@@ -3000,6 +2898,25 @@ if(!this.isAutoSuggestCallFired){
 			this.clearValidations(this.mandatoryFields);
 	})
 }
+	attachInfiniteScrollForAutoCompletetaskType(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchtaskType`
+        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
 	onwfSubmit(){
 	const params = {id:this.id,
       comments:this.comments}
@@ -3079,20 +2996,6 @@ if(!this.isAutoSuggestCallFired){
       this.selectedItems[field][0] = model;
     }
   }
-	onwfDemoteToRequester(){
-	const params = {id:this.id,
-      comments:this.comments}
-	this.requestService.sslWorkflowDemoteToRequester(params).subscribe((res:any)=>{
-		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
-		if(Object.keys(this.mandatoryFields).length > 0){
-			this.clearValidations(this.mandatoryFields);
-		}
-		this.onInit();
-	},error=>{
-		if(Object.keys(this.mandatoryFields).length > 0)
-			this.clearValidations(this.mandatoryFields);
-	})
-}
 	restrictEditandView(ele:any,action:string,fieldName:string){
     const conResult = this.appUtilBaseService.evaluvateCondition(ele.query.rules, ele.query.condition,this.detailFormControls.getRawValue());
      if(action =='view'){
@@ -3113,6 +3016,246 @@ if(!this.isAutoSuggestCallFired){
       }
      }
    }
+	attachInfiniteScrollForAutoCompleteleadPlaceOfDevelopment(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchleadPlaceOfDevelopment`
+        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
+	attachInfiniteScrollForAutoCompletewatcher(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchwatcher`
+        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
+	attachInfiniteScrollForAutoCompletesecondPlaceOfDevelopment(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchsecondPlaceOfDevelopment`
+        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
+	getId(){
+      this.activatedRoute.queryParams.subscribe((params: any) => { 
+        this.id = params['id'];
+        this.pid = params['pid']
+      }); 
+    }
+	formValueChanges() {
+    this.detailFormControls.valueChanges.pipe(
+      debounceTime(600),
+      distinctUntilChanged(),
+    )
+      .subscribe(() => {
+        this.updateAllowedActions();
+        this.isFormValueChanged = true;
+      })
+  }
+	onSave(isToastNotNeeded?:boolean){
+         let data = this.formatFormDataBeforeSave();
+        const finalArr:string[] = [];
+        this.formErrors = {};
+        this.inValidFields = {};
+        if(this.appUtilBaseService.isEqualIgnoreCase(data, this.backupData,[], true)){
+            this.showMessage({severity:'info', summary:'', detail:'No changes available to save'});
+            return;
+        }
+        if(!this.appUtilBaseService.isValidForm(this.detailFormControls, this.formErrors, finalArr, this.inValidFields)){
+            if(finalArr.length){
+                this.showMessage({severity:'error', summary:'Error', detail: this.appUtilBaseService.createNotificationList(finalArr), sticky : true});
+            }
+        }else{
+            const method = this.id ? 'update' : 'create';
+            data = {...this.backupData,...data}; //data.sid = this.id;
+            if(this.pid){
+              data.pid = this.pid;
+            }
+			const requestedObj = new Proxy(data, {
+			get: (obj, prop) => obj[prop] === ""|| (Array.isArray(obj[prop]) && obj[prop].length == 0) ? null : obj[prop],
+			});
+            this.messageService.clear();
+            this.requestService[method](requestedObj).subscribe((res:RequestBase) => {
+            this.backupData = {...data};
+            this.isSaveResponseReceived = true;
+            this.isFormValueChanged = false;
+	        this.id = res.sid;
+	        if (method === 'create') {
+	          this.router.navigate(
+	            [],
+	            {
+	              queryParams: {id:this.id},
+	              relativeTo: this.activatedRoute,
+	              queryParamsHandling: 'merge',
+	            }).then(()=>{this.onInit()});
+	          this.getId();
+	        }       
+             if(!isToastNotNeeded){
+            this.showMessage({severity:'success', summary:'', detail:'Record Saved Successfully'});
+          }
+          }, (err: any) => { this.isSaveResponseReceived = true; });
+        } 
+        
+    }
+	getWorkflowConfig() {
+	const workFlowInfo = this.data.workflowInfo;
+	const params = {
+		workflowType: this.workflowType
+	}
+	if(workFlowInfo && this.workFlowEnabled){
+		this.appBaseService.getWorkFlowConfig(params).subscribe((res: any) => {
+			this.securityJson = res.config;
+			this.configureFormOnWorkflow();
+		})
+	}
+}
+	clearValidations(mandatoryFields: []) {
+    mandatoryFields.forEach((controlName: string) => {
+      if (!(this.validatorsRetained[controlName] && this.validatorsRetained[controlName]['requiredValidator'])) {
+        this.detailFormControls.controls[controlName].removeValidators(Validators.required);
+        this.detailFormControls.controls[controlName].updateValueAndValidity();
+      }
+
+    })
+  }
+	formatCaptionItems(config: any, data: any) {
+    if (Object.keys(data).length > 0) {
+      return (this.appUtilBaseService.formatRawDatatoRedableFormat(config, data[config.field]));
+    }
+    else {
+      return '';
+    }
+  }
+	attachInfiniteScrollForAutoCompleteemcLab(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchemcLab`
+        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
+	onBack(){
+	this.messageService.clear();
+	const UsableFields = Object.keys(this.detailFormControls.getRawValue());
+    const fields = Object.keys(this.backupData || {});
+    const technicalFields = fields.filter(function (obj) { return UsableFields.indexOf(obj) == -1; });
+     if (this.appUtilBaseService.isEqualIgnoreCase(this.backupData, this.detailFormControls.getRawValue(), technicalFields, true) || (fields.length <= 0 && ((Object.values(this.detailFormControls.getRawValue()))?.filter(Boolean))?.length <=0)) {		
+     this.location.back();
+	}else{
+		this.confirmationService.confirm({
+			message:'Do you want to discard all unsaved changes?',
+			header:'Confirmation',
+			icon:'pipi-info-circle',
+			accept:()=>{
+				this.backupData=JSON.parse(JSON.stringify(this.detailFormControls.getRawValue()));
+				this.location.back();
+			},
+			reject:()=>{
+			},
+		});
+	}
+}
+	showMessage(config:any){
+    this.messageService.clear();
+    this.messageService.add(config);
+}
+	autoSuggestSearchtaskType(event?: any, col?: any,url?:any) {
+if(!this.isAutoSuggestCallFired){
+      this.isAutoSuggestCallFired = true;
+    let apiObj = Object.assign({}, ToolDesignTypeApiConstants.autoSuggestService)
+    apiObj.url = `${url ||apiObj.url}?query=${event.query}&pgNo=${this.autoSuggestPageNo}&pgLen=${BaseAppConstants.defaultPageSize}`;
+     this.baseService.get(apiObj).subscribe((res: any) => {
+      this.isAutoSuggestCallFired = false;
+      let updateRecords =  [...this.filteredItems, ...res];
+      const ids = updateRecords.map(o => o.sid)
+      this.filteredItems = updateRecords.filter(({ sid }, index) => !ids.includes(sid, index + 1));
+    })
+}
+ }
+	loadCaptionbarItems(){
+    
+}
+	attachInfiniteScrollForAutoCompleteprojectType(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchprojectType`
+        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
+	onwfDemoteToRequester(){
+	const params = {id:this.id,
+      comments:this.comments}
+	this.requestService.sslWorkflowDemoteToRequester(params).subscribe((res:any)=>{
+		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
+		if(Object.keys(this.mandatoryFields).length > 0){
+			this.clearValidations(this.mandatoryFields);
+		}
+		this.onInit();
+	},error=>{
+		if(Object.keys(this.mandatoryFields).length > 0)
+			this.clearValidations(this.mandatoryFields);
+	})
+}
 	formatFormDataBeforeSave() {
     let data = this.detailFormControls.getRawValue();
     if (this.detailFormConfig?.children) {
@@ -3173,25 +3316,6 @@ if(!this.isAutoSuggestCallFired){
 			this.clearValidations(this.mandatoryFields);
 	})
 }
-	attachInfiniteScrollForAutoCompleteleadPlaceOfDevelopment(fieldName:string) {
-    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
-    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
-      return Math.round(tracker.scrollTop);
-    }));
-
-    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
-      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
-        this.isAutoSuggestCallFired = false;
-          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
-            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
-          }
-         const methodName: any = `autoSuggestSearchleadPlaceOfDevelopment`
-        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
-        this[action]();
-      }
-    });
-    // this.subscriptions.push(autoSuggestScrollSubscription);
-  }
 	onwfApproveToLeader(){
 	const params = {id:this.id,
       comments:this.comments}

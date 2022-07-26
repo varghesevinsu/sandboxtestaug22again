@@ -336,6 +336,16 @@ isRowSelected: boolean = false;
     "fieldId" : "enabledLab"
   }, {
     "allowEditing" : "yes",
+    "fieldName" : "Specific Fields",
+    "data" : "Specific Fields",
+    "currentNode" : "Specific Fields",
+    "showOnMobile" : "true",
+    "type" : "datamodelField",
+    "mandatory" : "no",
+    "defaultVal" : "N/A",
+    "valueChange" : true,
+    "sysGen" : false,
+    "fieldId" : "specificFields",
     "allowedValues" : {
       "values" : [ {
         "label" : "EMC",
@@ -353,25 +363,17 @@ isRowSelected: boolean = false;
       }
     },
     "defaultField" : false,
-    "fieldName" : "Specific Fields",
-    "data" : "Specific Fields",
-    "currentNode" : "Specific Fields",
-    "showOnMobile" : "true",
+    "multipleValuesMax" : 10,
     "label" : "Specific Fields",
-    "type" : "datamodelField",
-    "mandatory" : "no",
     "searchable" : "full_word",
     "transientField" : false,
-    "defaultVal" : "N/A",
     "field" : "specificFields",
-    "valueChange" : true,
+    "multipleValuesMin" : 0,
     "name" : "specificFields",
-    "sysGen" : false,
     "width" : "120px",
     "uiType" : "select",
     "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "specificFields"
+    "allowViewing" : "yes"
   }, {
     "allowEditing" : "yes",
     "multipleValues" : false,

@@ -160,6 +160,24 @@
 			}
 		}
 	}
+	.projectType{
+		&.condition-0{
+			background-color : #ffffff;
+			.conditional{
+			    background-color : #E544FF33;
+			    color : #E544FF;
+			    text-align : center;
+			}
+		}
+		&.condition-1{
+			background-color : #ffffff;
+			.conditional{
+			    background-color : #8220FF33;
+			    color : #8220FF;
+			    text-align : center;
+			}
+		}
+	}
 	.emcLab{
 		&.condition-0{
 			background-color : #fff;
