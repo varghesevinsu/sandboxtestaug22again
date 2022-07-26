@@ -41,7 +41,7 @@ import com.vs.eva.gcs.CloudStorage;
 import com.eva.base.factory.StorageFactory;
 import com.eva.base.rest.authproviders.APIAuthProviderFactory;
 import com.eva.base.rest.authproviders.OAuth2APIAuthProvider;
-import com.valeo.sslnextgen.integrations.rest.str.StrRestAPIProvider;
+// import com.valeo.sslnextgen.integrations.rest.str.StrRestAPIProvider;
 
 
 public abstract class BaseApplicationListener implements EvaApplicationListener {	
@@ -103,7 +103,7 @@ private XLogger LOGGER = XLoggerFactory.getXLogger(BaseApplicationListener.class
 
 	@Override
 	public void initializeRESTAPIProviders() {
-		StrRestAPIProvider.init();
+		// StrRestAPIProvider.init();
 	}
 	
 	@Override
