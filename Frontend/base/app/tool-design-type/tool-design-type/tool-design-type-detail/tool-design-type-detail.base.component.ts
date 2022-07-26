@@ -166,6 +166,7 @@ isRowSelected:boolean = true;
     "label" : "TOOL DESIGN TYPE",
     "type" : "formField",
     "mandatory" : "yes",
+    "searchable" : "full_word",
     "field" : "toolDesignType",
     "name" : "toolDesignType",
     "sysGen" : false,
