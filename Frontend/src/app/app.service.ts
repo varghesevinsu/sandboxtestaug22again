@@ -8,7 +8,7 @@ import { ApiConstants } from "./api.constants";
 export class AppService extends AppBaseService {
     getManPowerByAll(...args: any):Observable<any>{
         const serviceOpts = ApiConstants.getManPowerByAll;
-        const params= args;
+        const params= args[0];
         return this.baseService.get(serviceOpts,params);
     }
 }
