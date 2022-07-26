@@ -24,7 +24,36 @@ public abstract class RequestPerimeterBaseImpl<T extends RequestBase> implements
 	public boolean canCreate(T model) {
 		ApplicationUserBase userBase = (ApplicationUserBase) userCache.getCurrentUser();
 		if (userBase.isDevAdmin()) { return true; }
-		
+			
+				if(userBase.isLeader()){
+					return true;
+				}	
+
+	
+				if(userBase.isScheduler()){
+					return true;
+				}	
+
+	
+				if(userBase.isApprover()){
+					return true;
+				}	
+
+	
+				if(userBase.isViewer()){
+					return true;
+				}	
+
+	
+				if(userBase.isAdmin()){
+					return true;
+				}	
+
+	
+				if(userBase.isRequester()){
+					return true;
+				}	
+
 		return false;
 	}
 
@@ -32,7 +61,36 @@ public abstract class RequestPerimeterBaseImpl<T extends RequestBase> implements
 	public boolean canUpdate(T model) {
 		ApplicationUserBase userBase = (ApplicationUserBase) userCache.getCurrentUser();
 		if (userBase.isDevAdmin()) { return true; }
-		
+			
+				if(userBase.isLeader()){
+					return true;
+				}	
+
+	
+				if(userBase.isScheduler()){
+					return true;
+				}	
+
+	
+				if(userBase.isApprover()){
+					return true;
+				}	
+
+	
+				if(userBase.isViewer()){
+					return true;
+				}	
+
+	
+				if(userBase.isAdmin()){
+					return true;
+				}	
+
+	
+				if(userBase.isRequester()){
+					return true;
+				}	
+
 		return false;
 	}
 
@@ -40,7 +98,36 @@ public abstract class RequestPerimeterBaseImpl<T extends RequestBase> implements
 	public boolean canDelete(T model) {
 		ApplicationUserBase userBase = (ApplicationUserBase) userCache.getCurrentUser();
 		if (userBase.isDevAdmin()) { return true; }
-		
+			
+				if(userBase.isLeader()){
+					return true;
+				}	
+
+	
+				if(userBase.isScheduler()){
+					return true;
+				}	
+
+	
+				if(userBase.isApprover()){
+					return true;
+				}	
+
+	
+				if(userBase.isViewer()){
+					return true;
+				}	
+
+	
+				if(userBase.isAdmin()){
+					return true;
+				}	
+
+	
+				if(userBase.isRequester()){
+					return true;
+				}	
+
 		return false;
 	}
 
@@ -48,7 +135,36 @@ public abstract class RequestPerimeterBaseImpl<T extends RequestBase> implements
 	public boolean canRead(T model) {
 		ApplicationUserBase userBase = (ApplicationUserBase) userCache.getCurrentUser();
 		if (userBase.isDevAdmin()) { return true; }
-		
+			
+				if(userBase.isLeader()){
+					return true;
+				}	
+
+	
+				if(userBase.isScheduler()){
+					return (FieldUtils.equals(model.getScheduler(), userBase.getEmail()));
+				}	
+
+	
+				if(userBase.isApprover()){
+					return true;
+				}	
+
+	
+				if(userBase.isViewer()){
+					return true;
+				}	
+
+	
+				if(userBase.isAdmin()){
+					return true;
+				}	
+
+	
+				if(userBase.isRequester()){
+					return true;
+				}	
+
 		return false;
 	}
 
@@ -75,32 +191,32 @@ public abstract class RequestPerimeterBaseImpl<T extends RequestBase> implements
 			return;
 		}
 					if (userBase.isLeader()) {
-			String[] readFields = new String[] {"boardNumber","name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","panelization","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","dummy2","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","boardName","globalBudget","additionnalCost","areLeftRightDesign","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","projectNameAsInEdrm","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","projectType","requesterOrgaloc","subCode","requestName","linkToQuotation","emcLab","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
+			String[] readFields = new String[] {"name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","globalBudget","additionnalCost","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","requesterOrgaloc","subCode","requestName","linkToQuotation","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"boardNumber","name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","panelization","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","dummy2","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","boardName","globalBudget","additionnalCost","areLeftRightDesign","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","projectNameAsInEdrm","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","projectType","requesterOrgaloc","subCode","requestName","linkToQuotation","emcLab","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
+			String[] readFields = new String[] {"name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","globalBudget","additionnalCost","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","requesterOrgaloc","subCode","requestName","linkToQuotation","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isApprover()) {
-			String[] readFields = new String[] {"boardNumber","name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","panelization","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","dummy2","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","boardName","globalBudget","additionnalCost","areLeftRightDesign","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","projectNameAsInEdrm","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","projectType","requesterOrgaloc","subCode","requestName","linkToQuotation","emcLab","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
+			String[] readFields = new String[] {"name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","globalBudget","additionnalCost","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","requesterOrgaloc","subCode","requestName","linkToQuotation","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"boardNumber","name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","panelization","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","dummy2","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","boardName","globalBudget","additionnalCost","areLeftRightDesign","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","projectNameAsInEdrm","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","projectType","requesterOrgaloc","subCode","requestName","linkToQuotation","emcLab","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
+			String[] readFields = new String[] {"name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","globalBudget","additionnalCost","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","requesterOrgaloc","subCode","requestName","linkToQuotation","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isAdmin()) {
-			String[] readFields = new String[] {"boardNumber","name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","panelization","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","dummy2","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","boardName","globalBudget","additionnalCost","areLeftRightDesign","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","projectNameAsInEdrm","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","projectType","requesterOrgaloc","subCode","requestName","linkToQuotation","emcLab","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
+			String[] readFields = new String[] {"name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","globalBudget","additionnalCost","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","requesterOrgaloc","subCode","requestName","linkToQuotation","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isRequester()) {
-			String[] readFields = new String[] {"boardNumber","name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","panelization","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","dummy2","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","boardName","globalBudget","additionnalCost","areLeftRightDesign","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","projectNameAsInEdrm","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","projectType","requesterOrgaloc","subCode","requestName","linkToQuotation","emcLab","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
+			String[] readFields = new String[] {"name","orgalocToBeInvoiced","commentsTravelExtraCosts","tasks","businessController","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","budgetManpower2","statusOfTheRequest","osaNameToBeCreatedInStr","commentsToolExtraCosts","hoursTool","prjOaEntity","dummyTest3","projectManagerOrActivityLeader","schedulerName","internalPoNumber","otherBudget2","nameOfTheRequest","stCodeLocation","prjOaCode","schedulerAdditionalInformation","modifiedDate","travelExtraCosts","budgetManpower","currency","additionnalCost2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","leader","rate","schedulerProposedStartDate","metier","namecode","schedulerProposedEndDate","otherActivityCode","subName","sapTypeOfCostForInternal","leadPlaceOfDevelopment","sid","globalBudget","additionnalCost","requestCode","location","prOrActivityName","rateManpower2","osaStatus","projectOrActivity","functionalNetwork","toolExtraCosts","technicalOffredBy","hoursManpower","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","hoursManpower2","extraCost","prjOaPm","budget","requestedStartDate","quoteNo","secondPlaceOfDevelopment","closingDate","quotationDescription","hours","additionalInformation","serviceType","intercoPartnerCode","estimatedDurationInHours","sapCategory","requesterOrgaloc","subCode","requestName","linkToQuotation","totalBudget2","schedulerCurrency","linkToSpecifications","tasks2","dummy","modifiedBy","requester","scheduler","rateManpower"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
@@ -115,32 +231,32 @@ public abstract class RequestPerimeterBaseImpl<T extends RequestBase> implements
 			return;
 		}
 					if (userBase.isLeader()) {
-			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","dummy2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","hours","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
+			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isScheduler()) {
-			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","dummy2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","hours","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
+			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isApprover()) {
-			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","dummy2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","hours","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
+			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","dummy2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","hours","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
+			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isAdmin()) {
-			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","dummy2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","hours","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
+			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isRequester()) {
-			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","dummy2","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","hours","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
+			String[] readFields = new String[] {"commentsTravelExtraCosts","tasks","totalBudget","budgetTool","place","otherSubActivityStatus","tool","createdDate","commentsToolExtraCosts","hoursTool","dummyTest3","internalPoNumber","stCodeLocation","modifiedDate","travelExtraCosts","createdBy","budgetTool2","purchasingEntityCode","sapTypeOfCostForExternal","test2","sapRdCost","selletEntityCode","watcher","rate","metier","otherActivityCode","sapTypeOfCostForInternal","sid","location","prOrActivityName","rateManpower2","osaStatus","toolExtraCosts","technicalOffredBy","stCodeLocation2","bgStr","otherBudget","requestedEndDate","hoursTool2","extraCost","budget","requestedStartDate","closingDate","serviceType","intercoPartnerCode","sapCategory","subCode","tasks2","dummy","modifiedBy"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
@@ -192,11 +308,14 @@ if(userPrivilege.isRequester()){
 	public List<String> getUserTypeFromModel(UserPrivilege userPrivilegeBase, T model, WorkflowMetaInfo metaInfo) {
 		List<String> userTypes = new ArrayList<>();
 		ApplicationUserBase userPrivilege = (ApplicationUserBase) userPrivilegeBase;
-		if(userPrivilege.getEmail().equals(model.getScheduler())){
-	userTypes.add("scheduler");
+		if(userPrivilege.getEmail().equals(model.getRequester())){
+	userTypes.add("requester");
 }
 if(userPrivilege.getEmail().equals(model.getLeader())){
 	userTypes.add("leader");
+}
+if(userPrivilege.getEmail().equals(model.getScheduler())){
+	userTypes.add("scheduler");
 }
 
 		return userTypes;

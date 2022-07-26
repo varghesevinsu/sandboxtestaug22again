@@ -408,48 +408,18 @@
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.taskType">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.taskType?.isRequired, 'error':inValidFields.taskType}">
-        <label for="taskType" class="col-form-label taskType-label" [textContent]="'TASK_TYPE'|translate"></label>  
-        <span class="info-bubble" *ngIf="formFieldConfig?.taskType?.infoBubble"   [pTooltip]="formFieldConfig?.taskType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
-        <p-dropdown [options]="formFieldConfig['taskType']?.options" formControlName="taskType"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.taskType?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
-            <ng-template pTemplate="selectedItem">
-                <ng-template #taskTypeSelectedRef let-conditions="conditions" let-option="option">
-                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
-                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
-                        <span  
-                            *ngIf="conditions?.iconClass" class="icon"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass"></i>
-                
-                        </span>
-                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-                <ng-container *ngIf="detailFormControls.controls.taskType.value; let selected;">
-                    <ng-template *ngTemplateOutlet="taskTypeSelectedRef;context:{conditions :formFieldConfig.taskType?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.taskType?.options)).value], option:(getSelectedObject(selected,formFieldConfig.taskType?.options))}"></ng-template>
-                </ng-container>
-            </ng-template>
-        
-            <ng-template let-dropdownItem pTemplate="item" >
-                <ng-template #taskTypeListRef let-conditions="conditions" let-option="option">
-                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
-                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
-                        <span
-                            *ngIf="conditions?.iconClass"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass" ></i>
-        
-                        </span>
-                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-        
-                <ng-container>
-                    <ng-template *ngTemplateOutlet="taskTypeListRef;context:{conditions :formFieldConfig.taskType?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
-                </ng-container>
-            </ng-template>
-        </p-dropdown>
+        <label for="taskType" class="col-form-label taskType-label" [textContent]="'TASK_TYPE'|translate"></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.taskType?.infoBubble"   [pTooltip]="formFieldConfig?.taskType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-autoComplete 
+            [placeholder]="formFieldConfig?.taskType?.placeHolder || 'Select'"
+            class="form-input" 
+            formControlName="taskType" 
+            [suggestions]="filteredItems" 
+            completeOnFocus="true" [dropdown]="true"
+           (onShow)="attachInfiniteScrollForAutoCompletetaskType('taskType')"             (completeMethod)="autoSuggestSearchtaskType($event,formFieldConfig?.taskType)"
+            [multiple]="formFieldConfig?.taskType?.multiple" (onHide)="deattachScroll()" [field]="(formFieldConfig?.taskType?.displayField)"
+             (onSelect)="onSelect($event,'taskType',formFieldConfig?.taskType)" (onUnselect)="unSelect($event,'taskType')" appendTo="body">
+        </p-autoComplete>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.taskType?.helpText || ''}}</div>
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.estimatedDurationInHours">
@@ -468,48 +438,18 @@
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.projectType">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.projectType?.isRequired, 'error':inValidFields.projectType}">
-        <label for="projectType" class="col-form-label projectType-label" [textContent]="'PROJECT_TYPE'|translate"></label>  
-        <span class="info-bubble" *ngIf="formFieldConfig?.projectType?.infoBubble"   [pTooltip]="formFieldConfig?.projectType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
-        <p-dropdown [options]="formFieldConfig['projectType']?.options" formControlName="projectType"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.projectType?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
-            <ng-template pTemplate="selectedItem">
-                <ng-template #projectTypeSelectedRef let-conditions="conditions" let-option="option">
-                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
-                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
-                        <span  
-                            *ngIf="conditions?.iconClass" class="icon"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass"></i>
-                
-                        </span>
-                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-                <ng-container *ngIf="detailFormControls.controls.projectType.value; let selected;">
-                    <ng-template *ngTemplateOutlet="projectTypeSelectedRef;context:{conditions :formFieldConfig.projectType?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.projectType?.options)).value], option:(getSelectedObject(selected,formFieldConfig.projectType?.options))}"></ng-template>
-                </ng-container>
-            </ng-template>
-        
-            <ng-template let-dropdownItem pTemplate="item" >
-                <ng-template #projectTypeListRef let-conditions="conditions" let-option="option">
-                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
-                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
-                        <span
-                            *ngIf="conditions?.iconClass"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass" ></i>
-        
-                        </span>
-                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-        
-                <ng-container>
-                    <ng-template *ngTemplateOutlet="projectTypeListRef;context:{conditions :formFieldConfig.projectType?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
-                </ng-container>
-            </ng-template>
-        </p-dropdown>
+        <label for="projectType" class="col-form-label projectType-label" [textContent]="'PROJECT_TYPE'|translate"></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.projectType?.infoBubble"   [pTooltip]="formFieldConfig?.projectType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-autoComplete 
+            [placeholder]="formFieldConfig?.projectType?.placeHolder || 'Select'"
+            class="form-input" 
+            formControlName="projectType" 
+            [suggestions]="filteredItems" 
+            completeOnFocus="true" [dropdown]="true"
+           (onShow)="attachInfiniteScrollForAutoCompleteprojectType('projectType')"             (completeMethod)="autoSuggestSearchprojectType($event,formFieldConfig?.projectType)"
+            [multiple]="formFieldConfig?.projectType?.multiple" (onHide)="deattachScroll()" [field]="(formFieldConfig?.projectType?.displayField)"
+             (onSelect)="onSelect($event,'projectType',formFieldConfig?.projectType)" (onUnselect)="unSelect($event,'projectType')" appendTo="body">
+        </p-autoComplete>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.projectType?.helpText || ''}}</div>
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.areLeftRightDesign">

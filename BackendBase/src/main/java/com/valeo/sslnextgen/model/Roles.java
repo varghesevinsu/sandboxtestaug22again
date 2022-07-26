@@ -7,7 +7,7 @@ public enum Roles {
 	DEVADMIN(7,"Development Administrator"),
 LEADER(5,"Leader"),
 APPROVER(2,"Approver"),
-SCHEDULER(4,"Scheduler "),
+SCHEDULER(4,"Scheduler"),
 ADMIN(1,"Admin"),
 REQUESTER(3,"Requester "),
 VIEWER(6,"Viewer");

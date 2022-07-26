@@ -17,7 +17,7 @@ public class StatusBase extends BaseModel {
 	private String dummyTest;
 	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
-	private StatusStatusoftherequest statusOfTheRequest;
+	private StatusStatusoftherequest statusOfTheRequest=StatusStatusoftherequest.DRAFT;
 
 	public void setTest3(String test3) {
 		this.test3 = test3;

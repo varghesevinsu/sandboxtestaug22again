@@ -7,6 +7,6 @@ import com.valeo.sslnextgen.base.logic.IManPowerBLBase;
 
 public interface IManPowerBL<T extends ManPowerBase> extends IManPowerBLBase<T> {
 
-	ManPower getByAll(String service, String site, String currency);
-
+    ManPower getByAll(String service, String site, String currency);
+    
 }

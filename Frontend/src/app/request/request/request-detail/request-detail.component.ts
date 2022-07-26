@@ -25,13 +25,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { AppBaseService } from '@baseapp/app.base.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { AppService } from '@app/app.service';
 import { RequestService } from '@baseapp/request/request/request.service';
 import { Component, OnInit } from '@angular/core';
 import { RequestDetailBaseComponent } from '@baseapp/request/request/request-detail/request-detail.base.component';
 import { DialogService } from 'primeng/dynamicdialog';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { AppService } from '@app/app.service';
 import { Manpower } from '@app/manpower/manpower/manpower.model';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-request-detail',
@@ -87,6 +87,7 @@ export class RequestDetailComponent extends RequestDetailBaseComponent implement
 
  
 onValidateAction($event:any,$button:any){}
+
 
 
 

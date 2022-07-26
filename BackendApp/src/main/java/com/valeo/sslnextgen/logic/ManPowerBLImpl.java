@@ -25,12 +25,12 @@ public class ManPowerBLImpl extends ManPowerBLBaseImpl<ManPower> implements IMan
 		return null;
 	}
 
-	@Override
+    @Override
 	public ManPower getByAll(String service,String site,String currency) {
 		List<Filter> filters = new ArrayList<>();
-		filters.add(new SimpleFilter("service", service));
-		filters.add(new SimpleFilter("site", site));
-		filters.add(new SimpleFilter("currency", currency));
+        filters.add(new SimpleFilter("service", service));
+        filters.add(new SimpleFilter("site", site));
+        filters.add(new SimpleFilter("currency", currency));
 		List<ManPower> getAllList= super.getAll(filters);
 		if(getAllList!=null && getAllList.size()>0)
 		{

@@ -191,6 +191,7 @@ isRowSelected: boolean = false;
     "label" : "TOOL DESIGN TYPE",
     "type" : "datamodelField",
     "mandatory" : "yes",
+    "searchable" : "full_word",
     "field" : "toolDesignType",
     "name" : "toolDesignType",
     "sysGen" : false,

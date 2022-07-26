@@ -9,11 +9,11 @@ public class ApplicationUserBase extends UserPrivilege {
 	@Searchable(index = true)
 	private Boolean leader=false;
 	@Searchable(index = true)
+	private Boolean scheduler=false;
+	@Searchable(index = true)
 	private Boolean approver=false;
 	@Searchable(index = true)
 	private Boolean viewer=false;
-	@Searchable(index = true)
-	private Boolean scheduler=false;
 	@Searchable(index = true)
 	private Boolean admin=false;
 	@Searchable(index = true)
@@ -25,6 +25,14 @@ public class ApplicationUserBase extends UserPrivilege {
 
 	public Boolean isLeader() {
 		return leader;
+	}
+
+	public void setScheduler(Boolean scheduler) {
+		this.scheduler = scheduler;
+	}
+
+	public Boolean isScheduler() {
+		return scheduler;
 	}
 
 	public void setApprover(Boolean approver) {
@@ -41,14 +49,6 @@ public class ApplicationUserBase extends UserPrivilege {
 
 	public Boolean isViewer() {
 		return viewer;
-	}
-
-	public void setScheduler(Boolean scheduler) {
-		this.scheduler = scheduler;
-	}
-
-	public Boolean isScheduler() {
-		return scheduler;
 	}
 
 	public void setAdmin(Boolean admin) {

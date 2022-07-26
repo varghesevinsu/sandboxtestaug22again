@@ -49,4 +49,5 @@ export class ManpowerDetailComponent extends ManpowerDetailBaseComponent impleme
   }
  
 
+
 }

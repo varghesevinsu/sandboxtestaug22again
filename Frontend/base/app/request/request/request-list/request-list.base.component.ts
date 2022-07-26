@@ -918,14 +918,6 @@ isRowSelected: boolean = false;
     "field" : "serviceType",
     "multipleValuesMin" : 0,
     "name" : "serviceType",
-    "editConditionally" : {
-      "qbName" : "Requester_Rights_Fields",
-      "query" : {
-        "condition" : "and",
-        "rules" : [ ]
-      },
-      "roles" : [ ]
-    },
     "sysGen" : false,
     "uiType" : "select",
     "fieldType" : "string",
