@@ -49,4 +49,5 @@ export class StatusDetailComponent extends StatusDetailBaseComponent implements 
   }
  
 
+
 }

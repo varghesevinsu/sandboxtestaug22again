@@ -44,4 +44,5 @@ export class ManpowerListComponent extends ManpowerListBaseComponent implements 
   }
  
 
+
 }
