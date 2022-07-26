@@ -40,7 +40,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class RequestDetailComponent extends RequestDetailBaseComponent implements OnInit {
  
-  constructor(public override requestService: RequestService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override baseService: BaseService, public override location: Location) {
+  constructor(public override requestService: RequestService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override baseService: BaseService, public override location: Location, public appSerivce: AppService) {
     super(requestService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, appBaseService, router, appGlobalService, baseService, location);
   }
 	
@@ -57,9 +57,9 @@ export class RequestDetailComponent extends RequestDetailBaseComponent implement
   {
     let formControls = this.detailFormControls;
 
-    let service = new AppService(this.baseService);
+    let rateManPower1: number = 0;
 
-    let rate: number = 0;
+    let rateManPower2: number = 0;
 
     formControls.controls['leadPlaceOfDevelopment'].enable({emitEvent:false})
 
@@ -67,22 +67,57 @@ export class RequestDetailComponent extends RequestDetailBaseComponent implement
 
     formControls.controls['budgetManpower2'].disable({emitEvent:false})
 
-    formControls.controls['secondPlaceOfDevelopment'].valueChanges.subscribe((placeOfDev)=>{
-       service.getManPowerByAll(formControls.controls['serviceType'].value,placeOfDev.siteCode, formControls.controls['currency'].value).subscribe(
+    formControls.controls['leadPlaceOfDevelopment'].valueChanges.subscribe((placeOfDev)=>{
+      let params = {
+        "service" : formControls.controls['serviceType'].value,
+        "site" : placeOfDev.siteCode, 
+        "currency" : formControls.controls['currency'].value
+      }
+       this.appSerivce.getManPowerByAll(params).subscribe(
         (manPower)=>{
-            rate = manPower.rate
+          rateManPower1 = manPower.rate
         }
        )
-      formControls.controls['budgetManpower2'].setValue(rate * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
+      formControls.controls['budget'].setValue(rateManPower1 * formControls.controls['hoursManpower'].value + formControls.controls['additionnalCost'].value)
+      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
     })
 
-    formControls.controls['hoursManpower2'].valueChanges.subscribe(
-      (event) => formControls.controls['budgetManpower2'].setValue(rate * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
+    formControls.controls['secondPlaceOfDevelopment'].valueChanges.subscribe((placeOfDev)=>{
+      let params = {
+        "service" : formControls.controls['serviceType'].value,
+        "site" : placeOfDev.siteCode, 
+        "currency" : formControls.controls['currency'].value
+      }
+       this.appSerivce.getManPowerByAll(params).subscribe(
+        (manPower)=>{
+          rateManPower2 = manPower.rate
+        }
+       )
+      formControls.controls['budgetManpower2'].setValue(rateManPower2 * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
+      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
+    })
+
+    formControls.controls['hoursManpower'].valueChanges.subscribe(
+      (event) => {formControls.controls['budget'].setValue(rateManPower1 * formControls.controls['hoursManpower'].value + formControls.controls['additionnalCost'].value)
+      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
+    }
     )
 
-    formControls.controls['additionnalCost2'].valueChanges.subscribe(
-      (event) => formControls.controls['budgetManpower2'].setValue(rate * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
+    formControls.controls['hoursManpower2'].valueChanges.subscribe(
+      (event) => {formControls.controls['budgetManpower2'].setValue(rateManPower2 * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
+      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
+    }
     )
+
+    formControls.controls['additionnalCost'].valueChanges.subscribe(
+      (event) => {formControls.controls['budget'].setValue(rateManPower1 * formControls.controls['hoursManpower'].value + formControls.controls['additionnalCost'].value)
+      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
+    })
+
+    formControls.controls['additionnalCost2'].valueChanges.subscribe(
+      (event) => {formControls.controls['budgetManpower2'].setValue(rateManPower2 * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
+      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
+    })
   }
 
  
