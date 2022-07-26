@@ -16,7 +16,7 @@ public class ToolDesignTypeBase extends BaseModel {
 	@Searchable(index = true)
 	private Boolean enabled;
 	@NotBlank(message = ValidationErrorConstants.BLANK_VALUE)
-	@Searchable(index = false)
+	@Searchable(index = true)
 	private String toolDesignType;
 	@Searchable(index = true)
 	private String dummyTest;

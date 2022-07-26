@@ -99,16 +99,16 @@ public abstract class RequestServiceBaseImpl<BL extends IRequestBLBase<M>, M ext
 	 	return logic.cancel(id.get(),additionalInfo);
 	}	
 	@PUT
-	@Path("sslworkflow/approvetoleader/{id}")
-	public M sslWorkflowApproveToLeader(@PathParam("id") Primary id, Map<String, Object> additionalInfo)
-	{
-	 	return logic.approveToLeader(id.get(),additionalInfo);
-	}	
-	@PUT
 	@Path("sslworkflow/demotetoleader/{id}")
 	public M sslWorkflowDemoteToLeader(@PathParam("id") Primary id, Map<String, Object> additionalInfo)
 	{
 	 	return logic.demoteToLeader(id.get(),additionalInfo);
+	}	
+	@PUT
+	@Path("sslworkflow/approvetoleader/{id}")
+	public M sslWorkflowApproveToLeader(@PathParam("id") Primary id, Map<String, Object> additionalInfo)
+	{
+	 	return logic.approveToLeader(id.get(),additionalInfo);
 	}	
 	@PUT
 	@Path("sslworkflow/submit/{id}")

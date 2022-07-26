@@ -21,7 +21,36 @@ public abstract class ToolDesignTypePerimeterBaseImpl<T extends ToolDesignTypeBa
 	public boolean canCreate(T model) {
 		ApplicationUserBase userBase = (ApplicationUserBase) userCache.getCurrentUser();
 		if (userBase.isDevAdmin()) { return true; }
-		
+			
+				if(userBase.isLeader()){
+					return true;
+				}	
+
+	
+				if(userBase.isScheduler()){
+					return true;
+				}	
+
+	
+				if(userBase.isApprover()){
+					return true;
+				}	
+
+	
+				if(userBase.isViewer()){
+					return true;
+				}	
+
+	
+				if(userBase.isAdmin()){
+					return true;
+				}	
+
+	
+				if(userBase.isRequester()){
+					return true;
+				}	
+
 		return false;
 	}
 
@@ -29,7 +58,36 @@ public abstract class ToolDesignTypePerimeterBaseImpl<T extends ToolDesignTypeBa
 	public boolean canUpdate(T model) {
 		ApplicationUserBase userBase = (ApplicationUserBase) userCache.getCurrentUser();
 		if (userBase.isDevAdmin()) { return true; }
-		
+			
+				if(userBase.isLeader()){
+					return true;
+				}	
+
+	
+				if(userBase.isScheduler()){
+					return true;
+				}	
+
+	
+				if(userBase.isApprover()){
+					return true;
+				}	
+
+	
+				if(userBase.isViewer()){
+					return true;
+				}	
+
+	
+				if(userBase.isAdmin()){
+					return true;
+				}	
+
+	
+				if(userBase.isRequester()){
+					return true;
+				}	
+
 		return false;
 	}
 
@@ -37,7 +95,36 @@ public abstract class ToolDesignTypePerimeterBaseImpl<T extends ToolDesignTypeBa
 	public boolean canDelete(T model) {
 		ApplicationUserBase userBase = (ApplicationUserBase) userCache.getCurrentUser();
 		if (userBase.isDevAdmin()) { return true; }
-		
+			
+				if(userBase.isLeader()){
+					return true;
+				}	
+
+	
+				if(userBase.isScheduler()){
+					return true;
+				}	
+
+	
+				if(userBase.isApprover()){
+					return true;
+				}	
+
+	
+				if(userBase.isViewer()){
+					return true;
+				}	
+
+	
+				if(userBase.isAdmin()){
+					return true;
+				}	
+
+	
+				if(userBase.isRequester()){
+					return true;
+				}	
+
 		return false;
 	}
 
@@ -45,7 +132,36 @@ public abstract class ToolDesignTypePerimeterBaseImpl<T extends ToolDesignTypeBa
 	public boolean canRead(T model) {
 		ApplicationUserBase userBase = (ApplicationUserBase) userCache.getCurrentUser();
 		if (userBase.isDevAdmin()) { return true; }
-		
+			
+				if(userBase.isLeader()){
+					return true;
+				}	
+
+	
+				if(userBase.isScheduler()){
+					return true;
+				}	
+
+	
+				if(userBase.isApprover()){
+					return true;
+				}	
+
+	
+				if(userBase.isViewer()){
+					return true;
+				}	
+
+	
+				if(userBase.isAdmin()){
+					return true;
+				}	
+
+	
+				if(userBase.isRequester()){
+					return true;
+				}	
+
 		return false;
 	}
 
@@ -76,17 +192,17 @@ public abstract class ToolDesignTypePerimeterBaseImpl<T extends ToolDesignTypeBa
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
+			if (userBase.isScheduler()) {
+			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
-			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
@@ -116,17 +232,17 @@ public abstract class ToolDesignTypePerimeterBaseImpl<T extends ToolDesignTypeBa
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
+			if (userBase.isScheduler()) {
+			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
+			allowedAccessFields.addAll(Arrays.asList(readFields));
+		}
+
 			if (userBase.isApprover()) {
 			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}
 
 			if (userBase.isViewer()) {
-			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
-			allowedAccessFields.addAll(Arrays.asList(readFields));
-		}
-
-			if (userBase.isScheduler()) {
 			String[] readFields = new String[] {"createdBy","sid","test3","enabled","modifiedDate","toolDesignType","modifiedBy","dummyTest","createdDate"};
 			allowedAccessFields.addAll(Arrays.asList(readFields));
 		}

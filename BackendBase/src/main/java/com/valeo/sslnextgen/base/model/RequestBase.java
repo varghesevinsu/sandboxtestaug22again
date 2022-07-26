@@ -184,6 +184,7 @@ public class RequestBase extends BaseWorkflowModel {
 	private Long estimatedDurationInHours;
 	@Searchable(index = true)
 	private String sapCategory;
+	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
 	private RequestProjecttype projectType;
 	@Searchable(index = true)
