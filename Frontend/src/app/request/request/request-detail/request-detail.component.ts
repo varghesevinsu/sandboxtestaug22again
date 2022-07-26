@@ -78,8 +78,8 @@ export class RequestDetailComponent extends RequestDetailBaseComponent implement
           rateManPower1 = manPower.rate
         }
        )
-      formControls.controls['budget'].setValue(rateManPower1 * formControls.controls['hoursManpower'].value + formControls.controls['additionnalCost'].value)
-      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
+      formControls.controls['budget'].setValue(rateManPower1 * Number(formControls.controls['hoursManpower'].value) + Number(formControls.controls['additionnalCost'].value))
+      formControls.controls['globalBudget'].setValue(Number(formControls.controls['budgetManpower2'].value)+Number(formControls.controls['budget'].value))
     })
 
     formControls.controls['secondPlaceOfDevelopment'].valueChanges.subscribe((placeOfDev)=>{
@@ -93,30 +93,30 @@ export class RequestDetailComponent extends RequestDetailBaseComponent implement
           rateManPower2 = manPower.rate
         }
        )
-      formControls.controls['budgetManpower2'].setValue(rateManPower2 * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
-      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
+      formControls.controls['budgetManpower2'].setValue(rateManPower2 * Number(formControls.controls['hoursManpower2'].value) + Number(formControls.controls['additionnalCost2'].value))
+      formControls.controls['globalBudget'].setValue(Number(formControls.controls['budgetManpower2'].value)+Number(formControls.controls['budget'].value))
     })
 
     formControls.controls['hoursManpower'].valueChanges.subscribe(
-      (event) => {formControls.controls['budget'].setValue(rateManPower1 * formControls.controls['hoursManpower'].value + formControls.controls['additionnalCost'].value)
-      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
+      (event) => {formControls.controls['budget'].setValue(rateManPower1 * Number(formControls.controls['hoursManpower'].value) + Number(formControls.controls['additionnalCost'].value))
+      formControls.controls['globalBudget'].setValue(Number(formControls.controls['budgetManpower2'].value)+Number(formControls.controls['budget'].value))
     }
     )
 
     formControls.controls['hoursManpower2'].valueChanges.subscribe(
-      (event) => {formControls.controls['budgetManpower2'].setValue(rateManPower2 * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
-      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
+      (event) => {formControls.controls['budgetManpower2'].setValue(rateManPower2 * Number(formControls.controls['hoursManpower2'].value) + Number(formControls.controls['additionnalCost2'].value))
+      formControls.controls['globalBudget'].setValue(Number(formControls.controls['budgetManpower2'].value)+Number(formControls.controls['budget'].value))
     }
     )
 
     formControls.controls['additionnalCost'].valueChanges.subscribe(
-      (event) => {formControls.controls['budget'].setValue(rateManPower1 * formControls.controls['hoursManpower'].value + formControls.controls['additionnalCost'].value)
-      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
+      (event) => {formControls.controls['budget'].setValue(rateManPower1 * Number(formControls.controls['hoursManpower'].value) + Number(formControls.controls['additionnalCost'].value))
+      formControls.controls['globalBudget'].setValue(Number(formControls.controls['budgetManpower2'].value)+Number(formControls.controls['budget'].value))
     })
 
     formControls.controls['additionnalCost2'].valueChanges.subscribe(
-      (event) => {formControls.controls['budgetManpower2'].setValue(rateManPower2 * formControls.controls['hoursManpower2'].value + formControls.controls['additionnalCost2'].value)
-      formControls.controls['globalBudget'].setValue(formControls.controls['budgetManpower2'].value+formControls.controls['budget'].value)
+      (event) => {formControls.controls['budgetManpower2'].setValue(rateManPower2 * Number(formControls.controls['hoursManpower2'].value) + Number(formControls.controls['additionnalCost2'].value))
+      formControls.controls['globalBudget'].setValue(Number(formControls.controls['budgetManpower2'].value)+Number(formControls.controls['budget'].value))
     })
   }
 
