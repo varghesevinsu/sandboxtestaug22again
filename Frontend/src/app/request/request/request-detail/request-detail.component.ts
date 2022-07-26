@@ -30,6 +30,8 @@ import { Component, OnInit } from '@angular/core';
 import { RequestDetailBaseComponent } from '@baseapp/request/request/request-detail/request-detail.base.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { AppService } from '@app/app.service';
+import { Manpower } from '@app/manpower/manpower/manpower.model';
 
 @Component({
   selector: 'app-request-detail',
@@ -48,7 +50,39 @@ export class RequestDetailComponent extends RequestDetailBaseComponent implement
 
   ngOnInit(): void {
     super.onInit();
+    this.handleChanges();
   }
+
+  handleChanges()
+  {
+    let formControls = this.detailFormControls;
+
+    let service = new AppService(this.baseService);
+
+    let rate: number = 0;
+
+    formControls.controls['leadPlaceOfDevelopment'].enable()
+
+    formControls.controls['budget'].disable()
+
+    formControls.controls['leadPlaceOfDevelopment'].valueChanges.subscribe((placeOfDev)=>{
+       service.getManPowerByAll(formControls.controls['serviceType'].value,placeOfDev.siteCode, formControls.controls['currency'].value).subscribe(
+        (manPower)=>{
+            rate = manPower.rate
+        }
+       )
+      formControls.controls['budget'].setValue(rate * formControls.controls['hoursManpower'].value + formControls.controls['additionalInformation'].value)
+    })
+
+    formControls.controls['hoursManpower'].valueChanges.subscribe(
+      (event) => formControls.controls['budget'].setValue(rate * formControls.controls['hoursManpower'].value + formControls.controls['additionalInformation'].value)
+    )
+
+    formControls.controls['additionalInformation'].valueChanges.subscribe(
+      (event) => formControls.controls['budget'].setValue(rate * formControls.controls['hoursManpower'].value + formControls.controls['additionalInformation'].value)
+    )
+  }
+
  
 onValidateAction($event:any,$button:any){}
 
