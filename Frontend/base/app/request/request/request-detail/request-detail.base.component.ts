@@ -2,7 +2,6 @@ import { RequestService } from '../request.service';
 import { RequestBase} from '../request.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
 import { ServicesApiConstants } from '@baseapp/services/services/services.api-constants';
 import { LabApiConstants } from '@baseapp/lab/lab/lab.api-constants';
 import { ToolDesignTypeApiConstants } from '@baseapp/tool-design-type/tool-design-type/tool-design-type.api-constants';
@@ -2683,7 +2682,7 @@ if(!this.isAutoSuggestCallFired){
   }
 
 reloadForm(workflowInfo:any){
-    const dataObsr$ = this.data ? of(this.data) : this.getData()
+   /* const dataObsr$ = this.data ? of(this.data) : this.getData()
     dataObsr$.subscribe((res: any) => {
       if(workflowInfo && this?.data?.workflowInfo){          
         Object.assign(this.data.workflowInfo,workflowInfo)
@@ -2691,7 +2690,7 @@ reloadForm(workflowInfo:any){
       this.configureFormOnWorkflow();
       this.updateAllowedActions();
       this.formValueChanges();
-    })
+    })*/
   }
 
   openWorkflowSimilator(){
