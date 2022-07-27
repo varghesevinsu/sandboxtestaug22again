@@ -6,14 +6,12 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { SharedBaseModule } from '@baseapp/shared/shared.base.module';
-import { Leadertable } from './leadertable/leadertable.component';
 import { Scheduler } from './scheduler/scheduler.component';
 import { Sdfdsf } from './sdfdsf/sdfdsf.component';
 
 @NgModule({
   declarations: [
   	Sdfdsf,
-Leadertable,
 Scheduler
   ],
   imports: [
@@ -32,7 +30,6 @@ Scheduler
     MessageModule,
     MessagesModule,
    Sdfdsf,
-Leadertable,
 Scheduler 
   ],
   providers: [

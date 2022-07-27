@@ -28,7 +28,10 @@
         </li>
     </ul>
     </div>
-</div><div class="ev-detail-view">
+</div><div class="wrokflow-simulate" *ngIf="isPrototype">
+    <button pButton type="button" label="Simulate Workflow" class="wrokflow-simulate-btn" (click)="openWorkflowSimilator()"></button>
+</div>
+<div class="ev-detail-view">
     <div class="detail-flex-box">
         <div class="flex align-items-center justify-content-center wizard-container" style="display:none">
 

@@ -639,7 +639,7 @@ isRowSelected: boolean = false;
     "allowViewing" : "yes",
     "fieldId" : "requestCode"
   }, {
-    "allowEditing" : "no",
+    "allowEditing" : "yes",
     "multipleValues" : false,
     "allowedValues" : {
       "values" : [ {
@@ -944,15 +944,10 @@ isRowSelected: boolean = false;
 	
 		tableSearchControls : FormGroup = new FormGroup({
 	createdDate: new FormControl('',[]),
-	requesterOrgaloc: new FormControl('',[]),
-	serviceType: new FormControl('',[]),
-	requestName: new FormControl('',[]),
-	statusOfTheRequest: new FormControl('',[]),
 	requestCode: new FormControl('',[]),
 });
 
 		quickFilterControls : FormGroup = new FormGroup({
-	statusOfTheRequest: new FormControl('',[]),
 });
 
 
