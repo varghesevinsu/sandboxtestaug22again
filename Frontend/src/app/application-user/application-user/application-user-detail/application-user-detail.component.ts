@@ -54,4 +54,5 @@ export class ApplicationUserDetailComponent extends ApplicationUserDetailBaseCom
 
 
 
+
 }
