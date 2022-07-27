@@ -1180,6 +1180,24 @@
         "Leader",
         "Viewer",
         "Development Administrator"
+      ],
+      "/autosuggest/scheduler": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Scheduler",
+        "Leader",
+        "Viewer",
+        "Development Administrator"
+      ],
+      "/autosuggest/leader": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Scheduler",
+        "Leader",
+        "Viewer",
+        "Development Administrator"
       ]
     },
     "put": {

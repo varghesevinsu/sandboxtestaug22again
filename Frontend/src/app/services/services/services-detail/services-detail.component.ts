@@ -49,7 +49,17 @@ export class ServicesDetailComponent extends ServicesDetailBaseComponent impleme
     super.onInit();
   }
  
+  override autoSuggestSearchrespLeader(event?: any, col?: any,url?:any){
+    const urlpath = `/rest/applicationusers/autosuggest/leader`
+    super.autoSuggestSearchrespLeader(event,col,urlpath);
+  }
 
+
+  override autoSuggestSearchrespScheduler(event?: any, col?: any,url?:any) {
+    const urlpath = `/rest/applicationusers/autosuggest/scheduler`
+    super.autoSuggestSearchrespScheduler(event,col,urlpath);
+
+  }
 
 
 
