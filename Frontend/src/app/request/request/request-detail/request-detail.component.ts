@@ -40,8 +40,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class RequestDetailComponent extends RequestDetailBaseComponent implements OnInit {
  
-  constructor(public override requestService: RequestService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override baseService: BaseService, public override location: Location) {
-    super(requestService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, appBaseService, router, appGlobalService, baseService, location);
+  constructor(public override requestService: RequestService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override appBaseService: AppBaseService, public override router: Router, public override appGlobalService: AppGlobalService, public override baseService: BaseService, public override location: Location, public appService: AppService) {
+    super(requestService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, appBaseService, router, appGlobalService, baseService, location, appService);
   }
 	
   ngAfterViewInit(): void {
@@ -73,7 +73,7 @@ export class RequestDetailComponent extends RequestDetailBaseComponent implement
         "site" : placeOfDev.siteCode, 
         "currency" : formControls.controls['currency'].value
       }
-       this.appSerivce.getManPowerByAll(params).subscribe(
+       this.appService.getManPowerByAll(params).subscribe(
         (manPower)=>{
           rateManPower1 = manPower.rate
         }
@@ -88,7 +88,7 @@ export class RequestDetailComponent extends RequestDetailBaseComponent implement
         "site" : placeOfDev.siteCode, 
         "currency" : formControls.controls['currency'].value
       }
-       this.appSerivce.getManPowerByAll(params).subscribe(
+       this.appService.getManPowerByAll(params).subscribe(
         (manPower)=>{
           rateManPower2 = manPower.rate
         }
