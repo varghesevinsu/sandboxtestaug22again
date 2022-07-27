@@ -7,7 +7,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -135,9 +134,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
-          "*",
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -234,7 +230,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -351,13 +346,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
           "submit",
           "cancel",
           "demoteToRequester",
@@ -628,7 +616,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -721,18 +708,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
           "submit",
           "cancel",
           "demoteToScheduler",
@@ -959,7 +934,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -1076,7 +1050,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -1373,8 +1346,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -1519,13 +1490,6 @@
           "submitToApprover"
         ],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "validate",
-          "demoteToLeader",
           "*",
           "submit",
           "cancel",
@@ -1720,9 +1684,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
-          "*",
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -1819,7 +1780,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -1936,7 +1896,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -2410,7 +2369,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -2579,13 +2537,6 @@
           "demoteToScheduler",
           "submitToApprover",
           "validate",
-          "demoteToLeader",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
           "demoteToLeader"
         ],
         "disableonlyactions": [],
@@ -2717,7 +2668,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -3005,17 +2955,6 @@
           "submitToApprover"
         ],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "validate",
-          "demoteToLeader",
-          "*",
-          "*",
-          "*",
-          "*",
           "*",
           "submit",
           "cancel",
@@ -3239,26 +3178,7 @@
           "demoteToScheduler",
           "submitToApprover",
           "validate",
-          "demoteToLeader",
-          "*",
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
-          "*",
-          "*",
-          "*",
-          "*",
-          "*",
-          "*"
+          "demoteToLeader"
         ],
         "disableonlyactions": [],
         "actiontarget": {
@@ -3510,14 +3430,6 @@
           "demoteToScheduler",
           "submitToApprover",
           "validate",
-          "demoteToLeader",
-          "*",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
           "demoteToLeader"
         ],
         "disableonlyactions": [],
@@ -3715,14 +3627,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
-          "*",
           "*",
           "submit",
           "cancel",
@@ -4106,13 +4010,6 @@
           "submitToApprover"
         ],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "validate",
-          "demoteToLeader",
           "*",
           "submit",
           "cancel",
@@ -4307,18 +4204,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
           "submit",
           "cancel",
           "demoteToScheduler",
@@ -4556,13 +4441,6 @@
           "demoteToScheduler",
           "submitToApprover",
           "validate",
-          "demoteToLeader",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
           "demoteToLeader"
         ],
         "disableonlyactions": [],
@@ -4694,13 +4572,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
           "submit",
           "cancel",
           "demoteToRequester",
