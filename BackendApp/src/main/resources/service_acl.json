@@ -478,6 +478,15 @@
         "Viewer",
         "Development Administrator"
       ],
+      "/sslworkflow/close/{id}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Scheduler",
+        "Leader",
+        "Viewer",
+        "Development Administrator"
+      ],
       "/sslworkflow/submittoapprover/{id}": [
         "Admin",
         "Approver",
@@ -1246,6 +1255,15 @@
         "Viewer",
         "Development Administrator"
       ],
+      "/byAll/{service}/{site}/{currency}": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Scheduler ",
+        "Leader",
+        "Viewer",
+        "Development Administrator"
+      ],
       "/bypid/{pid}": [
         "Admin",
         "Approver",
@@ -1269,15 +1287,6 @@
         "Approver",
         "Requester ",
         "Scheduler",
-        "Leader",
-        "Viewer",
-        "Development Administrator"
-      ],
-      "/byAll/{service}/{site}/{currency}": [
-      	"Admin",
-        "Approver",
-        "Requester ",
-        "Scheduler ",
         "Leader",
         "Viewer",
         "Development Administrator"
