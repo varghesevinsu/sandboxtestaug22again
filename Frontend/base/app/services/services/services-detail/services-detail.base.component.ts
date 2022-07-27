@@ -239,7 +239,7 @@ isAutoSuggestCallFired: boolean = false;
     "fieldId" : "enabledLab"
   }, {
     "allowEditing" : "yes",
-    "multipleValues" : false,
+    "multipleValues" : true,
     "lookupTo" : "0725d0fa-e979-4bdf-88d6-f2648d42a48d",
     "fieldName" : "Resp Leader",
     "data" : "Resp Leader",
@@ -264,7 +264,7 @@ isAutoSuggestCallFired: boolean = false;
     "allowViewing" : "yes"
   }, {
     "allowEditing" : "yes",
-    "multipleValues" : false,
+    "multipleValues" : true,
     "lookupTo" : "0725d0fa-e979-4bdf-88d6-f2648d42a48d",
     "fieldName" : "Resp Scheduler",
     "data" : "Resp Scheduler",
@@ -332,7 +332,6 @@ isAutoSuggestCallFired: boolean = false;
 	pageViewTitle: string = 'SERVICES_DETAIL';
 	
 		detailFormControls : FormGroup = new FormGroup({
-	service: new FormControl('',[Validators.required]),
 	enabledLab: new FormControl('',[]),
 	respScheduler: new FormControl('',[]),
 	respLeader: new FormControl('',[]),

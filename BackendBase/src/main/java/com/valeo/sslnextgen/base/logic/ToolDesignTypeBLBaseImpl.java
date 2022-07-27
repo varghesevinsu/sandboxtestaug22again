@@ -31,6 +31,7 @@ public class ToolDesignTypeBLBaseImpl<T extends ToolDesignTypeBase> extends Base
 	
 	public ToolDesignTypeBLBaseImpl(Class<T> modelClass) {
 		super(modelClass);
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	@Override

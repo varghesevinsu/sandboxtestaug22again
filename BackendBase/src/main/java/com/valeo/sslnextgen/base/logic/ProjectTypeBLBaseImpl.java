@@ -31,6 +31,7 @@ public class ProjectTypeBLBaseImpl<T extends ProjectTypeBase> extends BaseBusine
 	
 	public ProjectTypeBLBaseImpl(Class<T> modelClass) {
 		super(modelClass);
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	@Override

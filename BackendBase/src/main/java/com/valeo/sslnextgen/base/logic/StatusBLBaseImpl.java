@@ -31,6 +31,7 @@ public class StatusBLBaseImpl<T extends StatusBase> extends BaseBusinessLogic<T>
 	
 	public StatusBLBaseImpl(Class<T> modelClass) {
 		super(modelClass);
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	@Override
