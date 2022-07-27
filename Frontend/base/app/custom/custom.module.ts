@@ -5,14 +5,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
-import { Leadertable } from './leadertable/leadertable.component';
+import { SharedBaseModule } from '@baseapp/shared/shared.base.module';
 import { Scheduler } from './scheduler/scheduler.component';
 import { Sdfdsf } from './sdfdsf/sdfdsf.component';
 
 @NgModule({
   declarations: [
   	Sdfdsf,
-Leadertable,
 Scheduler
   ],
   imports: [
@@ -21,7 +20,8 @@ Scheduler
     TranslateModule,
     ConfirmDialogModule,
     MessageModule,
-    MessagesModule
+    MessagesModule,
+    SharedBaseModule
   ],
   exports: [
 	WidgetsBaseModule,
@@ -30,7 +30,6 @@ Scheduler
     MessageModule,
     MessagesModule,
    Sdfdsf,
-Leadertable,
 Scheduler 
   ],
   providers: [

@@ -213,7 +213,7 @@ isRowSelected: boolean = false;
     "type" : "datamodelField",
     "fieldType" : "string"
   }, {
-    "multipleValues" : false,
+    "multipleValues" : true,
     "allowedValues" : { },
     "fieldName" : "respScheduler",
     "data" : "Resp Scheduler",
@@ -226,7 +226,7 @@ isRowSelected: boolean = false;
     "displayField" : "email",
     "fieldType" : "any"
   }, {
-    "multipleValues" : false,
+    "multipleValues" : true,
     "allowedValues" : { },
     "fieldName" : "respLeader",
     "data" : "Resp Leader",
@@ -376,7 +376,7 @@ isRowSelected: boolean = false;
     "allowViewing" : "yes"
   }, {
     "allowEditing" : "yes",
-    "multipleValues" : false,
+    "multipleValues" : true,
     "lookupTo" : "0725d0fa-e979-4bdf-88d6-f2648d42a48d",
     "fieldName" : "Resp Scheduler",
     "data" : "Resp Scheduler",
@@ -405,7 +405,7 @@ isRowSelected: boolean = false;
     "allowViewing" : "yes"
   }, {
     "allowEditing" : "yes",
-    "multipleValues" : false,
+    "multipleValues" : true,
     "lookupTo" : "0725d0fa-e979-4bdf-88d6-f2648d42a48d",
     "fieldName" : "Resp Leader",
     "data" : "Resp Leader",
@@ -464,7 +464,6 @@ isRowSelected: boolean = false;
 	respLeader: new FormControl('',[]),
 	metier: new FormControl('',[]),
 	specificFields: new FormControl('',[]),
-	service: new FormControl('',[]),
 });
 
 		quickFilterControls : FormGroup = new FormGroup({

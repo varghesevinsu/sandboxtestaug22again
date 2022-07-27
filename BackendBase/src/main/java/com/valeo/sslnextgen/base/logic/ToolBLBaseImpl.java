@@ -31,6 +31,7 @@ public class ToolBLBaseImpl<T extends ToolBase> extends BaseBusinessLogic<T>
 	
 	public ToolBLBaseImpl(Class<T> modelClass) {
 		super(modelClass);
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	@Override

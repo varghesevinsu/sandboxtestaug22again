@@ -11,6 +11,11 @@ export class RequestApiConstants {
         method: 'PUT',
         showloading: true
     };
+    public static readonly sslWorkflowClose: any = {
+        url: '/rest/requests/sslworkflow/close/{id}',
+        method: 'PUT',
+        showloading: true
+    };
     public static readonly getById: any = {
         url: '/rest/requests/{sid}',
         method: 'GET',

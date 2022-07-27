@@ -1,6 +1,7 @@
 package com.valeo.sslnextgen.base.model;
 import com.eva.base.model.BaseModel;
 import com.eva.base.annotations.Table;
+import java.util.List;
 import com.eva.base.annotations.NotBlank;
 import com.eva.base.annotations.Searchable;
 import com.eva.base.util.ValidationErrorConstants;
@@ -18,7 +19,7 @@ public class ServicesBase extends BaseModel {
 	@Searchable(index = true)
 	private ServicesSpecificFields specificFields=ServicesSpecificFields.N_A;
 	@Searchable(index = true)
-	private Lookup respLeader;
+	private List<Lookup> respLeader;
 	@Searchable(index = true)
 	private Boolean enabledLab=true;
 	@Searchable(index = true)
@@ -26,7 +27,7 @@ public class ServicesBase extends BaseModel {
 	@Searchable(index = true)
 	private String metier;
 	@Searchable(index = true)
-	private Lookup respScheduler;
+	private List<Lookup> respScheduler;
 
 	public void setService(String service) {
 		this.service = service;
@@ -44,11 +45,11 @@ public class ServicesBase extends BaseModel {
 		return specificFields;
 	}
 
-	public void setRespLeader(Lookup respLeader) {
+	public void setRespLeader(List<Lookup> respLeader) {
 		this.respLeader = respLeader;
 	}
 
-	public Lookup getRespLeader() {
+	public List<Lookup> getRespLeader() {
 		return respLeader;
 	}
 
@@ -76,11 +77,11 @@ public class ServicesBase extends BaseModel {
 		return metier;
 	}
 
-	public void setRespScheduler(Lookup respScheduler) {
+	public void setRespScheduler(List<Lookup> respScheduler) {
 		this.respScheduler = respScheduler;
 	}
 
-	public Lookup getRespScheduler() {
+	public List<Lookup> getRespScheduler() {
 		return respScheduler;
 	}
 

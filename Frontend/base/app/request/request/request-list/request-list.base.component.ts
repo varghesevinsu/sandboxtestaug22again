@@ -3,7 +3,9 @@ import { RequestBase} from '../request.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { ServicesApiConstants } from '@baseapp/services/services/services.api-constants';
 
+import { BaseService } from '@baseapp/base.service';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { allowedValuesValidator } from "@baseapp/widgets/validators/allowedValuesValidator";
@@ -41,6 +43,9 @@ tableSearchFieldConfig:any = {};
   @ViewChild('menu')
   menu!: ElementRef;
 
+	autoSuggestPageNo:number = 0;
+filteredItems:any = [];
+isAutoSuggestCallFired: boolean = false;
 	quickFilter: any;
 hiddenFields:any = {};
 quickFilterFieldConfig:any={}
@@ -207,33 +212,17 @@ isRowSelected: boolean = false;
     "fieldType" : "number"
   }, {
     "multipleValues" : false,
-    "allowedValues" : {
-      "values" : [ {
-        "label" : "EMC",
-        "value" : "EMC"
-      }, {
-        "label" : "ECAD",
-        "value" : "ECAD"
-      }, {
-        "label" : "SERVICE3",
-        "value" : "SERVICE3"
-      }, {
-        "label" : "SERVICE4",
-        "value" : "SERVICE4"
-      } ],
-      "conditions" : {
-        "conditionType" : "Auto",
-        "conditions" : [ ]
-      }
-    },
+    "allowedValues" : { },
     "fieldName" : "serviceType",
     "data" : " Service type",
-    "field" : "serviceType",
-    "name" : "serviceType",
-    "uiType" : "select",
+    "lookupUrl" : "services/autosuggest",
     "label" : " Service type",
     "type" : "searchField",
-    "fieldType" : "string"
+    "field" : "serviceType",
+    "name" : "serviceType",
+    "uiType" : "autosuggest",
+    "displayField" : "service",
+    "fieldType" : "any"
   }, {
     "multipleValues" : false,
     "allowedValues" : {
@@ -650,7 +639,7 @@ isRowSelected: boolean = false;
     "allowViewing" : "yes",
     "fieldId" : "requestCode"
   }, {
-    "allowEditing" : "no",
+    "allowEditing" : "yes",
     "multipleValues" : false,
     "allowedValues" : {
       "values" : [ {
@@ -885,44 +874,46 @@ isRowSelected: boolean = false;
     "allowViewing" : "yes",
     "fieldId" : "quoteNo"
   }, {
-    "allowEditing" : "yes",
+    "allowEditing" : "conditional",
     "multipleValues" : false,
-    "allowedValues" : {
-      "values" : [ {
-        "label" : "EMC",
-        "value" : "EMC"
-      }, {
-        "label" : "ECAD",
-        "value" : "ECAD"
-      }, {
-        "label" : "SERVICE3",
-        "value" : "SERVICE3"
-      }, {
-        "label" : "SERVICE4",
-        "value" : "SERVICE4"
-      } ],
-      "conditions" : {
-        "conditionType" : "Auto",
-        "conditions" : [ ]
-      }
-    },
-    "defaultField" : false,
+    "lookupTo" : "f0ffa9ec-20b2-4f11-be10-0677b1e099bf",
     "fieldName" : " Service type",
     "data" : " Service type",
-    "multipleValuesMax" : 10,
-    "label" : " Service type",
+    "lookupUrl" : "services/autosuggest",
     "type" : "gridColumn",
     "mandatory" : "yes",
+    "viewConditionally" : {
+      "qbName" : "Scheduler_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ "all" ]
+    },
+    "editConditionally" : {
+      "qbName" : "Scheduler_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ "selected", "Requester ", "Admin" ]
+    },
+    "sysGen" : false,
+    "fieldId" : "serviceType",
+    "allowedValues" : { },
+    "defaultField" : false,
+    "multipleValuesMax" : 10,
+    "lookupType" : "table",
+    "label" : " Service type",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "serviceType",
     "multipleValuesMin" : 0,
     "name" : "serviceType",
-    "sysGen" : false,
-    "uiType" : "select",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "serviceType"
+    "uiType" : "autosuggest",
+    "displayField" : "service",
+    "fieldType" : "any",
+    "allowViewing" : "conditional"
   } ],
   "toggleColumns" : false,
   "valueChange" : true,
@@ -953,19 +944,14 @@ isRowSelected: boolean = false;
 	
 		tableSearchControls : FormGroup = new FormGroup({
 	createdDate: new FormControl('',[]),
-	requesterOrgaloc: new FormControl('',[]),
-	serviceType: new FormControl('',[]),
-	requestName: new FormControl('',[]),
-	statusOfTheRequest: new FormControl('',[]),
 	requestCode: new FormControl('',[]),
 });
 
 		quickFilterControls : FormGroup = new FormGroup({
-	statusOfTheRequest: new FormControl('',[]),
 });
 
 
-	constructor(public requestService : RequestService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public dialogService: DialogService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public renderer2: Renderer2, public router: Router, ...args: any) {
+	constructor(public requestService : RequestService, public appUtilBaseService: AppUtilBaseService, public translateService: TranslateService, public messageService: MessageService, public confirmationService: ConfirmationService, public dialogService: DialogService, public domSanitizer:DomSanitizer, public bsModalService: BsModalService, public activatedRoute: ActivatedRoute, public renderer2: Renderer2, public router: Router, public baseService: BaseService, ...args: any) {
     
  	 }
 
@@ -1156,6 +1142,24 @@ this.subscriptions.push(scrollSubscription);
 		this.router.navigate(['../requestdetail'], { relativeTo: this.activatedRoute});
 	}
 }
+	deattachScroll() {
+    this.filteredItems = [];
+    this.autoSuggestPageNo = 0;
+    this.isAutoSuggestCallFired = false;
+  }
+	autoSuggestSearchserviceType(event?: any, col?: any,url?:any) {
+if(!this.isAutoSuggestCallFired){
+      this.isAutoSuggestCallFired = true;
+    let apiObj = Object.assign({}, ServicesApiConstants.autoSuggestService)
+    apiObj.url = `${url ||apiObj.url}?query=${event.query}&pgNo=${this.autoSuggestPageNo}&pgLen=${BaseAppConstants.defaultPageSize}`;
+     this.baseService.get(apiObj).subscribe((res: any) => {
+      this.isAutoSuggestCallFired = false;
+      let updateRecords =  [...this.filteredItems, ...res];
+      const ids = updateRecords.map(o => o.sid)
+      this.filteredItems = updateRecords.filter(({ sid }, index) => !ids.includes(sid, index + 1));
+    })
+}
+ }
 	initSearchForm(){
   this.tableSearchFieldConfig= this.appUtilBaseService.getControlsFromFormConfig(this.tableSearchConfig)
 }
@@ -1175,6 +1179,14 @@ this.messageService.add(config);
     else if(this.selectedValues.length <= 0){
       this.isRowSelected = false;
     }
+  }
+	unSelect(event:any,field:string){
+    this.selectedItems[field]?.forEach((item:any,index:number)=>{
+        if(item.id === event.sid){
+            this.selectedItems[field].splice(index,1);
+        }
+    })
+    
   }
 	sort(e: any, field: string) {
 this.filter.sortField = field;
@@ -1236,11 +1248,52 @@ this.loadGridData();
     }
     return (formattedValue);
   }
+	onSelect(event: any, field: string, config: any) {
+    let lookupFields: any[] = config?.lookupFields || [];
+    let model = {
+      id: event.sid,
+      value: {}
+    }
+    if (lookupFields.length > 0) {
+      model.value = lookupFields?.reduce((o: any, key: any) => ({ ...o, [key]: event[key] }), {});
+    }
+    else {
+      model.value = event;
+    }
+    if (!this.selectedItems?.hasOwnProperty(field)) {
+      this.selectedItems[field] = [];
+    }
+    if (config?.multiple === true) {
+      this.selectedItems[field]?.push(model);
+    }
+    else {
+      this.selectedItems[field][0] = model;
+    }
+  }
 	advancedSearch() {
   this.filter.advancedSearch = this.tableSearchControls.value;
  this.onRefresh();
   this.toggleAdvancedSearch();
 }
+	attachInfiniteScrollForAutoCompleteserviceType(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchserviceType`
+        let action: Exclude<keyof RequestListBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
 	onDelete() {
   if (this.selectedValues.length > 0) {
     let values: any = [];

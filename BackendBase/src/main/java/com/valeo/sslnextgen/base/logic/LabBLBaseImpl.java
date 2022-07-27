@@ -31,6 +31,7 @@ public class LabBLBaseImpl<T extends LabBase> extends BaseBusinessLogic<T>
 	
 	public LabBLBaseImpl(Class<T> modelClass) {
 		super(modelClass);
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	@Override

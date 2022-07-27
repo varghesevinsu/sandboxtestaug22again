@@ -31,6 +31,7 @@ public class PlaceOfDevBLBaseImpl<T extends PlaceOfDevBase> extends BaseBusiness
 	
 	public PlaceOfDevBLBaseImpl(Class<T> modelClass) {
 		super(modelClass);
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	@Override

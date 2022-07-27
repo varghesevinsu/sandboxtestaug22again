@@ -62,6 +62,21 @@ export class RequestService {
     
         return subject;
     }
+    sslWorkflowClose(...args: any):Observable<any>{
+        const serviceOpts = RequestApiConstants.sslWorkflowClose;
+        const params= args[0];
+        
+        const subject = new Observable(observer => {
+          this.baseService.put(serviceOpts,params).subscribe((response: any) => {
+            observer.next(response);
+          },
+          (err:any) => {
+            observer.error(err);
+          });
+        });
+    
+        return subject;
+    }
     getById(...args: any):Observable<any>{
         const serviceOpts = RequestApiConstants.getById;
         const params= args[0];

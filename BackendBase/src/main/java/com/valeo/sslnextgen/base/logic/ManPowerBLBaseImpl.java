@@ -31,6 +31,7 @@ public class ManPowerBLBaseImpl<T extends ManPowerBase> extends BaseBusinessLogi
 	
 	public ManPowerBLBaseImpl(Class<T> modelClass) {
 		super(modelClass);
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	@Override

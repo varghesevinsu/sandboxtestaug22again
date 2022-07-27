@@ -31,6 +31,7 @@ public class ServicesBLBaseImpl<T extends ServicesBase> extends BaseBusinessLogi
 	
 	public ServicesBLBaseImpl(Class<T> modelClass) {
 		super(modelClass);
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	@Override

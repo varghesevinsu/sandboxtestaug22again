@@ -17,15 +17,16 @@ import { BaseAppConstants } from '@baseapp/app-constants.base';
 import { allowedValuesValidator } from '@baseapp/widgets/validators/allowedValuesValidator';
 import { DomSanitizer } from '@angular/platform-browser';
 import { dateValidator } from '@baseapp/widgets/validators/dateValidator';
+import { DialogService } from 'primeng/dynamicdialog';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { WorkflowSimulatorComponent } from '@baseapp/widgets/workflow-simulator/workflow-simulator.component';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { AppBaseService } from '@baseapp/app.base.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ApplicationUserService } from '@baseapp/application-user/application-user/application-user.service';
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ApplicationUserDetailBaseComponent } from '@baseapp/application-user/application-user/application-user-detail/application-user-detail.base.component';
 
@@ -48,6 +49,9 @@ export class ApplicationUserDetailComponent extends ApplicationUserDetailBaseCom
     super.onInit();
   }
  
+
+
+
 
 
 

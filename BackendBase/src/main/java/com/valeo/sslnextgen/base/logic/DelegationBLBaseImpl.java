@@ -19,6 +19,7 @@ public class DelegationBLBaseImpl<T extends DelegationBase> extends BaseBusiness
 	
 	public DelegationBLBaseImpl(Class<T> modelClass) {
 		super(modelClass);
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	@Override

@@ -31,6 +31,7 @@ public class HistoryBLBaseImpl<T extends HistoryBase> extends BaseBusinessLogic<
 	
 	public HistoryBLBaseImpl(Class<T> modelClass) {
 		super(modelClass);
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	@Override

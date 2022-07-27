@@ -31,6 +31,7 @@ public class UserGuideBLBaseImpl<T extends UserGuideBase> extends BaseBusinessLo
 	
 	public UserGuideBLBaseImpl(Class<T> modelClass) {
 		super(modelClass);
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	@Override

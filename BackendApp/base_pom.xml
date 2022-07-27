@@ -7,7 +7,7 @@
   </parent>
   <artifactId>BackendAppParent</artifactId>
   <packaging>pom</packaging>
-  <properties>          
+  <properties>
   	<appengine.cloud.tools.version>2.2.0</appengine.cloud.tools.version>
   </properties>
   <dependencies>
