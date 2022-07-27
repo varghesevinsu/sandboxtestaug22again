@@ -298,6 +298,71 @@ isRowSelected:boolean = true;
     "fieldType" : "Boolean",
     "allowViewing" : "yes",
     "fieldId" : "approver"
+  }, {
+    "allowedValues" : {
+      "values" : [ {
+        "label" : "EMC",
+        "value" : "EMC"
+      }, {
+        "label" : "ECAD",
+        "value" : "ECAD"
+      } ],
+      "conditions" : {
+        "conditionType" : "Auto",
+        "conditions" : [ ]
+      }
+    },
+    "defaultField" : false,
+    "fieldName" : "Leader Service Type",
+    "data" : "Leader Service Type",
+    "multipleValuesMax" : 10,
+    "currentNode" : "784378f6-77a3-4689-a9ca-35c83a003de4",
+    "label" : "Leader Service Type",
+    "type" : "formField",
+    "field" : "leaderServiceType",
+    "multipleValuesMin" : 0,
+    "valueChange" : true,
+    "name" : "leaderServiceType",
+    "sysGen" : false,
+    "width" : "12%",
+    "uiType" : "select",
+    "fieldType" : "string",
+    "fieldId" : "leaderServiceType"
+  }, {
+    "allowEditing" : "yes",
+    "multipleValues" : false,
+    "allowedValues" : {
+      "values" : [ {
+        "label" : "EMC",
+        "value" : "EMC"
+      }, {
+        "label" : "ECAD",
+        "value" : "ECAD"
+      } ],
+      "conditions" : {
+        "conditionType" : "Auto",
+        "conditions" : [ ]
+      }
+    },
+    "defaultField" : false,
+    "fieldName" : "Scheduler Service Type",
+    "data" : "Scheduler Service Type",
+    "multipleValuesMax" : 10,
+    "currentNode" : "59229d02-8a30-4e50-8972-04e6b1051a01",
+    "label" : "Scheduler Service Type",
+    "type" : "formField",
+    "mandatory" : "no",
+    "searchable" : "full_word",
+    "transientField" : false,
+    "field" : "schedulerServiceType",
+    "multipleValuesMin" : 0,
+    "valueChange" : true,
+    "name" : "schedulerServiceType",
+    "sysGen" : false,
+    "uiType" : "select",
+    "fieldType" : "string",
+    "allowViewing" : "yes",
+    "fieldId" : "schedulerServiceType"
   } ],
   "columns" : "1",
   "valueChange" : true,
@@ -313,8 +378,11 @@ isRowSelected:boolean = true;
 	approver: new FormControl('',[]),
 	firstName: new FormControl('',[]),
 	viewer: new FormControl('',[]),
+	leaderServiceType: new FormControl('',[]),
 	admin: new FormControl('',[]),
+	schedulerServiceType: new FormControl('',[]),
 	email: new FormControl('',[]),
+	scheduler: new FormControl('',[]),
 });
 
 
@@ -401,6 +469,10 @@ isRowSelected:boolean = true;
         this.updateAllowedActions();
         this.isFormValueChanged = true;
       })
+  }
+	getSelectedObject(field:string,options:any){
+      const selectedObj = (options.filter((item: { label: any}) => item.label.includes(field)));
+      return selectedObj[0];
   }
 	getWorkflowConfig() {
 	const workFlowInfo = this.data.workflowInfo;

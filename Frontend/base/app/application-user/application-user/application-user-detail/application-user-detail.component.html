@@ -106,7 +106,99 @@
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.approver?.helpText || ''}}</div>
     </div>
 </div>
-
+<div class="form-col" [hidden]="hiddenFields.leaderServiceType">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.leaderServiceType?.isRequired, 'error':inValidFields.leaderServiceType}">
+        <label for="leaderServiceType" class="col-form-label leaderServiceType-label" [textContent]="'LEADER_SERVICE_TYPE'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.leaderServiceType?.infoBubble"   [pTooltip]="formFieldConfig?.leaderServiceType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['leaderServiceType']?.options" formControlName="leaderServiceType"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.leaderServiceType?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #leaderServiceTypeSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.leaderServiceType.value; let selected;">
+                    <ng-template *ngTemplateOutlet="leaderServiceTypeSelectedRef;context:{conditions :formFieldConfig.leaderServiceType?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.leaderServiceType?.options)).value], option:(getSelectedObject(selected,formFieldConfig.leaderServiceType?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #leaderServiceTypeListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="leaderServiceTypeListRef;context:{conditions :formFieldConfig.leaderServiceType?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.leaderServiceType?.helpText || ''}}</div>
+    </div>
+</div><div class="form-col" [hidden]="hiddenFields.schedulerServiceType">
+    <div class="field-row"  [ngClass]="{'required': formFieldConfig?.schedulerServiceType?.isRequired, 'error':inValidFields.schedulerServiceType}">
+        <label for="schedulerServiceType" class="col-form-label schedulerServiceType-label" [textContent]="'SCHEDULER_SERVICE_TYPE'|translate"></label>  
+        <span class="info-bubble" *ngIf="formFieldConfig?.schedulerServiceType?.infoBubble"   [pTooltip]="formFieldConfig?.schedulerServiceType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
+        <p-dropdown [options]="formFieldConfig['schedulerServiceType']?.options" formControlName="schedulerServiceType"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.schedulerServiceType?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
+            <ng-template pTemplate="selectedItem">
+                <ng-template #schedulerServiceTypeSelectedRef let-conditions="conditions" let-option="option">
+                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
+                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
+                        <span  
+                            *ngIf="conditions?.iconClass" class="icon"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass"></i>
+                
+                        </span>
+                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+                <ng-container *ngIf="detailFormControls.controls.schedulerServiceType.value; let selected;">
+                    <ng-template *ngTemplateOutlet="schedulerServiceTypeSelectedRef;context:{conditions :formFieldConfig.schedulerServiceType?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.schedulerServiceType?.options)).value], option:(getSelectedObject(selected,formFieldConfig.schedulerServiceType?.options))}"></ng-template>
+                </ng-container>
+            </ng-template>
+        
+            <ng-template let-dropdownItem pTemplate="item" >
+                <ng-template #schedulerServiceTypeListRef let-conditions="conditions" let-option="option">
+                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
+                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
+                        <span
+                            *ngIf="conditions?.iconClass"
+                            [ngStyle]="conditions?.iconStyle"
+                        >
+                            <i [ngClass]="conditions?.iconClass" ></i>
+        
+                        </span>
+                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
+                    </div>
+                </ng-template>
+        
+                <ng-container>
+                    <ng-template *ngTemplateOutlet="schedulerServiceTypeListRef;context:{conditions :formFieldConfig.schedulerServiceType?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
+                </ng-container>
+            </ng-template>
+        </p-dropdown>
+        <div class="fst-italic fs-5 help-text">{{formFieldConfig?.schedulerServiceType?.helpText || ''}}</div>
+    </div>
+</div>
                     </div>
                 </div>
         </form>
