@@ -19,8 +19,10 @@ import { BaseAppConstants } from '@baseapp/app-constants.base';
 import { allowedValuesValidator } from '@baseapp/widgets/validators/allowedValuesValidator';
 import { DomSanitizer } from '@angular/platform-browser';
 import { dateValidator } from '@baseapp/widgets/validators/dateValidator';
+import { DialogService } from 'primeng/dynamicdialog';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { WorkflowSimulatorComponent } from '@baseapp/widgets/workflow-simulator/workflow-simulator.component';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { AppBaseService } from '@baseapp/app.base.service';
@@ -29,7 +31,6 @@ import { AppService } from '@app/app.service';
 import { RequestService } from '@baseapp/request/request/request.service';
 import { Component, OnInit } from '@angular/core';
 import { RequestDetailBaseComponent } from '@baseapp/request/request/request-detail/request-detail.base.component';
-import { DialogService } from 'primeng/dynamicdialog';
 import { Manpower } from '@app/manpower/manpower/manpower.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -122,6 +123,7 @@ export class RequestDetailComponent extends RequestDetailBaseComponent implement
 
  
 onValidateAction($event:any,$button:any){}
+
 
 
 
