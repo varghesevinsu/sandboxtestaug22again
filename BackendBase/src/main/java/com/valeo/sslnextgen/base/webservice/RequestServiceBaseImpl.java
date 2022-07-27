@@ -135,6 +135,12 @@ public abstract class RequestServiceBaseImpl<BL extends IRequestBLBase<M>, M ext
 	 	return logic.demoteToScheduler(id.get(),additionalInfo);
 	}	
 	@PUT
+	@Path("sslworkflow/close/{id}")
+	public M sslWorkflowClose(@PathParam("id") Primary id, Map<String, Object> additionalInfo)
+	{
+	 	return logic.close(id.get(),additionalInfo);
+	}	
+	@PUT
 	@Path("sslworkflow/validate/{id}")
 	public M sslWorkflowValidate(@PathParam("id") Primary id, Map<String, Object> additionalInfo)
 	{

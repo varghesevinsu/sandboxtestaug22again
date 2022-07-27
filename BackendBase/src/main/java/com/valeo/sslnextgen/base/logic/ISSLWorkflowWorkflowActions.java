@@ -14,6 +14,7 @@ public interface ISSLWorkflowWorkflowActions<T extends RequestBase>{
         String SUBMIT_TO_APPROVER = "submitToApprover";
         String DEMOTE_TO_REQUESTER = "demoteToRequester";
         String DEMOTE_TO_SCHEDULER = "demoteToScheduler";
+        String CLOSE = "close";
         String VALIDATE = "validate";
         String ASSIGN = "assign";
     
@@ -46,6 +47,10 @@ public interface ISSLWorkflowWorkflowActions<T extends RequestBase>{
 	void onbeforeDemoteToScheduler(T model, WorkflowMetaInfo metaInfo);
 	void onDemoteToScheduler(T model, WorkflowMetaInfo metaInfo);
 	void onAfterDemoteToScheduler(T model, WorkflowMetaInfo metaInfo);
+        T close(Object id, Map<String, Object> additionalInfo);
+	void onbeforeClose(T model, WorkflowMetaInfo metaInfo);
+	void onClose(T model, WorkflowMetaInfo metaInfo);
+	void onAfterClose(T model, WorkflowMetaInfo metaInfo);
         T validate(Object id, Map<String, Object> additionalInfo);
 	void onbeforeValidate(T model, WorkflowMetaInfo metaInfo);
 	void onValidate(T model, WorkflowMetaInfo metaInfo);
