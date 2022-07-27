@@ -261,48 +261,18 @@
         <div class="form-row  vg-col-2">
             <div class="form-col" [hidden]="hiddenFields.serviceType">
     <div class="field-row"  [ngClass]="{'required': formFieldConfig?.serviceType?.isRequired, 'error':inValidFields.serviceType}">
-        <label for="serviceType" class="col-form-label serviceType-label" [textContent]="'SERVICE_TYPE'|translate"></label>  
-        <span class="info-bubble" *ngIf="formFieldConfig?.serviceType?.infoBubble"   [pTooltip]="formFieldConfig?.serviceType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>                      
-        <p-dropdown [options]="formFieldConfig['serviceType']?.options" formControlName="serviceType"  [showClear]="true" optionLabel="value" optionValue="label" [placeholder]="formFieldConfig?.serviceType?.placeHolder || 'Select'"  styleClass = "dropdown" appendTo="body">
-            <ng-template pTemplate="selectedItem">
-                <ng-template #serviceTypeSelectedRef let-conditions="conditions" let-option="option">
-                    <div class="selected-item" [ngStyle]="conditions?.cellStyle">
-                        <img [src]="conditions?.image" class="img" *ngIf="conditions?.image"/>
-                        <span  
-                            *ngIf="conditions?.iconClass" class="icon"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass"></i>
-                
-                        </span>
-                        <div class="value" *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-                <ng-container *ngIf="detailFormControls.controls.serviceType.value; let selected;">
-                    <ng-template *ngTemplateOutlet="serviceTypeSelectedRef;context:{conditions :formFieldConfig.serviceType?.optionConditions?.[(getSelectedObject(selected,formFieldConfig.serviceType?.options)).value], option:(getSelectedObject(selected,formFieldConfig.serviceType?.options))}"></ng-template>
-                </ng-container>
-            </ng-template>
-        
-            <ng-template let-dropdownItem pTemplate="item" >
-                <ng-template #serviceTypeListRef let-conditions="conditions" let-option="option">
-                    <div class="select-list-item" [ngStyle]="conditions?.cellStyle">                    
-                        <img [src]="conditions?.image" class="list-image" *ngIf="conditions?.image" />
-                        <span
-                            *ngIf="conditions?.iconClass"
-                            [ngStyle]="conditions?.iconStyle"
-                        >
-                            <i [ngClass]="conditions?.iconClass" ></i>
-        
-                        </span>
-                        <div *ngIf="!conditions || (conditions && conditions?.showText)">{{option.value| translate}}</div>
-                    </div>
-                </ng-template>
-        
-                <ng-container>
-                    <ng-template *ngTemplateOutlet="serviceTypeListRef;context:{conditions :formFieldConfig.serviceType?.optionConditions?.[dropdownItem.value], option:dropdownItem}"></ng-template>
-                </ng-container>
-            </ng-template>
-        </p-dropdown>
+        <label for="serviceType" class="col-form-label serviceType-label" [textContent]="'SERVICE_TYPE'|translate"></label>
+        <span class="info-bubble" *ngIf="formFieldConfig?.serviceType?.infoBubble"   [pTooltip]="formFieldConfig?.serviceType?.infoBubble || ''"><i class="fa fa-circle-info"></i></span>
+        <p-autoComplete 
+            [placeholder]="formFieldConfig?.serviceType?.placeHolder || 'Select'"
+            class="form-input" 
+            formControlName="serviceType" 
+            [suggestions]="filteredItems" 
+            completeOnFocus="true" [dropdown]="true"
+           (onShow)="attachInfiniteScrollForAutoCompleteserviceType('serviceType')"             (completeMethod)="autoSuggestSearchserviceType($event,formFieldConfig?.serviceType)"
+            [multiple]="formFieldConfig?.serviceType?.multiple" (onHide)="deattachScroll()" [field]="(formFieldConfig?.serviceType?.displayField)"
+             (onSelect)="onSelect($event,'serviceType',formFieldConfig?.serviceType)" (onUnselect)="unSelect($event,'serviceType')" appendTo="body">
+        </p-autoComplete>
         <div class="fst-italic fs-5 help-text">{{formFieldConfig?.serviceType?.helpText || ''}}</div>
     </div>
 </div><div class="form-col" [hidden]="hiddenFields.requestName">

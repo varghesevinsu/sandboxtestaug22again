@@ -3,6 +3,7 @@ import { RequestBase} from '../request.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { ServicesApiConstants } from '@baseapp/services/services/services.api-constants';
 import { LabApiConstants } from '@baseapp/lab/lab/lab.api-constants';
 import { ToolDesignTypeApiConstants } from '@baseapp/tool-design-type/tool-design-type/tool-design-type.api-constants';
 import { ProjectTypeApiConstants } from '@baseapp/project-type/project-type/project-type.api-constants';
@@ -261,7 +262,7 @@ isAutoSuggestCallFired: boolean = false;
       "service" : {
         "name" : "sslWorkflowCancel",
         "tableId" : "c31ac3f2-1ff3-4533-9aba-53f71383ab00",
-        "sid" : "ad519d5d-decc-414f-b626-bc960655bff3",
+        "sid" : "cc20bfb5-547b-49ce-a3aa-a7d48238422c",
         "tableName" : "Request"
       },
       "showOn" : "both",
@@ -278,7 +279,7 @@ isAutoSuggestCallFired: boolean = false;
       "service" : {
         "name" : "sslWorkflowDemoteToRequester",
         "tableId" : "c31ac3f2-1ff3-4533-9aba-53f71383ab00",
-        "sid" : "60d19603-5c77-4c43-819e-18549db932ca",
+        "sid" : "0fd18503-460d-416c-b592-83639e56f27b",
         "tableName" : "Request"
       },
       "showOn" : "both",
@@ -288,6 +289,23 @@ isAutoSuggestCallFired: boolean = false;
       "label" : "DEMOTE_TO_REQUESTER",
       "type" : "button",
       "wfAction" : "demoteToRequester"
+    }, {
+      "outline" : true,
+      "buttonType" : "icon_on_left",
+      "visibility" : "show",
+      "service" : {
+        "name" : "sslWorkflowClose",
+        "tableId" : "c31ac3f2-1ff3-4533-9aba-53f71383ab00",
+        "sid" : "9cb74b36-ae1d-4086-9fb9-856a3ff89e47",
+        "tableName" : "Request"
+      },
+      "showOn" : "both",
+      "buttonStyle" : "curved",
+      "buttonEnabled" : "yes",
+      "action" : "call_a_backend_webservice",
+      "label" : "CLOSE",
+      "type" : "button",
+      "wfAction" : "close"
     } ],
     "valueChange" : true,
     "buttonStyle" : "curved",
@@ -517,44 +535,46 @@ isAutoSuggestCallFired: boolean = false;
     "allowViewing" : "yes",
     "fieldId" : "requestName"
   }, {
-    "allowEditing" : "yes",
+    "allowEditing" : "conditional",
     "multipleValues" : false,
-    "allowedValues" : {
-      "values" : [ {
-        "label" : "EMC",
-        "value" : "EMC"
-      }, {
-        "label" : "ECAD",
-        "value" : "ECAD"
-      }, {
-        "label" : "SERVICE3",
-        "value" : "SERVICE3"
-      }, {
-        "label" : "SERVICE4",
-        "value" : "SERVICE4"
-      } ],
-      "conditions" : {
-        "conditionType" : "Auto",
-        "conditions" : [ ]
-      }
-    },
-    "defaultField" : false,
+    "lookupTo" : "f0ffa9ec-20b2-4f11-be10-0677b1e099bf",
     "fieldName" : " Service type",
     "data" : " Service type",
-    "multipleValuesMax" : 10,
-    "label" : " Service type",
+    "lookupUrl" : "services/autosuggest",
     "type" : "captionItem",
     "mandatory" : "yes",
+    "viewConditionally" : {
+      "qbName" : "Scheduler_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ "all" ]
+    },
+    "editConditionally" : {
+      "qbName" : "Scheduler_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ "selected", "Requester ", "Admin" ]
+    },
+    "sysGen" : false,
+    "fieldId" : "serviceType",
+    "allowedValues" : { },
+    "defaultField" : false,
+    "multipleValuesMax" : 10,
+    "lookupType" : "table",
+    "label" : " Service type",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "serviceType",
     "multipleValuesMin" : 0,
     "name" : "serviceType",
-    "sysGen" : false,
-    "uiType" : "select",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "serviceType"
+    "uiType" : "autosuggest",
+    "displayField" : "service",
+    "fieldType" : "any",
+    "allowViewing" : "conditional"
   }, {
     "allowEditing" : "no",
     "allowedValues" : { },
@@ -1052,46 +1072,48 @@ isAutoSuggestCallFired: boolean = false;
     "allowViewing" : "yes",
     "fieldId" : "orgalocToBeInvoiced"
   }, {
-    "allowEditing" : "yes",
+    "allowEditing" : "conditional",
     "multipleValues" : false,
-    "allowedValues" : {
-      "values" : [ {
-        "label" : "EMC",
-        "value" : "EMC"
-      }, {
-        "label" : "ECAD",
-        "value" : "ECAD"
-      }, {
-        "label" : "SERVICE3",
-        "value" : "SERVICE3"
-      }, {
-        "label" : "SERVICE4",
-        "value" : "SERVICE4"
-      } ],
-      "conditions" : {
-        "conditionType" : "Auto",
-        "conditions" : [ ]
-      }
-    },
-    "defaultField" : false,
+    "lookupTo" : "f0ffa9ec-20b2-4f11-be10-0677b1e099bf",
     "fieldName" : " Service type",
     "data" : " Service type",
-    "multipleValuesMax" : 10,
+    "lookupUrl" : "services/autosuggest",
     "currentNode" : "cfa15170-0741-43ec-957c-3c263d6cf8e2",
-    "label" : " Service type",
     "type" : "formField",
     "mandatory" : "yes",
+    "viewConditionally" : {
+      "qbName" : "Scheduler_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ "all" ]
+    },
+    "valueChange" : true,
+    "editConditionally" : {
+      "qbName" : "Scheduler_Rights_Fields",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ ]
+      },
+      "roles" : [ "selected", "Requester ", "Admin" ]
+    },
+    "sysGen" : false,
+    "fieldId" : "serviceType",
+    "allowedValues" : { },
+    "defaultField" : false,
+    "multipleValuesMax" : 10,
+    "lookupType" : "table",
+    "label" : " Service type",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "serviceType",
     "multipleValuesMin" : 0,
-    "valueChange" : true,
     "name" : "serviceType",
-    "sysGen" : false,
-    "uiType" : "select",
-    "fieldType" : "string",
-    "allowViewing" : "yes",
-    "fieldId" : "serviceType"
+    "uiType" : "autosuggest",
+    "displayField" : "service",
+    "fieldType" : "any",
+    "allowViewing" : "conditional"
   }, {
     "allowEditing" : "conditional",
     "allowedValues" : { },
@@ -2700,6 +2722,19 @@ if(!this.isAutoSuggestCallFired){
     this.autoSuggestPageNo = 0;
     this.isAutoSuggestCallFired = false;
   }
+	autoSuggestSearchserviceType(event?: any, col?: any,url?:any) {
+if(!this.isAutoSuggestCallFired){
+      this.isAutoSuggestCallFired = true;
+    let apiObj = Object.assign({}, ServicesApiConstants.autoSuggestService)
+    apiObj.url = `${url ||apiObj.url}?query=${event.query}&pgNo=${this.autoSuggestPageNo}&pgLen=${BaseAppConstants.defaultPageSize}`;
+     this.baseService.get(apiObj).subscribe((res: any) => {
+      this.isAutoSuggestCallFired = false;
+      let updateRecords =  [...this.filteredItems, ...res];
+      const ids = updateRecords.map(o => o.sid)
+      this.filteredItems = updateRecords.filter(({ sid }, index) => !ids.includes(sid, index + 1));
+    })
+}
+ }
 	actionBarAction(btn: any) {
     const methodName: any = (`on` + btn.action.charAt(0).toUpperCase() + btn.action.slice(1));
     let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
@@ -3223,6 +3258,25 @@ if(!this.isAutoSuggestCallFired){
 	loadCaptionbarItems(){
     
 }
+	attachInfiniteScrollForAutoCompleteserviceType(fieldName:string) {
+    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
+    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
+      return Math.round(tracker.scrollTop);
+    }));
+
+    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
+      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
+        this.isAutoSuggestCallFired = false;
+          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
+            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
+          }
+         const methodName: any = `autoSuggestSearchserviceType`
+        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
+        this[action]();
+      }
+    });
+    // this.subscriptions.push(autoSuggestScrollSubscription);
+  }
 	attachInfiniteScrollForAutoCompleteprojectType(fieldName:string) {
     const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
     let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
@@ -3306,6 +3360,20 @@ if(!this.isAutoSuggestCallFired){
 	const params = {id:this.id,
       comments:this.comments}
 	this.requestService.sslWorkflowSubmitToApprover(params).subscribe((res:any)=>{
+		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
+		if(Object.keys(this.mandatoryFields).length > 0){
+			this.clearValidations(this.mandatoryFields);
+		}
+		this.onInit();
+	},error=>{
+		if(Object.keys(this.mandatoryFields).length > 0)
+			this.clearValidations(this.mandatoryFields);
+	})
+}
+	onwfClose(){
+	const params = {id:this.id,
+      comments:this.comments}
+	this.requestService.sslWorkflowClose(params).subscribe((res:any)=>{
 		this.showMessage({ severity: 'success', summary: '', detail: 'Record Updated Successfully' });
 		if(Object.keys(this.mandatoryFields).length > 0){
 			this.clearValidations(this.mandatoryFields);
