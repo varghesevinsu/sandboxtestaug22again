@@ -16,4 +16,5 @@ export interface ApplicationUserBase {
 	approver: Boolean;
 	leaderServiceType: string;
 	schedulerServiceType: string;
+	orgaloc: string;
 }
