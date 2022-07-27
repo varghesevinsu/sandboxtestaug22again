@@ -23,7 +23,6 @@ import { BaseAppConstants } from '@baseapp/app-constants.base';
 import { allowedValuesValidator } from '@baseapp/widgets/validators/allowedValuesValidator';
 import { DomSanitizer } from '@angular/platform-browser';
 import { dateValidator } from '@baseapp/widgets/validators/dateValidator';
-import { DialogService } from 'primeng/dynamicdialog';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { WorkflowSimulatorComponent } from '@baseapp/widgets/workflow-simulator/workflow-simulator.component';
@@ -370,7 +369,7 @@ isPrototype = environment.prototype;
   }
 
 reloadForm(workflowInfo:any){
-    const dataObsr$ = this.data ? of(this.data) : this.getData()
+   /* const dataObsr$ = this.data ? of(this.data) : this.getData();
     dataObsr$.subscribe((res: any) => {
       if(workflowInfo && this?.data?.workflowInfo){          
         Object.assign(this.data.workflowInfo,workflowInfo)
@@ -378,7 +377,7 @@ reloadForm(workflowInfo:any){
       this.configureFormOnWorkflow();
       this.updateAllowedActions();
       this.formValueChanges();
-    })
+    })*/
   }
 
   openWorkflowSimilator(){
