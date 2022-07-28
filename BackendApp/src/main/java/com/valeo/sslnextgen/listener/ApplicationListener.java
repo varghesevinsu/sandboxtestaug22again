@@ -16,13 +16,12 @@ import com.eva.base.rest.authproviders.OAuth2APIAuthProvider;
 
 
 public class ApplicationListener extends BaseApplicationListener {
-   LOGGER.debug("Registering Providers");
-		ProviderFactory.register(PersistenceType.DB, new BaseGCPFSDal<>());
+   		ProviderFactory.register(PersistenceType.DB, new BaseGCPFSDal<>());
 		CacheProviderFactory.registerProvider(new MemCacheProvider());
 		ProviderFactory.register(PersistenceType.SEARCH, new BaseGAESearchDal<>());
 		StorageFactory.register(PersistenceType.FILES, new CloudStorage());
-		LOGGER.debug("Registering storage Providers");
-		
+
+		EmailProviderFactory.registerProvider(EmailProviderTypes.SEND_GRID, new SendGridEmailProvider());	
 		APIAuthProviderFactory.registerProvider("Str", new OAuth2APIAuthProvider());
 
 	
