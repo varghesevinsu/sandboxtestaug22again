@@ -307,6 +307,7 @@ isRowSelected:boolean = true;
 	pageViewTitle: string = 'APPLICATION_USER_DETAIL';
 	
 		detailFormControls : FormGroup = new FormGroup({
+	requester: new FormControl('',[]),
 	lastName: new FormControl('',[]),
 	leader: new FormControl('',[]),
 	approver: new FormControl('',[]),

@@ -7,7 +7,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -135,9 +134,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
-          "*",
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -234,7 +230,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -275,6 +270,11 @@
               {
                 "resolutiontype": "APPROLE",
                 "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
                 "staticvalue": true
               },
               {
@@ -351,13 +351,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
           "submit",
           "cancel",
           "demoteToRequester",
@@ -628,7 +621,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -721,18 +713,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
           "submit",
           "cancel",
           "demoteToScheduler",
@@ -851,12 +831,23 @@
               },
               {
                 "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
                 "source": "admin",
                 "staticvalue": true
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_demote_to_requester.ftl",
             "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "APPROLE",
                 "source": "admin",
@@ -866,13 +857,8 @@
             "mailccs": [
               {
                 "resolutiontype": "APPROLE",
-                "source": "admin",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "FIELD",
                 "source": "scheduler",
-                "staticvalue": false
+                "staticvalue": true
               }
             ]
           },
@@ -959,7 +945,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -1000,6 +985,11 @@
               {
                 "resolutiontype": "APPROLE",
                 "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
                 "staticvalue": true
               },
               {
@@ -1076,7 +1066,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -1373,8 +1362,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -1519,13 +1506,6 @@
           "submitToApprover"
         ],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "validate",
-          "demoteToLeader",
           "*",
           "submit",
           "cancel",
@@ -1720,9 +1700,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
-          "*",
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -1819,7 +1796,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -1860,6 +1836,11 @@
               {
                 "resolutiontype": "APPROLE",
                 "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
                 "staticvalue": true
               },
               {
@@ -1936,7 +1917,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -2410,7 +2390,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -2579,13 +2558,6 @@
           "demoteToScheduler",
           "submitToApprover",
           "validate",
-          "demoteToLeader",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
           "demoteToLeader"
         ],
         "disableonlyactions": [],
@@ -2634,7 +2606,8 @@
                 "staticvalue": false
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_submit.ftl",
             "mailtos": [
               {
                 "resolutiontype": "FIELD",
@@ -2646,11 +2619,6 @@
               {
                 "resolutiontype": "APPROLE",
                 "source": "requester ",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "APPROLE",
-                "source": "admin",
                 "staticvalue": true
               }
             ]
@@ -2717,7 +2685,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "*",
           "*"
         ],
         "disableonlyactions": [],
@@ -3005,17 +2972,6 @@
           "submitToApprover"
         ],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "validate",
-          "demoteToLeader",
-          "*",
-          "*",
-          "*",
-          "*",
           "*",
           "submit",
           "cancel",
@@ -3239,26 +3195,7 @@
           "demoteToScheduler",
           "submitToApprover",
           "validate",
-          "demoteToLeader",
-          "*",
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
-          "*",
-          "*",
-          "*",
-          "*",
-          "*",
-          "*"
+          "demoteToLeader"
         ],
         "disableonlyactions": [],
         "actiontarget": {
@@ -3435,12 +3372,23 @@
               },
               {
                 "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
                 "source": "admin",
                 "staticvalue": true
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_demote_to_requester.ftl",
             "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "APPROLE",
                 "source": "admin",
@@ -3450,13 +3398,8 @@
             "mailccs": [
               {
                 "resolutiontype": "APPROLE",
-                "source": "admin",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "FIELD",
                 "source": "scheduler",
-                "staticvalue": false
+                "staticvalue": true
               }
             ]
           },
@@ -3510,14 +3453,6 @@
           "demoteToScheduler",
           "submitToApprover",
           "validate",
-          "demoteToLeader",
-          "*",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
           "demoteToLeader"
         ],
         "disableonlyactions": [],
@@ -3564,6 +3499,11 @@
               {
                 "resolutiontype": "APPROLE",
                 "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
                 "staticvalue": true
               },
               {
@@ -3632,7 +3572,8 @@
                 "staticvalue": false
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_submit.ftl",
             "mailtos": [
               {
                 "resolutiontype": "FIELD",
@@ -3644,11 +3585,6 @@
               {
                 "resolutiontype": "APPROLE",
                 "source": "requester ",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "APPROLE",
-                "source": "admin",
                 "staticvalue": true
               }
             ]
@@ -3715,14 +3651,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
-          "*",
           "*",
           "submit",
           "cancel",
@@ -4106,13 +4034,6 @@
           "submitToApprover"
         ],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "validate",
-          "demoteToLeader",
           "*",
           "submit",
           "cancel",
@@ -4312,18 +4233,6 @@
           "demoteToScheduler",
           "submitToApprover",
           "validate",
-          "demoteToLeader",
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
-          "demoteToLeader",
-          "submit",
-          "cancel",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
           "demoteToLeader"
         ],
         "disableonlyactions": [],
@@ -4437,12 +4346,23 @@
               },
               {
                 "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
                 "source": "admin",
                 "staticvalue": true
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_demote_to_requester.ftl",
             "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "APPROLE",
                 "source": "admin",
@@ -4452,13 +4372,8 @@
             "mailccs": [
               {
                 "resolutiontype": "APPROLE",
-                "source": "admin",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "FIELD",
                 "source": "scheduler",
-                "staticvalue": false
+                "staticvalue": true
               }
             ]
           },
@@ -4556,13 +4471,6 @@
           "demoteToScheduler",
           "submitToApprover",
           "validate",
-          "demoteToLeader",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
-          "validate",
           "demoteToLeader"
         ],
         "disableonlyactions": [],
@@ -4611,7 +4519,8 @@
                 "staticvalue": false
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_submit.ftl",
             "mailtos": [
               {
                 "resolutiontype": "FIELD",
@@ -4623,11 +4532,6 @@
               {
                 "resolutiontype": "APPROLE",
                 "source": "requester ",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "APPROLE",
-                "source": "admin",
                 "staticvalue": true
               }
             ]
@@ -4694,13 +4598,6 @@
         "hide": [],
         "enableonlyactions": [],
         "hideactions": [
-          "submit",
-          "cancel",
-          "demoteToRequester",
-          "approveToLeader",
-          "assign",
-          "demoteToScheduler",
-          "submitToApprover",
           "submit",
           "cancel",
           "demoteToRequester",
