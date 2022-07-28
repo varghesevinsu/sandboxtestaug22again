@@ -26,7 +26,7 @@ public class ApplicationListener extends BaseApplicationListener {
 
 		EmailProviderFactory.registerProvider(EmailProviderTypes.SEND_GRID, new SendGridEmailProvider());	
 		APIAuthProviderFactory.registerProvider("Str", new OAuth2APIAuthProvider());
-
+	}
 	
 	@Override
 	public void initializeConfigurations() {
