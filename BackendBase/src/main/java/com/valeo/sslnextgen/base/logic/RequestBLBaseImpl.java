@@ -163,43 +163,6 @@ public class RequestBLBaseImpl<T extends RequestBase> extends BaseWorkflowBusine
 	
 			
 	@Override
-	public T demoteToRequester(Object id, Map<String, Object> additionalInfo) {
-		setWorkflowName(SSL_WORKFLOW);
-		T model = getById(id);
-		if(model == null) {
-			throw new EntityNotFoundException(ErrorCode.WORKFLOW_MODEL_NOT_FOUND, new Object[] {id});
-		}
-		WorkflowMetaInfo metaInfo = createWorkflowMetaInfo(model, model.getStatusOfTheRequest().name().toLowerCase(), null,
-				DEMOTE_TO_REQUESTER,MapUtil.readValueAsString(ACTION_COMMENTS, additionalInfo));
-		metaInfo.addAllAdditionalInfo(additionalInfo);		
-		metaInfo.setCurrentUser(getCurrentUser(model, metaInfo));
-		metaInfo.setCurrentStepObj(validateStep(model, metaInfo));
-		onbeforeDemoteToRequester(model,metaInfo);
-		onDemoteToRequester(model,metaInfo);
-		onAfterDemoteToRequester(model,metaInfo);
-		return model;
-	}
-	
-	@Override
-	public void onbeforeDemoteToRequester(T model, WorkflowMetaInfo metaInfo){
-		
-	}
-	
-	@Override
-	public void onDemoteToRequester(T model, WorkflowMetaInfo metaInfo){
-		metaInfo.setNextStep(resolveNextStep(model, metaInfo));
-		metaInfo.setNextActors(resolveNextActor(model, metaInfo));
-		setWorkflowFieldsInModel(model, metaInfo);
-		update(model);
-	}
-	
-	@Override
-	public void onAfterDemoteToRequester(T model, WorkflowMetaInfo metaInfo){
-		createWorkflowHistory(model, metaInfo);
-		sendEmail(model, metaInfo);
-	}
-	
-	@Override
 	public T validate(Object id, Map<String, Object> additionalInfo) {
 		setWorkflowName(SSL_WORKFLOW);
 		T model = getById(id);
@@ -417,6 +380,43 @@ public class RequestBLBaseImpl<T extends RequestBase> extends BaseWorkflowBusine
 	
 	@Override
 	public void onAfterClose(T model, WorkflowMetaInfo metaInfo){
+		createWorkflowHistory(model, metaInfo);
+		sendEmail(model, metaInfo);
+	}
+	
+	@Override
+	public T demoteToRequester(Object id, Map<String, Object> additionalInfo) {
+		setWorkflowName(SSL_WORKFLOW);
+		T model = getById(id);
+		if(model == null) {
+			throw new EntityNotFoundException(ErrorCode.WORKFLOW_MODEL_NOT_FOUND, new Object[] {id});
+		}
+		WorkflowMetaInfo metaInfo = createWorkflowMetaInfo(model, model.getStatusOfTheRequest().name().toLowerCase(), null,
+				DEMOTE_TO_REQUESTER,MapUtil.readValueAsString(ACTION_COMMENTS, additionalInfo));
+		metaInfo.addAllAdditionalInfo(additionalInfo);		
+		metaInfo.setCurrentUser(getCurrentUser(model, metaInfo));
+		metaInfo.setCurrentStepObj(validateStep(model, metaInfo));
+		onbeforeDemoteToRequester(model,metaInfo);
+		onDemoteToRequester(model,metaInfo);
+		onAfterDemoteToRequester(model,metaInfo);
+		return model;
+	}
+	
+	@Override
+	public void onbeforeDemoteToRequester(T model, WorkflowMetaInfo metaInfo){
+		
+	}
+	
+	@Override
+	public void onDemoteToRequester(T model, WorkflowMetaInfo metaInfo){
+		metaInfo.setNextStep(resolveNextStep(model, metaInfo));
+		metaInfo.setNextActors(resolveNextActor(model, metaInfo));
+		setWorkflowFieldsInModel(model, metaInfo);
+		update(model);
+	}
+	
+	@Override
+	public void onAfterDemoteToRequester(T model, WorkflowMetaInfo metaInfo){
 		createWorkflowHistory(model, metaInfo);
 		sendEmail(model, metaInfo);
 	}
