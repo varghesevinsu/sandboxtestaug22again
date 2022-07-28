@@ -25,7 +25,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { dateValidator } from '@baseapp/widgets/validators/dateValidator';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { WorkflowSimulatorComponent } from '@baseapp/widgets/workflow-simulator/workflow-simulator.component';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { AppBaseService } from '@baseapp/app.base.service';
@@ -73,7 +72,6 @@ workflowActions:any ={
   formSecurityConfig:any = {};
   enableReadOnly = BaseAppConstants.enableReadOnly;
 isRowSelected:boolean = true; 
-isPrototype = environment.prototype;
 	bsModalRef?: BsModalRef;
 	isChildPage:boolean = false;
 
@@ -325,75 +323,6 @@ isPrototype = environment.prototype;
  	 }
 
 	
-	formatRawData() {
-    this.detailFormConfig.children.map((ele: any) => {
-      if (ele.fieldType == 'Date') {
-        if (this.data && this.data[ele.name]) {
-          const formattedDate = new Date(this.data[ele.name])
-          this.data[ele.name] = formattedDate;
-          this.backupData[ele.name] = formattedDate;
-        }
-      }
-      if (ele.uiType === 'autosuggest' && ele.multipleValues) {
-        let arr: any[] = [];
-        if (this.data && this.data[ele.name] && Array.isArray(this.data[ele.name])) {
-          this.data[ele.name]?.map((k: any) => {
-            this.createAutoSuggestFields(ele);
-            this.selectedItems[ele.name] = this.data[ele.name]
-            arr.push(k.value);
-          })
-          if (arr.length > 0) {
-            this.data[ele.name] = arr;
-            this.backupData[ele.name] = arr;
-          }
-        }
-      }
-      else if (ele.uiType === 'autosuggest' && !ele.multipleValues) {
-        if (this.data && this.data[ele.name] && Object.keys(this.data[ele.name]).length > 0) {
-          this.createAutoSuggestFields(ele);
-          this.selectedItems[ele.name].push(this.data[ele.name]);
-          const value = this.data[ele.name]?.value;
-          this.data[ele.name] = value;
-          this.backupData[ele.name] = value;
-        }
-      }
-    })
-    this.detailFormControls.patchValue(this.backupData);
-  }
-
-  createAutoSuggestFields(ele: any) {
-    if (!this.selectedItems?.hasOwnProperty(ele.name)) {
-      this.selectedItems[ele.name] = [];
-    }
-
-  }
-
-reloadForm(workflowInfo:any){
-   /* const dataObsr$ = this.data ? of(this.data) : this.getData();
-    dataObsr$.subscribe((res: any) => {
-      if(workflowInfo && this?.data?.workflowInfo){          
-        Object.assign(this.data.workflowInfo,workflowInfo)
-      }
-      this.configureFormOnWorkflow();
-      this.updateAllowedActions();
-      this.formValueChanges();
-    })*/
-  }
-
-  openWorkflowSimilator(){
-    const ref = this.dialogService.open(WorkflowSimulatorComponent, {
-      header: 'Workflow Simulator',
-      width: '350px',
-      data : {
-        statusFieldConfig : this.formFieldConfig[this.workFlowField]
-      }
-    });
-    ref.onClose.subscribe((workflowInfo : any) => {
-      if (workflowInfo) {
-        this.reloadForm(workflowInfo);
-      }
-  });
-  }
 	getDateTimeFields() {
     return ['createdDate','modifiedDate'];
   }
@@ -493,6 +422,48 @@ reloadForm(workflowInfo:any){
       }
 
     })
+  }
+	formatRawData() {
+    this.detailFormConfig.children.map((ele: any) => {
+      if (ele.fieldType == 'Date') {
+        if (this.data && this.data[ele.name]) {
+          const formattedDate = new Date(this.data[ele.name])
+          this.data[ele.name] = formattedDate;
+          this.backupData[ele.name] = formattedDate;
+        }
+      }
+      if (ele.uiType === 'autosuggest' && ele.multipleValues) {
+        let arr: any[] = [];
+        if (this.data && this.data[ele.name] && Array.isArray(this.data[ele.name])) {
+          this.data[ele.name]?.map((k: any) => {
+            this.createAutoSuggestFields(ele);
+            this.selectedItems[ele.name] = this.data[ele.name]
+            arr.push(k.value);
+          })
+          if (arr.length > 0) {
+            this.data[ele.name] = arr;
+            this.backupData[ele.name] = arr;
+          }
+        }
+      }
+      else if (ele.uiType === 'autosuggest' && !ele.multipleValues) {
+        if (this.data && this.data[ele.name] && Object.keys(this.data[ele.name]).length > 0) {
+          this.createAutoSuggestFields(ele);
+          this.selectedItems[ele.name].push(this.data[ele.name]);
+          const value = this.data[ele.name]?.value;
+          this.data[ele.name] = value;
+          this.backupData[ele.name] = value;
+        }
+      }
+    })
+    this.detailFormControls.patchValue(this.backupData);
+  }
+
+  createAutoSuggestFields(ele: any) {
+    if (!this.selectedItems?.hasOwnProperty(ele.name)) {
+      this.selectedItems[ele.name] = [];
+    }
+
   }
 	formatCaptionItems(config: any, data: any) {
     if (Object.keys(data).length > 0) {

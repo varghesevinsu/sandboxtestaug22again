@@ -17,4 +17,5 @@ export interface ApplicationUserBase {
 	leaderServiceType: string;
 	schedulerServiceType: string;
 	orgaloc: string;
+	dummy5: string;
 }
