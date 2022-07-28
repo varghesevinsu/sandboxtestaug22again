@@ -2,6 +2,7 @@ import { RequestService } from '../request.service';
 import { RequestBase} from '../request.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { ServicesApiConstants } from '@baseapp/services/services/services.api-constants';
 import { LabApiConstants } from '@baseapp/lab/lab/lab.api-constants';
 import { ToolDesignTypeApiConstants } from '@baseapp/tool-design-type/tool-design-type/tool-design-type.api-constants';
@@ -30,10 +31,8 @@ import { BaseAppConstants } from '@baseapp/app-constants.base';
 import { allowedValuesValidator } from '@baseapp/widgets/validators/allowedValuesValidator';
 import { DomSanitizer } from '@angular/platform-browser';
 import { dateValidator } from '@baseapp/widgets/validators/dateValidator';
-import { DialogService } from 'primeng/dynamicdialog';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { WorkflowSimulatorComponent } from '@baseapp/widgets/workflow-simulator/workflow-simulator.component';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { AppBaseService } from '@baseapp/app.base.service';
@@ -81,7 +80,6 @@ workflowActions:any ={
   formSecurityConfig:any = {};
   enableReadOnly = BaseAppConstants.enableReadOnly;
 isRowSelected:boolean = true; 
-isPrototype = environment.prototype;
 	autoSuggestPageNo:number = 0;
 filteredItems:any = [];
 isAutoSuggestCallFired: boolean = false;
@@ -2364,6 +2362,7 @@ isAutoSuggestCallFired: boolean = false;
     "valueChange" : true,
     "name" : "budget",
     "sysGen" : false,
+    "width" : "12px",
     "uiType" : "text",
     "fieldType" : "string",
     "fieldId" : "budget"
@@ -2578,29 +2577,53 @@ isAutoSuggestCallFired: boolean = false;
 	pageViewTitle: string = 'REQUEST_DETAIL';
 	
 		detailFormControls : FormGroup = new FormGroup({
-	emcLab: new FormControl('',[]),
 	quoteNo: new FormControl('',[]),
-	boardNumber: new FormControl('',[]),
-	businessController: new FormControl('',[]),
+	serviceType: new FormControl('',[Validators.required]),
+	linkToSpecifications: new FormControl('',[]),
 	projectManagerOrActivityLeader: new FormControl('',[]),
+	budget: new FormControl('',[]),
 	schedulerName: new FormControl('',[]),
 	schedulerCurrency: new FormControl('',[]),
-	currency: new FormControl('',[]),
-	requestedEndDate: new FormControl('',[]),
 	prOrActivityName: new FormControl('',[]),
-	prjOaCode: new FormControl('',[]),
 	schedulerProposedStartDate: new FormControl('',[]),
 	schedulerProposedEndDate: new FormControl('',[]),
-	schedulerAdditionalInformation: new FormControl('',[]),
-	requester: new FormControl('',[]),
 	namecode: new FormControl('',[]),
 	projectOrActivity: new FormControl('',[]),
 	leader: new FormControl('',[]),
 	secondPlaceOfDevelopment: new FormControl('',[]),
+	estimatedDurationInHours: new FormControl('',[]),
+	subName: new FormControl('',[]),
+	boardName: new FormControl('',[]),
 	globalBudget: new FormControl('',[]),
-	additionnalCost: new FormControl('',[]),
+	orgalocToBeInvoiced: new FormControl('',[]),
 	leadPlaceOfDevelopment: new FormControl('',[]),
+	linkToQuotation: new FormControl('',[]),
+	requesterOrgaloc: new FormControl('',[]),
 	additionnalCost2: new FormControl('',[]),
+	areLeftRightDesign: new FormControl('',[]),
+	taskType: new FormControl('',[]),
+	emcLab: new FormControl('',[]),
+	quotationDescription: new FormControl('',[]),
+	additionalInformation: new FormControl('',[]),
+	boardNumber: new FormControl('',[]),
+	businessController: new FormControl('',[]),
+	hoursManpower: new FormControl('',[]),
+	watcher: new FormControl('',[]),
+	currency: new FormControl('',[]),
+	requestedEndDate: new FormControl('',[]),
+	projectNameAsInEdrm: new FormControl('',[]),
+	osaNameToBeCreatedInStr: new FormControl('',[]),
+	panelization: new FormControl('',[]),
+	prjOaCode: new FormControl('',[]),
+	schedulerAdditionalInformation: new FormControl('',[]),
+	functionalNetwork: new FormControl('',[]),
+	requester: new FormControl('',[]),
+	requestedStartDate: new FormControl('',[]),
+	hoursManpower2: new FormControl('',[]),
+	additionnalCost: new FormControl('',[]),
+	projectType: new FormControl('',[Validators.required]),
+	budgetManpower2: new FormControl('',[]),
+	requestName: new FormControl('',[]),
 	subCode: new FormControl('',[]),
 	scheduler: new FormControl('',[]),
 });
@@ -2638,6 +2661,10 @@ if(!this.isAutoSuggestCallFired){
 			this.clearValidations(this.mandatoryFields);
 	})
 }
+	getSelectedObject(field:string,options:any){
+      const selectedObj = (options.filter((item: { label: any}) => item.label.includes(field)));
+      return selectedObj[0];
+  }
 	formatRawData() {
     this.detailFormConfig.children.map((ele: any) => {
       if (ele.fieldType == 'Date') {
@@ -2679,37 +2706,6 @@ if(!this.isAutoSuggestCallFired){
       this.selectedItems[ele.name] = [];
     }
 
-  }
-
-reloadForm(workflowInfo:any){
-   /* const dataObsr$ = this.data ? of(this.data) : this.getData()
-    dataObsr$.subscribe((res: any) => {
-      if(workflowInfo && this?.data?.workflowInfo){          
-        Object.assign(this.data.workflowInfo,workflowInfo)
-      }
-      this.configureFormOnWorkflow();
-      this.updateAllowedActions();
-      this.formValueChanges();
-    })*/
-  }
-
-  openWorkflowSimilator(){
-    const ref = this.dialogService.open(WorkflowSimulatorComponent, {
-      header: 'Workflow Simulator',
-      width: '350px',
-      data : {
-        statusFieldConfig : this.formFieldConfig[this.workFlowField]
-      }
-    });
-    ref.onClose.subscribe((workflowInfo : any) => {
-      if (workflowInfo) {
-        this.reloadForm(workflowInfo);
-      }
-  });
-  }
-	getSelectedObject(field:string,options:any){
-      const selectedObj = (options.filter((item: { label: any}) => item.label.includes(field)));
-      return selectedObj[0];
   }
 	onwfAssign(){
 	const params = {id:this.id,

@@ -8,10 +8,12 @@ import { MessagesModule } from 'primeng/messages';
 import { SharedBaseModule } from '@baseapp/shared/shared.base.module';
 import { Scheduler } from './scheduler/scheduler.component';
 import { Sdfdsf } from './sdfdsf/sdfdsf.component';
+import { Leader } from './leader/leader.component';
 
 @NgModule({
   declarations: [
   	Sdfdsf,
+Leader,
 Scheduler
   ],
   imports: [
@@ -30,6 +32,7 @@ Scheduler
     MessageModule,
     MessagesModule,
    Sdfdsf,
+Leader,
 Scheduler 
   ],
   providers: [

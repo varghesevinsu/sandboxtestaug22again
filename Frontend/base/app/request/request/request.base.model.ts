@@ -104,4 +104,5 @@ export interface RequestBase {
 	test2: string;
 	leader: string;
 	scheduler: string;
+	dummy5: string;
 }
