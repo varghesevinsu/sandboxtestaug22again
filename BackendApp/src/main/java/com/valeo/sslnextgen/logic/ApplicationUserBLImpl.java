@@ -24,6 +24,7 @@ import com.eva.base.authentication.logic.AppUserPrivilegeCache;
 import com.valeo.sslnextgen.model.ApplicationUser;
 import com.valeo.sslnextgen.base.logic.ApplicationUserBLBaseImpl;
 import com.valeo.sslnextgen.logic.IApplicationUserBL;
+import com.eva.base.dal.providers.SearchOptions;
 
 public class ApplicationUserBLImpl extends ApplicationUserBLBaseImpl<ApplicationUser> 
 implements IApplicationUserBL<ApplicationUser>
@@ -33,6 +34,7 @@ implements IApplicationUserBL<ApplicationUser>
 	public ApplicationUserBLImpl() {
 		super(ApplicationUser.class);
 		setChangelogBL(new ChangelogBLImpl());
+		addPersistenceOption(SearchOptions.SEARCH_INDEX_NAME, getTableName());
 	}
 
 	public ApplicationUser getCurrentUserWithMenu() {
