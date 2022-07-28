@@ -274,6 +274,11 @@
               },
               {
                 "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
                 "source": "admin",
                 "staticvalue": true
               }
@@ -826,12 +831,23 @@
               },
               {
                 "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
                 "source": "admin",
                 "staticvalue": true
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_demote_to_requester.ftl",
             "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "APPROLE",
                 "source": "admin",
@@ -841,13 +857,8 @@
             "mailccs": [
               {
                 "resolutiontype": "APPROLE",
-                "source": "admin",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "FIELD",
                 "source": "scheduler",
-                "staticvalue": false
+                "staticvalue": true
               }
             ]
           },
@@ -974,6 +985,11 @@
               {
                 "resolutiontype": "APPROLE",
                 "source": "approver",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
                 "staticvalue": true
               },
               {
@@ -1824,6 +1840,11 @@
               },
               {
                 "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
                 "source": "admin",
                 "staticvalue": true
               }
@@ -2585,7 +2606,8 @@
                 "staticvalue": false
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_submit.ftl",
             "mailtos": [
               {
                 "resolutiontype": "FIELD",
@@ -2597,11 +2619,6 @@
               {
                 "resolutiontype": "APPROLE",
                 "source": "requester ",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "APPROLE",
-                "source": "admin",
                 "staticvalue": true
               }
             ]
@@ -3355,12 +3372,23 @@
               },
               {
                 "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
                 "source": "admin",
                 "staticvalue": true
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_demote_to_requester.ftl",
             "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "APPROLE",
                 "source": "admin",
@@ -3370,13 +3398,8 @@
             "mailccs": [
               {
                 "resolutiontype": "APPROLE",
-                "source": "admin",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "FIELD",
                 "source": "scheduler",
-                "staticvalue": false
+                "staticvalue": true
               }
             ]
           },
@@ -3480,6 +3503,11 @@
               },
               {
                 "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
                 "source": "admin",
                 "staticvalue": true
               }
@@ -3544,7 +3572,8 @@
                 "staticvalue": false
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_submit.ftl",
             "mailtos": [
               {
                 "resolutiontype": "FIELD",
@@ -3556,11 +3585,6 @@
               {
                 "resolutiontype": "APPROLE",
                 "source": "requester ",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "APPROLE",
-                "source": "admin",
                 "staticvalue": true
               }
             ]
@@ -4322,12 +4346,23 @@
               },
               {
                 "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
+              {
+                "resolutiontype": "APPROLE",
                 "source": "admin",
                 "staticvalue": true
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_demote_to_requester.ftl",
             "mailtos": [
+              {
+                "resolutiontype": "APPROLE",
+                "source": "requester ",
+                "staticvalue": true
+              },
               {
                 "resolutiontype": "APPROLE",
                 "source": "admin",
@@ -4337,13 +4372,8 @@
             "mailccs": [
               {
                 "resolutiontype": "APPROLE",
-                "source": "admin",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "FIELD",
                 "source": "scheduler",
-                "staticvalue": false
+                "staticvalue": true
               }
             ]
           },
@@ -4489,7 +4519,8 @@
                 "staticvalue": false
               }
             ],
-            "sendemail": false,
+            "sendemail": true,
+            "mailtemplate": "sslworkflow_submit.ftl",
             "mailtos": [
               {
                 "resolutiontype": "FIELD",
@@ -4501,11 +4532,6 @@
               {
                 "resolutiontype": "APPROLE",
                 "source": "requester ",
-                "staticvalue": true
-              },
-              {
-                "resolutiontype": "APPROLE",
-                "source": "admin",
                 "staticvalue": true
               }
             ]
