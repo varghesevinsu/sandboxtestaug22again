@@ -16,6 +16,9 @@ import com.eva.base.rest.authproviders.OAuth2APIAuthProvider;
 
 
 public class ApplicationListener extends BaseApplicationListener {
+
+	@Override
+	public void registerProvider() {
    		ProviderFactory.register(PersistenceType.DB, new BaseGCPFSDal<>());
 		CacheProviderFactory.registerProvider(new MemCacheProvider());
 		ProviderFactory.register(PersistenceType.SEARCH, new BaseGAESearchDal<>());
