@@ -1163,6 +1163,15 @@
         "Viewer",
         "Development Administrator"
       ],
+      "/autosuggest/scheduler": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Scheduler",
+        "Leader",
+        "Viewer",
+        "Development Administrator"
+      ],
       "/{sid}": [
         "Admin",
         "Approver",
@@ -1181,25 +1190,16 @@
         "Viewer",
         "Development Administrator"
       ],
-      "/autosuggest": [
-        "Admin",
-        "Approver",
-        "Requester ",
-        "Scheduler",
-        "Leader",
-        "Viewer",
-        "Development Administrator"
-      ],
-      "/autosuggest/scheduler": [
-        "Admin",
-        "Approver",
-        "Requester ",
-        "Scheduler",
-        "Leader",
-        "Viewer",
-        "Development Administrator"
-      ],
       "/autosuggest/leader": [
+        "Admin",
+        "Approver",
+        "Requester ",
+        "Scheduler",
+        "Leader",
+        "Viewer",
+        "Development Administrator"
+      ],
+      "/autosuggest": [
         "Admin",
         "Approver",
         "Requester ",
