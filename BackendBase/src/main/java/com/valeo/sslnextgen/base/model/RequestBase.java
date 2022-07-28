@@ -179,14 +179,13 @@ public class RequestBase extends BaseWorkflowModel {
 	private String projectNameAsInEdrm;
 	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
-	private Lookup serviceType;
+	private RequestServicetype serviceType;
 	@Searchable(index = true)
 	private String intercoPartnerCode;
 	@Searchable(index = true)
 	private Long estimatedDurationInHours;
 	@Searchable(index = true)
 	private String sapCategory;
-	@NotNull(message = ValidationErrorConstants.NULL_VALUE)
 	@Searchable(index = true)
 	private Lookup projectType;
 	@Searchable(index = true)
@@ -864,11 +863,11 @@ public class RequestBase extends BaseWorkflowModel {
 		return projectNameAsInEdrm;
 	}
 
-	public void setServiceType(Lookup serviceType) {
+	public void setServiceType(RequestServicetype serviceType) {
 		this.serviceType = serviceType;
 	}
 
-	public Lookup getServiceType() {
+	public RequestServicetype getServiceType() {
 		return serviceType;
 	}
 
