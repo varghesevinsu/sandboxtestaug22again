@@ -206,6 +206,7 @@ isAutoSuggestCallFired: boolean = false;
     "valueChange" : true,
     "name" : "service",
     "sysGen" : false,
+    "width" : "12px",
     "uiType" : "text",
     "fieldType" : "string",
     "allowViewing" : "yes",
@@ -332,6 +333,7 @@ isAutoSuggestCallFired: boolean = false;
 	pageViewTitle: string = 'SERVICES_DETAIL';
 	
 		detailFormControls : FormGroup = new FormGroup({
+	service: new FormControl('',[Validators.required]),
 	enabledLab: new FormControl('',[]),
 	respScheduler: new FormControl('',[]),
 	respLeader: new FormControl('',[]),
