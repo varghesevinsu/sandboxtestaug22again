@@ -1,1 +1,16 @@
-[{}]
+[	{
+		"value": "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",
+		"key": "apiKey"
+	},
+	{
+		"value": "EVA POC",
+		"key": "appName"
+	},
+	{
+		"value": "EVA POC",
+		"key": "from.name"
+	},
+	{
+		"value": "smurugesan@vanenburgsoftware.com",
+		"key": "from.email"
+	}]
