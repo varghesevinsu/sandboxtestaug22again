@@ -3,7 +3,6 @@ import { RequestBase} from '../request.base.model';
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { ServicesApiConstants } from '@baseapp/services/services/services.api-constants';
 import { LabApiConstants } from '@baseapp/lab/lab/lab.api-constants';
 import { ToolDesignTypeApiConstants } from '@baseapp/tool-design-type/tool-design-type/tool-design-type.api-constants';
 import { ProjectTypeApiConstants } from '@baseapp/project-type/project-type/project-type.api-constants';
@@ -277,23 +276,6 @@ isAutoSuggestCallFired: boolean = false;
       "buttonType" : "icon_on_left",
       "visibility" : "show",
       "service" : {
-        "name" : "sslWorkflowDemoteToRequester",
-        "tableId" : "c31ac3f2-1ff3-4533-9aba-53f71383ab00",
-        "sid" : "0fd18503-460d-416c-b592-83639e56f27b",
-        "tableName" : "Request"
-      },
-      "showOn" : "both",
-      "buttonStyle" : "curved",
-      "buttonEnabled" : "yes",
-      "action" : "call_a_backend_webservice",
-      "label" : "DEMOTE_TO_REQUESTER",
-      "type" : "button",
-      "wfAction" : "demoteToRequester"
-    }, {
-      "outline" : true,
-      "buttonType" : "icon_on_left",
-      "visibility" : "show",
-      "service" : {
         "name" : "sslWorkflowClose",
         "tableId" : "c31ac3f2-1ff3-4533-9aba-53f71383ab00",
         "sid" : "9cb74b36-ae1d-4086-9fb9-856a3ff89e47",
@@ -306,6 +288,23 @@ isAutoSuggestCallFired: boolean = false;
       "label" : "CLOSE",
       "type" : "button",
       "wfAction" : "close"
+    }, {
+      "outline" : true,
+      "buttonType" : "icon_on_left",
+      "visibility" : "show",
+      "service" : {
+        "name" : "sslWorkflowDemoteToRequester",
+        "tableId" : "c31ac3f2-1ff3-4533-9aba-53f71383ab00",
+        "sid" : "cac21e86-4ada-4c91-850f-7a3119f0d30c",
+        "tableName" : "Request"
+      },
+      "showOn" : "both",
+      "buttonStyle" : "curved",
+      "buttonEnabled" : "yes",
+      "action" : "call_a_backend_webservice",
+      "label" : "DEMOTE_TO_REQUESTER",
+      "type" : "button",
+      "wfAction" : "demoteToRequester"
     } ],
     "valueChange" : true,
     "buttonStyle" : "curved",
@@ -537,43 +536,58 @@ isAutoSuggestCallFired: boolean = false;
   }, {
     "allowEditing" : "conditional",
     "multipleValues" : false,
-    "lookupTo" : "f0ffa9ec-20b2-4f11-be10-0677b1e099bf",
     "fieldName" : " Service type",
     "data" : " Service type",
-    "lookupUrl" : "services/autosuggest",
+    "infoBubble" : "",
     "type" : "captionItem",
     "mandatory" : "yes",
     "viewConditionally" : {
-      "qbName" : "Scheduler_Rights_Fields",
+      "qbName" : "Requester",
       "query" : {
         "condition" : "and",
         "rules" : [ ]
       },
       "roles" : [ "all" ]
     },
+    "defaultVal" : "",
     "editConditionally" : {
-      "qbName" : "Scheduler_Rights_Fields",
+      "qbName" : "requester",
       "query" : {
         "condition" : "and",
         "rules" : [ ]
       },
-      "roles" : [ "selected", "Requester ", "Admin" ]
+      "roles" : [ ]
     },
     "sysGen" : false,
+    "placeHolder" : "",
     "fieldId" : "serviceType",
-    "allowedValues" : { },
+    "allowedValues" : {
+      "values" : [ {
+        "label" : "ECAD",
+        "value" : "ECAD"
+      }, {
+        "label" : "EMC",
+        "value" : "EMC"
+      }, {
+        "label" : "SERVICE1",
+        "value" : "SERVICE1"
+      } ],
+      "conditions" : {
+        "conditionType" : "Auto",
+        "conditions" : [ ]
+      }
+    },
     "defaultField" : false,
+    "helpText" : "",
     "multipleValuesMax" : 10,
-    "lookupType" : "table",
     "label" : " Service type",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "serviceType",
     "multipleValuesMin" : 0,
     "name" : "serviceType",
-    "uiType" : "autosuggest",
-    "displayField" : "service",
-    "fieldType" : "any",
+    "uiType" : "select",
+    "fieldType" : "string",
     "allowViewing" : "conditional"
   }, {
     "allowEditing" : "no",
@@ -1076,45 +1090,60 @@ isAutoSuggestCallFired: boolean = false;
   }, {
     "allowEditing" : "conditional",
     "multipleValues" : false,
-    "lookupTo" : "f0ffa9ec-20b2-4f11-be10-0677b1e099bf",
     "fieldName" : " Service type",
     "data" : " Service type",
-    "lookupUrl" : "services/autosuggest",
     "currentNode" : "cfa15170-0741-43ec-957c-3c263d6cf8e2",
+    "infoBubble" : "",
     "type" : "formField",
     "mandatory" : "yes",
     "viewConditionally" : {
-      "qbName" : "Scheduler_Rights_Fields",
+      "qbName" : "Requester",
       "query" : {
         "condition" : "and",
         "rules" : [ ]
       },
       "roles" : [ "all" ]
     },
+    "defaultVal" : "",
     "valueChange" : true,
     "editConditionally" : {
-      "qbName" : "Scheduler_Rights_Fields",
+      "qbName" : "requester",
       "query" : {
         "condition" : "and",
         "rules" : [ ]
       },
-      "roles" : [ "selected", "Requester ", "Admin" ]
+      "roles" : [ ]
     },
     "sysGen" : false,
+    "placeHolder" : "",
     "fieldId" : "serviceType",
-    "allowedValues" : { },
+    "allowedValues" : {
+      "values" : [ {
+        "label" : "ECAD",
+        "value" : "ECAD"
+      }, {
+        "label" : "EMC",
+        "value" : "EMC"
+      }, {
+        "label" : "SERVICE1",
+        "value" : "SERVICE1"
+      } ],
+      "conditions" : {
+        "conditionType" : "Auto",
+        "conditions" : [ ]
+      }
+    },
     "defaultField" : false,
+    "helpText" : "",
     "multipleValuesMax" : 10,
-    "lookupType" : "table",
     "label" : " Service type",
     "searchable" : "full_word",
     "transientField" : false,
     "field" : "serviceType",
     "multipleValuesMin" : 0,
     "name" : "serviceType",
-    "uiType" : "autosuggest",
-    "displayField" : "service",
-    "fieldType" : "any",
+    "uiType" : "select",
+    "fieldType" : "string",
     "allowViewing" : "conditional"
   }, {
     "allowEditing" : "conditional",
@@ -1494,7 +1523,7 @@ isAutoSuggestCallFired: boolean = false;
     "lookupUrl" : "projecttypes/autosuggest",
     "currentNode" : "e2a955b1-17cc-45f0-b2cb-ecc4d016f7ee",
     "type" : "formField",
-    "mandatory" : "yes",
+    "mandatory" : "conditional",
     "viewConditionally" : {
       "qbName" : "Requester_Rights_Fields",
       "query" : {
@@ -1515,69 +1544,41 @@ isAutoSuggestCallFired: boolean = false;
       "qbName" : "Requester_Rights_Fields",
       "query" : {
         "condition" : "and",
-        "rules" : [ ]
+        "rules" : [ {
+          "lhsTableName" : "request",
+          "rhsTableName" : "",
+          "custom" : true,
+          "label" : "serviceType",
+          "value" : "ECAD",
+          "operator" : "="
+        } ]
       },
       "roles" : [ ]
     },
     "sysGen" : false,
     "fieldId" : "projectType",
-    "allowedValues" : {
-      "values" : [ {
-        "label" : "VALUE1_FROM_PR_TABLE",
-        "value" : "VALUE1_FROM_PR_TABLE"
-      }, {
-        "label" : "VALUE2_FROM_PR_TABLE",
-        "value" : "VALUE2_FROM_PR_TABLE_"
-      } ],
-      "conditions" : {
-        "conditionType" : "Auto",
-        "conditions" : [ {
-          "id" : "Value1 from PR table",
-          "query" : {
-            "condition" : "and",
-            "rules" : [ {
-              "field" : " Project type",
-              "operator" : "==",
-              "value" : "Value1 from PR table"
-            } ]
-          },
-          "style" : {
-            "background-color" : "#E544FF33",
-            "color" : "#E544FF",
-            "cell-background-color" : "#ffffff",
-            "text-align" : "center",
-            "showText" : true,
-            "icon" : "",
-            "iconColor" : "#333333"
-          }
-        }, {
-          "id" : "Value2 from PR table ",
-          "query" : {
-            "condition" : "and",
-            "rules" : [ {
-              "field" : " Project type",
-              "operator" : "==",
-              "value" : "Value2 from PR table "
-            } ]
-          },
-          "style" : {
-            "background-color" : "#8220FF33",
-            "color" : "#8220FF",
-            "cell-background-color" : "#ffffff",
-            "text-align" : "center",
-            "showText" : true,
-            "icon" : "",
-            "iconColor" : "#333333"
-          }
-        } ]
-      }
-    },
+    "allowedValues" : { },
     "defaultField" : false,
     "multipleValuesMax" : 10,
     "lookupType" : "table",
     "label" : " Project type",
     "searchable" : "full_word",
     "transientField" : false,
+    "conditionalMandatory" : {
+      "qbName" : "Ecad Service",
+      "query" : {
+        "condition" : "and",
+        "rules" : [ {
+          "lhsTableName" : "request",
+          "rhsTableName" : "",
+          "custom" : true,
+          "label" : "serviceType",
+          "value" : "ECAD",
+          "operator" : "="
+        } ]
+      },
+      "roles" : [ ]
+    },
     "field" : "projectType",
     "multipleValuesMin" : 0,
     "name" : "projectType",
@@ -2585,6 +2586,7 @@ isAutoSuggestCallFired: boolean = false;
 	schedulerName: new FormControl('',[]),
 	schedulerCurrency: new FormControl('',[]),
 	prOrActivityName: new FormControl('',[]),
+	projectType: new FormControl('',[]),
 	schedulerProposedStartDate: new FormControl('',[]),
 	schedulerProposedEndDate: new FormControl('',[]),
 	namecode: new FormControl('',[]),
@@ -2621,7 +2623,6 @@ isAutoSuggestCallFired: boolean = false;
 	requestedStartDate: new FormControl('',[]),
 	hoursManpower2: new FormControl('',[]),
 	additionnalCost: new FormControl('',[]),
-	projectType: new FormControl('',[Validators.required]),
 	budgetManpower2: new FormControl('',[]),
 	requestName: new FormControl('',[]),
 	subCode: new FormControl('',[]),
@@ -2726,19 +2727,6 @@ if(!this.isAutoSuggestCallFired){
     this.autoSuggestPageNo = 0;
     this.isAutoSuggestCallFired = false;
   }
-	autoSuggestSearchserviceType(event?: any, col?: any,url?:any) {
-if(!this.isAutoSuggestCallFired){
-      this.isAutoSuggestCallFired = true;
-    let apiObj = Object.assign({}, ServicesApiConstants.autoSuggestService)
-    apiObj.url = `${url ||apiObj.url}?query=${event.query}&pgNo=${this.autoSuggestPageNo}&pgLen=${BaseAppConstants.defaultPageSize}`;
-     this.baseService.get(apiObj).subscribe((res: any) => {
-      this.isAutoSuggestCallFired = false;
-      let updateRecords =  [...this.filteredItems, ...res];
-      const ids = updateRecords.map(o => o.sid)
-      this.filteredItems = updateRecords.filter(({ sid }, index) => !ids.includes(sid, index + 1));
-    })
-}
- }
 	actionBarAction(btn: any) {
     const methodName: any = (`on` + btn.action.charAt(0).toUpperCase() + btn.action.slice(1));
     let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
@@ -3262,25 +3250,6 @@ if(!this.isAutoSuggestCallFired){
 	loadCaptionbarItems(){
     
 }
-	attachInfiniteScrollForAutoCompleteserviceType(fieldName:string) {
-    const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
-    let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {
-      return Math.round(tracker.scrollTop);
-    }));
-
-    const autoSuggestScrollSubscription = windowYOffsetObservable.subscribe((scrollPos: number) => {
-      if ((tracker.offsetHeight + scrollPos >= tracker.scrollHeight)) {
-        this.isAutoSuggestCallFired = false;
-          if(this.filteredItems.length  >= this.autoSuggestPageNo * BaseAppConstants.defaultPageSize){
-            this.autoSuggestPageNo = this.autoSuggestPageNo + 1;
-          }
-         const methodName: any = `autoSuggestSearchserviceType`
-        let action: Exclude<keyof RequestDetailBaseComponent, ' '> = methodName;
-        this[action]();
-      }
-    });
-    // this.subscriptions.push(autoSuggestScrollSubscription);
-  }
 	attachInfiniteScrollForAutoCompleteprojectType(fieldName:string) {
     const tracker = (<HTMLInputElement>document.getElementsByClassName('p-autocomplete-panel')[0])
     let windowYOffsetObservable = fromEvent(tracker, 'scroll').pipe(map(() => {

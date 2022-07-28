@@ -72,7 +72,7 @@ export interface RequestBase {
 	hours: number;
 	additionalInformation: string;
 	projectNameAsInEdrm: string;
-	serviceType: any;
+	serviceType: string;
 	intercoPartnerCode: string;
 	estimatedDurationInHours: number;
 	sapCategory: string;
