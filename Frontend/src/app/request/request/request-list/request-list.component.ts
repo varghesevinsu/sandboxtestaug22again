@@ -1,4 +1,3 @@
-import { BaseService } from '@baseapp/base.service';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { allowedValuesValidator } from "@baseapp/widgets/validators/allowedValuesValidator";
@@ -19,6 +18,7 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import {  ElementRef } from '@angular/core';
 import {  ViewChild} from '@angular/core';
 import { BaseAppConstants } from '@baseapp/app-constants.base';
+import { BaseService } from '@baseapp/base.service';
 import { RequestListBaseComponent } from '@baseapp/request/request/request-list/request-list.base.component';
 import { RequestService } from '@baseapp/request/request/request.service';
 import { Component, OnInit } from '@angular/core';
@@ -32,7 +32,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class RequestListComponent extends RequestListBaseComponent implements OnInit {
  
-  constructor(public override requestService: RequestService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router, public override baseService: BaseService) {
+  constructor(public override requestService: RequestService, public override appUtilBaseService: AppUtilBaseService, public override translateService: TranslateService, public override messageService: MessageService, public override confirmationService: ConfirmationService, public override dialogService: DialogService, public override domSanitizer: DomSanitizer, public override bsModalService: BsModalService, public override activatedRoute: ActivatedRoute, public override renderer2: Renderer2, public override router: Router, public baseService: BaseService) {
     super(requestService, appUtilBaseService, translateService, messageService, confirmationService, dialogService, domSanitizer, bsModalService, activatedRoute, renderer2, router, baseService);
   }
 	
@@ -44,6 +44,7 @@ export class RequestListComponent extends RequestListBaseComponent implements On
     super.onInit();
   }
  
+
 
 
 
