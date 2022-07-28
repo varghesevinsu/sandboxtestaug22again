@@ -35,6 +35,8 @@ public class RequestBase extends BaseWorkflowModel {
 	private String place;
 	@Searchable(index = false)
 	private String otherSubActivityStatus;
+	@Searchable(index = true)
+	private String dummy5;
 	@Searchable(index = false)
 	private String tool;
 	@Searchable(index = true)
@@ -292,6 +294,14 @@ public class RequestBase extends BaseWorkflowModel {
 
 	public String getOtherSubActivityStatus() {
 		return otherSubActivityStatus;
+	}
+
+	public void setDummy5(String dummy5) {
+		this.dummy5 = dummy5;
+	}
+
+	public String getDummy5() {
+		return dummy5;
 	}
 
 	public void setTool(String tool) {
